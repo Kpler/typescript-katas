@@ -1,35 +1,37 @@
-class MineSweeper {
+interface FieldDimension {
+  rows: number;
+  cols: number;
 }
 
-const parseDimensions = (line: string): [number, number] => {
-  return line.split(' ').map(x => Number(x)) as [number, number]
+class Minesweeper {
+  constructor(public readonly dimensions: Readonly<FieldDimension>) {}
 }
 
-export const splitInputInFields = (input: string): MineSweeper[] => {
+const parseDimensions = (line: string): FieldDimension => {
+  const [rows, cols] = line.split(" ").map((x) => Number(x));
+  return { rows, cols };
+};
+
+export const parseMinesweepers = (input: string): Minesweeper[] => {
   const byLine = input.split("\n");
   let globalIndex = 0;
   const instruction = parseDimensions(byLine[globalIndex]);
-  
-  let linesToRead = instruction[0];
-  const output = [];
+
+  let linesToRead = instruction.rows;
+  const output: Minesweeper[] = [];
 
   while (linesToRead > 0) {
-    debugger;
+    // debugger;
     globalIndex += 1;
-    const mineSweeperLines = byLine.slice(globalIndex, globalIndex + linesToRead);
-    output.push(new MineSweeper());
+    const minesweeperLines = byLine.slice(
+      globalIndex,
+      globalIndex + linesToRead
+    );
+    output.push(new Minesweeper());
 
     globalIndex += linesToRead;
-    linesToRead = parseDimensions(byLine[globalIndex])[0];
-
-    // slice input as we know dimensions
-    // store in an array
-    // update global index with how many lines we've just read
-
-
-    // const currentLine = byLine[globalIndex];
-    // linesToRead--;
+    linesToRead = parseDimensions(byLine[globalIndex]).rows;
   }
 
-  return output
+  return output;
 };
