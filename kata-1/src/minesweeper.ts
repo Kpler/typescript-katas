@@ -1,4 +1,4 @@
-interface FieldDimension {
+interface Dimensions {
   rows: number;
   columns: number;
 }
@@ -12,7 +12,7 @@ export class Minesweeper {
   #mineLocations: Map<number, Set<number>>;
 
   constructor(
-    readonly dimensions: Readonly<FieldDimension>,
+    readonly dimensions: Readonly<Dimensions>,
     readonly mines: Position[]
   ) {
     const locations = new Map<number, Set<number>>();
@@ -31,11 +31,20 @@ export class Minesweeper {
   }
 
   static fromRawLines(
-    dimensions: Readonly<FieldDimension>,
+    dimensions: Readonly<Dimensions>,
     rawLines: string[]
   ): Minesweeper {
-    // @TODO: not implemented
-    return new Minesweeper(dimensions, []);
+    const mines = rawLines.flatMap((line, rowIndex) => {
+      return line
+        .split("")
+        .map((char, columnIndex): [string, number, number] => {
+          return [char, rowIndex, columnIndex];
+        })
+        .filter(([char]) => char === "*")
+        .map(([, row, column]) => ({ row, column }));
+    });
+
+    return new Minesweeper(dimensions, mines);
   }
 
   #hasMine(row: number, column: number): boolean {
@@ -72,17 +81,13 @@ export class Minesweeper {
     }, 0);
   }
 
-  get display(): string {
+  toDisplay(): string {
     const rows = [];
     for (let i = 0; i < this.dimensions.rows; i++) {
       let row = "";
       for (let j = 0; j < this.dimensions.columns; j++) {
         const neightborMines = this.#countNeighborMines(i, j);
-        row += this.#hasMine(i, j)
-          ? "*"
-          : neightborMines === 0
-          ? "."
-          : neightborMines.toString();
+        row += this.#hasMine(i, j) ? "*" : neightborMines.toString();
       }
       rows.push(row);
     }
@@ -91,7 +96,7 @@ export class Minesweeper {
   }
 }
 
-const parseDimensions = (line: string): FieldDimension => {
+const parseDimensions = (line: string): Dimensions => {
   const [rows, columns] = line.split(" ", 2).map((x) => Number(x));
   return { rows, columns };
 };
@@ -118,4 +123,15 @@ export const parseMinesweepers = (input: string): Minesweeper[] => {
   }
 
   return output;
+};
+
+export const kataResult = (input: string): string => {
+  const minesweepers = parseMinesweepers(input);
+
+  const lines = minesweepers.flatMap((minesweeper, index) => {
+    const padding = index > 0 ? [""] : [];
+    return [...padding, `Field #${index + 1}:`, minesweeper.toDisplay()];
+  });
+
+  return lines.join("\n");
 };
