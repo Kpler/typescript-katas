@@ -43,7 +43,12 @@ export class Minesweeper {
   }
 
   #getBoundedValue(row: number, column: number): number {
-    if (row < 0 || column < 0 || row > this.dimensions.rows || column > this.dimensions.columns) {
+    if (
+      row < 0 ||
+      column < 0 ||
+      row > this.dimensions.rows ||
+      column > this.dimensions.columns
+    ) {
       return 0;
     }
 
@@ -52,19 +57,19 @@ export class Minesweeper {
 
   #countNeighborMines(row: number, column: number): number {
     const neighborsCoordinates: Position[] = [
-      { row: -1, column: -1},
-      { row: 0, column: -1},
-      { row: 1, column: -1},
-      { row: -1, column: 0},
-      { row: 1, column: 0},
-      { row: -1, column: 1},
-      { row: 0, column: 1},
-      { row: 1, column: 1},
-    ]
+      { row: -1, column: -1 },
+      { row: 0, column: -1 },
+      { row: 1, column: -1 },
+      { row: -1, column: 0 },
+      { row: 1, column: 0 },
+      { row: -1, column: 1 },
+      { row: 0, column: 1 },
+      { row: 1, column: 1 },
+    ];
 
     return neighborsCoordinates.reduce((acc, { row: x, column: y }) => {
       return acc + this.#getBoundedValue(row + x, column + y);
-    }, 0)
+    }, 0);
   }
 
   get display(): string {
@@ -73,12 +78,16 @@ export class Minesweeper {
       let row = "";
       for (let j = 0; j < this.dimensions.columns; j++) {
         const neightborMines = this.#countNeighborMines(i, j);
-        row += this.#hasMine(i, j) ? "*" : neightborMines === 0 ? "." : neightborMines.toString();
+        row += this.#hasMine(i, j)
+          ? "*"
+          : neightborMines === 0
+          ? "."
+          : neightborMines.toString();
       }
       rows.push(row);
     }
 
-    return rows.join('\n');
+    return rows.join("\n");
   }
 }
 
