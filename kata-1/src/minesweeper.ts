@@ -9,16 +9,37 @@ interface Position {
 }
 
 export class Minesweeper {
-  constructor(readonly dimensions: Readonly<FieldDimension>, readonly mines: Position[]) {}
+  #mineLocations: Map<number, Set<number>>;
 
-  static fromRawLines(dimensions: Readonly<FieldDimension>, rawLines: string[]): Minesweeper {
+  constructor(
+    readonly dimensions: Readonly<FieldDimension>,
+    readonly mines: Position[]
+  ) {
+    const locations = new Map<number, Set<number>>();
+
+    mines.forEach(({ row, column }) => {
+      let columnsInRow = locations.get(row);
+      if (columnsInRow === undefined) {
+        columnsInRow = new Set<number>();
+        locations.set(row, columnsInRow);
+      }
+
+      columnsInRow.add(column);
+    });
+
+    this.#mineLocations = locations;
+  }
+
+  static fromRawLines(
+    dimensions: Readonly<FieldDimension>,
+    rawLines: string[]
+  ): Minesweeper {
     // @TODO: not implemented
     return new Minesweeper(dimensions, []);
   }
 
   #hasMine(row: number, column: number): boolean {
-    // @TODO improve complexity
-    return this.mines.some(mine => mine.row === row && mine.column === column);
+    return this.#mineLocations.get(row)?.has(column) === true;
   }
 
   #getBoundedValue(row: number, column: number): number {
