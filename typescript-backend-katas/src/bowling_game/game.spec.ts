@@ -48,4 +48,22 @@ describe("When playing Bowling ", () => {
             expect(actualResult).toEqual(29)
         });
     });
+    describe("if player has a strike ", () => {
+        it("should add up the next 2 numbers of pins twice", () => {
+            // Given
+            const game = new Game()
+            game.roll(10) //  10 + next roll (2) + next roll (3) --> 15
+            game.roll(2)
+            game.roll(3)
+            for (let i= 0; i < 16; i++) {
+                game.roll(1)
+            }
+
+            // When
+            const actualResult = game.score()
+
+            // Then
+            expect(actualResult).toEqual(36)
+        });
+    });
 });
