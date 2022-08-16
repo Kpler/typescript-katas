@@ -10,6 +10,11 @@ export class Game {
 
       // if last even pair of numbers sums to 10:
       //   ???
+      if (i%2 == 1){
+        if (this.rolls[i] + this.rolls[i-1] == 10) {
+          this.currentScore += this.rolls[i+1];
+        }
+      }
 
       this.currentScore += this.rolls[i];
     }
