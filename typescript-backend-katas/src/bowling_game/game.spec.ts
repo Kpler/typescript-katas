@@ -1,6 +1,6 @@
 import { Game } from "./game"
 
-describe("When playing Bowling ", () => {
+describe("When playing Bowling", () => {
     describe("if player throws always in the gutter ", () => {
         it("should return 0", () => {
             // Given
@@ -16,7 +16,7 @@ describe("When playing Bowling ", () => {
             expect(actualResult).toEqual(0)
         });
     });
-    describe("if player takes down only one pin per roll ", () => {
+    describe("if player takes down only one pin per roll", () => {
         it("should add up correctly the basic number of pins", () => {
             // Given
             const game = new Game()
@@ -31,21 +31,19 @@ describe("When playing Bowling ", () => {
             expect(actualResult).toEqual(20)
         });
     });
-    describe("if player has a spare ", () => {
+    describe("if player has a spare", () => {
         it("should add up the next number of pins twice", () => {
             // Given
             const game = new Game()
-            game.roll(3)
-            game.roll(7) //  10 + next roll (1) --> 11
-            for (let i= 0; i < 18; i++) {
-                game.roll(1)
-            }
+            game.roll(3);
+            game.roll(7); // 10 + next roll (1) --> 11
+            game.roll(1);
 
             // When
-            const actualResult = game.score()
+            const actualResult = game.score();
 
             // Then
-            expect(actualResult).toEqual(29)
+            expect(actualResult).toEqual(12);
         });
     });
 });

@@ -1,15 +1,22 @@
 export class Game {
-    rolls: number[] = []
-    currentScore: number = 0
+  rolls: number[] = [];
 
-    score(): number {
-        for (let i = 0; i < this.rolls.length; i++){
-            this.currentScore += this.rolls[i]
-        }
-        return this.currentScore
-    }
+  currentScore: number = 0;
 
-    roll(pins: number) {
-        this.rolls.push(pins)
+  score(): number {
+    let bonus = 0;
+
+    for (let i = 0; i < this.rolls.length; i++) {
+
+      // if last even pair of numbers sums to 10:
+      //   ???
+
+      this.currentScore += this.rolls[i];
     }
+    return this.currentScore;
+  }
+
+  roll(pins: number) {
+    this.rolls.push(pins);
+  }
 }
