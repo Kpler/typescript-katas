@@ -5,6 +5,11 @@ export class Game {
     score(): number {
         for (let i = 0; i < this.rolls.length; i++){
             this.currentScore += this.rolls[i]
+            const isSpare = i > 0 && i % 2 != 0
+                && this.rolls[i-1] + this.rolls[i-2] == 10
+
+            if (isSpare)
+                this.currentScore += this.rolls[i]
         }
         return this.currentScore
     }
