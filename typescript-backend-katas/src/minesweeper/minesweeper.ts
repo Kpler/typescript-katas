@@ -1,12 +1,12 @@
 export function generateGame(
     rows: number, columns: number, mines: [number, number][]
 ): string {
-    let grid: string[][] = []
+    let grid: string[][] = new Array(rows).fill('').map(() => new Array(columns).fill('.'));
 
-    for (let i = 0; i < rows ; i++) {
-        for (let j = 0; j < columns; j++) {
+    mines.forEach(mine => {
+        const [x, y] = mine;
+        grid[x][y] = '*';
+    });
 
-        }
-    }
-    return grid
+    return grid.map(x => x.join('')).join('\n');
 }
