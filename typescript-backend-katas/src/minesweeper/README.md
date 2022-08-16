@@ -14,9 +14,11 @@ npm test
 
 ## Iteration 1: generate a new game with mines
 
-Write a program that accepts a number of rows, number of columns, and a difficulty, and generates a new minefield ready to play, with `.` representing clear squares, and `*` representing mines.
+Write a program that accepts a number of rows, a number of columns, and an array of mine positions.
 
-Example output for input of 4 rows, 4 columns, and 'easy' difficulty:
+It should print the new minefield with `.` representing clear squares, and `*` representing mines.
+
+Example output for input of 4 rows, 4 columns, with one mine in row 1 column 1 and one mine in row 3 column 2:
 ```
 *...
 ....
@@ -26,8 +28,9 @@ Example output for input of 4 rows, 4 columns, and 'easy' difficulty:
 
 ## Iteration 2: display the number of mines adjacent to each square
 
-Build on the first iteration to output the adjacent mine count for each square
-Example output of game with all numbers:
+Build on the first iteration to output the adjacent mine count for each square.
+
+Example output of game from the first iteration with all numbers:
 ```
 *100
 2210
@@ -46,13 +49,13 @@ Add a function to _play_ the game. When a new game is generated, it should displ
 ```
 When a square is swept, it should either end the game, or display the number of mines adjacent to the square:
 ```
-// Sweep row 1 col 1: game over
+// Sweep row 1 column 1: game over
 *...
 ....
 ....
 ....
 
-// Sweep row 1 col 2: number is displayed; game is still in progress
+// Sweep row 1 column 2: number is displayed; game is still in progress
 .1..
 ....
 ....
