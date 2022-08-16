@@ -6,7 +6,7 @@ export class Game {
     let currentScore = 0;
 
     for (let i = 0; i < this.frames.length; i++) {
-      for (let j = 0; i < this.frames[i].length; i++) {
+      for (let j = 0; j < this.frames[i].length; j++) {
         
         
       }
