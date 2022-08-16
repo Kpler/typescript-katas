@@ -46,4 +46,37 @@ describe("When playing Bowling", () => {
             expect(actualResult).toEqual(12);
         });
     });
+    describe("if player has two spares", () => {
+        it("should add up the next number of pins twice", () => {
+            // Given
+            const game = new Game()
+            game.roll(3);
+            game.roll(7); // 10 + 9 --> 19
+            game.roll(9);
+            game.roll(1); // 10 + next roll (1) --> 15
+            game.roll(5);
+
+            // When
+            const actualResult = game.score();
+
+            // Then
+            expect(actualResult).toEqual(39);
+        });
+    });
+    describe("if player has a strike", () => {
+        it("should add up the next two number of pins twice", () => {
+            // Given
+            const game = new Game()
+            game.roll(10); // 10 + 5 + 3 = 18
+            game.roll(5); // 
+            game.roll(3); 
+            game.roll(7);
+
+            // When
+            const actualResult = game.score();
+
+            // Then
+            expect(actualResult).toEqual(33);
+        });
+    });
 });

@@ -1,24 +1,19 @@
 export class Game {
   rolls: number[] = [];
 
-  currentScore: number = 0;
-
   score(): number {
-    let bonus = 0;
+    let currentScore = 0;
 
     for (let i = 0; i < this.rolls.length; i++) {
 
-      // if last even pair of numbers sums to 10:
-      //   ???
-      if (i%2 == 1){
-        if (this.rolls[i] + this.rolls[i-1] == 10) {
-          this.currentScore += this.rolls[i+1];
-        }
+      // If it's a odd roll and the last rolls score is ten, then it's a spare
+      if (i%2 == 1 && this.rolls[i] + this.rolls[i-1] == 10){
+        currentScore += this.rolls[i+1];
       }
 
-      this.currentScore += this.rolls[i];
+      currentScore += this.rolls[i];
     }
-    return this.currentScore;
+    return currentScore;
   }
 
   roll(pins: number) {
