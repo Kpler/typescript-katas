@@ -7,9 +7,11 @@ export class Game {
             this.currentScore += this.rolls[i]
             const isSpare = i > 0 && i % 2 != 0
                 && this.rolls[i-1] + this.rolls[i-2] == 10
-
-            if (isSpare)
+            console.log.("this is the score", this.currentScore)
+            if (isSpare){
+            console.log.("we have a spare")
                 this.currentScore += this.rolls[i]
+                }
         }
         return this.currentScore
     }
