@@ -1,4 +1,4 @@
-import { generateField, renderField } from "./minesweeper";
+import { generateField, getNeighbors, renderField } from "./minesweeper";
 
 describe("generateField", () => {
   it("should return an filled array", () => {
@@ -41,5 +41,26 @@ describe("renderField", () => {
     const result = renderField(field);
     // THEN
     expect(result).toBe("...");
+  });
+
+  it("an non empty field with multiple lines and mines should render", () => {
+    // GIVEN
+    const field: number[][] = [[0, 0, 0], [1, 0, 1]]
+    // WHEN
+    const result = renderField(field);
+    // THEN
+    expect(result).toBe("...\n*.*");
+  });
+});
+
+describe("getNeighbors", () => {
+  it("should return every neighbor values", () => {
+    // GIVEN
+    const field = [[0,0,0], [0,0,0], [0,0,0]];
+    const position: [number, number] = [1, 1];
+    // WHEN
+    const result = getNeighbors(position, field);
+    // THEN
+    expect(result).toStrictEqual([0, 0, 0, 0, 0, 0, 0, 0]);
   });
 });

@@ -13,5 +13,9 @@ export const generateField = (rowsNumber: number, colsNumber: number, minesPosit
 }
 
 export const renderField = (field: number[][]): string => {
-  return field.map(row => row.join("")).join("\n");
+  return field.map(row => row.map(col => col === 0 ? '.' : '*').join("")).join("\n");
+}
+
+export const getNeighbors = (position: [number, number], field: number[][]) => {
+  return Array.from({ length: 8 }).fill(0)
 }
