@@ -2,7 +2,11 @@ export class Minesweeper {
     rows: number;
     columns: number;
 
-    constructor(rows: number, columns: number, mines: any[]) {
+    constructor(
+    rows: number,
+    columns: number,
+    mines: [number,number][]
+    ) {
         this.rows = rows;
         this.columns = columns;
     }
