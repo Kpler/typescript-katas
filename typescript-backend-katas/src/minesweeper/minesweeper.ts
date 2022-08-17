@@ -9,8 +9,13 @@ export class Minesweeper {
     display(): string {
         let display = ''
         for(let i =0;i<this.rows;i++){
-            for(let i =0;i<this.rows;i++){
+            for(let j =0;j<this.columns;j++){
+                display += '.'
+            }
+            if (i < this.rows) {
+                 display += '\n'
             }
         }
+        return display
     }
 }
