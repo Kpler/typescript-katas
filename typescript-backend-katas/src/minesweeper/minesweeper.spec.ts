@@ -1,4 +1,4 @@
-import { generateField } from "./minesweeper";
+import { generateField, renderField } from "./minesweeper";
 
 describe("generateField", () => {
   it("should return an filled array", () => {
@@ -22,17 +22,24 @@ describe("generateField", () => {
     // THEN
     expect(result).toStrictEqual([[0, 1], [0, 0]]);
   });
+});
 
-  // it("should render minefield", () => {
-  //   // GIVEN
-  //   const rowsNumber = 2;
-  //   const colsNumber = 2;
-  //   const minesPositions: number[][] = [[0, 1]];
-  //   const result = generateField(rowsNumber, colsNumber, minesPositions);
-  //   // WHEN
-  //   const field = 
-  //   // THEN
-  //   expect(result).toStrictEqual([0, 1, 0, 0]);
-  // });
+describe("renderField", () => {
+  it("an empty field should render an empty string", () => {
+    // GIVEN
+    const field: number[][] = []
+    // WHEN
+    const result = renderField(field);
+    // THEN
+    expect(result).toBe("");
+  });
 
+  it("an non empty field without mines should render a lot of dots", () => {
+    // GIVEN
+    const field: number[][] = [[0, 0, 0]]
+    // WHEN
+    const result = renderField(field);
+    // THEN
+    expect(result).toBe("...");
+  });
 });
