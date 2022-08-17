@@ -1,4 +1,4 @@
-import {MinesweeperGame} from "./minesweeper";
+import { MinesweeperGame } from "./minesweeper";
 
 describe("MinesweeperGame", () => {
     it("should print empty game", () => {
@@ -7,7 +7,12 @@ describe("MinesweeperGame", () => {
     });
 
     it("should print one mine", () => {
-        const minesweeperGame = new MinesweeperGame(2, 2, [[0, 0]])
-        expect(minesweeperGame.print()).toBe("*.\n..\n")
+        const minesweeperGame = new MinesweeperGame(2, 2, [[0, 1]])
+        expect(minesweeperGame.print()).toBe(".*\n..\n")
+    });
+
+    it("should print two mines", () => {
+        const minesweeperGame = new MinesweeperGame(2, 2, [[0, 1], [1, 1]])
+        expect(minesweeperGame.print()).toBe(".*\n.*\n")
     });
 });
