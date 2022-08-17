@@ -1,28 +1,34 @@
 class Minesweeper {
-  #rows: number;
-  #columns: number;
   #grid: string[][];
+  #mines: [number, number][]
   constructor(rows: number, columns: number, mines: [number, number][]) {
-    this.#rows = rows;
-    this.#columns = columns;
-    this.#grid = this.generateGrid(rows, columns);
+    this.#mines = mines
+    this.#grid = this.generateGrid(rows, columns)
+    this.addMines()
   }
 
   toString(): string {
-    return this.#grid.map((str) => str.join('')).join('\n');
+    return this.#grid.map((str) => str.join('')).join('\n')
+  }
+
+  addMines() {
+    for (let mine in this.#mines) {
+        const [mineY, mineX] = mine
+        this.#grid[mineX][mineY] = '*'
+    }
   }
 
   generateGrid(rows: number, columns: number): string[][] {
-    let grid = new Array();
+    let grid = []
 
     for (let i = 0; i < rows; i++) {
-      let rowArr = [];
+      let rowArr = []
       for (let j = 0; j < columns; j++) {
-        rowArr.push('.');
+        rowArr.push('.')
       }
-      grid.push(rowArr);
+      grid.push(rowArr)
     }
-    return grid;
+    return grid
   }
 }
 
