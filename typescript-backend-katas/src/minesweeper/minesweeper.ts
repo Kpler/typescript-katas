@@ -12,7 +12,7 @@ export class Minesweeper {
             for(let j =0;j<this.columns;j++){
                 display += '.'
             }
-            if (i < this.rows) {
+            if (i < this.rows - 1) {
                  display += '\n'
             }
         }
