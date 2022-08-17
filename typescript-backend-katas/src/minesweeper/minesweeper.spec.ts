@@ -1,9 +1,14 @@
 import {MinesweeperGame} from "./minesweeper";
 
 
-describe("Mine sweeper", () => {
-    it("print empty game", () => {
-        const minesweeperGame = () => new MinesweeperGame()
-        expect(minesweeperGame().print()).toBe("..\n..")
+describe("MinesweeperGame", () => {
+    it("should print empty game", () => {
+        const minesweeperGame = new MinesweeperGame(2, 2)
+        expect(minesweeperGame.print()).toBe("..\n..\n")
+    });
+
+    it("should print one bomb", () => {
+        const minesweeperGame = new MinesweeperGame(2, 2)
+        expect(minesweeperGame.print()).toBe("..\n..\n")
     });
 });
