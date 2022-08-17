@@ -1,6 +1,9 @@
+import {MinesweeperGame} from "./minesweeper";
 
-describe("Example test", () => {
-  it("should sum numbers correctly", () => {
-    expect(1 + 1).toBe(2);
-  });
+
+describe("Mine sweeper", () => {
+    it("print empty game", () => {
+        const minesweeperGame = () => new MinesweeperGame()
+        expect(minesweeperGame().print()).toBe("..\n..")
+    });
 });
