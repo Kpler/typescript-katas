@@ -3,13 +3,18 @@ function generateGrid(rows: number,
                       mines: number[][]
 ): string[][] {
 
-  let  result: string[][] = [[]]
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < columns; c++) {
-      result.push(["."])
-    }
+  if (rows <= 0 || columns <= 0) {
+    throw new Error("This is not good")
   }
-    return [['.']];
+  let  result: string[][] = []
+  for (let r = 0; r < rows; r++) {
+    let temp_row: string[] = []
+    for (let c = 0; c < columns; c++) {
+      temp_row.push(".")
+    }
+    result.push(temp_row)
+  }
+    return result;
 }
 
 
@@ -23,6 +28,15 @@ describe("Example test", () => {
     expect(generateGrid(3, 3, [])).toEqual([['.','.','.'],['.','.','.'],['.','.','.']]);
   });
 
+  it("row should be positive", () => {
+    expect(generateGrid(0, 3, [])).toThrow(Error("This is not good"));
+    expect(generateGrid(-1, 3, [])).toThrow(Error("This is not good"));
+  });
+
+  it("column should be positive", () => {
+    expect(generateGrid(3, 0, [])).toThrow(Error("This is not good"));
+    expect(generateGrid(3, -1, [])).toThrow(Error("This is not good"));
+  });
 
 
 });
