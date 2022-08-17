@@ -1,34 +1,38 @@
 class Minesweeper {
   #grid: string[][];
-  #mines: [number, number][]
+  #mines: [number, number][];
   constructor(rows: number, columns: number, mines: [number, number][]) {
-    this.#mines = mines
-    this.#grid = this.generateGrid(rows, columns)
-    this.addMines()
+    this.#mines = mines;
+    this.#grid = this.#generateGrid(rows, columns);
+    this.#addMines();
   }
 
   toString(): string {
-    return this.#grid.map((str) => str.join('')).join('\n')
+    return this.#grid.map((str) => str.join('')).join('\n');
   }
 
-  addMines() {
+  displayAdjacentMines(): string {
+    return this.toString().replace('.', '0');
+  }
+
+  #addMines() {
     for (let mine in this.#mines) {
-        const [mineX, mineY] = this.#mines[mine]
-        this.#grid[mineY][mineX] = '*'
+      const [mineX, mineY] = this.#mines[mine];
+      this.#grid[mineY][mineX] = '*';
     }
   }
 
-  generateGrid(rows: number, columns: number): string[][] {
-    let grid = []
+  #generateGrid(rows: number, columns: number): string[][] {
+    let grid = [];
 
     for (let i = 0; i < rows; i++) {
-      let rowArr = []
+      let rowArr = [];
       for (let j = 0; j < columns; j++) {
-        rowArr.push('.')
+        rowArr.push('.');
       }
-      grid.push(rowArr)
+      grid.push(rowArr);
     }
-    return grid
+    return grid;
   }
 }
 
