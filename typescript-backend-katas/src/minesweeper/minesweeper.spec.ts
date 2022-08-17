@@ -14,7 +14,7 @@ describe("Minesweeper", () => {
   });
 
   it("can instantiate mines in the grid", () => {
-    const mines = [[0,0],[1,1],[2,2],[3,3]]
+    const mines: [number, number][] = [[0,0],[1,1],[2,2],[3,3]]
     const game = new Minesweeper(4, 4, mines);
     expect(game.display()).toBe(
 `*...
