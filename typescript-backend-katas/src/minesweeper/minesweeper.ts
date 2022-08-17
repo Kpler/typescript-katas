@@ -13,8 +13,8 @@ class Minesweeper {
 
   addMines() {
     for (let mine in this.#mines) {
-        const [mineY, mineX] = mine
-        this.#grid[mineX][mineY] = '*'
+        const [mineX, mineY] = this.#mines[mine]
+        this.#grid[mineY][mineX] = '*'
     }
   }
 

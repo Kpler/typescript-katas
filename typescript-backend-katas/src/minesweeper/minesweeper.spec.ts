@@ -24,8 +24,8 @@ describe('MineSweeper ', () => {
   });
 
   it('should generate a map bombs ', () => {
-    const expectedResult = `.x.
-.x.
+    const expectedResult = `.*.
+.*.
 ...`;
 
     const game = new Minesweeper(3, 3, [[1, 0], [1, 1]]);
