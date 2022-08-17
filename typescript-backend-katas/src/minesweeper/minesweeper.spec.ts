@@ -1,13 +1,24 @@
 class Minesweeper {
   #rows: number
   #columns: number
+  #grid: string[][]
   constructor(rows: number, columns: number, mines: [number, number][]) {
     this.#rows = rows
     this.#columns = columns
+    this.#grid = new Array()
+
+    for (let row in rows) {
+      let rowArr = []
+      for (let column in columns) {
+        rowArr.push(".")
+      }
+      this.#grid.push(rowArr)
+    } 
   }
 
+
   toString(): string {
-    return ``
+    return this.#grid.map(str => str.join('')).join('\n')
   }
 
 }
