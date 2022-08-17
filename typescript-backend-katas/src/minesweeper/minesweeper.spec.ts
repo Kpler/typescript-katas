@@ -9,7 +9,7 @@ describe("generateField", () => {
     // WHEN
     const result = generateField(rowsNumber, colsNumber, minesPositions);
     // THEN
-    expect(result).toStrictEqual([0]);
+    expect(result).toStrictEqual([[0]]);
   });
 
   it("should return an filled array with mines", () => {
@@ -20,6 +20,19 @@ describe("generateField", () => {
     // WHEN
     const result = generateField(rowsNumber, colsNumber, minesPositions);
     // THEN
-    expect(result).toStrictEqual([0, 1, 0, 0]);
+    expect(result).toStrictEqual([[0, 1], [0, 0]]);
   });
+
+  // it("should render minefield", () => {
+  //   // GIVEN
+  //   const rowsNumber = 2;
+  //   const colsNumber = 2;
+  //   const minesPositions: number[][] = [[0, 1]];
+  //   const result = generateField(rowsNumber, colsNumber, minesPositions);
+  //   // WHEN
+  //   const field = 
+  //   // THEN
+  //   expect(result).toStrictEqual([0, 1, 0, 0]);
+  // });
+
 });
