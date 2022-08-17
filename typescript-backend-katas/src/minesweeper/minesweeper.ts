@@ -1,9 +1,9 @@
 export const generateField = (rowsNumber: number, colsNumber: number, minesPositions: number[][]) => {
-  let result = "";
+  const result = [];
   for (let rowIdx=0 ; rowIdx < rowsNumber ; rowIdx++) {
     for (let colIdx=0 ; colIdx < colsNumber ; colIdx++) {
-      result += ""
+      result.push(minesPositions.includes([rowIdx, colIdx]) ? 1 : 0)
     }
   }
-  console.log(result);
+  return result;
 }
