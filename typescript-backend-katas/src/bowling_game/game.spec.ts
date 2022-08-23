@@ -65,7 +65,7 @@ describe("When playing Bowling", () => {
     });
 
     describe("roll", () => {
-        it("shall build the frames correctly", () => {
+        it("should build the frames correctly", () => {
             // Given
             const game = new Game()
 
@@ -76,10 +76,12 @@ describe("When playing Bowling", () => {
             game.roll(1);
             game.roll(5);
             const frames = game.frames;
+            
+            console.log("Frames: ", frames);
 
             // Then
             expect(frames).toEqual([
-                // TODO
+                [3,7], [9, 1], [5]
             ]);
         });
     });
