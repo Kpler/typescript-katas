@@ -20,6 +20,8 @@ export class Game {
   // TODO: modify the roll method to update not only the first frame
   roll(pins: number) {
     const lastFrame = this.frames[this.frames.length-1]
-    lastFrame.push(pins);
+    if (lastFrame.length < 3){
+      lastFrame.push(pins);
+    }
   }
 }

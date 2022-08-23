@@ -78,9 +78,9 @@ describe("When playing Bowling", () => {
             const frames = game.frames;
 
             // Then
-            expect(frames).toEqual([
-                // TODO
-            ]);
+            expect(frames).toEqual(
+                [[3,7], [9,1],[5]]
+            );
         });
     });
 
