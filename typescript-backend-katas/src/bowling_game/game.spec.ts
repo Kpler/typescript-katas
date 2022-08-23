@@ -135,4 +135,21 @@ describe("When playing Bowling", () => {
             expect(() => game.roll(1)).toThrow(Error);
         });
     });
+
+    describe("roll", () => {
+        it("should add an 11th frame if there is a strike or spare in the 10th frame", () => {
+            // Given
+            const game = new Game()
+            for (let roll = 0; roll < 19; roll++) {
+                game.roll(1);
+            }
+            game.roll(10);
+
+            // When
+            game.roll(1);
+
+            // Then
+            expect(game.score()).toEqual(30);
+        });
+    });
 });
