@@ -84,6 +84,26 @@ describe("When playing Bowling", () => {
         });
     });
 
+    describe("roll", () => {
+        it("shall build the frames correctly when there is a strike", () => {
+            // Given
+            const game = new Game()
+
+            // When
+            game.roll(3);
+            game.roll(7);
+            game.roll(10);
+            game.roll(1);
+            game.roll(5);
+            const frames = game.frames;
+
+            // Then
+            expect(frames).toEqual(
+                [[3,7], [10], [1,5]]
+            );
+        });
+    });
+
     // TODO uncomment this method after having done the previous one
     /*describe("if player has a strike", () => {
         it("should add up the next two number of pins twice", () => {
