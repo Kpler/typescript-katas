@@ -104,7 +104,6 @@ describe("When playing Bowling", () => {
         });
     });
 
-    // TODO uncomment this method after having done the previous one
     describe("if player has a strike", () => {
         it("should add up the next two number of pins twice", () => {
             // Given
@@ -119,6 +118,21 @@ describe("When playing Bowling", () => {
 
             // Then
             expect(score).toEqual(33);
+        });
+    });
+
+    describe("roll", () => {
+        it("shall be limited to 10 frames", () => {
+            // Given
+            const game = new Game()
+
+            // When
+            for (let roll = 0; roll < 20; roll++) {
+                game.roll(1);
+            }
+
+            // Then
+            expect(() => game.roll(1)).toThrow(Error);
         });
     });
 });

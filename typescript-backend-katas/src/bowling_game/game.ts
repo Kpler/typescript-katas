@@ -21,9 +21,14 @@ export class Game {
 
   // TODO: modify the roll method to update not only the first frame
   roll(pins: number) {
+
     const lastFrame = this.frames[this.frames.length-1]
+    if (this.frames.length >= 10 && lastFrame.length === 2) {
+      throw new Error("We can't have more than 10 frames")
+    }
+
     lastFrame.push(pins);
-    if (lastFrame.length === 2 || pins === 10){
+    if (this.frames.length < 10 && (lastFrame.length === 2 || pins === 10)){
       this.frames.push([]);
     }
   }
