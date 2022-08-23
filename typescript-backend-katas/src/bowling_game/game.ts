@@ -6,19 +6,21 @@ export class Game {
 
     for (let frameIndex = 0; frameIndex < this.frames.length; frameIndex++) {
       const currentFrame = this.frames[frameIndex];
-      for (let rollIndex = 0; rollIndex < currentFrame.length; rollIndex++) {
 
-        // If it's a odd roll and the last rolls score is ten, then it's a spare
-        const sum = currentFrame.reduce((a, b) => a + b, 0);
-        if (sum === 10) {
-          // spare
+      const sum = currentFrame.reduce((a, b) => a + b, 0);
+      if (sum === 10) {
+        // spare
+        const nextFrame = this.frames[frameIndex+1];
+        if(nextFrame?.length){
+          currentScore+=nextFrame[0]
         }
-        // if (rollIndex % 2 === 1 && currentFrame[rollIndex] + currentFrame[rollIndex-1] === 10) {
-        //   currentScore += currentFrame[rollIndex+1];
-        // }
-
-        currentScore += currentFrame[rollIndex];
       }
+      // if (rollIndex % 2 === 1 && currentFrame[rollIndex] + currentFrame[rollIndex-1] === 10) {
+      //   currentScore += currentFrame[rollIndex+1];
+      // }
+
+      currentScore += currentFrame[sum];
+      
     }
     return currentScore;
   }
