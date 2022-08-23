@@ -99,13 +99,13 @@ describe("When playing Bowling", () => {
 
             // Then
             expect(frames).toEqual(
-                [[3,7], [10], [1,5]]
+                [[3,7], [10], [1,5],[]]
             );
         });
     });
 
     // TODO uncomment this method after having done the previous one
-    /*describe("if player has a strike", () => {
+    describe("if player has a strike", () => {
         it("should add up the next two number of pins twice", () => {
             // Given
             const game = new Game()
@@ -120,5 +120,5 @@ describe("When playing Bowling", () => {
             // Then
             expect(score).toEqual(33);
         });
-    });*/
+    });
 });
