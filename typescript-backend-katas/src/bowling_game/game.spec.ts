@@ -87,7 +87,7 @@ describe("When playing Bowling", () => {
     });
 
     // TODO uncomment this method after having done the previous one
-    /*describe("if player has a strike", () => {
+    /* describe("if player has a strike", () => {
         it("should add up the next two number of pins twice", () => {
             // Given
             const game = new Game()
@@ -102,5 +102,5 @@ describe("When playing Bowling", () => {
             // Then
             expect(score).toEqual(33);
         });
-    });*/
+    }); */
 });

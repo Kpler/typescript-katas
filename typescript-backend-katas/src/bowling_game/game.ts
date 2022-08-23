@@ -15,11 +15,7 @@ export class Game {
           currentScore+=nextFrame[0]
         }
       }
-      // if (rollIndex % 2 === 1 && currentFrame[rollIndex] + currentFrame[rollIndex-1] === 10) {
-      //   currentScore += currentFrame[rollIndex+1];
-      // }
-
-      currentScore += currentFrame[sum];
+      currentScore += sum;
       
     }
     return currentScore;
