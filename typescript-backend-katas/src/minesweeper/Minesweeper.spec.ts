@@ -23,6 +23,12 @@ describe("Minesweeper", () => {
   });
 
   it("should display adjacent mines", () => {
-    // @TODO
+    const expectedResult = '*100\n2210\n1*10\n1110'
+    const game = new Minesweeper(4, 4, [
+      [0, 0],
+      [1, 2],
+    ]);
+
+    expect(true).toBe(false)
   });
 });
