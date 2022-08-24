@@ -2,7 +2,7 @@ export class Minesweeper {
   #grid: string[][];
   #mines: [number, number][];
 
-  constructor(rows: number, columns: number, mines: [number, number][]) {
+  constructor(private rows: number, private columns: number, mines: [number, number][]) {
     this.#mines = mines;
     this.#grid = this.#generateGrid(rows, columns);
     this.#addMines();
@@ -12,15 +12,21 @@ export class Minesweeper {
     return this.#grid.map((str) => str.join("")).join("\n");
   }
 
+  getNeighbors(position: [number, number]): [number, number][] {
+    //
+    return [];
+  }
+
   revealGrid(): string {
     const grid = this.#grid;
-    for (let mineIndex in this.#mines) {
+    for (const mine of this.#mines) {
+      const neighbors = this.getNeighbors(mine)
       // get mines y x
       // increment neighbors count in grid
       // check for mines and bounds
     }
     return this.#grid.map((str) => str.join("")).join("\n");
-  } 
+  }
 
 
   #addMines() {
