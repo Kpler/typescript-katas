@@ -14,7 +14,7 @@ export class Minesweeper {
 
   revealGrid(): string {
     const grid = this.#grid;
-    for (mineIndex in this.#mines) {
+    for (let mineIndex in this.#mines) {
       // get mines y x
       // increment neighbors count in grid
       // check for mines and bounds
