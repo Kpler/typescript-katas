@@ -1,5 +1,10 @@
+enum Cell {
+  EMPTY = 'empty',
+  MINE = 'mine'
+}
+
 export class Minesweeper {
-  #grid: string[][];
+  #grid: Cell[][];
   #mines: [number, number][];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
@@ -9,23 +14,30 @@ export class Minesweeper {
   }
 
   toString(): string {
-    return this.#grid.map((str) => str.join("")).join("\n");
+    return this.#grid.map((row) => row.map(x => {
+      if (x === Cell.EMPTY) {
+        return '.';
+      }
+      if (x === Cell.MINE) {
+        return '*';
+      }
+    }).join("")).join("\n");
   }
 
   #addMines() {
     this.#mines.forEach((mine) => {
       const [mineX, mineY] = mine;
-      this.#grid[mineY][mineX] = "*";
+      this.#grid[mineY][mineX] = Cell.MINE;
     });
   }
 
-  #generateGrid(rows: number, columns: number): string[][] {
+  #generateGrid(rows: number, columns: number): Cell[][] {
     const grid = [];
 
     for (let i = 0; i < rows; i++) {
       const rowArr = [];
       for (let j = 0; j < columns; j++) {
-        rowArr.push(".");
+        rowArr.push(Cell.EMPTY);
       }
       grid.push(rowArr);
     }
@@ -34,6 +46,8 @@ export class Minesweeper {
   }
 
   displayField(): string {
-    return this.toString().replaceAll(".", "0");
+    const field: number[][] = this.#grid.map();
+
+    // return this.toString().replaceAll(".", "0");
   }
 }
