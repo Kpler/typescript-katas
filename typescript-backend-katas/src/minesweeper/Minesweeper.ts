@@ -46,8 +46,23 @@ export class Minesweeper {
   }
 
   displayField(): string {
-    const field: number[][] = this.#grid.map();
+    const field: number[][] = this.#grid.map(row => {
+		return row.map(cell => {
+			return 0;
+		})
+	});
 
-    // return this.toString().replaceAll(".", "0");
+	this.#mines.forEach(mine => {
+		const [mineX, mineY] = mine;
+		
+		for (let i = -1; i < 2; i++) {
+			for (let j = -1; j < 2; j++) {
+				if (i > && j >0)
+			  field[mineX + i][mineY + j] += 1;
+			}
+		  }
+	})
+	
+    return field.map((row) => row.join("")).join("\n");;
   }
 }
