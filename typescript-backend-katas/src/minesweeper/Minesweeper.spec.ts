@@ -23,6 +23,11 @@ describe("Minesweeper", () => {
   });
 
   it("should display adjacent mines", () => {
-    // @TODO
+    const expectedResult = "000\n000\n000";
+
+    const game = new Minesweeper(3, 3, []);
+    const actual = game.displayFields();
+
+    expect(actual).toBe(expectedResult);
   });
 });
