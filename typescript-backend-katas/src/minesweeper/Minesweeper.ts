@@ -47,26 +47,33 @@ export class Minesweeper {
 
   displayField(): string {
     const field: number[][] = this.#grid.map(row => {
-		return row.map(cell => {
-			return 0;
-		})
-	});
+      return row.map(cell => {
+        return 0;
+      })
+    });
 
-	this.#mines.forEach(mine => {
-		const [mineX, mineY] = mine;
+    this.#mines.forEach(mine => {
+      const [mineX, mineY] = mine;
+      field[mineX][mineY] -= 10;
 
-		
-		for (let i = -1; i < 2; i++) {
-			for (let j = -1; j < 2; j++) {
-			    const indexX = mineX + i
-			    const indexY = mineY + j
-				if (indexX >= 0 && indexY >= 0 && indexX < this.#grid.length && indexY < this.#grid[0].length ) {
-				    field[mineX + i][mineY + j] += 1;
-				}
-			}
-		  }
-	})
+      
+      for (let i = -1; i < 2; i++) {
+        for (let j = -1; j < 2; j++) {
+            const indexX = mineX + i
+            const indexY = mineY + j
+          if (indexX >= 0 && indexY >= 0 && indexX < this.#grid.length && indexY < this.#grid[0].length ) {
+              field[mineX + i][mineY + j] += 1;
+          }
+        }
+        }
+    })
 	
-    return field.map((row) => row.join("")).join("\n");;
+    return field.map((row) => row.map(cell => {
+      if (cell >= 0) {
+        return cell;
+      } else {
+        return "*"
+      }
+    }).join("")).join("\n");
   }
 }

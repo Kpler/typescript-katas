@@ -39,4 +39,13 @@ describe("Minesweeper", () => {
 
     expect(actual).toBe(expectedResult);
   });
+
+  it("should display a minefield with adjacent mines", () => {
+    const expectedResult = "1*100\n11100\n01110\n12*21\n1*22*";
+
+    const game = new Minesweeper(5, 5, [[0, 1], [3, 2], [4, 1], [4, 4]]);
+    const actual = game.displayField();
+
+    expect(actual).toBe(expectedResult);
+  });
 });
