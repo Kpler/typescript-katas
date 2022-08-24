@@ -1,9 +1,11 @@
+export type Position = {col:number, row:number}
+
 export class Minesweeper {
   #grid: string[][];
-  #mines: [number, number][];
+  #mines: Position[]
 
-  constructor(private columns: number, private rows: number, mines: [number, number][]) {
-    this.#mines = mines;
+  constructor(private columns: number, private rows: number, mines: Position[]) {
+    this.#mines = mines
     this.#grid = this.#generateGrid(rows, columns);
     this.#addMines();
   }
@@ -12,7 +14,7 @@ export class Minesweeper {
     return this.#grid.map((str) => str.join("")).join("\n");
   }
 
-  getNeighbors(position: [number, number]): [number, number][] {
+  getNeighbors(position: Position): Position[] {
     //
     return [];
   }
@@ -31,8 +33,8 @@ export class Minesweeper {
 
   #addMines() {
     this.#mines.forEach((mine) => {
-      const [mineX, mineY] = mine;
-      this.#grid[mineY][mineX] = "*";
+      const {col,row} = mine;
+      this.#grid[row][col] = "*";
     });
   }
 
