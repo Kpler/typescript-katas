@@ -22,9 +22,19 @@ describe("Minesweeper", () => {
     expect(actual).toBe(expectedResult);
   });
 
-  it("should display adjacent mines", () => {
+  it("should display adjacent mines on empty minefield", () => {
     const expectedResult = "000\n000\n000";
     const game = new Minesweeper(3, 3, []);
+
+    expect(game.toStringWithCounters()).toBe(expectedResult);
+  });
+
+  it("should display adjacent mines", () => {
+    const expectedResult = "2*2\n2*2\n111";
+    const game = new Minesweeper(3, 3, [
+      [1, 0],
+      [1, 1],
+    ]);
 
     expect(game.toStringWithCounters()).toBe(expectedResult);
   });
