@@ -33,4 +33,28 @@ describe("Minesweeper", () => {
 
     expect(actual).toBe(expectedResult)
   });
+
+  it("should find neighboor in corner", () => {
+    const expectedOutput = [[0,1], [1,0], [1,1]]
+    const game = new Minesweeper(4, 4, [
+      [0, 0],
+    ]);
+    // getNeighbors(position: [number, number]): [number, number][] {
+    const output = game.getNeighbors([0,0])
+
+    expect(output).toBe(expectedOutput)
+  });
+
+  it("should find neighboor in upper line", () => {
+    const expectedOutput = [[1,0], [3,0], [1,1], [2,1], [3,1]]
+    const game = new Minesweeper(5, 5, [
+      [0, 0],
+    ]);
+    // getNeighbors(position: [number, number]): [number, number][] {
+    const output = game.getNeighbors([2, 0])
+
+    expect(output).toBe(expectedOutput)
+  });
+
+
 });

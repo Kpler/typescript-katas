@@ -2,7 +2,7 @@ export class Minesweeper {
   #grid: string[][];
   #mines: [number, number][];
 
-  constructor(private rows: number, private columns: number, mines: [number, number][]) {
+  constructor(private columns: number, private rows: number, mines: [number, number][]) {
     this.#mines = mines;
     this.#grid = this.#generateGrid(rows, columns);
     this.#addMines();
@@ -36,7 +36,7 @@ export class Minesweeper {
     });
   }
 
-  #generateGrid(rows: number, columns: number): string[][] {
+  #generateGrid(columns: number, rows: number): string[][] {
     const grid = [];
 
     for (let i = 0; i < rows; i++) {
