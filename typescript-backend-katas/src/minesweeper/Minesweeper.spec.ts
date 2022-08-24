@@ -29,6 +29,8 @@ describe("Minesweeper", () => {
       [1, 2],
     ]);
 
-    expect(true).toBe(false)
+    const actual = game.revealGrid()
+
+    expect(actual).toBe(expectedResult)
   });
 });
