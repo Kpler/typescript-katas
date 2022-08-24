@@ -14,7 +14,7 @@ describe("Minesweeper", () => {
     const expectedResult = ".*.\n.*.\n...";
 
     const game = new Minesweeper(3, 3, [
-      [1, 0],
+      [0, 1],
       [1, 1],
     ]);
     const actual = game.toString();
@@ -34,7 +34,7 @@ describe("Minesweeper", () => {
   it("should display a minefield with adjacent mines", () => {
     const expectedResult = "1*1\n111\n000";
 
-    const game = new Minesweeper(3, 3, [[1, 0]]);
+    const game = new Minesweeper(3, 3, [[0, 1]]);
     const actual = game.displayField();
 
     expect(actual).toBe(expectedResult);

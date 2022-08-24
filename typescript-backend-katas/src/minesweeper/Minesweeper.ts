@@ -27,7 +27,7 @@ export class Minesweeper {
   #addMines() {
     this.#mines.forEach((mine) => {
       const [mineX, mineY] = mine;
-      this.#grid[mineY][mineX] = Cell.MINE;
+      this.#grid[mineX][mineY] = Cell.MINE;
     });
   }
 
@@ -54,11 +54,15 @@ export class Minesweeper {
 
 	this.#mines.forEach(mine => {
 		const [mineX, mineY] = mine;
+
 		
 		for (let i = -1; i < 2; i++) {
 			for (let j = -1; j < 2; j++) {
-				if (i > && j >0)
-			  field[mineX + i][mineY + j] += 1;
+			    const indexX = mineX + i
+			    const indexY = mineY + j
+				if (indexX >= 0 && indexY >= 0 && indexX < this.#grid.length && indexY < this.#grid[0].length ) {
+				    field[mineX + i][mineY + j] += 1;
+				}
 			}
 		  }
 	})
