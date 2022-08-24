@@ -15,8 +15,15 @@ export class Minesweeper {
   }
 
   getNeighbors(position: Position): Position[] {
-    //
-    return [];
+    const neighbors = []
+    for (let j= position.row - 1; j < position.row + 1; j++ ) {
+      if (j < 0 || j >= this.rows) continue
+      for (let i= position.col - 1; i < position.col + 1; i++ ) {
+        if (i < 0 || i >= this.columns) continue
+        neighbors.push({col: i, row: j})
+      } 
+    }
+    return neighbors;
   }
 
   revealGrid(): string {
