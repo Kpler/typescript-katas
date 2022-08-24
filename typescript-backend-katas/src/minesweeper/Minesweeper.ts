@@ -12,6 +12,10 @@ export class Minesweeper {
     return this.#grid.map((str) => str.join("")).join("\n");
   }
 
+  toStringWithCounters(): string {
+    return this.#countMines(this.#grid).map((str) => ["0", "0", "0"].join("")).join("\n");
+  }
+
   #addMines() {
     this.#mines.forEach((mine) => {
       const [mineX, mineY] = mine;
@@ -32,8 +36,6 @@ export class Minesweeper {
 
     return grid;
   }
-
-
 
   #countMines(grid: string[][]): (Cell | number)[][] {
     return [];

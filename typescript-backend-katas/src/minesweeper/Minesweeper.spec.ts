@@ -23,9 +23,9 @@ describe("Minesweeper", () => {
   });
 
   it("should display adjacent mines", () => {
-    const game = new Minesweeper(3, 3, [
-      [1, 0],
-      [1, 1],
-    ]);
+    const expectedResult = "000\n000\n000";
+    const game = new Minesweeper(3, 3, []);
+
+    expect(game.toStringWithCounters()).toBe(expectedResult);
   });
 });
