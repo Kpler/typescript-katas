@@ -32,4 +32,8 @@ export class Minesweeper {
 
     return grid;
   }
+
+  displayField(): string {
+    return this.toString().replaceAll(".", "0");
+  }
 }

@@ -26,7 +26,7 @@ describe("Minesweeper", () => {
     const expectedResult = "000\n000\n000";
 
     const game = new Minesweeper(3, 3, []);
-    const actual = game.displayFields();
+    const actual = game.displayField();
 
     expect(actual).toBe(expectedResult);
   });
