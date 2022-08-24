@@ -32,4 +32,15 @@ export class Minesweeper {
 
     return grid;
   }
+
+
+
+  #countMines(grid: string[][]): (Cell | number)[][] {
+    return [];
+  }
+}
+
+enum Cell {
+  MINE = "*",
+  UNKOWN = ".",
 }

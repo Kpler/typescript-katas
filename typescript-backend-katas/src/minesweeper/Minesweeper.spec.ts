@@ -23,6 +23,9 @@ describe("Minesweeper", () => {
   });
 
   it("should display adjacent mines", () => {
-    // @TODO
+    const game = new Minesweeper(3, 3, [
+      [1, 0],
+      [1, 1],
+    ]);
   });
 });
