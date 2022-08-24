@@ -39,9 +39,15 @@ export class Minesweeper {
 
   #countMines(grid: string[][]): (Cell | number)[][] {
     return grid.map((row, rowIndex) => row.map((cell, cellIndex) => {
-      const filteredThing = this.#mines.filter(([x, y]) => x === rowIndex && y === cellIndex);
 
-      return 0;
+      if (cell === "*") {
+        return Cell.MINE;
+      } else {
+        const filteredThing = this.#mines.filter(([y, x]) => {
+          return [rowIndex -1, rowIndex, rowIndex+1].includes(x) && [cellIndex -1, cellIndex, cellIndex +1].includes(y)
+        });
+        return filteredThing.length;
+      }
     }));
   }
 }
