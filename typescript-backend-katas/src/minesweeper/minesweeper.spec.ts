@@ -12,7 +12,7 @@ describe("My method", () => {
 
     // THEN
     
-    expect(result).toBe([
+    expect(result).toStrictEqual([
       ['*', '.', '.', '.'],
       ['.', '.', '.', '.'],
       ['.', '*', '.', '.'],
