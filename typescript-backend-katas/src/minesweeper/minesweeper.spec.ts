@@ -5,10 +5,10 @@ describe("My method", () => {
     // GIVEN
     const rowsNumber = 4;
     const colsNumber = 4;
-    const mines = [result[0][0]];
+    const mines = [[0,0], [2, 1]];
 
     // WHEN
-    const result = createMatrice(rowsNumber, colsNumber)
+    const result = createMatrice(rowsNumber, colsNumber, mines)
 
     // THEN
     
