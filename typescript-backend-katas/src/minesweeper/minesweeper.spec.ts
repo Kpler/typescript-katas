@@ -3,20 +3,16 @@ describe("Minesweeper", () => {
   it("should build mine field correctly", () => {
     const rows = 1;
     const columns = 2;
-    const minePositions: MinePositions = [] 
+    const minePositions: MinePositions = [];
     const minesweeper = new Minesweeper(rows, columns, minePositions);
-    expect(minesweeper.outputField()).toBe(
-      '..\n'
-    );
+    expect(minesweeper.outputField()).toBe("..\n");
   });
 
   it("creating a mine at the end", () => {
     const rows = 1;
     const columns = 3;
-    const minePositions: MinePositions = [{x: 0, y: 2}] 
+    const minePositions: MinePositions = [{ col: 2, row: 0 }];
     const minesweeper = new Minesweeper(rows, columns, minePositions);
-    expect(minesweeper.outputField()).toBe(
-      '..*\n'
-    );
+    expect(minesweeper.outputField()).toBe("..*\n");
   });
 });
