@@ -1,4 +1,4 @@
-class Minesweeper {
+export class Minesweeper {
     constructor(
         public rows: number,
         public columns: number,
@@ -6,5 +6,5 @@ class Minesweeper {
     ) {}
 }
 
-type MinePosition = {x: number, y: number};
-type MinePositions = MinePosition[];
+export type MinePosition = {x: number, y: number};
+export type MinePositions = MinePosition[];
