@@ -1,6 +1,20 @@
+import { createMatrice } from "./minesweeper";
 
-describe("Example test", () => {
-  it("should sum numbers correctly", () => {
-    expect(1 + 1).toBe(2);
+describe("My method", () => {
+  it("should generate a 4x4 matrice", () => {
+    // GIVEN
+    const rowsNumber = 4;
+    const colsNumber = 4;
+
+    // WHEN
+    const result = createMatrice(rowsNumber, colsNumber)
+
+    // THEN
+    
+    expect(result).toBe([
+      [],
+      [],
+      [],
+    ]);
   });
 });
