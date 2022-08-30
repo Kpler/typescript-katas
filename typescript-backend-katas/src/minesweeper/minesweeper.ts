@@ -4,6 +4,10 @@ export class Minesweeper {
         public columns: number,
         public minePositions: MinePositions
     ) {}
+
+    outputField(): string {
+        return '';
+    }
 }
 
 export type MinePosition = {x: number, y: number};
