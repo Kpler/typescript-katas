@@ -1,3 +1,3 @@
-export const createMatrice = (rowsNumber: number, colsNumber: number): string[][] => {
+export const createMatrice = (rowsNumber: number, colsNumber: number, mines: [[]]): string[][] => {
 
 }

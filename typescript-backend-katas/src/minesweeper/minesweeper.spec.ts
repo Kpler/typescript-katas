@@ -5,6 +5,7 @@ describe("My method", () => {
     // GIVEN
     const rowsNumber = 4;
     const colsNumber = 4;
+    const mines = [result[0][0]];
 
     // WHEN
     const result = createMatrice(rowsNumber, colsNumber)
@@ -12,9 +13,10 @@ describe("My method", () => {
     // THEN
     
     expect(result).toBe([
-      [],
-      [],
-      [],
+      ['*', '.', '.', '.'],
+      ['.', '.', '.', '.'],
+      ['.', '*', '.', '.'],
+      ['.', '.', '.', '.'],
     ]);
   });
 });
