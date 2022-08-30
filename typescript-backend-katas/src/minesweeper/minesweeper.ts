@@ -6,7 +6,15 @@ export class Minesweeper {
     ) {}
 
     outputField(): string {
-        return '';
+        let field = '';
+        for (let row=0;row < this.rows;row++) {
+            for (let column=0; column < this.columns; column++) {
+                if (row === this.minePositions[row] && column === this.minePositions[1])
+                field = field.concat('.');
+            }
+            field = field.concat('\n');
+        }
+        return field;
     }
 }
 
