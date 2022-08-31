@@ -39,3 +39,19 @@ describe("Minesweeper", () => {
     expect(game.toStringWithCounters()).toBe(expectedResult);
   });
 });
+
+describe("Play minesweeper", () => {
+  it("should show number of mines adjacents to where we play", () => {
+    // GIVEN a new minesweeper game
+    const game = new Minesweeper(3, 3, [
+      [1, 0],
+      [1, 1],
+    ]);
+
+    // WHEN we play one move
+    const result = game.play(0, 0);
+
+    // THEN we shall have a new grid with few things displayed
+    expect(result).toBe("2..\n...\n...")
+  });
+});
