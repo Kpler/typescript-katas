@@ -1,75 +1,62 @@
-enum Cell {
+enum MineStatus {
   MINE = "*",
-  UNKOWN = ".",
+  CLEAR = ".",
 }
 
-type Field = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
-// type Field = string;
+type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
 
 export class Minesweeper {
-  #grid: Field[][];
+  #grid: Cell[][];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
-    this.#grid = this.#generateField(rows, columns, mines);
+    const gridWithMines = this.#generateMinefield(rows, columns, mines);
+    this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
   }
 
-  toString(): string {
-    return this.#grid.map((str) => str.join("")).join("\n");
-  }
-
-  toStringWithCounters(): string {
-    return this.#countMines(this.#grid)
-      .map((str) => str.join(""))
-      .join("\n");
-  }
-
-  #generateField(
+  #generateMinefield(
     rows: number,
     columns: number,
     mines: [number, number][]
-  ): Field[][] {
-    const gridWithMines = this.#generateGrid(rows, columns, mines);
-    return this.#countMines(gridWithMines, mines);
-  }
-
-  #generateGrid(
-    rows: number,
-    columns: number,
-    mines: [number, number][]
-  ): Cell[][] {
-    const grid: Cell[][] = [];
+  ): MineStatus[][] {
+    const grid: MineStatus[][] = [];
 
     for (let i = 0; i < rows; i++) {
       const rowArr = [];
       for (let j = 0; j < columns; j++) {
-        rowArr.push(Cell.UNKOWN);
+        rowArr.push(MineStatus.CLEAR);
       }
       grid.push(rowArr);
     }
 
     mines.forEach((mine) => {
       const [mineX, mineY] = mine;
-      grid[mineY][mineX] = Cell.MINE;
+      grid[mineX][mineY] = MineStatus.MINE;
     });
 
     return grid;
   }
 
-  #countMines(grid: Cell[][], mines: [number, number][]): Field[][] {
+  #addCountsToMinefield(grid: MineStatus[][], mines: [number, number][]): Cell[][] {
     return grid.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
-        if (cell === Cell.MINE) {
+        if (cell === MineStatus.MINE) {
           return "*";
         }
 
-        const filteredThing = mines.filter(([y, x]) => {
+        const adjacentMines = mines.filter(([x, y]) => {
           return (
             [rowIndex - 1, rowIndex, rowIndex + 1].includes(x) &&
             [cellIndex - 1, cellIndex, cellIndex + 1].includes(y)
           );
         });
-        return filteredThing.length.toString() as Field;
+        return adjacentMines.length.toString() as Cell;
       })
     );
+  }
+
+  toString(): string {
+    return this.#grid
+      .map(row => row.join(""))
+      .join("\n");
   }
 }
