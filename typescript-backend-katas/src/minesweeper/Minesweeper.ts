@@ -82,18 +82,7 @@ export class Minesweeper {
     return safeCellCount === 0;
   }
 
-  play(coordinates: [number, number]): string {
-    const [x, y] = coordinates;
-    this.#reveal[x][y] = true;
-
-    const isBomb = this.#grid[x][y] === '*';
-    if (isBomb) {
-      return 'You lose';
-    }
-    if (this.#isWon()) {
-      return 'Win!'
-    }
-
+  #displayGame() {
     return this.#grid
       .map((row, gX) =>
         row
@@ -104,5 +93,52 @@ export class Minesweeper {
           .join("")
       )
       .join("\n");
+  }
+
+  #getBoundedNeighbors(x: number, y: number): [number, number][] {
+    const deltas = [
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [0, -1],
+      [0, 1],
+      [1, -1],
+      [1, 0],
+      [1, 1],
+    ];
+
+    return deltas
+      .map(([dx, dy]): [number, number] => [x + dx, y + dy])
+      .filter(([nx, ny]) => this.#grid[nx]?.[ny] !== undefined);
+  }
+
+  #play(coordinates: [number, number]): void {
+    const [x, y] = coordinates;
+    this.#reveal[x][y] = true;
+
+    const isZero = this.#grid[x][y] === "0";
+    if (!isZero) {
+      return;
+    }
+
+    const neighbors = this.#getBoundedNeighbors(x, y);
+    neighbors
+      .filter(([nx, ny]) => !this.#reveal[nx][ny])
+      .forEach((cords) => this.#play(cords));
+  }
+
+  play(coordinates: [number, number]): string {
+    const [x, y] = coordinates;
+    const isBomb = this.#grid[x][y] === "*";
+    if (isBomb) {
+      return "You lose";
+    }
+
+    this.#play(coordinates);
+    if (this.#isWon()) {
+      return "Win!";
+    }
+
+    return this.#displayGame();
   }
 }

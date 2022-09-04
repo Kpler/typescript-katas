@@ -52,4 +52,22 @@ describe("Minesweeper", () => {
     const output = game.play([2, 2]);
     expect(output).toBe("Win!");
   });
+
+  it("recursively unreveal adjacent safe cells when playing on 0 to win", () => {
+    const game = new Minesweeper(3, 3, [[0, 2]]);
+
+    expect(game.toString()).toBe("01*\n011\n000");
+    expect(game.play([2, 2])).toBe("Win!");
+  });
+
+  it("recursively unreveal adjacent safe cells when playing on 0", () => {
+    const game = new Minesweeper(4, 4, [
+      [0, 1],
+      [1, 0],
+      [1, 1],
+    ]);
+
+    expect(game.toString()).toBe("3*20\n**20\n2210\n0000");
+    expect(game.play([3, 3])).toBe("..20\n..20\n2210\n0000");
+  });
 });
