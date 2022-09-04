@@ -36,7 +36,10 @@ export class Minesweeper {
     return grid;
   }
 
-  #addCountsToMinefield(grid: MineStatus[][], mines: [number, number][]): Cell[][] {
+  #addCountsToMinefield(
+    grid: MineStatus[][],
+    mines: [number, number][]
+  ): Cell[][] {
     return grid.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
         if (cell === MineStatus.MINE) {
@@ -55,8 +58,6 @@ export class Minesweeper {
   }
 
   toString(): string {
-    return this.#grid
-      .map(row => row.join(""))
-      .join("\n");
+    return this.#grid.map((row) => row.join("")).join("\n");
   }
 }
