@@ -12,6 +12,10 @@ export class Minesweeper {
     return this.#grid.map((str) => str.join("")).join("\n");
   }
 
+  displayAdjacentMines(): {
+
+  }
+
   #addMines() {
     this.#mines.forEach((mine) => {
       const [mineX, mineY] = mine;

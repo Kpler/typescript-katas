@@ -24,9 +24,12 @@ describe("Minesweeper", () => {
 
   it("should display adjacent mines", () => {
     // GIVEN
-
+    const game = new Minesweeper(4, 4, [
+      [0, 0],
+      [2, 1],
+    ]);
     // WHEN
-
+    const actual = game.displayAdjacentMines();
     // THEN
     const expectedResult = "*100\n2210\n1*10\n1110";
     expect(actual).toBe(expectedResult);
