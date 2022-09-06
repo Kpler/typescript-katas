@@ -13,6 +13,9 @@ export class Minesweeper {
   }
 
   displayAdjacentMines(): {
+  //initialize an array with 0 everywhere
+
+  //loop each mine to replace 0 around the cell if there is a mine
 
   }
 
