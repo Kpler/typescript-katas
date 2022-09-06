@@ -12,11 +12,25 @@ export class Minesweeper {
     return this.#grid.map((str) => str.join("")).join("\n");
   }
 
-  displayAdjacentMines(): {
-  //initialize an array with 0 everywhere
+  displayAdjacentMines(): string {
+    //initialize an array with 0 everywhere
+    const field: number[][] = this.#grid.map(row => row.map(col => 0));
+    // here fields is equal to an array or array of 0
+    
+    //loop each mine to replace 0 around the cell if there is a mine
+    this.#mines.forEach(([row, col]) => {
+      field[row-1][col-1] += 1;
+      field[row][col-1] += 1;
+      field[row+1][col-1] += 1;
+      field[row-1][col] += 1;
+      //field[row][col] += 1;
+      field[row+1][col] += 1;
+      field[row-1][col+1] += 1;
+      field[row][col+1] += 1;
+      field[row+1][col+1] += 1;
+    })
 
-  //loop each mine to replace 0 around the cell if there is a mine
-
+    return field.map((row) => row.join("")).join("\n");
   }
 
   #addMines() {
