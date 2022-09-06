@@ -32,4 +32,14 @@ export class Minesweeper {
 
     return grid;
   }
+
+   /*
+    Creating convetion to define a mine as a value of -1 
+  */
+  detectSurroundingMines(row: number, column: number): number {
+    const condition = true; // if is mine
+    if (condition) {
+      return -1;
+    }
+  }
 }
