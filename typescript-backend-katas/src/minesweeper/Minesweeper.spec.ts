@@ -23,6 +23,12 @@ describe("Minesweeper", () => {
   });
 
   it("should display adjacent mines", () => {
-    // @TODO
+    // GIVEN
+
+    // WHEN
+
+    // THEN
+    const expectedResult = "*100\n2210\n1*10\n1110";
+    expect(actual).toBe(expectedResult);
   });
 });
