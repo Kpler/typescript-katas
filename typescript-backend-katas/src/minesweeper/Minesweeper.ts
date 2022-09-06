@@ -38,8 +38,33 @@ export class Minesweeper {
   */
   detectSurroundingMines(row: number, column: number): number {
     const condition = true; // if is mine
+    /* 
+    2*2
+    2*2
+    111
+
+    -*-
+    -*-
+    ---
+
+    row = 0, column = 2
+
+    */
+
+    
     if (condition) {
       return -1;
     }
+    return 0;
+  }
+
+  isMineAtLocation(row: number, column: number): boolean {
+    if (row < 0 || column < 0) {
+      return false;
+    }
+    if (this.#grid[row][column] === "*") {
+      return true;
+    }
+    return false;
   }
 }

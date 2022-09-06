@@ -48,5 +48,39 @@ describe("Minesweeper", () => {
       const actual = game.detectSurroundingMines(1, 0);
       expect(actual).toBe(2);
     });
+
+    describe("isMineAtLocation", () => {
+      it("return true if mine is at location", () => {
+        const game = new Minesweeper(3, 3, [
+          [1, 0],
+          [1, 1],
+        ]);
+
+        /*
+          2*2
+          2*2
+          111
+        */
+
+        const actual = game.isMineAtLocation(0, 1);
+        expect(actual).toBe(true);
+      })
+
+      it("return false if mine is not at location", () => {
+        const game = new Minesweeper(3, 3, [
+          [1, 0],
+          [1, 1],
+        ]);
+
+        /*
+          2*2
+          2*2
+          111
+        */
+
+        const actual = game.isMineAtLocation(0, 2);
+        expect(actual).toBe(false);
+      })
+    });
   });
 });
