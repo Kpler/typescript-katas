@@ -68,8 +68,13 @@ export class Minesweeper {
     }
 
     play([x, y]: [number, number]): number {
-        throw new YouLoose()
-        return 0;
+        const cell_value = this.#grid[x][y]
+        if (cell_value === MineStatus.MINE) {
+            throw new YouLoose()
+        //    TODO: fix return value
+        }
+        // else
+        return;
     }
 }
 
