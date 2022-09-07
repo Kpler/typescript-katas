@@ -25,7 +25,7 @@ describe("Minesweeper", () => {
       [0, 1]
     ]);
 
-    expect(game.play([1,2])).toBe(expectedResult);
+    expect(game.play({ row: 1, col: 2 })).toBe(expectedResult);
   });
 
 

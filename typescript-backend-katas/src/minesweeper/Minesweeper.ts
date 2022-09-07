@@ -4,10 +4,16 @@ enum MineStatus {
   UNKNOWN = "#",
 }
 
+interface Position {
+  row: number;
+  col: number;
+}
+
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" ;
 
 export class Minesweeper {
   #grid: Cell[][];
+  // #moves: Position[];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
@@ -61,8 +67,17 @@ export class Minesweeper {
       .join("\n");
   }
 
-  play([row, col]: [number, number]) : string {
-    return "";
+  // #filterForDisplay() {
+  // }
+
+  play(position: Position) : string {
+    return this.#grid
+      .map(row => row.join(""))
+      .join("\n");
+
+    // this.#moves.push(position);
+    // // is mine?
+    // return this.#filterForDisplay(this.#grid);
   }
 
 }
