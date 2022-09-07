@@ -9,6 +9,8 @@ interface Position {
   col: number;
 }
 
+const GAME_OVER_MSG = "Game Over Samir you suck"
+
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" ;
 
 export class Minesweeper {
@@ -69,11 +71,16 @@ export class Minesweeper {
   }
 
   play(position: Position) : string {
+
+    if (this.#grid[position.row][position.col] === MineStatus.MINE)
+      return GAME_OVER_MSG
+
     this.#moves.push(position);
     return this.#grid
       .map((row, rowIndex) =>
           row.map((col, collIndex) => {
             const isPositionInMoves = this.#moves.some((position, i) => position.col === collIndex && position.row === rowIndex);
+            // const isPositionInMoves = this.#moves.some((position, i) => position.col === collIndex && position.row === rowIndex);
             return isPositionInMoves ? col : MineStatus.UNKNOWN
           }).join("")
       )

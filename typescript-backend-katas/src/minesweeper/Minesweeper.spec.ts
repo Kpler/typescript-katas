@@ -28,5 +28,17 @@ describe("Minesweeper", () => {
     expect(game.play({ row: 1, col: 2 })).toBe(expectedResult);
   });
 
+  it("should play a mine cell", () => {
+    const expectedResult = "Game Over Samir you suck";
+
+    const game = new Minesweeper(3, 3, [
+      [0, 1]
+    ]);
+
+    expect(game.play({ row: 0, col: 1 })).toBe(expectedResult);
+  });
+
+  
+
 
 });
