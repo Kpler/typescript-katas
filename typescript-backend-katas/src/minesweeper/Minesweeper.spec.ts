@@ -37,4 +37,21 @@ describe("Minesweeper", () => {
       game.play(0, 1);
     }).toThrow();
   })
+
+  it("should play on no mines finish the game", () => {
+    const expectedResult = "2.2\n2.2\n111";
+    const game = new Minesweeper(3, 3, [
+      [0, 1],
+      [1, 1],
+    ]);
+    game.play(0, 0);
+    game.play(0, 2);
+    game.play(1, 0);
+    game.play(1, 2);
+    game.play(2, 0);
+    game.play(2, 1);
+    expect(() => {
+      game.play(2, 2);
+    }).toThrow();
+  })
 });

@@ -88,6 +88,7 @@ export class Minesweeper {
     if (currentMove === "*") {
       throw new Error(`GAME OVER\n${currentGrid}`);
     }
+
     return currentGrid;
   }
 }
