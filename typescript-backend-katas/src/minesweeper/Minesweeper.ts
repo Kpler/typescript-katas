@@ -82,7 +82,12 @@ export class Minesweeper {
   }
 
   play(row: number, col: number): string {
-    this.#playerGrid[row][col] = this.#grid[row][col];
-    return this.#toString(this.#playerGrid);
+    const currentMove = this.#grid[row][col];
+    this.#playerGrid[row][col] = currentMove;
+    const currentGrid = this.#toString(this.#playerGrid);
+    if (currentMove === "*") {
+      throw new Error(`GAME OVER\n${currentGrid}`);
+    }
+    return currentGrid;
   }
 }
