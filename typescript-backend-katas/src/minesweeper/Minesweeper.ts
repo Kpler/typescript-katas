@@ -7,10 +7,26 @@ type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
 
 export class Minesweeper {
   #grid: Cell[][];
+  #playerGrid: string[][];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
+    this.#playerGrid = this.#initPlayerGrid(rows, columns);
+  }
+
+  #initPlayerGrid(rows: number, columns: number): string[][] {
+    const grid: string[][] = [];
+
+    for (let i = 0; i < rows; i++) {
+      const rowArr = [];
+      for (let j = 0; j < columns; j++) {
+        rowArr.push(".");
+      }
+      grid.push(rowArr);
+    }
+
+    return grid;
   }
 
   #generateMinefield(
@@ -54,14 +70,19 @@ export class Minesweeper {
     );
   }
 
-  toString(): string {
-    return this.#grid
+  #toString(grid: string[][]): string {
+    return grid
       .map(row => row.join(""))
       .join("\n");
+
+  }
+
+  toString(): string {
+    return this.#toString(this.#grid);
   }
 
   play(row: number, col: number): string {
-    return ""
+    this.#playerGrid[row][col] = this.#grid[row][col];
+    return this.#toString(this.#playerGrid);
   }
-
 }
