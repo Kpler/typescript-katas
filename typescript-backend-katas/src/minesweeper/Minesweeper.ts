@@ -5,6 +5,10 @@ enum MineStatus {
 
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
 
+export class YouLoose extends Error {}
+export class YouWin extends Error {}
+
+
 export class Minesweeper {
   #grid: Cell[][];
 
@@ -61,6 +65,8 @@ export class Minesweeper {
   }
 
   play([x, y]: [number, number]): number {
+    throw new YouLoose()
     return 0;
   }
 }
+
