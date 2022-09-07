@@ -18,8 +18,8 @@ export class Minesweeper {
   #playerGrid: string[][];
 
   constructor(
-    rows: number,
-    columns: number,
+    private rows: number,
+    private columns: number,
     private mines: [number, number][]
   ) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
@@ -99,19 +99,21 @@ export class Minesweeper {
 
     if (currentMove === "0") {
       const neighbors = [
-        [-1, -1],
-        [-1, 0],
-        [-1, 1],
-        [0, -1],
-        [0, 1],
-        [1, -1],
-        [1, 0],
-        [1, 1],
+        [row-1, col-1],
+        [row-1, col],
+        [row-1, col+1],
+        [row, col-1],
+        [row, col+1],
+        [row+1, col-1],
+        [row+1, col],
+        [row+1, col+1],
       ]
 
-      neighbors.map(([deltaRow, deltaCol]) => {
-
-      });
+      neighbors.forEach(([row, col]) => {
+        if (row >= 0 && row <= this.rows && col >=0 && col <= this.columns) {
+          this.play(row, col);
+        }
+      })
 
       // const neighbors = []
     }
