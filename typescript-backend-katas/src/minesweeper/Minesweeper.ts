@@ -71,10 +71,13 @@ export class Minesweeper {
         const cell_value = this.#grid[x][y]
         if (cell_value === MineStatus.MINE) {
             throw new YouLoose()
-        //    TODO: fix return value
         }
-        // else
-        return;
+        // grid_x * grid_y == n - length(mines)
+        // todo check that everything has been explored
+        if (false) {
+          throw new YouWin()
+        }
+        return Number(cell_value);
     }
 }
 
