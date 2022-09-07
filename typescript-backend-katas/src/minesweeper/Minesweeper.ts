@@ -1,10 +1,9 @@
-
 export class GameOver extends Error {
-  name = "GameOver"
+  name = "GameOver";
 }
 
 export class Win extends Error {
-  name = "Win"
+  name = "Win";
 }
 
 enum MineStatus {
@@ -18,7 +17,11 @@ export class Minesweeper {
   #grid: Cell[][];
   #playerGrid: string[][];
 
-  constructor(rows: number, columns: number, private mines: [number, number][]) {
+  constructor(
+    rows: number,
+    columns: number,
+    private mines: [number, number][]
+  ) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
     this.#playerGrid = this.#initPlayerGrid(rows, columns);
@@ -61,7 +64,10 @@ export class Minesweeper {
     return grid;
   }
 
-  #addCountsToMinefield(grid: MineStatus[][], mines: [number, number][]): Cell[][] {
+  #addCountsToMinefield(
+    grid: MineStatus[][],
+    mines: [number, number][]
+  ): Cell[][] {
     return grid.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
         if (cell === MineStatus.MINE) {
@@ -80,10 +86,7 @@ export class Minesweeper {
   }
 
   #toString(grid: string[][]): string {
-    return grid
-      .map(row => row.join(""))
-      .join("\n");
-
+    return grid.map((row) => row.join("")).join("\n");
   }
 
   toString(): string {
@@ -93,16 +96,23 @@ export class Minesweeper {
   play(row: number, col: number): string {
     const currentMove = this.#grid[row][col];
     this.#playerGrid[row][col] = currentMove;
+
     const currentGrid = this.#toString(this.#playerGrid);
     if (currentMove === "*") {
       throw new GameOver(`GAME OVER\n${currentGrid}`);
     }
 
-    const unsweptCellCount = this.#playerGrid.flat().filter(c => c === '.').length;
+    const unsweptCellCount = this.#playerGrid
+      .flat()
+      .filter((c) => c === ".").length;
     if (unsweptCellCount == this.mines.length) {
       throw new Win(`WIN\n${currentGrid}`);
     }
-    
+
+    if (currentMove === "0") {
+
+    }
+
     return currentGrid;
   }
 }

@@ -24,8 +24,8 @@ describe("Minesweeper", () => {
       [0, 1],
       [1, 1],
     ]);
-    expect(game.play(0, 0)).toBe(expectedResult)
-  })
+    expect(game.play(0, 0)).toBe(expectedResult);
+  });
 
   it("should play on a mine finish the game", () => {
     const game = new Minesweeper(3, 3, [
@@ -36,7 +36,7 @@ describe("Minesweeper", () => {
     expect(() => {
       game.play(0, 1);
     }).toThrow(GameOver);
-  })
+  });
 
   it("should play on no mines finish the game", () => {
     const game = new Minesweeper(3, 3, [
@@ -52,5 +52,15 @@ describe("Minesweeper", () => {
     expect(() => {
       game.play(2, 2);
     }).toThrow(Win);
-  })
+  });
+
+  it("should recursively reveal adjacent mines when playing on zero", () => {
+    const expectedResult = "001.\n112.\n....\n....";
+    const game = new Minesweeper(4, 4, [
+      [0, 3],
+      [2, 1],
+    ]);
+
+    expect(game.play(0, 0)).toBe(expectedResult);
+  });
 });
