@@ -40,13 +40,8 @@ Example output of game from the first iteration with all numbers:
 
 ## Iteration 3: play the game
 
-Add a function to _play_ the game. When a new game is generated, it should display a blank minefield:
-```
-....
-....
-....
-....
-```
+Add a function `play` that takes a set of co-ordinates of the player's current move, and returns the state of the minefield after the user's move.
+
 When a square is swept, it should either end the game, or display the number of mines adjacent to the square:
 ```
 // Sweep row 1 column 1: game over
@@ -61,6 +56,25 @@ When a square is swept, it should either end the game, or display the number of 
 ....
 ....
 ```
+
+## Iteration 4: reveal all adjacent non-mines when a zero is clicked
+
+If the user plays a cell with 0 adjacent mines, recursively reveal all adjacent cells without mines:
+
+```
+// Given mine positions:
+...*
+....
+.*..
+....
+
+// Output when user plays row 1 column 1:
+001.
+112.
+....
+....
+```
+
 
 ---
 
