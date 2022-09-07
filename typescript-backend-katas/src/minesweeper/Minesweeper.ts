@@ -1,3 +1,12 @@
+
+export class GameOver extends Error {
+  name = "GameOver"
+}
+
+export class Win extends Error {
+  name = "Win"
+}
+
 enum MineStatus {
   MINE = "*",
   CLEAR = ".",
@@ -9,7 +18,7 @@ export class Minesweeper {
   #grid: Cell[][];
   #playerGrid: string[][];
 
-  constructor(rows: number, columns: number, mines: [number, number][]) {
+  constructor(rows: number, columns: number, private mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
     this.#playerGrid = this.#initPlayerGrid(rows, columns);
@@ -86,9 +95,14 @@ export class Minesweeper {
     this.#playerGrid[row][col] = currentMove;
     const currentGrid = this.#toString(this.#playerGrid);
     if (currentMove === "*") {
-      throw new Error(`GAME OVER\n${currentGrid}`);
+      throw new GameOver(`GAME OVER\n${currentGrid}`);
     }
 
+    const unsweptCellCount = this.#playerGrid.flat().filter(c => c === '.').length;
+    if (unsweptCellCount == this.mines.length) {
+      throw new Win(`WIN\n${currentGrid}`);
+    }
+    
     return currentGrid;
   }
 }

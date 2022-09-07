@@ -1,4 +1,4 @@
-import { Minesweeper } from "./Minesweeper";
+import { Minesweeper, GameOver, Win } from "./Minesweeper";
 
 describe("Minesweeper", () => {
   it("should generate game and display adjacent mines on empty minefield", () => {
@@ -35,11 +35,10 @@ describe("Minesweeper", () => {
 
     expect(() => {
       game.play(0, 1);
-    }).toThrow();
+    }).toThrow(GameOver);
   })
 
   it("should play on no mines finish the game", () => {
-    const expectedResult = "2.2\n2.2\n111";
     const game = new Minesweeper(3, 3, [
       [0, 1],
       [1, 1],
@@ -52,6 +51,6 @@ describe("Minesweeper", () => {
     game.play(2, 1);
     expect(() => {
       game.play(2, 2);
-    }).toThrow();
+    }).toThrow(Win);
   })
 });
