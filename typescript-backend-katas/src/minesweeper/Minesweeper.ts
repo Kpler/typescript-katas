@@ -97,6 +97,25 @@ export class Minesweeper {
     const currentMove = this.#grid[row][col];
     this.#playerGrid[row][col] = currentMove;
 
+    if (currentMove === "0") {
+      const neighbors = [
+        [-1, -1],
+        [-1, 0],
+        [-1, 1],
+        [0, -1],
+        [0, 1],
+        [1, -1],
+        [1, 0],
+        [1, 1],
+      ]
+
+      neighbors.map(([deltaRow, deltaCol]) => {
+
+      });
+
+      // const neighbors = []
+    }
+
     const currentGrid = this.#toString(this.#playerGrid);
     if (currentMove === "*") {
       throw new GameOver(`GAME OVER\n${currentGrid}`);
@@ -107,10 +126,6 @@ export class Minesweeper {
       .filter((c) => c === ".").length;
     if (unsweptCellCount == this.mines.length) {
       throw new Win(`WIN\n${currentGrid}`);
-    }
-
-    if (currentMove === "0") {
-
     }
 
     return currentGrid;
