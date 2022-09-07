@@ -27,7 +27,13 @@ describe("Minesweeper", () => {
     const game = new Minesweeper(3, 3, [
       [0, 0],
     ]);
-    expect(() => game.play([0,1])).toThrowError(YouLoose);
+    expect(() => game.play([0,0])).toThrowError(YouLoose);
   });
 
+  it("should continue if you are not on a mine and reveal adj number of mines", () => {
+    const game = new Minesweeper(3, 3, [
+      [0, 0],
+    ]);
+    expect(() => game.play([0,1])).toBe(1);
+  });
 });
