@@ -17,4 +17,16 @@ describe("Minesweeper", () => {
 
     expect(game.toString()).toBe(expectedResult);
   });
+
+  it("should play a clear cell", () => {
+    const expectedResult = "###\n##0\n###";
+
+    const game = new Minesweeper(3, 3, [
+      [0, 1]
+    ]);
+
+    expect(game.play([1,2])).toBe(expectedResult);
+  });
+
+
 });

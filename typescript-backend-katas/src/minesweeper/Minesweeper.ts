@@ -1,9 +1,10 @@
 enum MineStatus {
   MINE = "*",
   CLEAR = ".",
+  UNKNOWN = "#",
 }
 
-type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
+type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" ;
 
 export class Minesweeper {
   #grid: Cell[][];
@@ -59,4 +60,9 @@ export class Minesweeper {
       .map(row => row.join(""))
       .join("\n");
   }
+
+  play([row, col]: [number, number]) : string {
+    return "";
+  }
+
 }
