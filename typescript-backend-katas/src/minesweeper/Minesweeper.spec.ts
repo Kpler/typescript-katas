@@ -38,7 +38,4 @@ describe("Minesweeper", () => {
     expect(game.play({ row: 0, col: 1 })).toBe(expectedResult);
   });
 
-  
-
-
 });

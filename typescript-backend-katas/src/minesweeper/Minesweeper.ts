@@ -80,7 +80,6 @@ export class Minesweeper {
       .map((row, rowIndex) =>
           row.map((col, collIndex) => {
             const isPositionInMoves = this.#moves.some((position, i) => position.col === collIndex && position.row === rowIndex);
-            // const isPositionInMoves = this.#moves.some((position, i) => position.col === collIndex && position.row === rowIndex);
             return isPositionInMoves ? col : MineStatus.UNKNOWN
           }).join("")
       )
