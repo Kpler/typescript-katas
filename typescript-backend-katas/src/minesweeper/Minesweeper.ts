@@ -76,13 +76,12 @@ export class Minesweeper {
 
     play([x, y]: [number, number]): number {
       this.#playedCells++
-      console.log(this.#playedCells, this.#numberOfCells, this.#numberOfMines)
       const cell_value = this.#grid[x][y]
       if (cell_value === MineStatus.MINE) {
           throw new YouLoose()
       }
 
-      const winCondition = this.#numberOfCells === this.#playedCells - this.#numberOfMines
+      const winCondition = this.#numberOfCells === this.#playedCells + this.#numberOfMines
       if (winCondition) {
         throw new YouWin()
       }
