@@ -38,9 +38,23 @@ describe("Minesweeper", () => {
     });
 
 
-  it("should continue if you are not on a mine and reveal adj number of mines", () => {
+  it("should win if you explored the full grid", () => {
     const game = new Minesweeper(1, 1, [
     ]);
     expect(() => game.play([0, 0])).toThrowError(YouWin);
+  });
+
+  it("should win if you explored the full grid (larger grid)", () => {
+    const game = new Minesweeper(3, 3, [
+      [1, 1]
+    ]);
+    game.play([0, 0]);
+    game.play([0, 1]);
+    game.play([0, 2]);
+    game.play([1, 0]);
+    game.play([1, 2]);
+    game.play([2, 0]);
+    game.play([2, 1]);
+    expect(() => game.play([2, 2])).toThrowError(YouWin);
   });
 });
