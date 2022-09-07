@@ -59,4 +59,8 @@ export class Minesweeper {
       .map(row => row.join(""))
       .join("\n");
   }
+
+  play([x, y]: [number, number]): number {
+    return 0;
+  }
 }

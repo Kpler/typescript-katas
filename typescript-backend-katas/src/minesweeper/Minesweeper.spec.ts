@@ -27,8 +27,7 @@ describe("Minesweeper", () => {
     const game = new Minesweeper(3, 3, [
       [0, 0],
     ]);
-//     todo: implement play
-    expect(game.play([0,0])).toThrow("GameOver"))
+    expect(game.play([0,1])).toBe(0);
   });
 
 });
