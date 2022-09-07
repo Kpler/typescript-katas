@@ -19,7 +19,7 @@ describe("Minesweeper", () => {
   });
 
   it("should play a clear cell", () => {
-    const expectedResult = "###\n##0\n###";
+    const expectedResult = "###\n##1\n###";
 
     const game = new Minesweeper(3, 3, [
       [0, 1]

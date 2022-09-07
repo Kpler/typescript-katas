@@ -13,11 +13,12 @@ type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" ;
 
 export class Minesweeper {
   #grid: Cell[][];
-  // #moves: Position[];
+  #moves: Position[];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
+    this.#moves = []
   }
 
   #generateMinefield(
@@ -67,17 +68,15 @@ export class Minesweeper {
       .join("\n");
   }
 
-  // #filterForDisplay() {
-  // }
-
   play(position: Position) : string {
+    this.#moves.push(position);
     return this.#grid
-      .map(row => row.join(""))
+      .map((row, rowIndex) =>
+          row.map((col, collIndex) => {
+            const isPositionInMoves = this.#moves.some((position, i) => position.col === collIndex && position.row === rowIndex);
+            return isPositionInMoves ? col : MineStatus.UNKNOWN
+          }).join("")
+      )
       .join("\n");
-
-    // this.#moves.push(position);
-    // // is mine?
-    // return this.#filterForDisplay(this.#grid);
   }
-
 }
