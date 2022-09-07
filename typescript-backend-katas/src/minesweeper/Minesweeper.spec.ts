@@ -8,6 +8,7 @@ describe("Minesweeper", () => {
     expect(game.toString()).toBe(expectedResult);
   });
 
+
   it("should display adjacent mines", () => {
     const expectedResult = "2*2\n2*2\n111";
     const game = new Minesweeper(3, 3, [
@@ -17,4 +18,17 @@ describe("Minesweeper", () => {
 
     expect(game.toString()).toBe(expectedResult);
   });
+
+//   get set coordinates, show number of near mines or tells about game over
+//   game over, winner
+//
+
+  it("should lose if current coordinates have a mine", () => {
+    const game = new Minesweeper(3, 3, [
+      [0, 0],
+    ]);
+//     todo: implement play
+    expect(game.play([0,0])).toThrow("GameOver"))
+  });
+
 });
