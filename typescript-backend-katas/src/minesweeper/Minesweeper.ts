@@ -94,6 +94,11 @@ export class Minesweeper {
   }
 
   play(row: number, col: number): string {
+
+    if (this.#playerGrid[row][col] !== ".") {
+      return "Already revealed";
+    }
+
     const currentMove = this.#grid[row][col];
     this.#playerGrid[row][col] = currentMove;
 
@@ -109,13 +114,11 @@ export class Minesweeper {
         [row+1, col+1],
       ]
 
-      neighbors.forEach(([row, col]) => {
-        if (row >= 0 && row <= this.rows && col >=0 && col <= this.columns) {
-          this.play(row, col);
+      neighbors.forEach(([neighborRow, neighborCol]) => {
+        if (neighborRow >= 0 && neighborRow <= this.rows && neighborCol >=0 && neighborCol <= this.columns) {
+          this.play(neighborRow, neighborCol);
         }
       })
-
-      // const neighbors = []
     }
 
     const currentGrid = this.#toString(this.#playerGrid);
