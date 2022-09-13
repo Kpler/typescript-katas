@@ -20,6 +20,11 @@ describe("Minesweeper", () => {
   });
 
   it("should display adjacent mines", () => {
-    // @TODO
+    const expectedResult = "2*2\n2*2\n\111\n";
+    
+    const game = new Minesweeper([[CellStatus.EMPTY,CellStatus.MINE,CellStatus.EMPTY],[CellStatus.EMPTY,CellStatus.MINE,CellStatus.EMPTY],[CellStatus.EMPTY,CellStatus.EMPTY,CellStatus.EMPTY]]);
+    const actual = game.toString();
+
+    expect(actual).toBe(expectedResult);
   });
 });
