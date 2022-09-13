@@ -32,4 +32,11 @@ export class Minesweeper {
 
     return grid;
   }
+
+  computeAdjacentMines() : void {
+    this.#mines.forEach(() => {
+
+    })
+    return
+  }
 }
