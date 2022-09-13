@@ -1,13 +1,18 @@
+export enum CellStatus {
+  MINE,
+  EMPTY,
+}
+
 export class Minesweeper {
 
   constructor(
-    private grid: number[][]
+    private grid: CellStatus[][]
   ) {
   }
 
   toString(): string {
     return this.grid.map((row) => row.map(cell => {
-      return cell > 0 ? "*" : ".";
+      return cell === CellStatus.MINE ? "*" : ".";
     }).join("")).join("\n");
   }
 }
