@@ -18,7 +18,7 @@ export class Minesweeper {
 
   #addMines() {
     this.#mines.forEach((mine) => {
-      const [mineX, mineY] = mine;
+      const [mineY, mineX] = mine;
       this.#grid[mineY][mineX] = "*";
     });
   }
