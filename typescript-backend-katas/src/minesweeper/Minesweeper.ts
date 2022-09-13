@@ -1,5 +1,5 @@
 export class Minesweeper {
-  #grid: string[][];
+  #grid: (string | number)[][];
   #mines: [number, number][];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
@@ -34,8 +34,12 @@ export class Minesweeper {
   }
 
   computeAdjacentMines() : void {
-    this.#mines.forEach(() => {
+    this.#mines.forEach(([mineY, mineX]) => {
+      for (let i=-1; i===1; i++) {
+        for (let j=-1; j===1; j++) {
 
+        }
+      }
     })
     return
   }
