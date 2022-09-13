@@ -32,8 +32,10 @@ export default defineComponent({
   background-position: center;
   position: relative;
   .minesweeper-program-window {
-    width: 400px;
-    height: 400px;
+    min-width: 200px;
+    min-height: 200px;
+    width: auto;
+    height: auto;
     position: absolute;
     top: 200px;
     left: 200px;

@@ -7,6 +7,7 @@
 <style lang="scss">
 :root {
   --windows-grey: #e3dfd1;
+  --windows-grey-dark: #d8d4c8;
   --windows-blue: #245edb;
   --windows-bar-gradient: linear-gradient(
       to bottom,

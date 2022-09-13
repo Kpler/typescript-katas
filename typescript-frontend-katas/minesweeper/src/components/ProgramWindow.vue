@@ -40,6 +40,7 @@ export default defineComponent({
   }
   .content {
     background-color: var(--windows-grey);
+    padding: 2px;
   }
 }
 </style>
