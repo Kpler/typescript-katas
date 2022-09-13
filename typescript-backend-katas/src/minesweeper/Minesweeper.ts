@@ -1,11 +1,15 @@
 export class Minesweeper {
   #grid: (string | number)[][];
   #mines: [number, number][];
+  #rowsNumber: number
+  #colsNumber: number
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
     this.#mines = mines;
     this.#grid = this.#generateGrid(rows, columns);
     this.#addMines();
+    this.#rowsNumber = rows
+    this.#colsNumber = columns
   }
 
   toString(): string {
@@ -40,9 +44,19 @@ export class Minesweeper {
           if (y !== 0 && x !== 0) {
             let cellY = mineY + y;
             let cellX = mineX + x;
-          }
-          
 
+            const xCondition = cellX >= 0 && cellX < this.#rowsNumber
+            const yCondition = cellY >= 0 && cellY < this.#colsNumber
+            if (xCondition && yCondition) {
+                const previousCellValue = this.#grid[cellY][cellX]
+                if (typeof previousCellValue === 'string') {
+                    this.#grid[cellY][cellX] = 1
+                } else {
+                    this.#grid[cellY][cellX] = previousCellValue + 1
+                }
+            }
+
+          }
         }
       }
     })
