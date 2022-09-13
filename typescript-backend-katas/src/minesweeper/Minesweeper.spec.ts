@@ -29,6 +29,7 @@ describe("Minesweeper", () => {
       [0, 0],
       [2, 1],
     ]);
+    game.computeAdjacentMines()
     const actual = game.toString();
 
     expect(actual).toBe(expectedResult);
