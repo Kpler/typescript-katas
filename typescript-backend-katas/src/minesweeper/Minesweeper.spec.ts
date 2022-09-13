@@ -23,7 +23,7 @@ describe("Minesweeper", () => {
     const expectedResult = "2*2\n2*2\n\111\n";
     
     const game = new Minesweeper([[CellStatus.EMPTY,CellStatus.MINE,CellStatus.EMPTY],[CellStatus.EMPTY,CellStatus.MINE,CellStatus.EMPTY],[CellStatus.EMPTY,CellStatus.EMPTY,CellStatus.EMPTY]]);
-    const actual = game.toString();
+    const actual = game.displayadjacentmines();
 
     expect(actual).toBe(expectedResult);
   });

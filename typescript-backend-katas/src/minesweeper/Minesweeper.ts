@@ -15,4 +15,10 @@ export class Minesweeper {
       return cell === CellStatus.MINE ? "*" : ".";
     }).join("")).join("\n");
   }
+
+  displayadjacentmines(): string{
+    return
+
+  }
+
 }
