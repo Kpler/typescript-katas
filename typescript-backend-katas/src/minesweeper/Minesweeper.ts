@@ -2,7 +2,9 @@ export class Minesweeper {
   #grid: string[][];
   #mines: [number, number][];
 
-  constructor(rows: number, columns: number, mines: [number, number][]) {
+  constructor(
+    fields: number[][]
+  ) {
     this.#mines = mines;
     this.#grid = this.#generateGrid(rows, columns);
     this.#addMines();
