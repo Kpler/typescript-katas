@@ -17,6 +17,9 @@ export class Minesweeper {
   }
 
   displayadjacentmines(): string{
+  //get lens of the array, then get width, loop over the cells, from left top to the lower right,
+  //  if there is a mine, then bomb, else counts four lines around the cell
+  // boundary
     return
 
   }
