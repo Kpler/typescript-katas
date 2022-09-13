@@ -35,8 +35,13 @@ export class Minesweeper {
 
   computeAdjacentMines() : void {
     this.#mines.forEach(([mineY, mineX]) => {
-      for (let i=-1; i===1; i++) {
-        for (let j=-1; j===1; j++) {
+      for (let y=-1; y<=1; y++) {
+        for (let x=-1; x<=1; x++) {
+          if (y !== 0 && x !== 0) {
+            let cellY = mineY + y;
+            let cellX = mineX + x;
+          }
+          
 
         }
       }
