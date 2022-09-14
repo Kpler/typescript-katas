@@ -1,6 +1,6 @@
-
 describe("Example test", () => {
   it("should sum numbers correctly", () => {
-    expect(1 + 1).toBe(2);
+    const one = 1;
+    expect(one + one).toBe(2);
   });
 });
