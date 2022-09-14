@@ -16,8 +16,10 @@ npm run serve
 
 ## Instructions
 
-Modify the `MinesweeperProgram.vue` component so an end user can play Minesweeper in the browser. The UI should interact
-with the `Minesweeper` class, and call the class' `play` method when a cell is clicked to win/lose the game, or reveal
+Modify the `MinesweeperProgram.vue` component so an end user can play Minesweeper in the browser. 
+The UI should interact
+with the `Minesweeper` class, 
+and call the class' `play` method when a cell is clicked to win/lose the game, or reveal
 the number of adjacent mines.
 
 Make a `MinesweeperCell` component for each cell, with props and events.
