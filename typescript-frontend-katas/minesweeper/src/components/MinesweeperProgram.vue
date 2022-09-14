@@ -1,7 +1,10 @@
 <template>
   <div class="minesweeper-program">
-    {{ game }}
-    <div v-for="col in "></div>
+    <div v-for="row in grid" class="">
+      <div v-for="cell in row" class="minesweeper-program__cell">
+        <div class="cell">{{ cell }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,4 +26,19 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.minesweeper-program {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.minesweeper-program__cell {
+  width: 100%;
+  height: auto;
+  border: 1px solid black;
+  text-align: center;
+}
+.minesweeper-program__cell:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+</style>
