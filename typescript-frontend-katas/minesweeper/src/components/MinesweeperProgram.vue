@@ -1,8 +1,8 @@
 <template>
   <div class="minesweeper-program">
-    <div v-for="row in grid" class="">
-      <div v-for="cell in row" class="minesweeper-program__cell">
-        <div class="cell">{{ cell }}</div>
+    <div v-for="(row, rowIndex) in grid" class="" >
+      <div v-for="(cell, cellIndex) in row" class="minesweeper-program__cell">
+        <div class="cell" @click="cellClick(rowIndex, cellIndex)">{{ cell }}</div>
       </div>
     </div>
   </div>
@@ -18,6 +18,10 @@ export default defineComponent({
   setup() {
     const game = new Minesweeper(5, 5, [[0, 0]]);
     console.log(game);
+
+    const cellClick = (row, col) => {
+      game.play(row, col);
+    }
 
     return {
       grid: game.getPlayerGrid(),
