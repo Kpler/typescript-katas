@@ -20,5 +20,8 @@ export default defineComponent({
 .cell {
   width: 30px;
   height: 30px;
+  font-size: 24px;
+  border-top: 1px solid grey;
+  border-left: 1px solid grey;
 }
 </style>
