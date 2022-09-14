@@ -4,9 +4,9 @@
       <div
         v-for="(cell, cellIndex) in row"
         class="minesweeper-program__cell"
-        :key="cellIndex"
+        :key="`${rowIndex}-${cellIndex}`"
       >
-        <div class="cell" @click="cellClick(rowIndex, cellIndex)">
+        <div class="cell" @click="() => cellClick(rowIndex, cellIndex)">
           {{ cell }}
         </div>
       </div>
@@ -17,20 +17,29 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
-import { Minesweeper } from "../game/Minesweeper";
+import { GameOver, Minesweeper, Win } from "../game/Minesweeper";
 
 export default defineComponent({
   name: "MinesweeperProgram",
   setup() {
     const game = new Minesweeper(5, 5, [[0, 0]]);
-    console.log(game);
 
     const grid = ref(game.getPlayerGrid());
 
     const cellClick = (row, col) => {
-      console.log(row, col);
-      game.play(row, col);
-      grid.value = game.getPlayerGrid();
+      try {
+        game.play(row, col);
+      } catch (err) {
+        if (err instanceof Win) {
+          console.error("You win!");
+        } else if (err instanceof GameOver) {
+          console.error("You loose!");
+        } else {
+          throw err;
+        }
+      } finally {
+        grid.value = [...game.getPlayerGrid()];
+      }
     };
 
     return {
@@ -47,8 +56,6 @@ export default defineComponent({
   grid-template-columns: repeat(5, 1fr);
 }
 .minesweeper-program__cell {
-  width: 100%;
-  height: auto;
   border: 1px solid black;
   text-align: center;
 }
