@@ -2,10 +2,10 @@
   <div class="minesweeper-program">
     <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
       <div
-        v-for="(cell, cellIndex) in row"
-        :key="cellIndex"
-        class="cell"
-        @click="onClick(rowIndex, cellIndex)"
+          v-for="(cell, cellIndex) in row"
+          :key="cellIndex"
+          class="cell"
+          @click="onClick(rowIndex, cellIndex)"
       >
         {{ cell }}
       </div>
@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts">
-import { Minesweeper } from 'src/game/Minesweeper';
-import { defineComponent, ref } from 'vue';
+import {Minesweeper} from 'src/game/Minesweeper';
+import {defineComponent, ref} from 'vue';
 
 export default defineComponent({
   name: 'MinesweeperProgram',
@@ -26,10 +26,12 @@ export default defineComponent({
     ]);
 
     const grid = ref(minesweeper.getPlayerGrid());
+
     const onClick = (row: number, column: number) => {
-      //   console.log(row, column);
-      minesweeper.play(row, column);
+      // console.log(row, column);
+      grid.value = minesweeper.play(row, column);
     };
+
     return {
       minesweeper,
       grid,
