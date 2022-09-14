@@ -1,4 +1,4 @@
-# minesweeper
+t # minesweeper
 
 ## Project setup
 ```
@@ -16,7 +16,7 @@ npm run build
 ```
 
 ### Run your unit tests
-```
+```u
 npm run test:unit
 ```
 
