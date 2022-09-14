@@ -1,5 +1,7 @@
 <template>
-  <span>cell</span>
+  <button style="height: 40px; width: 40px" @click="onCellClick">
+    {{ cell }}
+  </button>
 </template>
 
 <script lang="ts">
@@ -13,6 +15,12 @@ export default defineComponent({
       type: Cell,
       required: true,
     },
+  },
+  setup: () => {
+    const onCellClick = (event) => {
+      $emit("click", event);
+    };
+    return { onCellClick };
   },
 });
 </script>

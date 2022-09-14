@@ -2,7 +2,7 @@
   <div>
     <template v-for="row in game.getPlayerGrid()">
       <template v-for="cell in row">
-        <CellComponent />
+        <CellComponent :cell="cell" />
       </template>
       </br>
     </template>
@@ -17,7 +17,7 @@ import CellComponent from "src/components/CellComponent";
 export default defineComponent({
   name: "MinesweeperProgram",
   components: {
-      CellComponent
+    CellComponent,
   },
   setup() {
     const mines: [number, number][] = [
@@ -25,10 +25,9 @@ export default defineComponent({
       [3, 2],
       [5, 6],
     ];
+
     const game = new Minesweeper(7, 8, mines);
-    game.play(0, 0)
-    game.play(0, 1)
-    game.play(1, 0)
+
     return { game };
   },
 });
