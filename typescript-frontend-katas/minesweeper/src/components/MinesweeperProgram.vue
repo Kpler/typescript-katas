@@ -12,6 +12,7 @@ import { Minesweeper } from "src/game/Minesweeper";
 export default defineComponent({
   name: "MinesweeperProgram",
   setup() {
+    game = new Minesweeper(5,5, [])
   },
 });
 </script>
