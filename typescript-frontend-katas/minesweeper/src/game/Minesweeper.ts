@@ -111,18 +111,19 @@ export class Minesweeper {
         [row + 1, col - 1],
         [row + 1, col],
         [row + 1, col + 1],
-      ]
+      ];
 
       neighbors.forEach(([neighborRow, neighborCol]) => {
-        if (neighborRow >= 0 &&
-            neighborRow < this.rows &&
-            neighborCol >= 0 &&
-            neighborCol < this.columns &&
-            this.#playerGrid[neighborRow][neighborCol] === "."
-          ) {
+        if (
+          neighborRow >= 0 &&
+          neighborRow < this.rows &&
+          neighborCol >= 0 &&
+          neighborCol < this.columns &&
+          this.#playerGrid[neighborRow][neighborCol] === "."
+        ) {
           this.play(neighborRow, neighborCol);
         }
-      })
+      });
     }
 
     if (currentMove === "*") {
