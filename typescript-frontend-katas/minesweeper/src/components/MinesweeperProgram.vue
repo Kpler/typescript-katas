@@ -2,7 +2,7 @@
   <div class="minesweeper-program">
     <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
       <div v-for="(cell, cellIndex) in row" :key="cellIndex">
-        <MinesweeperCell :value="cell" @click="play"/>
+        <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)"/>
       </div>
     </div>
   </div>
@@ -18,14 +18,20 @@ export default defineComponent({
   name: "MinesweeperProgram",
   components: { MinesweeperCell },
   setup() {
-    const play = (rowIndex: number, cellIndex: number) => {
-
-    }
-    const game = new Minesweeper(10, 10, []);
+    const game = new Minesweeper(10, 10, [[0, 1], [2, 1], [5, 5]]);
 
     const grid = ref(game.getPlayerGrid());
 
-    return { grid };
+    const play = (rowIndex: number, cellIndex: number) => {
+      try {
+        grid.value = game.play(rowIndex, cellIndex)
+      }
+      catch (e) {
+
+      }
+    }
+
+    return { grid, play };
   },
 });
 </script>
