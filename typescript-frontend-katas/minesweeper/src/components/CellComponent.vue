@@ -1,5 +1,5 @@
 <template>
-  <button style="height: 40px; width: 40px" @click="onCellClick">
+  <button style="height: 40px; width: 40px" @click="onCellClick"> <!--$emit("click", event)-->
     {{ cell }}
   </button>
 </template>
@@ -16,9 +16,9 @@ export default defineComponent({
       required: true,
     },
   },
-  setup: () => {
+  setup: (_, ctx) => {
     const onCellClick = (event) => {
-      $emit("click", event);
+      ctx.emit('click', event);
     };
     return { onCellClick };
   },

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <template v-for="row in game.getPlayerGrid()">
-      <template v-for="cell in row">
-        <CellComponent :cell="cell" />
+    <template v-for="(row, rowIdx) in game.getPlayerGrid()">
+      <template v-for="(cell, colIdx) in row">
+        <CellComponent :key="[rowIdx, colIdx].toString()" :cell="cell" @click="alert('im clicked')"/>
       </template>
       </br>
     </template>
