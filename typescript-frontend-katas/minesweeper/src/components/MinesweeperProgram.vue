@@ -2,7 +2,7 @@
   <div class="minesweeper-program">
     <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
       <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="cell">
-        {{ cell }}
+        <cell :value="cell" />
       </div>
     </div>
   </div>
