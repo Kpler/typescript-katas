@@ -1,15 +1,21 @@
 <template>
   <div class="minesweeper-program">
-    <div v-for="(row, rowIndex) in grid" class="" >
-      <div v-for="(cell, cellIndex) in row" class="minesweeper-program__cell">
-        <div class="cell" @click="cellClick(rowIndex, cellIndex)">{{ cell }}</div>
+    <div v-for="(row, rowIndex) in grid" class="" :key="rowIndex">
+      <div
+        v-for="(cell, cellIndex) in row"
+        class="minesweeper-program__cell"
+        :key="cellIndex"
+      >
+        <div class="cell" @click="cellClick(rowIndex, cellIndex)">
+          {{ cell }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 import { Minesweeper } from "../game/Minesweeper";
 
@@ -19,12 +25,17 @@ export default defineComponent({
     const game = new Minesweeper(5, 5, [[0, 0]]);
     console.log(game);
 
+    const grid = ref(game.getPlayerGrid());
+
     const cellClick = (row, col) => {
+      console.log(row, col);
       game.play(row, col);
-    }
+      grid.value = game.getPlayerGrid();
+    };
 
     return {
-      grid: game.getPlayerGrid(),
+      grid,
+      cellClick,
     };
   },
 });
