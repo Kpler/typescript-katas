@@ -1,16 +1,26 @@
 <template>
-  <div class="minesweeper-program">
-    <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
-      <div
-          v-for="(cell, cellIndex) in row"
-          :key="cellIndex"
-          class="cell"
-          @click="onClick(rowIndex, cellIndex)"
-      >
-        {{ cell }}
+
+  <div>
+    <div class="minesweeper-program">
+      <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
+        <div
+            v-for="(cell, cellIndex) in row"
+            :key="cellIndex"
+            class="cell"
+            @click="onClick(rowIndex, cellIndex)"
+        >
+          {{ cell }}
+        </div>
       </div>
     </div>
+
+    <div class="gameIsFinished" v-if="gameIsFinished">
+      over
+      <!--    TODO print status  -->
+      <!--   if win print win if lose print lose -->
+    </div>
   </div>
+
 </template>
 
 <script lang="ts">
@@ -26,16 +36,22 @@ export default defineComponent({
     ]);
 
     const grid = ref(minesweeper.getPlayerGrid());
+    const gameIsFinished = ref(false)
 
     const onClick = (row: number, column: number) => {
       // console.log(row, column);
-      grid.value = minesweeper.play(row, column);
+      try {
+        grid.value = minesweeper.play(row, column);
+      } catch (e) {
+        gameIsFinished.value = true
+      }
     };
 
     return {
       minesweeper,
       grid,
       onClick,
+      gameIsFinished
     };
   },
 });
