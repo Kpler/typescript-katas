@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cell" @click="$emit('click')">
     {{ value }}
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Cell",
+  name: "MinesweeperCell",
   setup() {},
   props: {
     value: { type: String, required: true },
@@ -17,4 +17,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.cell {
+  width: 30px;
+  height: 30px;
+}
 </style>
