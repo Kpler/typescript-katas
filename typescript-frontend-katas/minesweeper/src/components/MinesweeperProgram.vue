@@ -1,20 +1,36 @@
 <template>
   <div class="minesweeper-program">
-    <!-- Add the minefield here -->
+    <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
+      <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="cell">
+        {{ cell }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 import { Minesweeper } from "src/game/Minesweeper";
 
 export default defineComponent({
   name: "MinesweeperProgram",
   setup() {
+    const game = new Minesweeper(10, 10, []);
+
+    const grid = ref(game.getPlayerGrid());
+
+    return { grid };
   },
 });
 </script>
 
 <style lang="scss" scoped>
+.row {
+  display: flex;
+}
+.cell {
+  width: 30px;
+  height: 30px;
+}
 </style>
