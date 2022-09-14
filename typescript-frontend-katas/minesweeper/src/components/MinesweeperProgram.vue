@@ -1,5 +1,11 @@
 <template>
-  <p>{{ game.toString() }}</p>
+  <div>
+    <template v-for="row in game.getPlayerGrid()">
+      <template v-for="cell in row">
+        <span>I'm a cell</span>
+      </template>
+    </template>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,7 +20,7 @@ export default defineComponent({
       [3, 2],
       [5, 6],
     ];
-    const game = new Minesweeper(8, 8, mines);
+    const game = new Minesweeper(7, 8, mines);
 
     return { game };
   },

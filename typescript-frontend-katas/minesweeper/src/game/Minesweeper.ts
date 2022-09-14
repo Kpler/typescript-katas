@@ -129,4 +129,8 @@ export class Minesweeper {
 
     return this.#playerGrid;
   }
+
+  getPlayerGrid() {
+    return this.#playerGrid;
+  }
 }
