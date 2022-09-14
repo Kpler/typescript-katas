@@ -2,7 +2,7 @@
   <div>
     <template v-for="(row, rowIdx) in game.getPlayerGrid()">
       <template v-for="(cell, colIdx) in row">
-        <CellComponent :key="[rowIdx, colIdx].toString()" :cell="cell" @click="alert('im clicked')"/>
+        <CellComponent :key="[rowIdx, colIdx].toString()" :cell="cell" @click="onCellClicked(rowIdx, colIdx)"/>
       </template>
       </br>
     </template>
@@ -28,7 +28,12 @@ export default defineComponent({
 
     const game = new Minesweeper(7, 8, mines);
 
-    return { game };
+    const onCellClicked = (rowIdx, colIdx) => {
+      game.play(rowIdx, colIdx)
+      console.log('game', game)
+    }
+
+    return { game, onCellClicked };
   },
 });
 </script>
