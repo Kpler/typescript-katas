@@ -39,7 +39,6 @@ describe("Minesweeper", () => {
     ]
     const game = new Minesweeper(3, 3, minePositions);
 
-    
     expect(game.play(onlyMinePosition)).toBe(expectedResult);
   });
 });
