@@ -34,4 +34,23 @@ describe("play", () => {
     const expectedResult = "..2\n...\n...";
     expect(result).toBe(expectedResult);
   });
+
+  it("should ", () => {
+    // GIVEN
+    const game = new Minesweeper(3, 3, [
+      [0, 1],
+      [1, 1],
+    ]);
+
+    // WHEN
+    game.play(0, 0);
+    game.play(1, 0);
+    const result = game.play(0, 2);
+
+    // THEN
+    const expectedResult = "2.2\n2..\n...";
+    expect(result).toBe(expectedResult);
+  });
+
+
 });
