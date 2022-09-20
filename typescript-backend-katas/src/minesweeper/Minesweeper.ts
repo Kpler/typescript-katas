@@ -12,7 +12,7 @@ export class Minesweeper {
   constructor(rows: number, columns: number, mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
-    this.
+    this.#mask = boolean[][];
   }
 
   #generateMinefield(
@@ -56,7 +56,32 @@ export class Minesweeper {
     );
   }
 
+
+//     constructor(rows: number, columns: number, mines: [number, number][]) {
+//     const gridWithMines = this.#generateMinefield(rows, columns, mines);
+//     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
+//     this.
+//   }
+//
+
+    this.
+    for (let i = 0; i < rows; i++) {
+      const rowArr = [];
+      for (let j = 0; j < columns; j++) {
+        rowArr.push(MineStatus.CLEAR);
+      }
+      grid.push(rowArr);
+    }
+
+    mines.forEach((mine) => {
+      const [mineX, mineY] = mine;
+      grid[mineX][mineY] = MineStatus.MINE;
+    });
+
+
   play(row: number, column: number): string {
+
+
     /* 
     .*.
     ...
