@@ -5,6 +5,9 @@ enum MineStatus {
 
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
 
+export type Position = [number,number]
+export const LOOSE_STR = "you loose"
+
 export class Minesweeper {
   #grid: Cell[][];
 
@@ -54,9 +57,13 @@ export class Minesweeper {
     );
   }
 
-  play([row, col]:[number, number]) {
+  play([row, col]:[number, number]): string {
     
+    if ([row, col] === this.#grid.) {
+
+    }
     return "you loose"; //status is "you loose"
+
   }
 
   toString(): string {
