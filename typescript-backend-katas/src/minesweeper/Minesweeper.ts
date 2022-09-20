@@ -54,6 +54,10 @@ export class Minesweeper {
     );
   }
 
+  play([row, col]:[number, number]) {
+
+  }
+
   toString(): string {
     return this.#grid
       .map(row => row.join(""))
