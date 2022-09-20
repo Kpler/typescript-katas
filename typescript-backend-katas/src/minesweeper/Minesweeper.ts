@@ -55,7 +55,8 @@ export class Minesweeper {
   }
 
   play([row, col]:[number, number]) {
-
+    
+    return "you loose"; //status is "you loose"
   }
 
   toString(): string {
