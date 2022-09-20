@@ -3,15 +3,16 @@ enum MineStatus {
   CLEAR = ".",
 }
 
-type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
+type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" | ".";
 
 export class Minesweeper {
   #grid: Cell[][];
-  #field: string;
+  #mask: Boolean[][];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
+    this.
   }
 
   #generateMinefield(
@@ -53,6 +54,34 @@ export class Minesweeper {
         return adjacentMines.length.toString() as Cell;
       })
     );
+  }
+
+  play(row: number, column: number): string {
+    /* 
+    .*.
+    ...
+    ...
+
+    Play(0, 2)
+
+           ..1
+    str =  ...
+           ...
+
+           false false true
+    mask = false false false
+           false false false
+
+    moves = [[0,1], [2, 1]]
+    
+    
+
+     1. Retrieve the current grid.
+     2. 
+    */
+
+    
+
   }
 
   toString(): string {
