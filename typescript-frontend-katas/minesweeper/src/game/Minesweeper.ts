@@ -12,7 +12,7 @@ enum MineStatus {
 }
 
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" | ".";
-type Position = [number, number];
+export type Position = [number, number];
 type Grid = Cell[][];
 export class Minesweeper {
   #grid: Grid;

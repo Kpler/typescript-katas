@@ -1,4 +1,4 @@
-import { Minesweeper, GameOver, Win } from "../Minesweeper";
+import { Minesweeper, GameOver, Win, Position } from "../Minesweeper";
 
 describe("Minesweeper", () => {
   it("should generate game and display adjacent mines on empty minefield", () => {
@@ -64,10 +64,28 @@ describe("Minesweeper", () => {
     expect(game.play(0, 0)).toStrictEqual(expectedResult);
   });
 
-  it("should randomize a grid", () => {
-    const mines = Minesweeper.generateMines(10, 10, 10);
-
-
+  describe("generateMines", () => {
+    const mineCount = 1000;
+    const rowCount = 10;
+    const colCount = 10;
+    const iterationCount = 100;
+    for (let i = 0; i < iterationCount; i++) {
+      const mines = Minesweeper.generateMines(mineCount, rowCount, colCount);
+      it("should return the correct number of mines", () => {
+        expect(mines.length).toBe(mineCount);
+      });
+      it("should return mines within the bounds of the grid", () => {
+        mines.forEach((m: Position) => {
+          expect(m[0]).toBeLessThan(rowCount);
+          expect(m[0]).toBeGreaterThanOrEqual(0);
+          expect(m[1]).toBeLessThan(colCount);
+          expect(m[1]).toBeGreaterThanOrEqual(0);
+        });
+      });
+      it("should not return duplicated mines", () => {
+        const mineSet = new Set(mines);
+        expect(mineSet.size).toBe(mines.length);
+      });
+    }
   });
-
 });
