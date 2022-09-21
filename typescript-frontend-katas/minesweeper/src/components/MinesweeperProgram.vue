@@ -14,10 +14,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref } from "vue";
 
-import MinesweeperCell from 'src/components/MinesweeperCell.vue';
-import { GameOver, Minesweeper, Win } from 'src/game/Minesweeper';
+import MinesweeperCell from "src/components/MinesweeperCell.vue";
+import { GameOver, Minesweeper, Win } from "src/game/Minesweeper";
 
 enum Status {
   WIN,
@@ -26,15 +26,16 @@ enum Status {
 }
 
 export default defineComponent({
-  name: 'MinesweeperProgram',
+  name: "MinesweeperProgram",
   components: { MinesweeperCell },
   setup() {
     const rows = 10;
     const columns = 10;
-    const minesNumber = 5;
+    const minesNumber = 15;
 
     const generateMine = (rows: number, columns: number): [number, number] => {
-      const random = (max: number): number => Math.trunc((Math.random() * 100) % max);
+      const random = (max: number): number =>
+        Math.trunc((Math.random() * 100) % max);
       return [random(rows), random(columns)];
     };
 
@@ -43,16 +44,24 @@ export default defineComponent({
       columns: number,
       minesNumber: number
     ): [number, number][] => {
-      const mines = [];
-      for ();
+      const mines: [number, number][] = [];
+
+      while (mines.length < minesNumber) {
+        const tuple = generateMine(rows, columns);
+
+        if (mines.find(([x, y]) => x === tuple[0] && y === tuple[1])) {
+          mines.push(tuple);
+        }
+      }
+
       return mines;
     };
 
-    const game = new Minesweeper(rows, columns, [
-      [0, 1],
-      [2, 1],
-      [5, 5],
-    ]);
+    const game = new Minesweeper(
+      rows,
+      columns,
+      generateMines(rows, columns, minesNumber)
+    );
 
     const grid = ref(game.getPlayerGrid());
     const gameStatus = ref(Status.IN_PROGRESS);
