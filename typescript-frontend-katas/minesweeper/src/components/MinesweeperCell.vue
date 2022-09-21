@@ -1,6 +1,9 @@
 <template>
   <div class="cell" @click="$emit('click')">
-    {{ value }}
+    <div v-if="value === '0'"></div>
+    <div v-else-if="value === '*'" class="bomb">*</div>
+    <div v-else-if="value === '.'" class="unexplored"></div>
+    <div v-else class="">{{ value }}</div>
   </div>
 </template>
 
@@ -23,5 +26,12 @@ export default defineComponent({
   font-size: 24px;
   border-top: 1px solid grey;
   border-left: 1px solid grey;
+  .bomb {
+    color: red;
+  }
+  .unexplored {
+    color: green;
+  }
 }
+
 </style>
