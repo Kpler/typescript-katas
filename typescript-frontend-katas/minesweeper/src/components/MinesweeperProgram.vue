@@ -1,9 +1,9 @@
 <template>
   <div class="minesweeper-program">
     <h2 v-if="gameStatus === Status.LOST" class="game-over">GAME OVER!</h2>
-    <h2 v-else-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
+    <h2 v-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
 
-    <template v-else>
+    <template>
       <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
         <div v-for="(cell, cellIndex) in row" :key="cellIndex">
           <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)" />
@@ -29,7 +29,7 @@ export default defineComponent({
   name: "MinesweeperProgram",
   components: { MinesweeperCell },
   setup() {
-    const game = new Minesweeper(10, 10, Minesweeper.generateMines(10, 10));
+    const game = new Minesweeper(10, 10, Minesweeper.generateMines(10, 10, 10));
 
     const grid = ref(game.getPlayerGrid());
     const gameStatus = ref(Status.IN_PROGRESS);
