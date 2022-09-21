@@ -63,4 +63,11 @@ describe("Minesweeper", () => {
 
     expect(game.play(0, 0)).toStrictEqual(expectedResult);
   });
+
+  it("should randomize a grid", () => {
+    const mines = Minesweeper.generateMines(10, 10, 10);
+
+
+  });
+
 });

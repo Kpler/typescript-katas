@@ -144,7 +144,7 @@ export class Minesweeper {
     rowsNumber: number,
     colsNumber: number
   ): Position[] {
-    const positions: Position[] = new Array(mineCount).fill(null).map();
-    return this.#grid;
+    const positions: Position[] = new Array(mineCount).fill(null).map(() => [Math.floor(Math.random() * rowsNumber), Math.floor(Math.random() * colsNumber)]);
+    return positions;
   }
 }
