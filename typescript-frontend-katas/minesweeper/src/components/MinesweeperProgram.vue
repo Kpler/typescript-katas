@@ -1,19 +1,21 @@
 <template>
-  <div class="minesweeper-program">
-    <button @click>
-      reset
-    </button>
-    <hr>
-    <h2 v-if="gameStatus === Status.LOST" class="game-over">GAME OVER!</h2>
-    <h2 v-else-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
+  <div>
+    <div class="minesweeper-header">
+      <button @click="clickReset">reset</button>
+    </div>
+    <hr />
+    <div class="minesweeper-program">
+      <h2 v-if="gameStatus === Status.LOST" class="game-over">GAME OVER!</h2>
+      <h2 v-else-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
 
-    <template v-else>
-      <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
-        <div v-for="(cell, cellIndex) in row" :key="cellIndex">
-          <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)"/>
+      <template v-else>
+        <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
+          <div v-for="(cell, cellIndex) in row" :key="cellIndex">
+            <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)" />
+          </div>
         </div>
-      </div>
-    </template>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -33,14 +35,18 @@ export default defineComponent({
   name: "MinesweeperProgram",
   components: { MinesweeperCell },
   setup() {
-    const game = new Minesweeper(10, 10, [[0, 1], [2, 1], [5, 5]]);
+    let game = new Minesweeper(10, 10, [
+      [0, 1],
+      [2, 1],
+      [5, 5],
+    ]);
 
     const grid = ref(game.getPlayerGrid());
     const gameStatus = ref(Status.IN_PROGRESS);
 
     const play = (rowIndex: number, cellIndex: number) => {
       try {
-        grid.value = game.play(rowIndex, cellIndex)
+        grid.value = game.play(rowIndex, cellIndex);
       } catch (e: unknown) {
         if (e instanceof GameOver) {
           gameStatus.value = Status.LOST;
@@ -50,9 +56,18 @@ export default defineComponent({
           throw e;
         }
       }
-    }
+    };
 
-    return { grid, gameStatus, play, Status };
+    const clickReset = () => {
+      game = new Minesweeper(10, 10, [
+        [0, 1],
+        [2, 1],
+        [5, 5],
+      ]);
+      grid.value = game.getPlayerGrid();
+    };
+
+    return { grid, gameStatus, play, Status, clickReset };
   },
 });
 </script>
@@ -66,5 +81,14 @@ export default defineComponent({
 }
 .win {
   color: green;
+}
+
+.minesweeper-header {
+  display: flex;
+  align-items: center;
+
+  button {
+    margin: 4px;
+  }
 }
 </style>
