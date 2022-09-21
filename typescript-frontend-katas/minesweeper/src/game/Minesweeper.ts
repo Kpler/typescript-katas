@@ -139,4 +139,9 @@ export class Minesweeper {
     // Create new reference
     return [...this.#playerGrid];
   }
+
+  generateMines(mineCount: number) {
+    new Array(mineCount).fill().map()
+    return this.#grid;
+  }
 }
