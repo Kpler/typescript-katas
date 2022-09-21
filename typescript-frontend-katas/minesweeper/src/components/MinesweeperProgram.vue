@@ -59,6 +59,7 @@ export default defineComponent({
     };
 
     let game: Minesweeper;
+    const grid = ref<Cell[][]>([]);
 
     const restart = () => {
       game = new Minesweeper(
@@ -67,9 +68,9 @@ export default defineComponent({
         generateMines(rows, columns, minesNumber)
       );
       grid.value = game!.getPlayerGrid();
+      gameStatus.value = Status.IN_PROGRESS;
     };
 
-    let grid: Ref<Cell[][]>;
     const gameStatus = ref(Status.IN_PROGRESS);
 
     const play = (rowIndex: number, cellIndex: number) => {
