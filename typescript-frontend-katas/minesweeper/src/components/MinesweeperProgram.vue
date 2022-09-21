@@ -1,5 +1,6 @@
 <template>
   <div class="minesweeper-program">
+    <button @click="restart">restart</button>
     <h2 v-if="gameStatus === Status.LOST" class="game-over">GAME OVER!</h2>
     <h2 v-else-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
 
@@ -14,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, Ref, ref } from 'vue';
 
-import MinesweeperCell from "src/components/MinesweeperCell.vue";
-import { GameOver, Minesweeper, Win } from "src/game/Minesweeper";
+import MinesweeperCell from 'src/components/MinesweeperCell.vue';
+import { Cell, GameOver, Minesweeper, Win } from 'src/game/Minesweeper';
 
 enum Status {
   WIN,
@@ -26,7 +27,7 @@ enum Status {
 }
 
 export default defineComponent({
-  name: "MinesweeperProgram",
+  name: 'MinesweeperProgram',
   components: { MinesweeperCell },
   setup() {
     const rows = 10;
@@ -49,7 +50,7 @@ export default defineComponent({
       while (mines.length < minesNumber) {
         const tuple = generateMine(rows, columns);
 
-        if (! mines.find(([x, y]) => x === tuple[0] && y === tuple[1])) {
+        if (!mines.find(([x, y]) => x === tuple[0] && y === tuple[1])) {
           mines.push(tuple);
         }
       }
@@ -57,13 +58,18 @@ export default defineComponent({
       return mines;
     };
 
-    const game = new Minesweeper(
-      rows,
-      columns,
-      generateMines(rows, columns, minesNumber)
-    );
+    let game: Minesweeper;
 
-    const grid = ref(game.getPlayerGrid());
+    const restart = () => {
+      game = new Minesweeper(
+        rows,
+        columns,
+        generateMines(rows, columns, minesNumber)
+      );
+      grid.value = game!.getPlayerGrid();
+    };
+
+    let grid: Ref<Cell[][]>;
     const gameStatus = ref(Status.IN_PROGRESS);
 
     const play = (rowIndex: number, cellIndex: number) => {
@@ -80,7 +86,8 @@ export default defineComponent({
       }
     };
 
-    return { grid, gameStatus, play, Status };
+    restart();
+    return { grid, gameStatus, play, Status, restart };
   },
 });
 </script>

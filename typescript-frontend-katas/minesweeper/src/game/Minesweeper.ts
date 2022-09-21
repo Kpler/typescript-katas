@@ -1,17 +1,28 @@
 export class GameOver extends Error {
-  name = "GameOver";
+  name = 'GameOver';
 }
 
 export class Win extends Error {
-  name = "Win";
+  name = 'Win';
 }
 
 enum MineStatus {
-  MINE = "*",
-  CLEAR = ".",
+  MINE = '*',
+  CLEAR = '.',
 }
 
-type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" | ".";
+export type Cell =
+  | '0'
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '*'
+  | '.';
 
 export class Minesweeper {
   #grid: Cell[][];
@@ -33,7 +44,7 @@ export class Minesweeper {
     for (let i = 0; i < rows; i++) {
       const rowArr: Cell[] = [];
       for (let j = 0; j < columns; j++) {
-        rowArr.push(".");
+        rowArr.push('.');
       }
       grid.push(rowArr);
     }
@@ -71,7 +82,7 @@ export class Minesweeper {
     return grid.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
         if (cell === MineStatus.MINE) {
-          return "*";
+          return '*';
         }
 
         const adjacentMines = mines.filter(([x, y]) => {
@@ -86,7 +97,7 @@ export class Minesweeper {
   }
 
   #toString(grid: string[][]): string {
-    return grid.map((row) => row.join("")).join("\n");
+    return grid.map((row) => row.join('')).join('\n');
   }
 
   toString(): string {
@@ -101,7 +112,7 @@ export class Minesweeper {
     const currentMove = this.#grid[row][col];
     this.#playerGrid[row][col] = currentMove;
 
-    if (currentMove === "0") {
+    if (currentMove === '0') {
       const neighbors = [
         [row - 1, col - 1],
         [row - 1, col],
@@ -111,27 +122,28 @@ export class Minesweeper {
         [row + 1, col - 1],
         [row + 1, col],
         [row + 1, col + 1],
-      ]
+      ];
 
       neighbors.forEach(([neighborRow, neighborCol]) => {
-        if (neighborRow >= 0 &&
-            neighborRow < this.rows &&
-            neighborCol >= 0 &&
-            neighborCol < this.columns &&
-            this.#playerGrid[neighborRow][neighborCol] === "."
-          ) {
+        if (
+          neighborRow >= 0 &&
+          neighborRow < this.rows &&
+          neighborCol >= 0 &&
+          neighborCol < this.columns &&
+          this.#playerGrid[neighborRow][neighborCol] === '.'
+        ) {
           this.play(neighborRow, neighborCol);
         }
-      })
+      });
     }
 
-    if (currentMove === "*") {
+    if (currentMove === '*') {
       throw new GameOver();
     }
 
     const unsweptCellCount = this.#playerGrid
       .flat()
-      .filter((c) => c === ".").length;
+      .filter((c) => c === '.').length;
     if (unsweptCellCount == this.mines.length) {
       throw new Win();
     }
