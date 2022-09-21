@@ -1,9 +1,9 @@
 <template>
-  <div class="cell" @click="$emit('click')">
+  <div class="cell" :class="{ 'unexplored': value === '.' }" @click="$emit('click')">
     <div v-if="value === '0'"></div>
     <div v-else-if="value === '*'" class="bomb">*</div>
     <div v-else-if="value === '.'" class="unexplored"></div>
-    <div v-else class="">{{ value }}</div>
+    <div v-else :class="`cell-${value}`">{{ value }}</div>
   </div>
 </template>
 
@@ -29,9 +29,33 @@ export default defineComponent({
   .bomb {
     color: red;
   }
-  .unexplored {
+  .cell-1 {
+    color: blue;
+  }
+  .cell-2 {
     color: green;
   }
+  .cell-3 {
+    color: red;
+  }
+  .cell-4 {
+    color: darkblue;
+  }
+  .cell-5 {
+    color: rebeccapurple;
+  }
+  .cell-6 {
+    color: teal;
+  }
+  .cell-7 {
+    color: teal;
+  }
+  .cell-8 {
+    color: black;
+  }
+}
+.unexplored {
+  background-color: rgb(200, 200, 200);
 }
 
 </style>
