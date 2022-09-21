@@ -1,6 +1,8 @@
 <template>
   <div class="cell" @click="$emit('click')">
+  <template v-if="value !== '.' ">
     {{ value }}
+  </template>
   </div>
 </template>
 

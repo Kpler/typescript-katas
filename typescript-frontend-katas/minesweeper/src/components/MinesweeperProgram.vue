@@ -49,7 +49,7 @@ export default defineComponent({
       while (mines.length < minesNumber) {
         const tuple = generateMine(rows, columns);
 
-        if (mines.find(([x, y]) => x === tuple[0] && y === tuple[1])) {
+        if (! mines.find(([x, y]) => x === tuple[0] && y === tuple[1])) {
           mines.push(tuple);
         }
       }
