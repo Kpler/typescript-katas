@@ -34,7 +34,8 @@ export default defineComponent({
     const minesNumber = 5;
 
     const generateMine = (rows: number, columns: number): [number, number] => {
-      return [4, 4];
+      const random = (max: number): number => Math.trunc((Math.random() * 100) % max);
+      return [random(rows), random(columns)];
     };
 
     const generateMines = (
@@ -42,7 +43,9 @@ export default defineComponent({
       columns: number,
       minesNumber: number
     ): [number, number][] => {
-      return [];
+      const mines = [];
+      for ();
+      return mines;
     };
 
     const game = new Minesweeper(rows, columns, [
