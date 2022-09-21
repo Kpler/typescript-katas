@@ -6,7 +6,7 @@
     <template v-else>
       <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
         <div v-for="(cell, cellIndex) in row" :key="cellIndex">
-          <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)"/>
+          <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)" />
         </div>
       </div>
     </template>
@@ -14,10 +14,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from 'vue';
 
-import { Minesweeper, GameOver, Win } from "src/game/Minesweeper";
-import MinesweeperCell from "src/components/MinesweeperCell.vue";
+import MinesweeperCell from 'src/components/MinesweeperCell.vue';
+import { GameOver, Minesweeper, Win } from 'src/game/Minesweeper';
 
 enum Status {
   WIN,
@@ -26,17 +26,37 @@ enum Status {
 }
 
 export default defineComponent({
-  name: "MinesweeperProgram",
+  name: 'MinesweeperProgram',
   components: { MinesweeperCell },
   setup() {
-    const game = new Minesweeper(10, 10, [[0, 1], [2, 1], [5, 5]]);
+    const rows = 10;
+    const columns = 10;
+    const minesNumber = 5;
+
+    const generateMine = (rows: number, columns: number): [number, number] => {
+      return [4, 4];
+    };
+
+    const generateMines = (
+      rows: number,
+      columns: number,
+      minesNumber: number
+    ): [number, number][] => {
+      return [];
+    };
+
+    const game = new Minesweeper(rows, columns, [
+      [0, 1],
+      [2, 1],
+      [5, 5],
+    ]);
 
     const grid = ref(game.getPlayerGrid());
     const gameStatus = ref(Status.IN_PROGRESS);
 
     const play = (rowIndex: number, cellIndex: number) => {
       try {
-        grid.value = game.play(rowIndex, cellIndex)
+        grid.value = game.play(rowIndex, cellIndex);
       } catch (e: unknown) {
         if (e instanceof GameOver) {
           gameStatus.value = Status.LOST;
@@ -46,7 +66,7 @@ export default defineComponent({
           throw e;
         }
       }
-    }
+    };
 
     return { grid, gameStatus, play, Status };
   },
