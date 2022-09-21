@@ -1,5 +1,9 @@
 <template>
   <div class="minesweeper-program">
+    <button @click>
+      reset
+    </button>
+    <hr>
     <h2 v-if="gameStatus === Status.LOST" class="game-over">GAME OVER!</h2>
     <h2 v-else-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
 
