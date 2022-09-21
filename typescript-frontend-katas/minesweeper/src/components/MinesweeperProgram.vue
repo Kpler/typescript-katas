@@ -6,7 +6,7 @@
     <template v-else>
       <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
         <div v-for="(cell, cellIndex) in row" :key="cellIndex">
-          <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)"/>
+          <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)" />
         </div>
       </div>
     </template>
@@ -29,14 +29,14 @@ export default defineComponent({
   name: "MinesweeperProgram",
   components: { MinesweeperCell },
   setup() {
-    const game = new Minesweeper(10, 10, [[0, 1], [2, 1], [5, 5]]);
+    const game = new Minesweeper(10, 10, Minesweeper.generateMines(10, 10));
 
     const grid = ref(game.getPlayerGrid());
     const gameStatus = ref(Status.IN_PROGRESS);
 
     const play = (rowIndex: number, cellIndex: number) => {
       try {
-        grid.value = game.play(rowIndex, cellIndex)
+        grid.value = game.play(rowIndex, cellIndex);
       } catch (e: unknown) {
         if (e instanceof GameOver) {
           gameStatus.value = Status.LOST;
@@ -46,7 +46,7 @@ export default defineComponent({
           throw e;
         }
       }
-    }
+    };
 
     return { grid, gameStatus, play, Status };
   },

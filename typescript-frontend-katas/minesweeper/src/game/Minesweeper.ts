@@ -12,15 +12,16 @@ enum MineStatus {
 }
 
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*" | ".";
-
+type Position = [number, number];
+type Grid = Cell[][];
 export class Minesweeper {
-  #grid: Cell[][];
+  #grid: Grid;
   #playerGrid: Cell[][];
 
   constructor(
     private rows: number,
     private columns: number,
-    private mines: [number, number][]
+    private mines: Position[]
   ) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
     this.#grid = this.#addCountsToMinefield(gridWithMines, mines);
@@ -44,7 +45,7 @@ export class Minesweeper {
   #generateMinefield(
     rows: number,
     columns: number,
-    mines: [number, number][]
+    mines: Position[]
   ): MineStatus[][] {
     const grid: MineStatus[][] = [];
 
@@ -64,10 +65,7 @@ export class Minesweeper {
     return grid;
   }
 
-  #addCountsToMinefield(
-    grid: MineStatus[][],
-    mines: [number, number][]
-  ): Cell[][] {
+  #addCountsToMinefield(grid: MineStatus[][], mines: Position[]): Cell[][] {
     return grid.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
         if (cell === MineStatus.MINE) {
@@ -111,18 +109,19 @@ export class Minesweeper {
         [row + 1, col - 1],
         [row + 1, col],
         [row + 1, col + 1],
-      ]
+      ];
 
       neighbors.forEach(([neighborRow, neighborCol]) => {
-        if (neighborRow >= 0 &&
-            neighborRow < this.rows &&
-            neighborCol >= 0 &&
-            neighborCol < this.columns &&
-            this.#playerGrid[neighborRow][neighborCol] === "."
-          ) {
+        if (
+          neighborRow >= 0 &&
+          neighborRow < this.rows &&
+          neighborCol >= 0 &&
+          neighborCol < this.columns &&
+          this.#playerGrid[neighborRow][neighborCol] === "."
+        ) {
           this.play(neighborRow, neighborCol);
         }
-      })
+      });
     }
 
     if (currentMove === "*") {
@@ -140,8 +139,12 @@ export class Minesweeper {
     return [...this.#playerGrid];
   }
 
-  generateMines(mineCount: number) {
-    new Array(mineCount).fill().map()
+  static generateMines(
+    mineCount: number,
+    rowsNumber: number,
+    colsNumber: number
+  ): Position[] {
+    const positions: Position[] = new Array(mineCount).fill(null).map();
     return this.#grid;
   }
 }
