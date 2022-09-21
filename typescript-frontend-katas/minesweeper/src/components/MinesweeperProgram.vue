@@ -5,16 +5,16 @@
     </div>
     <hr />
     <div class="minesweeper-program">
-      <h2 v-if="gameStatus === Status.LOST" class="game-over">GAME OVER!</h2>
-      <h2 v-else-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
+      <div v-if="gameStatus !== Status.IN_PROGRESS" class="message-container">
+        <img v-if="gameStatus === Status.LOST" src="~src/assets/game-over.png" height="160" width="160"/>
+        <h2 v-else-if="gameStatus === Status.WIN" class="win">CONGRATS!</h2>
+      </div>
 
-      <template v-else>
-        <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
-          <div v-for="(cell, cellIndex) in row" :key="cellIndex">
-            <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)" />
-          </div>
+      <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
+        <div v-for="(cell, cellIndex) in row" :key="cellIndex">
+          <MinesweeperCell :value="cell" @click="play(rowIndex, cellIndex)" />
         </div>
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -65,6 +65,7 @@ export default defineComponent({
         [5, 5],
       ]);
       grid.value = game.getPlayerGrid();
+      gameStatus.value = Status.IN_PROGRESS;
     };
 
     return { grid, gameStatus, play, Status, clickReset };
@@ -89,6 +90,20 @@ export default defineComponent({
 
   button {
     margin: 4px;
+  }
+}
+
+.minesweeper-program {
+  position: relative;
+
+  .message-container {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(40, 40, 40, 0.2);
   }
 }
 </style>
