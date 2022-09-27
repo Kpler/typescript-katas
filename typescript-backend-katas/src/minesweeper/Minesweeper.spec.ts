@@ -22,8 +22,11 @@ describe("constructor", () => {
 describe("play", () => {
   it("should display the cell played", () => {
     // GIVEN
+    const game = new Minesweeper(3, 3, []);
     // WHEN
+    const result = game.play(0, 0);
     // THEN
+    expect(result).toBe("0..\n...\n...");
   });
 
   it("should display the cells played when called several time", () => {
