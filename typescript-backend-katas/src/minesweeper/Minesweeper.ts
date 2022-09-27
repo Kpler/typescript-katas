@@ -6,7 +6,7 @@ enum MineStatus {
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
 
 export class Minesweeper {
-  #grid: Cell[][];
+  #grid: [Cell, boolean][][];
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);

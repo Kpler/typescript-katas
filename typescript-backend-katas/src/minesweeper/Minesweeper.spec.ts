@@ -31,8 +31,13 @@ describe("play", () => {
 
   it("should display the cells played when called several time", () => {
     // GIVEN
+    const game = new Minesweeper(3, 3, []);
     // WHEN
+    game.play(0, 0);
+    game.play(1, 1);
+    game.play(2, 2);
     // THEN
+
   });
 
   it("should return a game over when played on a mine", () => {
