@@ -54,13 +54,16 @@ export class Minesweeper {
     );
   }
 
-  toString(): string {
+  toString(reveal = true): string {
     return this.#grid
-      .map(row => row.join(""))
+      .map(row => row.map(([cell, flag]) => {
+        return (reveal || flag) ? cell : ".";
+      }).join(""))
       .join("\n");
   }
 
   play(row: number, col: number): string {
-    return "0..\n...\n...";
+    this.#grid[row][col] = [this.#grid[row][col][0], true];
+    return this.toString(false);
   }
 }

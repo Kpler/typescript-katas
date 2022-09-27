@@ -35,9 +35,9 @@ describe("play", () => {
     // WHEN
     game.play(0, 0);
     game.play(1, 1);
-    game.play(2, 2);
+    const result = game.play(2, 2);
     // THEN
-
+    expect(result).toBe("0..\n.0.\n..0");
   });
 
   it("should return a game over when played on a mine", () => {
