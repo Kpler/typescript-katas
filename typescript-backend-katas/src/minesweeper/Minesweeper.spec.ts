@@ -24,7 +24,8 @@ describe("play", () => {
     // GIVEN
     const game = new Minesweeper(3, 3, []);
     // WHEN
-    const result = game.play(0, 0);
+    game.play(0, 0);
+    const result = game.toString(false);
     // THEN
     expect(result).toBe("0..\n...\n...");
   });
@@ -35,15 +36,22 @@ describe("play", () => {
     // WHEN
     game.play(0, 0);
     game.play(1, 1);
-    const result = game.play(2, 2);
+    game.play(2, 2);
+    const result = game.toString(false);
     // THEN
     expect(result).toBe("0..\n.0.\n..0");
   });
 
   it("should return a game over when played on a mine", () => {
     // GIVEN
+    const game = new Minesweeper(3, 3, [
+      [0, 0]
+    ]);
     // WHEN
+    game.play(0, 0);
+    const result = game.toString(false);
     // THEN
+    expect(result).toBe("Game Over");
   });
 
   it("should display all adjacent cells without mines when played on a 0", () => {
