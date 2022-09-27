@@ -36,11 +36,11 @@ export class Minesweeper {
     return grid;
   }
 
-  #addCountsToMinefield(grid: MineStatus[][], mines: [number, number][]): Cell[][] {
+  #addCountsToMinefield(grid: MineStatus[][], mines: [number, number][]): [Cell, boolean][][] {
     return grid.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
         if (cell === MineStatus.MINE) {
-          return "*";
+          return ["*", false];
         }
 
         const adjacentMines = mines.filter(([x, y]) => {
@@ -49,7 +49,7 @@ export class Minesweeper {
             [cellIndex - 1, cellIndex, cellIndex + 1].includes(y)
           );
         });
-        return adjacentMines.length.toString() as Cell;
+        return [adjacentMines.length.toString() as Cell, false];
       })
     );
   }
