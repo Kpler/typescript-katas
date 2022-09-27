@@ -3,11 +3,16 @@ enum MineStatus {
   CLEAR = ".",
 }
 
+export enum GameStatus {
+  IN_PROGRESS,
+  GAME_OVER,
+}
+
 type Cell = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "*";
 
 export class Minesweeper {
   #grid: [Cell, boolean][][];
-  #status: 
+  #status = GameStatus.IN_PROGRESS;
 
   constructor(rows: number, columns: number, mines: [number, number][]) {
     const gridWithMines = this.#generateMinefield(rows, columns, mines);
@@ -63,8 +68,11 @@ export class Minesweeper {
       .join("\n");
   }
 
-  play(row: number, col: number): string {
+  play(row: number, col: number): GameStatus {
     this.#grid[row][col] = [this.#grid[row][col][0], true];
-    return this.toString(false);
+    if (this.#grid[row][col][0] === '*') {
+      this.#status = GameStatus.GAME_OVER;
+    }
+    return this.#status;
   }
 }

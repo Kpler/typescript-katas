@@ -1,4 +1,4 @@
-import { Minesweeper } from "./Minesweeper";
+import { GameStatus, Minesweeper } from "./Minesweeper";
 
 describe("constructor", () => {
   it("should generate game and display adjacent mines on empty minefield", () => {
@@ -48,10 +48,9 @@ describe("play", () => {
       [0, 0]
     ]);
     // WHEN
-    game.play(0, 0);
-    const result = game.toString(false);
+    const result = game.play(0, 0);
     // THEN
-    expect(result).toBe("Game Over");
+    expect(result).toBe(GameStatus.GAME_OVER);
   });
 
   it("should display all adjacent cells without mines when played on a 0", () => {
