@@ -14,6 +14,9 @@ function indexOfCharacter(char: string) {
     return letters.indexOf(char)
 }
 
+function craftDiamondLine(currentChar: string, maxChar: string) {
+    
+}
 
 
 describe("Diamond", () => {
@@ -45,3 +48,14 @@ describe("indexOfCharacter", () => {
         expect(index).toBe(1);
     });
 });
+
+describe("craftDiamondLine", () => {
+    it("when letter is A, and the size of the diamond is A", () => {
+        const line = craftDiamondLine('A', 'A')
+        expect(line).toBe('A');
+    });
+    it("when letter is B and the size of the diamond of C", () => {
+        const line = craftDiamondLine('B', 'C')
+        expect(line).toBe(' B B ');
+    });
+})
