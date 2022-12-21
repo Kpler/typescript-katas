@@ -1,9 +1,15 @@
+const computeDiamond = (letter: string) => {
+    return []
+}
+
 describe("Compute diamond", () => {
     it("should return the list of strings displayed for the simplest character - A", () => {
-        // const result = initCalc();
+        const result = computeDiamond("A");
         expect(result).toBe(["A"]);
     });
 });
+
+
 /*
 Input A:
 Output: [A]
