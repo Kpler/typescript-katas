@@ -16,7 +16,13 @@ function indexOfCharacter(char: string) {
 
 function craftDiamondLine(currentChar: string, maxChar: string) {
     const indexCurrentChar = indexOfCharacter(currentChar)
-    return " ".repeat(indexCurrentChar) + currentChar + "".repeat(indexCurrentChar + 1) + currentChar + " ".repeat(indexCurrentChar)
+    const indexMaxChar = indexOfCharacter(maxChar)
+
+    if (currentChar == 'A') {
+        return " ".repeat(indexMaxChar) + currentChar
+    } else {
+        return " ".repeat(indexMaxChar - indexCurrentChar) + currentChar + " ".repeat(indexCurrentChar) + currentChar + " ".repeat(indexMaxChar - indexCurrentChar)
+    }
 }
 
 
@@ -58,5 +64,13 @@ describe("craftDiamondLine", () => {
     it("when letter is B and the size of the diamond of C", () => {
         const line = craftDiamondLine('B', 'C')
         expect(line).toBe(' B B ');
+    });
+    it("when letter is C and the size of the diamond of C", () => {
+        const line = craftDiamondLine('C', 'C')
+        expect(line).toBe('C  C');
+    });
+    it("when letter is C and the size of the diamond of B", () => {
+        const line = craftDiamondLine('C', 'B')
+        expect(line).toBe('C  C');
     });
 })
