@@ -15,7 +15,8 @@ function indexOfCharacter(char: string) {
 }
 
 function craftDiamondLine(currentChar: string, maxChar: string) {
-    
+    const indexCurrentChar = indexOfCharacter(currentChar)
+    return " ".repeat(indexCurrentChar) + currentChar + "".repeat(indexCurrentChar + 1) + currentChar + " ".repeat(indexCurrentChar)
 }
 
 
