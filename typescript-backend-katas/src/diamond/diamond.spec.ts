@@ -1,5 +1,12 @@
 const computeDiamond = (letter: string) => {
-    return ["A"]
+    const diamonContent = [];
+    if(letter === "A")
+        diamonContent.push("A")
+
+    if(letter === "B")
+        diamonContent.push(["A", "BB", "A"]);
+
+    return diamonContent;
 }
 
 describe("Compute diamond", () => {
@@ -9,7 +16,7 @@ describe("Compute diamond", () => {
     });
     it("should return the list of strings displayed for A and B", () => {
         const result = computeDiamond("B");
-        expect(result).toEqual([["A", "BB", "A"]]);
+        expect(result).toEqual(["A", "BB", "A"]);
     });
 });
 
