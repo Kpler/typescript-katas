@@ -14,7 +14,7 @@ module.exports = {
   ],
   globals: {
     "ts-jest": {
-      tsconfig: "typescript-backend-katas/tsconfig.json",
+      tsconfig: "tsconfig.json",
     },
   },
 };
