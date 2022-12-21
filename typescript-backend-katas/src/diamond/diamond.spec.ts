@@ -1,4 +1,4 @@
-import { build_diamond, get_slice } from './diamond';
+import { build_diamond, build_row, get_slice } from './diamond';
 
 describe('get_alphabet_index', () => {
     it('should return the first slice  of the alphabet for a letter', () => {
@@ -11,13 +11,19 @@ describe('diamond', () => {
     it('should build a diamond for letter A', () => {
         expect(build_diamond('A')).toBe('A');
     })
-    it('should build a diamond for letter B', () => {
+    it.skip('should build a diamond for letter B', () => {
         expect(build_diamond('B')).toBe(' A \nB B\n A ');
+    })
+    it.skip('should build a diamond for letter C', () => {
+        expect(build_diamond('C')).toBe('  A  \n B B \nC   C\n B B \n  A  ');
+    })
+    it.skip('should build a diamond for letter D', () => {
+        expect(build_diamond('D')).toBe('   A   \n  B B  \n C   C \nD     D\n C   C \n  B B  \n   A   ');
     })
 })
 
 describe('build_row', () => {
     it('should build a row for letter B', () => {
-        expect(build_row('B')).toBe('B B');
+        expect(build_row('B', 2)).toBe('B B');
     })
 })
