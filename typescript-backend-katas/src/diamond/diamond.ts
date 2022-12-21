@@ -7,7 +7,6 @@ export function build_diamond(letter: string): string {
     for (let i = 0; i < letters.length; i++) {
         row
     }
-
 }
 
 export function get_slice(letter: string): string {
@@ -17,8 +16,12 @@ export function get_slice(letter: string): string {
 
 export function build_row(letter: string, letterCount: number): string {
     const index = ALPHABETS.indexOf(letter);
-    const spaces_in_between = index * 2 + 1;
-    const spaces_on_the_edge = //
+    const spaces_in_between = index * 2 - 1;
+    const spaces_on_the_edge = letterCount - index - 1;
 
-    return `${spaces_on_the_edge}${letter}${spaces_in_between}${letter}${spaces_on_the_edge}`;
+    if (letter === "A") {
+        return `${" ".repeat(spaces_on_the_edge)}${letter}${" ".repeat(spaces_on_the_edge)}`;
+    }
+
+    return `${" ".repeat(spaces_on_the_edge)}${letter}${" ".repeat(spaces_in_between)}${letter}${" ".repeat(spaces_on_the_edge)}`;
 }

@@ -23,7 +23,16 @@ describe('diamond', () => {
 })
 
 describe('build_row', () => {
-    it('should build a row for letter B', () => {
+    it('should build a row for letter A in a B diamond', () => {
+        expect(build_row('A', 2)).toBe(' A ');
+    })
+    it('should build a row for letter B in a B diamond', () => {
         expect(build_row('B', 2)).toBe('B B');
+    })
+    it('should build a row for letter B in a C diamond', () => {
+        expect(build_row('B', 3)).toBe(' B B ');
+    })
+    it('should build a row for letter C in a C diamond', () => {
+        expect(build_row('C', 3)).toBe('C   C');
     })
 })
