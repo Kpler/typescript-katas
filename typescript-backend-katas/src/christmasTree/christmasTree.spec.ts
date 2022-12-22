@@ -1,4 +1,4 @@
-import { buildChristmasTree, buildRow } from "./christmasTree";
+import { buildChristmasTree, buildRow, buildTrunk } from "./christmasTree";
 
 describe('build a christmas tree', () => {
   it('should build the simplest tree', () => {
@@ -28,5 +28,14 @@ describe('build row method', () => {
 
   it("should return the first row of a 3-tall tree", () => {
     expect(buildRow(3, 0)).toBe("  X  ");
+  });
+})
+
+describe('build trunk', () => {
+  it('build trunk for 3-tall tree', () => {
+    expect(buildTrunk(3)).toBe('  |  ')
+  });
+  it('build trunk for 2-tall tree', () => {
+    expect(buildTrunk(2)).toBe(' | ')
   });
 })

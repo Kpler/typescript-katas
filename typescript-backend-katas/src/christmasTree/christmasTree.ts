@@ -21,6 +21,13 @@ export function buildRow(height: number, rowNumber: number): string {
   return `${" ".repeat(numberOfSpaces)}${"X".repeat(rowNumber * 2 + 1)}${" ".repeat(numberOfSpaces)}`;
 }
 
+export function buildTrunk(height: number): string {
+
+  const numberOfSpaces = height - 1;
+
+  return `${" ".repeat(numberOfSpaces)}|${" ".repeat(numberOfSpaces)}`
+}
+
 `
 Height = 3
     X
