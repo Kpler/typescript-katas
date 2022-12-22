@@ -16,5 +16,15 @@ describe("getChristmasTree", () => {
       "XXX",
       " | ",
     ]);
-});
+  });
+
+  it("should return a 3 stage tree if height is 3", () => {
+      const christmasTree = getChristmasTree(3);
+      expect(christmasTree).toStrictEqual([
+        "  X  ",
+        " XXX ",
+        "XXXXX",
+        "  |  ",
+      ]);
+  });
 });

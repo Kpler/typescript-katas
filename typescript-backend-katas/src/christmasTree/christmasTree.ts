@@ -5,7 +5,8 @@ export const getChristmasTree = (height: number): string[] => {
       "|",
     ];
   }
-  const smallerTree = getChristmasTree(height-1)
+  const newHeight = height - 1 
+  const smallerTree = getChristmasTree(newHeight)
   
   const largerTree = smallerTree.map((stage, stageIndex) => {
       const to_add = stageIndex !== 0 ? " " : "X";
@@ -13,7 +14,12 @@ export const getChristmasTree = (height: number): string[] => {
       return biggerStage;
   })
 
-  const higherStage = " X ";
+  let spaceToAdd = "";
+  for (let i = 1; i <= newHeight; i++) {
+    spaceToAdd += " ";
+  }
+  
+  const higherStage = `${spaceToAdd}X${spaceToAdd}`;
   largerTree.unshift(higherStage);
 
   return largerTree;
