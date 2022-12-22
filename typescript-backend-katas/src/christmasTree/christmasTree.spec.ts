@@ -12,7 +12,7 @@ describe("getChristmasTree", () => {
   it("should return a 2 stage tree if height is 2", () => {
     const christmasTree = getChristmasTree(2);
     expect(christmasTree).toStrictEqual([
-      //" X ",
+      " X ",
       "XXX",
       " | ",
     ]);

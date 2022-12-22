@@ -5,16 +5,16 @@ export const getChristmasTree = (height: number): string[] => {
       "|",
     ];
   }
-  const smallTree = getChristmasTree(height-1)
+  const smallerTree = getChristmasTree(height-1)
   
-  return smallTree.forEach((stage, stageIndex) => {
-      if (stageIndex === 0) {
-        stage.unshift(" ");
-        stage.push(" ");
-      }
-      else {
-        stage.unshift("X");
-        stage.push("X");
-      }
+  const largerTree = smallerTree.map((stage, stageIndex) => {
+      const to_add = stageIndex !== 0 ? " " : "X";
+      const biggerStage = `${to_add}${stage}${to_add}`;
+      return biggerStage;
   })
+
+  const higherStage = " X ";
+  largerTree.unshift(higherStage);
+
+  return largerTree;
 }
