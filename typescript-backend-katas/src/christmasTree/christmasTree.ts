@@ -5,17 +5,16 @@ export function buildChristmasTree(height: number): string {
 
   const treeRows = [];
   for (let i = 0; i < height; i++) {
-    const row = buildRow(height, i);
+    const row = buildLeaves(height, i);
     treeRows.push(row);
   }
 
-  return 'X';
+  treeRows.push(buildTrunk(height));
+
+  return treeRows.join('\n');
 }
 
-export function buildRow(height: number, rowNumber: number): string {
-  // if (rowNumber === height - 1) {
-  //   return "|";
-  // }
+export function buildLeaves(height: number, rowNumber: number): string {
   const numberOfSpaces = height - rowNumber - 1;
 
   return `${" ".repeat(numberOfSpaces)}${"X".repeat(rowNumber * 2 + 1)}${" ".repeat(numberOfSpaces)}`;
