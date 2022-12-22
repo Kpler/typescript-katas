@@ -12,8 +12,13 @@ export function buildChristmasTree(height: number): string {
   return 'X';
 }
 
-export function buildRow(height: number, row_number: number): string {
-  return "X";
+export function buildRow(height: number, rowNumber: number): string {
+  // if (rowNumber === height - 1) {
+  //   return "|";
+  // }
+  const numberOfSpaces = height - rowNumber - 1;
+
+  return `${" ".repeat(numberOfSpaces)}${"X".repeat(rowNumber * 2 + 1)}${" ".repeat(numberOfSpaces)}`;
 }
 
 `
