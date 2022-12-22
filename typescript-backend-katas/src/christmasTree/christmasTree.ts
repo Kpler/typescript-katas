@@ -1,6 +1,10 @@
 export const getChristmasTree = (height: number): string[] => {
-  return [
-    "X",
-    "|",
-  ];
+  if (height === 1) {
+    return [
+      "X",
+      "|",
+    ];
+  }
+  
+  return getChristmasTree(height-1)
 }
