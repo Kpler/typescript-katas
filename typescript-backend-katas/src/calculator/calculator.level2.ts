@@ -14,7 +14,11 @@ const operators_to_method: { [key: string]: (a: number, b: number) => number} = 
 
 const operators_by_reversed_priority = ["+", "-", "/", "*"]
 
-export const calculate_with = ()
+export const calculate_with = (expression: string): number => {
+  const regex = ".*\((.*)\).*"
+  expression.match(regex)
+  return 0
+}
 
 
 export const calculate = (expression: string): number => {
