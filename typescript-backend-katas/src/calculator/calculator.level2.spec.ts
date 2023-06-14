@@ -18,4 +18,8 @@ describe("Calculator", () => {
     expect(calculate("3 * 4 + 5 * 6")).toBe(42);
     expect(calculate("-3 * -4 + -5 * -6")).toBe(42);
   });
+
+  it("should execute multiplications and divisions with parenthesis correctly", () => {
+    expect(calculate("80 + (20 - 5)")).toBe(95);
+  });
 });
