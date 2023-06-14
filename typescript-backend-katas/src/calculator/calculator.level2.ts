@@ -17,12 +17,26 @@ const operators_by_reversed_priority = ["+", "-", "/", "*"]
 export const calculate = (expression: string): number => {
   const expression_as_list = expression.split(" ");
 
-  const stack = [];
-
-  for (let c of expression) {
-    if (c === "(") {
-      stack.push()
+  const betweenParenthesis: string[] = [];
+  let weAreBetweenParenthesis = false;
+  for (let element of expression_as_list) {
+    if (element === "(") {
+      weAreBetweenParenthesis = true;
+      continue;
     }
+    if (element === ")") {
+      weAreBetweenParenthesis = false;
+      continue;
+    }
+    if (weAreBetweenParenthesis) {
+      betweenParenthesis.push(element)
+    }
+  }
+
+  if (betweenParenthesis.length > 0) {
+    const computedBetweenParenthesis = calculate(betweenParenthesis.join(''));
+    const newExpression = expression.replace(betweenParenthesis.join(''), computedBetweenParenthesis.toString());
+    return calculate(newExpression);
   }
 
   for (let operator of operators_by_reversed_priority) {
