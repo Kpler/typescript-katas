@@ -17,6 +17,14 @@ const operators_by_reversed_priority = ["+", "-", "/", "*"]
 export const calculate = (expression: string): number => {
   const expression_as_list = expression.split(" ");
 
+  const stack = [];
+
+  for (let c of expression) {
+    if (c === "(") {
+      stack.push()
+    }
+  }
+
   for (let operator of operators_by_reversed_priority) {
     if (!expression_as_list.includes(operator)) {
       continue;
