@@ -18,4 +18,10 @@ describe("Calculator", () => {
     expect(calculate("3 * 4 + 5 * 6")).toBe(42);
     expect(calculate("-3 * -4 + -5 * -6")).toBe(42);
   });
+
+  it("should execute operations in paranthesis first", () => {
+    expect(calculate("2 * ( 1 + 2 ) ")).toBe(6);
+    expect(calculate("2 * ( 1 - 2 ) ")).toBe(-2);
+
+  });
 });
