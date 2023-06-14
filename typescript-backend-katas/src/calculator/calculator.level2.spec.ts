@@ -20,10 +20,10 @@ describe("Calculator", () => {
   // });
 
   it("should execute operations in paranthesis first", () => {
-    expect(calculate("2 * ( 1 + 2 ) ")).toBe(6);
+    // expect(calculate("2 * ( 1 + 2 ) ")).toBe(6);
     // expect(calculate("2 * ( 1 - 2 ) ")).toBe(-2);
     // expect(calculate("2 * (( 1 - 2 ) ")).toBe(-2);
-    // expect(calculate("( 1 + 2 ) * ( 1 - 2 ) ")).toBe(-2);
+    expect(calculate("( 1 + 2 ) * ( 1 - 2 ) ")).toBe(-2);
     // expect(calculate("(( 1 + 2 ) + 3) * ( 1 - 2 ) * 5 ")).toBe(-2);
 
 
