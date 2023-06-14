@@ -14,14 +14,17 @@ const operators_to_method: { [key: string]: (a: number, b: number) => number} = 
 
 const operators_by_reversed_priority = ["+", "-", "/", "*"]
 
-export const calculate_with = (expression: string): number => {
-  const regex = ".*\((.*)\).*"
-  expression.match(regex)
-  return 0
+export const calculate = (expression: string): string => {
+  const regex = "(.*)\((.*)\)(.*)"
+  let result = expression.match(regex)
+  if (result) {
+    return result[2]
+  }
+  return expression
 }
 
 
-export const calculate = (expression: string): number => {
+export const calculate_with = (expression: string): number => {
   const expression_as_list = expression.split(" ");
 
   for (let operator of operators_by_reversed_priority) {
@@ -29,7 +32,7 @@ export const calculate = (expression: string): number => {
       continue;
     }
     const [left, ...right] = expression.split(` ${operator} `);
-    return operators_to_method[operator](calculate(left), calculate(right.join(` ${operator} `)))
+    return operators_to_method[operator](calculate_with(left), calculate_with(right.join(` ${operator} `)))
   }
 
   return Number(expression);
