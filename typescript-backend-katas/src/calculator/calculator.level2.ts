@@ -15,11 +15,11 @@ const operators_to_method: { [key: string]: (a: number, b: number) => number} = 
 const operators_by_reversed_priority = ["+", "-", "/", "*"]
 
 export const calculate = (expression: string): number => {
+  console.log("Expression eval: ", expression);
   const expression_as_list = expression.split(" ");
 
   const betweenParenthesis: string[] = [];
   let weAreBetweenParenthesis = false;
-  console.log("Expression eval: ", expression);
   for (let element of expression_as_list) {
     if (element === "(") {
       weAreBetweenParenthesis = true;
@@ -27,7 +27,7 @@ export const calculate = (expression: string): number => {
     }
     if (element === ")") {
       weAreBetweenParenthesis = false;
-      continue;
+      break;
     }
     if (weAreBetweenParenthesis) {
       betweenParenthesis.push(element)
