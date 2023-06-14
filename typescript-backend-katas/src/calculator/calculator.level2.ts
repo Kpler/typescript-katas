@@ -19,6 +19,7 @@ export const calculate = (expression: string): number => {
 
   const betweenParenthesis: string[] = [];
   let weAreBetweenParenthesis = false;
+  console.log("Expression eval: ", expression);
   for (let element of expression_as_list) {
     if (element === "(") {
       weAreBetweenParenthesis = true;
@@ -34,8 +35,9 @@ export const calculate = (expression: string): number => {
   }
 
   if (betweenParenthesis.length > 0) {
-    const computedBetweenParenthesis = calculate(betweenParenthesis.join(''));
-    const newExpression = expression.replace(betweenParenthesis.join(''), computedBetweenParenthesis.toString());
+    const stringBtwnParen = betweenParenthesis.join(' ');
+    const computedBetweenParenthesis = calculate(stringBtwnParen);
+    const newExpression = expression.replace(`( ${stringBtwnParen} )`, computedBetweenParenthesis.toString());
     return calculate(newExpression);
   }
 
