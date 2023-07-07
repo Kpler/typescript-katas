@@ -1,0 +1,12 @@
+[
+  {
+    "login": "admin",
+    "password": "admin",
+    "permissions": ["ranking:read", "database:delete", "icecream:eat"]
+  },
+  {
+    "login": "jose",
+    "password": "increment-every-6-months-21",
+    "permissions": ["nothing:all"]
+  }
+]

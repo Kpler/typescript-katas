@@ -1,0 +1,67 @@
+[
+  {
+    "id": 0,
+    "firstname": "Ryu",
+    "country": "JPN"
+  },
+  {
+    "id": 1,
+    "firstname": "Edmond",
+    "lastname": "Honda",
+    "country": "JPN"
+  },
+  {
+    "id": 2,
+    "firstname": "Jimmy",
+    "lastname": "Blanka",
+    "country": "BRA"
+  },
+  {
+    "id": 3,
+    "firstname": "Major",
+    "lastname": "Guile",
+    "country": "USA"
+  },
+  {
+    "id": 4,
+    "firstname": "Ken",
+    "lastname": "Masters",
+    "country": "USA"
+  },
+  {
+    "id": 5,
+    "firstname": "Chun-Li",
+    "country": "CHN"
+  },
+  {
+    "id": 6,
+    "firstname": "Zangief",
+    "country": "RUS"
+  },
+  {
+    "id": 7,
+    "firstname": "Dhalsim",
+    "country": "IND"
+  },
+  {
+    "id": 8,
+    "firstname": "Balrog",
+    "country": "USA"
+  },
+  {
+    "id": 9,
+    "firstname": "Vega",
+    "country": "ESP"
+  },
+  {
+    "id": 10,
+    "firstname": "Sagat",
+    "country": "THA"
+  },
+  {
+    "id": 11,
+    "firstname": "Mister",
+    "lastname": "Bison",
+    "country": null
+  }
+]

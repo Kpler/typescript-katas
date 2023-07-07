@@ -1,0 +1,67 @@
+timeslot,home,roundsWon1,roundsWon2,away
+1,blanka,2,0,e honda
+2,ryuu,1,2,major guile
+3,balrog,2,0,e honda
+4,dhalsim,2,1,vega
+5,chun-li,2,0,zangief
+6,chun-li,2,1,vega
+7,zangief,0,2,vega
+8,ryuu,2,1,M. Bison
+9,dhalsim,2,1,sagat
+10,balrog,1,2,ken
+11,blanka,2,1,M. Bison
+12,ryuu,2,0,ken
+13,zangief,0,2,sagat
+14,balrog,0,2,M. Bison
+15,sagat,2,1,ken
+16,e honda,2,1,ryuu
+17,ken,1,2,major guile
+18,e honda,2,1,vega
+19,major guile,1,2,blanka
+20,chun-li,2,0,balrog
+21,zangief,2,0,e honda
+22,ryuu,2,1,balrog
+23,blanka,2,1,zangief
+24,M. Bison,1,2,major guile
+25,ken,1,2,dhalsim
+26,zangief,1,2,major guile
+27,sagat,1,2,blanka
+28,vega,2,0,ryuu
+29,dhalsim,2,1,major guile
+30,ken,2,0,chun-li
+31,ryuu,2,0,chun-li
+32,sagat,2,0,vega
+33,major guile,0,2,e honda
+34,balrog,2,1,sagat
+35,sagat,1,2,e honda
+36,M. Bison,2,1,e honda
+37,chun-li,2,0,M. Bison
+38,ryuu,1,2,blanka
+39,zangief,2,0,ken
+40,zangief,2,2,dhalsim
+41,ryuu,2,1,sagat
+42,dhalsim,2,1,e honda
+43,ken,0,2,M. Bison
+44,vega,2,1,blanka
+45,chun-li,2,1,major guile
+46,M. Bison,0,2,vega
+47,sagat,0,2,chun-li
+48,ken,0,2,blanka
+49,vega,2,1,balrog
+50,zangief,0,2,M. Bison
+51,ryuu,2,1,dhalsim
+52,sagat,2,1,M. Bison
+53,vega,2,1,ken
+54,dhalsim,0,2,balrog
+55,major guile,2,1,sagat
+56,chun-li,2,0,e honda
+57,M. Bison,1,2,dhalsim
+58,major guile,2,1,balrog
+59,e honda,2,0,ken
+60,chun-li,2,0,dhalsim
+61,balrog,0,2,blanka
+62,balrog,2,0,zangief
+63,ryuu,2,0,zangief
+64,blanka,0,1,chun-li
+65,vega,2,1,major guile
+66,dhalsim,0,2,blanka
