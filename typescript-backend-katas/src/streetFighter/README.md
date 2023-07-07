@@ -20,6 +20,8 @@ timeslot,home,roundsWon1,roundsWon2,away
 
 :warning: A season starts the 1st of September and ends the 31st of August, included.
 
+:chores: Check the helpers folder to help you parse a CSV file.
+
 **The Fighters Census Agency API**
 
 The following API endpoint is supposed to give you the official list of fighters:
@@ -36,17 +38,17 @@ For each match:
 
 The function you have to implement shall takes as input a date, and return you the ranking for the season the date is in. The ranking is an array, with for each element the fighter id, name, country, rank, and number of points.
 
+If we input a date matching a non-existing season, the function should raise a proper error.
+
 ## Iteration 2
 
 You see a bit more clearly now! You've made the first iteration in order for the function to be used by an API.
 
 And guess what? You are asked to develop this API, with one endpoint to get the ranking of a given season.
 
-Your API should be protected, of course. However, the authentication service is not there yet. So, you've decided to push the list of users with their password and permissions. Cf `sources/users.json`.
-
-The endpoint you have to develop should be protected by the `ranking:read` permission.
-
-Finally, your API should be packaged in a Docker image.
+Bonus:
+- Your API should be protected, of course. However, the authentication service is not there yet. So, you've decided to push the list of users with their password and permissions. Cf `sources/users.json`. The endpoint you have to develop should be protected by the `ranking:read` permission.
+- Your API should be packaged in a Docker image.
 
 ## Iteration 3
 
@@ -87,3 +89,10 @@ Make the tournament progress by entering the result of a fight from the API.
 ## Iteration 6
 
 A webapp. Fortunately, you ex work at a company where you can find a template, and the needed account has not been logout from your computer... https://github.com/Kpler/template-vue2-app
+
+## Iteration X
+
+The Street Fighters Professional League CSV files have been replaced by an actual database.
+
+TODO:
+- Docker compose with a postgres fed with data
