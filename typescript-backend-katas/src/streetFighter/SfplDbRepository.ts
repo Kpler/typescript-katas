@@ -15,11 +15,9 @@ export class SfplRepository {
       throw new Error("No fighter has won two rounds")
     }
   }
-}
 
-// Two repo layers; two sources, fighters and users
-// One service layer
-// One controller layer
-// Start with business logic; from list of matches, get list of winners
-// Mock return from repository layer
-//
+  getMatches(filePath: string): Match[] {
+    return [];
+  }
+
+}
