@@ -3,7 +3,7 @@ import { rank } from "./streetfighter";
 
 describe("Streetfighter", () => {
     it("should run", () => {
-        expect(rank()).toStrictEqual([]);
+        expect(rank("2021-2022")).toStrictEqual(1);
     });
 });
 
