@@ -1,6 +1,7 @@
 import { parse } from "csv-parse";
 import * as fs from "fs";
 import * as path from "path";
+import {Fighter} from "../streetFighter";
 
 // TODO: any? It's not good!
 export const parseCsvFile = async (): Promise<any[]> => {
@@ -25,7 +26,7 @@ interface testInterface {
   test: boolean; // Warning: you can see here that the type is not checked
 }
 
-export const parseJsonFile = (): testInterface[] => {
+export const parseJsonFile = (): Fighter[] => {
   const filePath = path.resolve("src/streetFighter/sources/getFcaApiFighters.json");
   const jsonString = fs.readFileSync(filePath, 'utf-8');
   const jsonData = JSON.parse(jsonString);
