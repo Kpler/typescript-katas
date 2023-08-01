@@ -18,3 +18,16 @@ export const parseCsvFile = async (): Promise<any[]> => {
   }
   return records;
 };
+
+interface testInterface {
+  id: number;
+  firstname: string;
+  test: boolean; // Warning: you can see here that the type is not checked
+}
+
+export const parseJsonFile = (): testInterface[] => {
+  const filePath = path.resolve("src/streetFighter/sources/getFcaApiFighters.json");
+  const jsonString = fs.readFileSync(filePath, 'utf-8');
+  const jsonData = JSON.parse(jsonString);
+  return jsonData;
+};
