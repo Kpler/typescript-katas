@@ -16,3 +16,10 @@ export class SfplRepository {
     }
   }
 }
+
+// Two repo layers; two sources, fighters and users
+// One service layer
+// One controller layer
+// Start with business logic; from list of matches, get list of winners
+// Mock return from repository layer
+//

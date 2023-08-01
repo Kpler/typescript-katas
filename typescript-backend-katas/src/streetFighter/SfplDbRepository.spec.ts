@@ -1,4 +1,5 @@
 import { Match, SfplRepository } from "./SfplDbRepository";
+import * as path from "path";
 
 describe("SfplRepository", () => {
   describe("getWinner", () => {
@@ -18,4 +19,14 @@ describe("SfplRepository", () => {
       expect(winner).toEqual(1)
     })
   });
+  describe('get matches', () => {
+      it('return one match from a csv file with one match', async () => {
+          // given
+          const csvFile = path.resolve('src/streetFighter/sources/tests/testMatches.csv')
+          // when
+          getMatches(csvFile)
+          // then
+          // list of matches
+      });
+    });
 });
