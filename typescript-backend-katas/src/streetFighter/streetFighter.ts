@@ -1,3 +1,4 @@
+import { Fighter } from "./Fighter";
 import {parseJsonFile} from "./helpers/helpers";
 
 class Match {
@@ -14,26 +15,12 @@ class Match {
     }
 }
 
-export class Fighter {
-    id: number
-    firstname: string
-    lastname?: string | null
-    country?: string | null
-
-    constructor(id: number, firstname: string, lastname?: string | null, country?: string | null) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.country = country;
-    }
-}
-
 class SeasonEngine {
-    // #fighters: Array<Fighter>;
-    //
-    // constructor() {
-    //     this.fighters = helpers.parseJsonFile()
-    // }
+    #fighters: Array<Fighter>;
+
+    constructor() {
+        this.#fighters = parseJsonFile();
+    }
 
     public rankPlayers(season: string): Array<string> {
         return [];
