@@ -1,5 +1,4 @@
 import { rank } from "./streetfighter";
-import { calculate } from "../calculator/calculator.level2";
 
 
 describe("Streetfighter", () => {
