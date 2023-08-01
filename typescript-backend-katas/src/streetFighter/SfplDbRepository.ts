@@ -1,3 +1,11 @@
+import fs from "fs";
+import {Match as InternalMatch} from "./model";
+
+const FigherIdToFigherName = {
+    1: "e honda",
+    2: "blanka",
+}
+
 export interface Match {
     homeFighterId: number;
     roundsWonHome: number;
@@ -16,8 +24,20 @@ export class SfplRepository {
     }
   }
 
-  getMatches(filePath: string): Match[] {
-    return [];
+  getMatches(filePath: string): InternalMatch[] {
+      const headers= ['timeslot','home','roundsWon1','roundsWon2','away'];
+      const records = [];
+      const parser = fs
+          .createReadStream(filePath)
+          .pipe(parse({
+              delimiter: ',',
+              columns: headers,
+          }));
+      for await (const record of parser) {
+          console.log(record)
+          records.push();
+      }
+      return records;
   }
 
 }

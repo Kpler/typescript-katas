@@ -1,6 +1,6 @@
 import { Match, SfplRepository } from "./SfplDbRepository";
 import * as path from "path";
-import { MatchResult } from "./model";
+import {MatchResult, Match as InternalMatch} from "./model";
 
 describe("SfplRepository", () => {
   describe("getWinner", () => {
