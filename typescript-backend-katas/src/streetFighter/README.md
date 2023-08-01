@@ -20,8 +20,6 @@ timeslot,home,roundsWon1,roundsWon2,away
 
 :warning: A season starts the 1st of September and ends the 31st of August, included.
 
-:chores: Check the helpers folder to help you parse a CSV file.
-
 **The Fighters Census Agency API**
 
 The following API endpoint is supposed to give you the official list of fighters:
@@ -39,6 +37,8 @@ For each match:
 The function you have to implement shall takes as input a date, and return you the ranking for the season the date is in. The ranking is an array, with for each element the fighter id, name, country, rank, and number of points.
 
 If we input a date matching a non-existing season, the function should raise a proper error.
+
+:chore: Check the helpers folder to help you parse a CSV or a JSON file.
 
 ## Iteration 2
 
