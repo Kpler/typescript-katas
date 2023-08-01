@@ -12,7 +12,18 @@ class Match {
     }
 }
 
+class Fighter {
+    #id: number
+    #
+}
+
 class SeasonEngine {
+
+    constructor() {
+        // read json
+    }
+    #winner: string;
+
     public rankPlayers(season: string): Array<string> {
         return [];
     }
