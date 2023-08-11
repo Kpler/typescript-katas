@@ -10,6 +10,11 @@ describe("computeDiamond", () => {
     const diamond = computeDiamond('b');
     expect(diamond).toEqual(['*a','b*b','*a']);
   });
+
+  it("should return diamond with c ", () => {
+    const diamond = computeDiamond('c');
+    expect(diamond).toEqual(['**a','*b*b', 'c**c', '*b*b','**a']);
+  });
 });
 
 

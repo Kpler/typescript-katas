@@ -1,32 +1,24 @@
 export function computeDiamond(diamondVariable: string): Array<String> {
-    
-    const letters: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     const result: string[] = [];
-    let tempChar = '';
+    let currentLine = '';
 
-    function computeStars(diffChar: number, tempChar: string) : string {
-        for (let i = 0; i < diffChar; i++) {
-            tempChar = tempChar.concat('*');
-        }
-
-        return tempChar;
-    }
-
-    for(const letter of letters) {
-        tempChar = '';
-        const diffChar = letters.indexOf(diamondVariable) - letters.indexOf(letter);
+    for(const letter of LETTERS) {
+        currentLine = '';
+        const starLength = LETTERS.indexOf(diamondVariable) - LETTERS.indexOf(letter);
         if (letter !== diamondVariable) {
-            tempChar = computeStars(diffChar, tempChar);
+            console.log(starLength);
+            currentLine = computeStars(starLength, currentLine);
         }
-        tempChar = tempChar.concat(letter);
+        currentLine = currentLine.concat(letter);
 
         if (letter !== 'a') {
-            tempChar = computeStars(diffChar + 1, tempChar);
-            tempChar = tempChar.concat(letter);
-            result.push(tempChar);
+            const tmp = LETTERS.indexOf(diamondVariable) - LETTERS.indexOf(letter);
+            currentLine = computeStars(starLength, currentLine);
+            currentLine = currentLine.concat(letter);
+            result.push(currentLine);
         } else {
-            result.push(tempChar);
+            result.push(currentLine);
         }
 
         if (letter == diamondVariable) {
@@ -41,3 +33,13 @@ export function computeDiamond(diamondVariable: string): Array<String> {
 
     return result;
 }
+
+function computeStars(diffChar: number, inputLetter: string) : string {
+    for (let i = 0; i < diffChar; i++) {
+        inputLetter = inputLetter.concat('*');
+    }
+
+    return inputLetter;
+}
+
+const LETTERS: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
