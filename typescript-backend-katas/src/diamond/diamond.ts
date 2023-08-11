@@ -5,34 +5,39 @@ export function computeDiamond(diamondVariable: string): Array<String> {
     const result: string[] = [];
     let tempChar = '';
 
-    function computeStars(diffChar: number) {
+    function computeStars(diffChar: number, tempChar: string) : string {
         for (let i = 0; i < diffChar; i++) {
             tempChar = tempChar.concat('*');
         }
+
+        return tempChar;
     }
 
     for(const letter of letters) {
         tempChar = '';
         const diffChar = letters.indexOf(diamondVariable) - letters.indexOf(letter);
         if (letter !== diamondVariable) {
-            computeStars(diffChar);
+            tempChar = computeStars(diffChar, tempChar);
         }
         tempChar = tempChar.concat(letter);
-        console.log(tempChar);
 
         if (letter !== 'a') {
-
-            computeStars(diffChar);
+            tempChar = computeStars(diffChar + 1, tempChar);
             tempChar = tempChar.concat(letter);
             result.push(tempChar);
         } else {
             result.push(tempChar);
         }
+
         if (letter == diamondVariable) {
             break;
         }
 
     }
+
+    const secondDiamondPart = result.slice(0, result.length - 1).reverse()
+
+    result.push(...secondDiamondPart);
 
     return result;
 }
