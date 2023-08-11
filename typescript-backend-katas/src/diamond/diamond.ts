@@ -1,6 +1,6 @@
 export function computeDiamond(diamondVariable: string): Array<String> {
     
-    const letters: string[] = ['a', 'b', 'c'];
+    const letters: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     /*const charMap = {
         'a': ['a'],
@@ -11,20 +11,15 @@ export function computeDiamond(diamondVariable: string): Array<String> {
      Idea: get the difference between character a and the requested one (diamondVariable)
      to calculate the number of stars
      */
-    const diffChar = diamondVariable.charCodeAt(0) - "a".charCodeAt(0);
     const result: string[] = [];
-    let aChar = ''
     for(const letter in letters) {
-        if (letter == diamondVariable) {
-
-        } else {
-            
-        }
+        let tempChar = '';
+        const diffChar = letters.indexOf(letter);
         for (let i = 0; i < diffChar; i++) {
-            aChar = aChar.concat('*');
+            tempChar = tempChar.concat('*');
         }
-        aChar = aChar.concat('a');
-        result.push(aChar);
+        tempChar = tempChar.concat(letter);
+
         if (diamondVariable !== 'a') {
             let bChar = 'b';
             for (let i = 0; i < diffChar; i++) {
@@ -34,6 +29,10 @@ export function computeDiamond(diamondVariable: string): Array<String> {
             result.push(bChar);
             result.push(aChar);
         }
+        if (letter == diamondVariable) {
+            
+        }
+        result.push(aChar);
     }
     return result;
 }
