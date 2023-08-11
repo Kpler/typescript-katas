@@ -12,27 +12,26 @@ export function computeDiamond(diamondVariable: string): Array<String> {
      to calculate the number of stars
      */
     const result: string[] = [];
+    let tempChar = '';
     for(const letter in letters) {
-        let tempChar = '';
+        tempChar = '';
         const diffChar = letters.indexOf(letter);
         for (let i = 0; i < diffChar; i++) {
             tempChar = tempChar.concat('*');
         }
         tempChar = tempChar.concat(letter);
+        console.log(tempChar);
 
         if (diamondVariable !== 'a') {
-            let bChar = 'b';
-            for (let i = 0; i < diffChar; i++) {
-                bChar = bChar.concat('*');
-            }
-            bChar = bChar.concat('b');
-            result.push(bChar);
-            result.push(aChar);
+            tempChar = tempChar.concat(tempChar);
+            result.push(tempChar);
         }
         if (letter == diamondVariable) {
-            
+            break;
         }
-        result.push(aChar);
+
     }
+
+    result.unshift(tempChar);
     return result;
 }
