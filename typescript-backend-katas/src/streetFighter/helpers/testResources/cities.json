@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Paris",
+    "country": "France",
+    "surface": 105.4
+  },
+  {
+    "name": "London",
+    "country": "United Kingdom",
+    "surface": 1572
+  },
+  {
+    "name": "Madrid",
+    "country": "Spain",
+    "surface": 604.3
+  }
+]

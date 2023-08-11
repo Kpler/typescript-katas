@@ -6,7 +6,16 @@ The Street Fighter Tournament Society hired you. The compensation was huge, ther
 
 The Street Fighters are competiting in a league. Every year a new season.
 
-You have been asked to develop a function that will return the ranking for a season, based on two sources.
+You have been asked to develop a function that will return the ranking for a season, based on two sources described bellow.
+
+The function you have to implement returns you the ranking for the last season. The ranking is an array, with for each element the fighter id, name, country, rank, and number of points.
+
+If we input a date matching a non-existing season, the function should raise a proper error.
+
+For each match:
+- The winner earns 3 points
+- A draw makes the two fighters earn 1 point
+- The looser earn 0 point
 
 **The Street Fighters Professional League database**
 
@@ -18,29 +27,28 @@ timeslot,home,roundsWon1,roundsWon2,away
 1,chun-li,2,1,sagat
 ```
 
-:warning: A season starts the 1st of September and ends the 31st of August, included.
+For this iteration, we'll focus only on the last season.
 
 **The Fighters Census Agency API**
 
-The following API endpoint is supposed to give you the official list of fighters:
-```
-GET http://fighters-census-agency-api.yolo/fighters?category=street
-```
+The API returns the following list of fighters as a JSON file: `sources/getFcaApiFighters.json`.
 
-However, the API is currently down. Fortunately, you've called it once when it was working, and you saved the result. Cf. `sources/getFcaApiFighters.json`.
+TODO List:
+- Create a method which, given a list of fighters and of list of matches, return the fighters ranking 
+- Create a method which return the list of matches of the last season
+- Create a method which return the list of fighters
+- Create a method which return the last season fighters ranking
 
-For each match:
-- The winner earns 3 points
-- A draw makes the two fighters earn 1 point
-- The looser earn 0 point
-
-The function you have to implement shall takes as input a date, and return you the ranking for the season the date is in. The ranking is an array, with for each element the fighter id, name, country, rank, and number of points.
-
-If we input a date matching a non-existing season, the function should raise a proper error.
-
-:chore: Check the helpers folder to help you parse a CSV or a JSON file.
+:key: Check the helpers folder to help you parse a CSV or a JSON file.
+:key: Your predecessor, who left two weeks after having started, has create a mapping between SFPL and FCA fighters, it can be helpful.
 
 ## Iteration 2
+
+The requirements have changed! Now your employeer wants the method to take the season as input.
+
+A season starts the 1st of September and ends the 31st of August, included.
+
+## Iteration 3
 
 You see a bit more clearly now! You've made the first iteration in order for the function to be used by an API.
 
@@ -50,7 +58,7 @@ Bonus:
 - Your API should be protected, of course. However, the authentication service is not there yet. So, you've decided to push the list of users with their password and permissions. Cf `sources/users.json`. The endpoint you have to develop should be protected by the `ranking:read` permission.
 - Your API should be packaged in a Docker image.
 
-## Iteration 3
+## Iteration 4
 
 It starts to make sense! The Street Fighter Tournament Society wants to organize some tournaments!
 
@@ -78,15 +86,15 @@ However, when you intialize it, your tournament is far from being finished...
 
 And you have an additional rule: you should generate your tournament based on the last season ranking: in the first round of the tournament, the fighters in the first half of the ranking should only fight those ranked in the second half.
 
-## Iteration 4
+## Iteration 5
 
 Persist the tournament in a PostgreSQL DB, and create a GET endpoint on it.
 
-## Iteration 5
+## Iteration 6
 
 Make the tournament progress by entering the result of a fight from the API.
 
-## Iteration 6
+## Iteration 7
 
 A webapp. Fortunately, you ex work at a company where you can find a template, and the needed account has not been logout from your computer... https://github.com/Kpler/template-vue2-app
 
