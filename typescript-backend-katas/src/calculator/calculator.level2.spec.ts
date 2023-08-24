@@ -23,4 +23,12 @@ fdescribe("Calculator", () => {
     expect(calculate("6 + 3 * 2")).toBe(12);
   });
 
+  it("should execute additions and more than one multiplication correctly", () => {
+    expect(calculate("6 + 3 * 2 + 3 * 3")).toBe(21);
+  });
+
+  it("should execute division correctly", () => {
+    expect(calculate("6 / 3")).toBe(2);
+  });
+
 });
