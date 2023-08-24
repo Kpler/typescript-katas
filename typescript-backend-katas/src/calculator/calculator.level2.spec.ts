@@ -1,4 +1,4 @@
-import { calculate } from "./calculator.level2";
+import { calculate, DivisionError } from "./calculator.level2";
 
 fdescribe("Calculator", () => {
   it("should execute additions correctly", () => {
@@ -36,7 +36,8 @@ fdescribe("Calculator", () => {
   });
 
   it("should execute division by 0 correctly", () => {
-    expect(calculate("6 / 0")).toThrowError(DivisionError("Division"));
+    let expectedError = new DivisionError("Division by 0 is forbidden");
+    expect(calculate("6 / 0")).toThrowError("Division by 0 is forbidden");
   });
 
 });

@@ -12,7 +12,12 @@ const priorityOperation = (operandsAndOperators: Array<string>, operator: Operat
         if (operator === Operators.Multiplication) {
             operatorResult = Number(operandsAndOperators[operatorIndex - 1]) * Number(operandsAndOperators[operatorIndex + 1]);
         } else {
-            operatorResult = Number(operandsAndOperators[operatorIndex - 1]) / Number(operandsAndOperators[operatorIndex + 1]);
+
+            let divisor = Number(operandsAndOperators[operatorIndex + 1]);
+            if (divisor === 0) {
+                throw new DivisionError("Division by 0 is forbidden");
+            }
+            operatorResult = Number(operandsAndOperators[operatorIndex - 1]) / divisor;
         }
         operandsAndOperators[operatorIndex + 1] = operatorResult.toString()
         operandsAndOperators.splice(operatorIndex - 1, 2)
@@ -41,4 +46,12 @@ export const calculate = (expression: string): number => {
         }
     })
     return result;
+}
+
+
+export class DivisionError extends Error{
+    constructor(message: string) {
+        super(message);
+        this.name = "DivisionError";
+    }
 }
