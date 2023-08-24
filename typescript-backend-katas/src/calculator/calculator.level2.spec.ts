@@ -11,4 +11,16 @@ fdescribe("Calculator", () => {
     expect(calculate("5 - -3")).toBe(8);
   });
 
+  it("should execute substractions and additions in the same expression correctly", () => {
+    expect(calculate("5 + 40 - 30")).toBe(15);
+  });
+
+  it("should execute multiplications correctly", () => {
+    expect(calculate("3 * 2")).toBe(6);
+  });
+
+  it("should execute additions and multiplications correctly", () => {
+    expect(calculate("6 + 3 * 2")).toBe(12);
+  });
+
 });
