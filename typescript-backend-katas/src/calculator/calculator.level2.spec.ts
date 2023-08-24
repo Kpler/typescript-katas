@@ -31,4 +31,13 @@ fdescribe("Calculator", () => {
     expect(calculate("6 / 3")).toBe(2);
   });
 
+  it("should execute multiplications and division correctly", () => {
+    expect(calculate("4 * 6 / 3")).toBe(8);
+  });
+
+  it("should execute division by 0 correctly", () => {
+    expect(calculate("6 / 0")).toThrowError(DivisionError("Division"));
+  });
+
 });
+

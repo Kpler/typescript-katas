@@ -5,17 +5,17 @@ enum Operators {
     Division = '/',
 }
 
-function priorityOperation(operandsAndOperators: Array<string>, operator: Operators) {
+const priorityOperation = (operandsAndOperators: Array<string>, operator: Operators.Division | Operators.Multiplication) => {
     while (operandsAndOperators.indexOf(operator) !== -1) {
-        const multiplicationIndex = operandsAndOperators.indexOf(operator);
-        let multiplicationResult = 0;
+        const operatorIndex = operandsAndOperators.indexOf(operator);
+        let operatorResult = 0;
         if (operator === Operators.Multiplication) {
-            multiplicationResult = Number(operandsAndOperators[multiplicationIndex - 1]) * Number(operandsAndOperators[multiplicationIndex + 1]);
+            operatorResult = Number(operandsAndOperators[operatorIndex - 1]) * Number(operandsAndOperators[operatorIndex + 1]);
         } else {
-            multiplicationResult = Number(operandsAndOperators[multiplicationIndex - 1]) / Number(operandsAndOperators[multiplicationIndex + 1]);
+            operatorResult = Number(operandsAndOperators[operatorIndex - 1]) / Number(operandsAndOperators[operatorIndex + 1]);
         }
-        operandsAndOperators[multiplicationIndex + 1] = multiplicationResult.toString()
-        operandsAndOperators.splice(multiplicationIndex - 1, 2)
+        operandsAndOperators[operatorIndex + 1] = operatorResult.toString()
+        operandsAndOperators.splice(operatorIndex - 1, 2)
     }
 }
 
