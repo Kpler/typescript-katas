@@ -3,14 +3,14 @@ export const calculate = (expression: string): number => {
     let nextOperation= '+';
     expression.split(" ").forEach(
         (curStr) => {
-            if (!isNaN(Number(curStr))) {
+            if (!isNaN(Number(curStr)) && nextOperation === '+') {
                 result += Number(curStr);
-            }
-            if (curStr === '-') {
-              nextOperation = '-';
-            }
-            if (curStr === '+') {
-              nextOperation = '+';
+            } else if (!isNaN(Number(curStr)) && nextOperation === '-') {
+                result -= Number(curStr);
+            } else if (curStr === '-') {
+                nextOperation = '-';
+            } else if (curStr === '+') {
+                nextOperation = '+';
             }
         }
     )
