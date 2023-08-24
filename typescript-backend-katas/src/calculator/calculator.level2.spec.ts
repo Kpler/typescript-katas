@@ -36,8 +36,7 @@ fdescribe("Calculator", () => {
   });
 
   it("should execute division by 0 correctly", () => {
-    let expectedError = new DivisionError("Division by 0 is forbidden");
-    expect(calculate("6 / 0")).toThrowError("Division by 0 is forbidden");
+    expect(() => {calculate("6 / 0")}).toThrow(DivisionError);
   });
 
 });
