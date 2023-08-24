@@ -7,14 +7,16 @@ enum Operators {
 export const calculate = (expression: string): number => {
     let result = 0;
     let nextOperation = Operators.Addition;
-    const tempExpressionList: Array<string> = expression.split(" ")
+    const operandsAndOperators: Array<string> = expression.split(" ")
 
-    if (tempExpressionList.indexOf(Operators.Multiplication) !== -1) {
-      const indexMultiplcation = tempExpressionList.indexOf(Operators.Multiplication);
-      result = Number(tempExpressionList[indexMultiplcation-1]) * Number(tempExpressionList[indexMultiplcation+1]);
+    if (operandsAndOperators.indexOf(Operators.Multiplication) !== -1) {
+      const indexMultiplcation = operandsAndOperators.indexOf(Operators.Multiplication);
+      const tempResult = Number(operandsAndOperators[indexMultiplcation-1]) * Number(operandsAndOperators[indexMultiplcation+1]);
+      operandsAndOperators[indexMultiplcation + 1] = tempResult.toString()
+      operandsAndOperators.splice(indexMultiplcation - 1, 2)
     }
 
-    tempExpressionList.forEach((curStr) => {
+    operandsAndOperators.forEach((curStr) => {
 
         // !isNaaN
         //          do operation
