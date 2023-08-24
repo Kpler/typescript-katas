@@ -5,24 +5,28 @@ enum Operators {
     Division = '/',
 }
 
+function priorityOperation(operandsAndOperators: Array<string>, operator: Operators) {
+    while (operandsAndOperators.indexOf(operator) !== -1) {
+        const multiplicationIndex = operandsAndOperators.indexOf(operator);
+        let multiplicationResult = 0;
+        if (operator === Operators.Multiplication) {
+            multiplicationResult = Number(operandsAndOperators[multiplicationIndex - 1]) * Number(operandsAndOperators[multiplicationIndex + 1]);
+        } else {
+            multiplicationResult = Number(operandsAndOperators[multiplicationIndex - 1]) / Number(operandsAndOperators[multiplicationIndex + 1]);
+        }
+        operandsAndOperators[multiplicationIndex + 1] = multiplicationResult.toString()
+        operandsAndOperators.splice(multiplicationIndex - 1, 2)
+    }
+}
+
 export const calculate = (expression: string): number => {
     let result = 0;
     let nextOperation = Operators.Addition;
     const operandsAndOperators: Array<string> = expression.split(" ")
 
-    while (operandsAndOperators.indexOf(Operators.Multiplication) !== -1) {
-      const multiplicationIndex = operandsAndOperators.indexOf(Operators.Multiplication);
-      const multiplicationResult = Number(operandsAndOperators[multiplicationIndex-1]) * Number(operandsAndOperators[multiplicationIndex+1]);
-      operandsAndOperators[multiplicationIndex + 1] = multiplicationResult.toString()
-      operandsAndOperators.splice(multiplicationIndex - 1, 2)
-    }
+    priorityOperation(operandsAndOperators, Operators.Multiplication);
 
-    while (operandsAndOperators.indexOf(Operators.Division) !== -1) {
-        const divisionIndex = operandsAndOperators.indexOf(Operators.Division);
-        const divisionResult = Number(operandsAndOperators[divisionIndex-1]) * Number(operandsAndOperators[divisionIndex+1]);
-        operandsAndOperators[divisionIndex + 1] = divisionResult.toString()
-        operandsAndOperators.splice(divisionIndex - 1, 2)
-    }
+    priorityOperation(operandsAndOperators, Operators.Division);
 
     operandsAndOperators.forEach((curStr) => {
 
