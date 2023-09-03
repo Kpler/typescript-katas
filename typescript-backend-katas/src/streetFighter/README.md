@@ -4,22 +4,22 @@ The Street Fighter Tournament Society hired you. The compensation was huge, ther
 
 ## Iteration 1
 
-The Street Fighters are competiting in a league. Every year a new season.
+The Street Fighters are competing in a league. Every year a new season.
 
-You have been asked to develop a function that will return the ranking for a season, based on two sources described bellow.
+You have been asked to develop a function that will return the ranking for a season, based on two sources described below.
 
-The function you have to implement returns you the ranking for the last season. The ranking is an array, with for each element the fighter id, name, country, rank, and number of points.
+The function you have to implement returns to you the ranking for the last season. The ranking is an array, with for each element the fighter id, name, country, rank, and number of points.
 
 If we input a date matching a non-existing season, the function should raise a proper error.
 
 For each match:
 - The winner earns 3 points
 - A draw makes the two fighters earn 1 point
-- The looser earn 0 point
+- The loser earn 0 point
 
 **The Street Fighters Professional League database**
 
-It is constituted of CSV files, one per season ("2022-2023", "2021-2022"...). Each line of the CSV files represent a match between two fighters. A fighter has won if he won two rounds. Cf. `sources/SFPL_DB`.
+It is made of CSV files, one per season ("2022-2023", "2021-2022"...). Each line of the CSV files represent a match between two fighters. A fighter has won if he won two rounds. Cf. `sources/SFPL_DB`.
 
 In the following example, Chun-Li has won by 2 rounds against 1.
 ```
@@ -44,7 +44,7 @@ TODO List:
 
 ## Iteration 2
 
-The requirements have changed! Now your employeer wants the method to take the season as input.
+The requirements have changed! Now your employer wants the method to take the season as input.
 
 A season starts the 1st of September and ends the 31st of August, included.
 
