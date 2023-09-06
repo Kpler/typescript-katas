@@ -13,5 +13,17 @@ describe("getMatch", () => {
       } 
       expect(match).toEqual(expected);
     })
+  it('should parse the CSV and single Match', async () => {
+    const input: string = "2,chun-li,1,2,ryu";
+    const match: Match = getMatch(input);
+
+    const expected: Match = {
+      fighter1: "chun-li",
+      fighter2: "ryu",
+      winner: "ryu"
+    }
+    expect(match).toEqual(expected);
+  })
   });
+
 
