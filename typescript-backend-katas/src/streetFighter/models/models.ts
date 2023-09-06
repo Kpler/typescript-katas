@@ -1,5 +1,5 @@
-export interface match {
+export interface Match {
     fighter1: string;
     fighter2: string;
-    winner: Int16Array;
+    winner: string;
 }
