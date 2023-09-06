@@ -1,4 +1,7 @@
 import { Match } from "../models/models";
+import * as path from "path";
+import * as fs from "fs";
+
 
 export function getMatch(input: string): Match {
     const splitString = input.split(",");
@@ -16,17 +19,12 @@ export function getMatch(input: string): Match {
     }
 }
 
-export function getMatches(input: string): Match {
-
-    const allContents = fs.readFileSync('test.json', 'utf-8');
-    allContents.split(/\r?\n/).forEach((line) => {
-    // console.log('line: ', line);
+export function getMatches(filePath: string): Match[] {
+    const allMatches: Match[] = [];
+    const allContents = fs.readFileSync(filePath, 'utf-8');
+    allContents.split(/\r?\n/).slice(1).forEach((line) => {
+       allMatches.push(getMatch(line));
     });
-
-    return{
-        fighter1: fighter1,
-        fighter2: fighter2,
-        winner: winner,
-    }
+    return allMatches;
 }
 
