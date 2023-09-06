@@ -15,3 +15,18 @@ export function getMatch(input: string): Match {
         winner: winner,
     }
 }
+
+export function getMatches(input: string): Match {
+
+    const allContents = fs.readFileSync('test.json', 'utf-8');
+    allContents.split(/\r?\n/).forEach((line) => {
+    // console.log('line: ', line);
+    });
+
+    return{
+        fighter1: fighter1,
+        fighter2: fighter2,
+        winner: winner,
+    }
+}
+
