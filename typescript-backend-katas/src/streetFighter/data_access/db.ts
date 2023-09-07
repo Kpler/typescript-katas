@@ -20,11 +20,7 @@ export function getMatch(input: string): Match {
 }
 
 export function getMatches(filePath: string): Match[] {
-    const allMatches: Match[] = [];
     const allContents = fs.readFileSync(filePath, 'utf-8');
-    allContents.split(/\r?\n/).slice(1).forEach((line) => {
-       allMatches.push(getMatch(line));
-    });
-    return allMatches;
+    return allContents.split(/\r?\n/).slice(1).map(getMatch);
 }
 
