@@ -8,7 +8,7 @@ The Street Fighters are competing in a league.
 
 You have been asked to develop a function that will return the ranking, based on the source described below.
 
-The ranking is an array, with for each element the fighter id, name, country, rank, and number of points.
+The ranking is an array, with for each element the fighter name, rank, and number of points.
 
 For each match:
 - The winner earns 3 points
@@ -17,7 +17,7 @@ For each match:
 
 **The Street Fighters Professional League database**
 
-It is a CSL file. Each line of the CSV files represents a match between two fighters. A fighter has won if he wins two rounds. Cf. `sources/sfplDb.csv`.
+It is a CSV file. Each line of the CSV file represents a match between two fighters. A fighter has won if he wins two rounds. Cf. `sources/sfplDb.csv`.
 
 In the following example, Chun-Li has won the match, by 2 rounds against 1.
 ```
@@ -25,16 +25,24 @@ timeslot,home,roundsWon1,roundsWon2,away
 1,chun-li,2,1,sagat
 ```
 
+In this next example, we have a draw between Zangief and Blanka.
+```
+timeslot,home,roundsWon1,roundsWon2,away
+1,zangief,2,2,blanka
+```
+
 TODO List:
 - Create a method which, given a list of fighters and of list of matches, return the fighters ranking 
 - Create a method which return the list of matches from the SFPL DB
 - Use the two methods you created to get the ranking from the SFPL DB
 
-:key: Check the helpers folder to help you parse a CSV or a JSON file.
+:key: Check the helpers folder to help you parse a CSV file.
 
 ## Iteration 2
 
 Now we want to integrate a new data source. This the official list of fighters. In our ranking, we want to return information given in this source, instead of the name present in the SFPL DB.
+
+The ranking should be improved to contain, for each element the fighter id, name, country, rank, and number of points.
 
 **The Fighters Census Agency API**
 
@@ -44,6 +52,7 @@ TODO List:
 - Create a method which return the list of fighters from the FCA API
 - Use this method in your ranking method
 
+:key: Check the helpers folder to help you parse a JSON file.
 :key: Your predecessor, who left two weeks after having started, has created a mapping between SFPL and FCA fighters, it can be helpful.
 
 ## Iteration 3
