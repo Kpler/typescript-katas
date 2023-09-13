@@ -13,6 +13,11 @@ export async function computeMatchResults(fileName: string) {
       away: string
     }>(fileName, ',');
     const players: Record<string, PlayerResult> = {};
+    return matches.reduce((playerResults, match) => {
+        const player1 = match.home;
+        const player2 = match.away; 
+        return playerResults
+    }, players);
 
-    return [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
+    // return [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
 }
