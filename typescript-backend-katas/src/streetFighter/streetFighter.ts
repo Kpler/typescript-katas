@@ -1,7 +1,7 @@
 import { parseCsvFile } from './helpers/helpers';
 
 export class PlayerResult {
-    constructor(public name: string, public points: number, public roundsWon: number) { }
+    constructor(public name: string, public points: number, public ranking: number) { }
 }
 
 export async function computeMatchResults(fileName: string) {
@@ -13,11 +13,24 @@ export async function computeMatchResults(fileName: string) {
       away: string
     }>(fileName, ',');
     const players: Record<string, PlayerResult> = {};
-    return matches.reduce((playerResults, match) => {
-        const player1 = match.home;
-        const player2 = match.away; 
+    return Object.entries(matches.reduce((playerResults, match) => {
+        const player1Results = players[match.home] ?? new PlayerResult(match.home, 0, 0);
+        const player2Results = players[match.away] ?? new PlayerResult(match.away, 0, 0);
+
+        if(match.roundsWon1 > match.roundsWon2) {
+            player1Results.points += 3;
+        } else if (match.roundsWon1 === match.roundsWon2) {
+            player2Results.points += 1;
+            player1Results.points += 1;
+        }
+        else {
+            player2Results.points += 3;
+        }
+         
         return playerResults
-    }, players);
+    }, players)).sort(([playerName, playerResults]) => {
+        
+    });
 
     // return [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
 }
