@@ -12,5 +12,7 @@ export async function computeMatchResults(fileName: string) {
       roundsWon2: number,
       away: string
     }>(fileName, ',');
+    const players: Record<string, PlayerResult> = {};
+
     return [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
 }

@@ -20,6 +20,8 @@ describe("Given of list of two matches between chun-li and sagat and chun-li and
     ];
 
     const result = await computeMatchResults('src/streetFighter/helpers/testResources/two-matches.csv');
+
+    expect(result.length).toEqual(3);
     expect(result).toStrictEqual(expectedResult);
   });
 });
