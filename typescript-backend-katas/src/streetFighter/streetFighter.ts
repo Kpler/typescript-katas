@@ -29,14 +29,19 @@ export async function computeMatchResults(fileName: string) {
             player2Results.points += 3;
         }
 
-        playerResults[match.home]=player1Results;
-        playerResults[match.away]=player2Results;
+        playerResults[match.home] = player1Results;
+        playerResults[match.away] = player2Results;
 
          
         return playerResults
-    }, players)).sort((playerResults1, playerResults2) => playerResults1.points - playerResults2.points).map((player, index) => {
-
+    }, players)).sort((playerResults1, playerResults2) => {
+        if (playerResults2.points === playerResults1.points) {
+            return playerResults2.name.localeCompare(playerResults1.name)
+        } else {
+            return playerResults2.points - playerResults1.points
+        }
+    }).map((player, index) => {
+        player.ranking = index + 1;
+        return player
     });
-
-    // return [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
 }
