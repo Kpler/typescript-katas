@@ -1,11 +1,23 @@
-import {computeMatchResults, PlayerResult} from "./streetFighter";
+import { computeMatchResults, PlayerResult } from "./streetFighter";
 
 describe("Given a match between chun-li and sagat won 2 rounds to 1", () => {
-    it("should return the 2 players in a list with chun-li having 3 points and sagat having 0 pts", () => {
-        const expectedResult = [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
-        const result = computeMatchResults();
-        expect(result).toStrictEqual(expectedResult);
-    });
+  it("should return the 2 players in a list with chun-li having 3 points and sagat having 0 pts", () => {
+    const expectedResult = [
+      new PlayerResult("chun-li", 3, 1),
+      new PlayerResult("sagat", 0, 2),
+    ];
+    const result = computeMatchResults('one-match.csv');
+    expect(result).toStrictEqual(expectedResult);
+  });
 });
 
+describe("Given of list of two matches between chun-li and sagat and chun-li and zangief", () => {
+  const expectedResult = [
+    new PlayerResult("chun-li", 3, 1),
+    new PlayerResult("sagat", 0, 2),
+    new PlayerResult("zangief", 0, 2),
+  ];
 
+  const result = computeMatchResults('two-matches.csv');
+  expect(result).toStrictEqual(expectedResult);
+});
