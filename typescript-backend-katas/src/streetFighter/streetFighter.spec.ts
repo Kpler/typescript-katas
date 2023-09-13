@@ -6,7 +6,7 @@ describe("Given a match between chun-li and sagat won 2 rounds to 1", () => {
       new PlayerResult("chun-li", 3, 1),
       new PlayerResult("sagat", 0, 2),
     ];
-    const result = computeMatchResults('one-match.csv');
+    const result = computeMatchResults('src/streetFighter/helpers/testResources/one-match.csv');
     expect(result).toStrictEqual(expectedResult);
   });
 });
@@ -18,6 +18,6 @@ describe("Given of list of two matches between chun-li and sagat and chun-li and
     new PlayerResult("zangief", 0, 2),
   ];
 
-  const result = computeMatchResults('two-matches.csv');
+  const result = computeMatchResults('src/streetFighter/helpers/testResources/two-matches.csv');
   expect(result).toStrictEqual(expectedResult);
 });
