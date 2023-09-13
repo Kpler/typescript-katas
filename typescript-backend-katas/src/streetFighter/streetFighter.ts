@@ -18,6 +18,7 @@ export async function computeMatchResults(fileName: string) {
         const player1Results = players[match.home] ?? new PlayerResult(match.home, 0, 0);
         const player2Results = players[match.away] ?? new PlayerResult(match.away, 0, 0);
 
+
         if(match.roundsWon1 > match.roundsWon2) {
             player1Results.points += 3;
         } else if (match.roundsWon1 === match.roundsWon2) {
@@ -27,9 +28,15 @@ export async function computeMatchResults(fileName: string) {
         else {
             player2Results.points += 3;
         }
+
+        playerResults[match.home]=player1Results;
+        playerResults[match.away]=player2Results;
+
          
         return playerResults
-    }, players)).sort((playerResults1, playerResults2) => playerResults1.points - playerResults2.points);
+    }, players)).sort((playerResults1, playerResults2) => playerResults1.points - playerResults2.points).map((player, index) => {
+
+    });
 
     // return [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
 }
