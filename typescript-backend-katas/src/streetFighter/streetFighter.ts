@@ -13,7 +13,8 @@ export async function computeMatchResults(fileName: string) {
       away: string
     }>(fileName, ',');
     const players: Record<string, PlayerResult> = {};
-    return Object.entries(matches.reduce((playerResults, match) => {
+    console.log(matches);
+    return Object.values(matches.reduce((playerResults, match) => {
         const player1Results = players[match.home] ?? new PlayerResult(match.home, 0, 0);
         const player2Results = players[match.away] ?? new PlayerResult(match.away, 0, 0);
 
@@ -28,9 +29,7 @@ export async function computeMatchResults(fileName: string) {
         }
          
         return playerResults
-    }, players)).sort(([playerName, playerResults]) => {
-        
-    });
+    }, players)).sort((playerResults1, playerResults2) => playerResults1.points - playerResults2.points);
 
     // return [new PlayerResult("chun-li", 3, 1), new PlayerResult("sagat", 0, 2)];
 }
