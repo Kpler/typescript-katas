@@ -7,8 +7,18 @@ describe("Calculator should manage additions", () => {
 
     // When
     const result = calculate(expression);
-
+    
     // Then
     expect(result).toBe(2);
+  });
+  it("should compute 1 + 2 = 3", () => {
+    // Given
+    const expression = '1 + 2';
+
+    // When
+    const result = calculate(expression);
+    
+    // Then
+    expect(result).toBe(3);
   });
 });
