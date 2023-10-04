@@ -22,3 +22,16 @@ describe("Calculator should manage additions", () => {
     expect(result).toBe(3);
   });
 });
+
+describe("Calculator should manage subtraction", () => {
+  it("should compute 1 - 1 = 0", () => {
+    // Given
+    const expression = "1 - 1";
+
+    // When
+    const result = calculate(expression);
+
+    // Then
+    expect(result).toBe(0);
+  })
+})
