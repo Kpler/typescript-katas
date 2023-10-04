@@ -1,11 +1,16 @@
 
 export const calculate = (expression: string): number => {
-  const expressionArray = expression.split(' ');
+  const expressionElements: string[] = expression.split(' ');
 
   let result = 0;
-  expressionArray.forEach(element =>{
-
+  expressionElements.forEach(element => {
+    if (isOperand(element)) {
+      result += Number(element);
+    }
   });
 
-  return 2;
+  return result;
+}
+const isOperand = (element: string): boolean => {
+  return element !== '+';
 }
