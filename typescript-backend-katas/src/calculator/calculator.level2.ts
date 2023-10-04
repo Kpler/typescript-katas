@@ -1,6 +1,7 @@
 enum Operation {
     ADDITION = '+',
     SUBTRACTION = '-',
+    MULTIPLICATION = '*',
 }
 
 export const calculate = (expression: string): number => {
@@ -10,7 +11,7 @@ export const calculate = (expression: string): number => {
     let nextOperation: (x: number, y: number) => number = (x, y) => add(x,  y);
 
     expressionElements.forEach(element => {
-        if (isOperand(element)) {
+        if (!isOperation(element)) {
             result = nextOperation(result, Number(element));
         } else {
             nextOperation = getNextOperation(element);
@@ -23,14 +24,17 @@ export const calculate = (expression: string): number => {
 const getNextOperation = (element: string) => {
     if (element === Operation.ADDITION) {
         return add;
+    } if (element === Operation.SUBTRACTION ) {
+      return subtract;
     } else {
-        return subtract;
+      return multiply;
     }
 }
 
-const isOperand = (element: string): boolean => {
-    return element !== Operation.ADDITION && element !== Operation.SUBTRACTION;
+function isOperation(element: string): element is Operation {
+  return [Operation.ADDITION, Operation.SUBTRACTION, Operation.MULTIPLICATION].includes(element as Operation)
 }
 
 const add: (x: number, y: number) => number = (x, y) => x + y;
 const subtract: (x: number, y: number) => number = (x, y) => x - y;
+const multiply: (x: number, y: number) => number = (x, y) => x * y;
