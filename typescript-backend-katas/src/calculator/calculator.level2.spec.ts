@@ -60,3 +60,15 @@ describe("Calculator should manage addition and subtraction together", () => {
   })
 })
 
+describe("Calculator should manage multiplication", () => {
+  it("should compute 2 * 3 = 6", () => {
+    // Given
+    const expression = "2 * 3";
+
+    // When
+    const result = calculate(expression);
+
+    // Then
+    expect(result).toBe(6);
+  })
+})

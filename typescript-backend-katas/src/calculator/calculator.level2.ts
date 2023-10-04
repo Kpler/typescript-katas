@@ -13,16 +13,21 @@ export const calculate = (expression: string): number => {
         if (isOperand(element)) {
             result = nextOperation(result, Number(element));
         } else {
-            if (element === Operation.ADDITION) {
-                nextOperation = add;
-            } else {
-                nextOperation = subtract;
-            }
+            nextOperation = getNextOperation(element);
         }
     });
 
     return result;
 }
+
+const getNextOperation = (element: string) => {
+    if (element === Operation.ADDITION) {
+        return add;
+    } else {
+        return subtract;
+    }
+}
+
 const isOperand = (element: string): boolean => {
     return element !== Operation.ADDITION && element !== Operation.SUBTRACTION;
 }
