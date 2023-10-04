@@ -33,5 +33,30 @@ describe("Calculator should manage subtraction", () => {
 
     // Then
     expect(result).toBe(0);
+  });
+
+  it("should compute -1 - 1 = -2", () => {
+    // Given
+    const expression = "-1 - 1";
+
+    // When
+    const result = calculate(expression);
+
+    // Then
+    expect(result).toBe(-2);
+  });
+})
+
+describe("Calculator should manage addition and subtraction together", () => {
+  it("should compute 1 + 2 - 3 = 0", () => {
+    // Given
+    const expression = "1 + 2 - 3";
+
+    // When
+    const result = calculate(expression);
+
+    // Then
+    expect(result).toBe(0);
   })
 })
+
