@@ -1,6 +1,6 @@
 export class PasswordValidator {
     public validate(password: string): boolean {
-        return this.isLongEnough(password) && this.validateCase(password) && this.containNumber(password);
+        return this.isLongEnough(password) && this.validateCase(password) && this.containNumber(password) && this.containsUnderscore(password);
     }
 
     private isLongEnough(password: string): boolean {
@@ -8,11 +8,15 @@ export class PasswordValidator {
     }
 
     private validateCase(password: string): boolean {
-        return /[A-Z]/.test(password) && /[a-z]/.test(password);
+        return /(?=.*[a-z])(?=.*[A-Z])/.test(password);
     }
 
     private containNumber(password: string): boolean {
         return /[0-9]/.test(password);
+    }
+
+    private containsUnderscore(password: string): boolean {
+        return /[_]/.test(password);
     }
 }
 

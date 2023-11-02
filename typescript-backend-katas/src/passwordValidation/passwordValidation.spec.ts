@@ -23,4 +23,8 @@ describe("Password", () => {
     it("should contain at least 1 number", () => {
         expect(validator.validate('AE_qwertyuiop')).toBe(false);
     });
+
+    it("should contain at least 1 underscore", () => {
+        expect(validator.validate('AEq123456')).toBe(false);
+    });
 });
