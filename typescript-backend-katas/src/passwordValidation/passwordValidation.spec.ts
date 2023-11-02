@@ -1,5 +1,7 @@
-describe("Example test", () => {
-    it("should sum numbers correctly", () => {
-        expect(1 + 1).toBe(2);
+import {passwordValidator} from "./passwordValidation";
+
+describe("Password", () => {
+    it("should have at least 8 characters", () => {
+        expect(passwordValidator('12345678')).toBe(true);
     });
 });
