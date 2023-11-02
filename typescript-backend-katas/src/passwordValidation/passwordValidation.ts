@@ -3,8 +3,7 @@ interface Builder {
     buildValidatorTwo(): PasswordValidator;
 }
 
-export class PasswordValidator implements Builder{
-
+export class BuilderValidator implements Builder{
     public buildValidatorOne(): PasswordValidator {
         return new PasswordValidator(VALIDATORS[0]);
     }
@@ -12,6 +11,9 @@ export class PasswordValidator implements Builder{
     public buildValidatorTwo(): PasswordValidator {
         return new PasswordValidator(VALIDATORS[1]);
     }
+}
+
+export class PasswordValidator {
 
     private validator: Validator;
 
