@@ -1,6 +1,7 @@
 export class PasswordValidator {
+
     public validate(password: string): boolean {
-        return this.isLongEnough(password) && this.validateCase(password) && this.containNumber(password) && this.containsUnderscore(password);
+        return this.isLongEnough(password) && this.validateCase(password) && this.containsNumber(password) && this.containsUnderscore(password);
     }
 
     private isLongEnough(password: string): boolean {
@@ -11,7 +12,7 @@ export class PasswordValidator {
         return /(?=.*[a-z])(?=.*[A-Z])/.test(password);
     }
 
-    private containNumber(password: string): boolean {
+    private containsNumber(password: string): boolean {
         return /[0-9]/.test(password);
     }
 
@@ -20,3 +21,5 @@ export class PasswordValidator {
     }
 }
 
+export const VALIDATORS = ['1', '2', '3', '4'] as const
+export type Validator = typeof VALIDATORS[number]

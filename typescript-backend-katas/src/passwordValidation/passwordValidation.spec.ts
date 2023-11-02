@@ -1,7 +1,6 @@
-import { PasswordValidator } from "./passwordValidation";
+import { PasswordValidator, Validator, VALIDATORS } from "./passwordValidation";
 
-
-const validator  = new PasswordValidator();
+const validator  = new PasswordValidator(VALIDATORS[0]);
 
 describe("Password", () => {
     it("should have at least 8 characters", () => {
