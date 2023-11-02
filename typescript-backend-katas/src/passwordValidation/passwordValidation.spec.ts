@@ -1,15 +1,18 @@
-import { passwordValidator } from "./passwordValidation";
+import { PasswordValidator } from "./passwordValidation";
+
+
+const validator  = new PasswordValidator();
 
 describe("Password", () => {
     it("should have at least 8 characters", () => {
-        expect(passwordValidator('Ae_12345')).toBe(true);
+        expect(validator.validate('Ae_12345')).toBe(true);
     });
 
     it("should not have less than 8 characters", () => {
-        expect(passwordValidator('Ae_1234')).toBe(false);
+        expect(validator.validate('Ae_1234')).toBe(false);
     });
 
     it("should contain atleast 1 capital letter", () => {
-        expect(passwordValidator('ae_12345')).toBe(false);
+        expect(validator.validate('ae_12345')).toBe(false);
     });
 });
