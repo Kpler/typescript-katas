@@ -12,7 +12,11 @@ describe("Password", () => {
         expect(validator.validate('Ae_1234')).toBe(false);
     });
 
-    it("should contain atleast 1 capital letter", () => {
+    it("should contain at least 1 capital letter", () => {
         expect(validator.validate('ae_12345')).toBe(false);
+    });
+
+    it("should contain at least 1 lower case letter", () => {
+        expect(validator.validate('AE_12345')).toBe(false);
     });
 });
