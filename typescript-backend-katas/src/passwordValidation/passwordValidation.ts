@@ -1,4 +1,18 @@
-export class PasswordValidator {
+interface Builder {
+    buildValidatorOne(): PasswordValidator;
+    buildValidatorTwo(): PasswordValidator;
+}
+
+export class PasswordValidator implements Builder{
+
+    public buildValidatorOne(): PasswordValidator {
+        return new PasswordValidator(VALIDATORS[0]);
+    }
+
+    public buildValidatorTwo(): PasswordValidator {
+        return new PasswordValidator(VALIDATORS[1]);
+    }
+
     private validator: Validator;
 
     constructor(validator: Validator) {
@@ -6,11 +20,11 @@ export class PasswordValidator {
     }
 
     public validate(password: string): boolean {
-        return this.isAtLeastEightCharactersLong(password) && this.validateCase(password) && this.containsNumber(password) && this.containsUnderscore(password);
-    }
-
-    public validate2(password: string): boolean {
-        return this.isAtLeastSixCharactersLong(password) && this.validateCase(password) && this.containsNumber(password);
+        if (this.validator == 'Validator1') {
+            return this.isAtLeastEightCharactersLong(password) && this.validateCase(password) && this.containsNumber(password) && this.containsUnderscore(password);
+        } else {
+            return this.isAtLeastSixCharactersLong(password) && this.validateCase(password) && this.containsNumber(password);
+        }
     }
 
     private isAtLeastEightCharactersLong(password: string): boolean {
