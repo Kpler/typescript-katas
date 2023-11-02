@@ -19,4 +19,8 @@ describe("Password", () => {
     it("should contain at least 1 lower case letter", () => {
         expect(validator.validate('AE_12345')).toBe(false);
     });
+
+    it("should contain at least 1 number", () => {
+        expect(validator.validate('AE_qwertyuiop')).toBe(false);
+    });
 });
