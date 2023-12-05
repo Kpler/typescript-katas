@@ -25,4 +25,9 @@ describe("Is Password Valid", () => {
         const password = 'KPLER443_';
         expect(isPasswordValid(password)).toBe(false);
     });
+
+    test("Given the password missing a number letter should return that the password is invalid", () => {
+        const password = 'KPLerAAA_';
+        expect(isPasswordValid(password)).toBe(false);
+    });
 })
