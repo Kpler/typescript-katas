@@ -14,3 +14,10 @@ describe("Given the password 'Kpler_2'", () => {
         expect(isPasswordValid(password)).toBe(false);
     });
 });
+
+describe("Given the password 'Kpler43_'", () => {
+    it("should return that the password is invalid", () => {
+        const password = 'Kpler43_';
+        expect(isPasswordValid(password)).toBe(false);
+    });
+});
