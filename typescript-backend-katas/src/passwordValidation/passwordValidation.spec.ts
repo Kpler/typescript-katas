@@ -41,3 +41,8 @@ describe("Is Password Valid", () => {
         expect(isPasswordValid(password)).toBe(false);
     })
 })
+
+describe("In case of VALIDATION_2 Is Password Valid", () => {
+
+})
+
