@@ -1,5 +1,16 @@
-describe("Example test", () => {
-    it("should sum numbers correctly", () => {
-        expect(1 + 1).toBe(2);
+import { isPasswordValid } from "./passwordValidation";
+
+
+describe("Given the password 'Kpler4_3ver'", () => {
+    it("should return that the password is valid", () => {
+        const password = 'Kpler4_3ver';
+        expect(isPasswordValid(password)).toBe(true);
+    });
+});
+
+describe("Given the password 'Kpler_2'", () => {
+    it("should return that the password is not valid", () => {
+        const password = 'Kpler_2';
+        expect(isPasswordValid(password)).toBe(false);
     });
 });
