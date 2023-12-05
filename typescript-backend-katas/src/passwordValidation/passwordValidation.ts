@@ -3,6 +3,7 @@ const isNotLongEnough = (password: string) : boolean => {
 }
 
 const isMissingCapitalLetter = (password: string) : boolean => {
+    console.log(password);
     return password === password.toLocaleLowerCase();
 }
 
@@ -18,14 +19,10 @@ const isMissingUnderscore = (password: string): boolean => {
     return !/_/.test(password);
 }
 
+const rules = [isNotLongEnough, isMissingCapitalLetter, isMissingLowerCaseLetter, isMissingNumber, isMissingUnderscore]
+
 export const isPasswordValid = (password: string) : boolean => {
-    if (
-        isNotLongEnough(password)
-        || isMissingCapitalLetter(password)
-        || isMissingLowerCaseLetter(password)
-        || isMissingNumber(password)
-        || isMissingUnderscore(password)
-    ) {
+    if ( rules.some((rule) => rule(password))) {
         return false;
     }
     return true;
