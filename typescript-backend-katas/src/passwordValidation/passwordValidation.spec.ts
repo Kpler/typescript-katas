@@ -20,4 +20,9 @@ describe("Is Password Valid", () => {
         const password = 'kpler443_';
         expect(isPasswordValid(password)).toBe(false);
     });
+
+    test("Given the password missing a lowercase letter should return that the password is invalid", () => {
+        const password = 'KPLER443_';
+        expect(isPasswordValid(password)).toBe(false);
+    });
 })
