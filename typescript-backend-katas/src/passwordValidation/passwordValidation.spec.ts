@@ -30,4 +30,14 @@ describe("Is Password Valid", () => {
         const password = 'KPLerAAA_';
         expect(isPasswordValid(password)).toBe(false);
     });
+
+    test("Given the password contains only numbers and an underscore", () => {
+        const password = '12345678_';
+        expect(isPasswordValid(password)).toBe(false);
+    })
+
+    test("Given the password is missing an underscore", () => {
+        const password = 'KPLerAAAaaa12';
+        expect(isPasswordValid(password)).toBe(false);
+    })
 })
