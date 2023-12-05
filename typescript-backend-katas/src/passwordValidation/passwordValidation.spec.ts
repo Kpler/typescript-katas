@@ -40,9 +40,16 @@ describe("Is Password Valid", () => {
         const password = 'KPLerAAAaaa12';
         expect(isPasswordValid(password)).toBe(false);
     })
-})
+});
 
 describe("In case of VALIDATION_2 Is Password Valid", () => {
-
+    test("Given the password 'Kpler4_3ver' should return that the password is valid", () => {
+        const password = 'Kpler4_3ver';
+        expect(isPasswordValid(password,'VALIDATION_2')).toBe(true);
+    });
+    test("Given the password is 7 characters long should return that the password is valid", () => {
+        const password = 'Kplr4_3';
+        expect(isPasswordValid(password,'VALIDATION_2')).toBe(true);
+    });
 })
 
