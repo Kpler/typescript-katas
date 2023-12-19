@@ -16,8 +16,9 @@ export class Order {
 
     getCartPrice(books: number[]): number {
         const uniqueBooks = new Set(books);
+        
         const discount = this.#DISCOUNT_MAP.get(uniqueBooks.size) ?? 0;
-        return this.#getFullPrice(uniqueBooks.size) * (1 - discount);
+        return this.#getFullPrice(books.length) * (1 - discount);
     }
 
     #getFullPrice(booksCount: number) {
