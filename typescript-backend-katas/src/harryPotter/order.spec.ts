@@ -18,6 +18,15 @@ describe("When ordering books", () => {
     // Then
     expect(totalPrice).toBe(8);
   });
+
+  it("should pay 15.2$ when ordered two different books", () => {
+    // Given
+    const order = new Order();
+    // When
+    const totalPrice = order.getTotalPrice([1, 2]);
+    // Then
+    expect(totalPrice).toBe(15.2);
+  });
 });
 
 
