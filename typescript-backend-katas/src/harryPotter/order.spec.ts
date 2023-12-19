@@ -1,6 +1,6 @@
 import { Order } from "./order";
 
-describe("When ordering books", () => {
+describe("When ordering different books", () => {
   it("should pay 0$ when there are no books", () => {
     // Given
     const order = new Order();
@@ -35,6 +35,24 @@ describe("When ordering books", () => {
     const totalPrice = order.getCartPrice([1, 2, 3]);
     // Then
     expect(totalPrice).toBe(21.6);
+  });
+
+  it("should pay 25.6$ when ordered 4 different books", () => {
+    // Given
+    const order = new Order();
+    // When
+    const totalPrice = order.getCartPrice([1, 2, 3, 4]);
+    // Then
+    expect(totalPrice).toBe(25.6);
+  });
+
+  it("should pay 30$ when ordered 5 different books", () => {
+    // Given
+    const order = new Order();
+    // When
+    const totalPrice = order.getCartPrice([1, 2, 3, 4, 5]);
+    // Then
+    expect(totalPrice).toBe(30);
   });
 });
 
