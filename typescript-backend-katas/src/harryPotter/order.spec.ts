@@ -5,7 +5,7 @@ describe("When ordering books", () => {
     // Given
     const order = new Order();
     // When
-    const totalPrice = order.getTotalPrice([]);
+    const totalPrice = order.getCartPrice([]);
     // Then
     expect(totalPrice).toBe(0);
   });
@@ -14,7 +14,7 @@ describe("When ordering books", () => {
     // Given
     const order = new Order();
     // When
-    const totalPrice = order.getTotalPrice([1]);
+    const totalPrice = order.getCartPrice([1]);
     // Then
     expect(totalPrice).toBe(8);
   });
@@ -23,7 +23,7 @@ describe("When ordering books", () => {
     // Given
     const order = new Order();
     // When
-    const totalPrice = order.getTotalPrice([1, 2]);
+    const totalPrice = order.getCartPrice([1, 2]);
     // Then
     expect(totalPrice).toBe(15.2);
   });
@@ -32,7 +32,7 @@ describe("When ordering books", () => {
     // Given
     const order = new Order();
     // When
-    const totalPrice = order.getTotalPrice([1, 2, 3]);
+    const totalPrice = order.getCartPrice([1, 2, 3]);
     // Then
     expect(totalPrice).toBe(21.6);
   });
