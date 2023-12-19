@@ -1,6 +1,6 @@
-import { Calc } from "./calc";
+import { HarryPotter } from "./harryPotter";
 
-const initCalc = () => new Calc();
+const initCalc = () => new HarryPotter();
 
 describe("HarryPotter.add()", () => {
   it("should return 4 for 2x2", () => {
