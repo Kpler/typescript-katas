@@ -14,9 +14,25 @@ export class Order {
         [5, this.#DISCOUNT_FOR_5]
     ])
 
+
     getCartPrice(books: number[]): number {
         const uniqueBooks = new Set(books);
-        
+        const boxes: Array<Array<number>> = []
+
+        books.forEach((book)=> {
+          const boxWithoutCurrentBook = boxes.find(box => {
+            return !box.includes(book)
+          });
+
+          if(boxWithoutCurrentBook === undefined) {
+            boxes.push([book])
+            return 
+          }
+
+          boxWithoutCurrentBook.push(book);
+
+        });
+
         const discount = this.#DISCOUNT_MAP.get(uniqueBooks.size) ?? 0;
         return this.#getFullPrice(books.length) * (1 - discount);
     }
