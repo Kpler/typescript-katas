@@ -2,7 +2,7 @@ const isNotLongEnough = (minLen: number): VALIDATION_RULE => {
     return (password: string): boolean => {
         return password.length <= minLen;
     }
-} 
+}
 
 const isMissingCapitalLetter = (password: string): boolean => {
     return password === password.toLocaleLowerCase();
@@ -37,19 +37,24 @@ const validationTwoRules: Array<VALIDATION_RULE> = [
     isMissingNumber
 ]
 
-const validationThreeRules: Array<VALIDATION_RULE> = [isNotLongEnough(16)]
+const validationThreeRules: Array<VALIDATION_RULE> = [
+    isNotLongEnough(16),
+    isMissingCapitalLetter,
+    isMissingLowerCaseLetter,
+    isMissingUnderscore
+];
 
 type VALIDATION = 'VALIDATION_1' | 'VALIDATION_2' | 'VALIDATION_3';
 
 
-const mappedRulesets = new Map([
+const mappedRuleSets = new Map([
     ['VALIDATION_1', validationOneRules],
     ['VALIDATION_2', validationTwoRules],
     ['VALIDATION_3', validationThreeRules],
 ]);
 
 export const isPasswordValid = (password: string, validationType: VALIDATION = 'VALIDATION_1'): boolean => {
-    const ruleset = mappedRulesets.get(validationType) ?? [];
+    const ruleset = mappedRuleSets.get(validationType) ?? [];
     if (ruleset.length === 0) {
         throw new Error(`Validation type ${validationType} is not supported`);
     }

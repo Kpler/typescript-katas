@@ -70,5 +70,17 @@ describe("In case of VALIDATION_3 Is Password Valid", () => {
         const password = 'Kpler4_3erqwertyu';
         expect(isPasswordValid(password,'VALIDATION_3')).toBe(true);
     });
+    test("Given the password doesn't contain a capital letter, should return that the password is not valid", () => {
+        const password = 'kpler4_3erqwertyu';
+        expect(isPasswordValid(password,'VALIDATION_3')).toBe(false);
+    });
+    test("Given the password doesn't contain a lowercase letter, should return that the password is not valid", () => {
+        const password = 'KPLER4_3ERQWERTYU';
+        expect(isPasswordValid(password,'VALIDATION_3')).toBe(false);
+    });
+    test("Given the password doesn't contain an underscore, should return that the password is not valid", () => {
+        const password = 'KPLER4x3ERQWERTYU';
+        expect(isPasswordValid(password,'VALIDATION_3')).toBe(false);
+    });
 })
 
