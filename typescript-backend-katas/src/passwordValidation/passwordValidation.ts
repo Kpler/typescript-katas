@@ -1,14 +1,8 @@
-const isNotLongEnough = (password: string): boolean => {
-    return password.length <= 8;
-}
-
-const isNotLongEnoughTwo = (password: string): boolean => {
-    return password.length <= 6;
-}
-
-const isNotLongEnoughThree = (password: string): boolean => {
-    return password.length <= 16;
-}
+const isNotLongEnough = (minLen: number): VALIDATION_RULE => {
+    return (password: string): boolean => {
+        return password.length <= minLen;
+    }
+} 
 
 const isMissingCapitalLetter = (password: string): boolean => {
     return password === password.toLocaleLowerCase();
@@ -29,7 +23,7 @@ const isMissingUnderscore = (password: string): boolean => {
 type VALIDATION_RULE = (password: string) => boolean;
 
 const validationOneRules: Array<VALIDATION_RULE> = [
-    isNotLongEnough,
+    isNotLongEnough(8),
     isMissingCapitalLetter,
     isMissingLowerCaseLetter,
     isMissingNumber,
@@ -37,13 +31,13 @@ const validationOneRules: Array<VALIDATION_RULE> = [
 ]
 
 const validationTwoRules: Array<VALIDATION_RULE> = [
-    isNotLongEnoughTwo,
+    isNotLongEnough(6),
     isMissingCapitalLetter,
     isMissingLowerCaseLetter,
     isMissingNumber
 ]
 
-const validationThreeRules: Array<VALIDATION_RULE> = [isNotLongEnoughThree]
+const validationThreeRules: Array<VALIDATION_RULE> = [isNotLongEnough(16)]
 
 type VALIDATION = 'VALIDATION_1' | 'VALIDATION_2' | 'VALIDATION_3';
 

@@ -66,8 +66,8 @@ describe("In case of VALIDATION_2 Is Password Valid", () => {
 })
 
 describe("In case of VALIDATION_3 Is Password Valid", () => {
-    test("Given the password 'Kpler4_3erqwerty' should return that the password is valid", () => {
-        const password = 'Kpler4_3erqwerty';
+    test("Given the password 'Kpler4_3erqwertyu' should return that the password is valid", () => {
+        const password = 'Kpler4_3erqwertyu';
         expect(isPasswordValid(password,'VALIDATION_3')).toBe(true);
     });
 })
