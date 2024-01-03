@@ -75,13 +75,10 @@ export const isPasswordValid = (password: string, validationType: VALIDATION = '
     if (ruleset.length === 0) {
         throw new Error(`Validation type ${validationType} is not supported`);
     }
-    // return !ruleset.some((rule) => rule(password));
-    const reasons = ruleset.map((rule) => {
-        if(rule.validationRule(password))
-            return '';
-        else
-            return rule.errorMsg;
-    }).filter((str) => str.length > 0);
+    
+    const reasons = ruleset
+        .filter(rule => rule.validationRule(password))
+        .map((rule) => rule.errorMsg);
 
 
     return reasons.length > 0 ? new PasswordInvalidResponse(reasons)
