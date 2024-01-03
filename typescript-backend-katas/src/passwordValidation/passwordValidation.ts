@@ -22,12 +22,12 @@ const isMissingUnderscore = (password: string): boolean => {
 
 type VALIDATION_RULE = (password: string) => boolean;
 
-const validationOneRules: Array<VALIDATION_RULE> = [
-    isNotLongEnough(8),
-    isMissingCapitalLetter,
-    isMissingLowerCaseLetter,
-    isMissingNumber,
-    isMissingUnderscore
+const validationOneRules: Array<{ validation_rule: VALIDATION_RULE, errorMsg: string }> = [
+    {validationRule: isNotLongEnough(8), errorMsg: ''},
+    {validationRule: isMissingCapitalLetter, errorMsg: ''},
+    {validationRule: isMissingLowerCaseLetter, errorMsg: ''},
+    {validationRule: isMissingNumber, errorMsg: ''},
+    {validationRule: isMissingUnderscore, errorMsg: ''}
 ]
 
 const validationTwoRules: Array<VALIDATION_RULE> = [
@@ -53,16 +53,20 @@ const mappedRuleSets = new Map([
     ['VALIDATION_3', validationThreeRules],
 ]);
 
-interface Response {}
+const ruleToErrorMsg = new Map([
+    [isNotLongEnough, 'Password is not long enough and is missing']
+]);
+
+interface Response {
+}
+
 export class PasswordValidResponse implements Response {
     constructor() {
-
     }
 }
 
-class PasswordInvalidResponse implements Response {
+export class PasswordInvalidResponse implements Response {
     constructor(public readonly reasons: Array<string>) {
-
     }
 }
 
@@ -72,5 +76,11 @@ export const isPasswordValid = (password: string, validationType: VALIDATION = '
         throw new Error(`Validation type ${validationType} is not supported`);
     }
     // return !ruleset.some((rule) => rule(password));
-    return ruleset.some((rule) => rule(password)) ? new PasswordInvalidResponse(['']) : new PasswordValidResponse();
+    const reasons = ruleset.map((rule) => rule(password))
+    return reasons ? new PasswordInvalidResponse([''])
+        : new PasswordValidResponse();
+}
+
+export const isPasswordInvalidResponse: (response: Response) => response is PasswordInvalidResponse = (response: Response): response is PasswordInvalidResponse => {
+    return response instanceof PasswordInvalidResponse;
 }
