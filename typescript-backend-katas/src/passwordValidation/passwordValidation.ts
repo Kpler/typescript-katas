@@ -22,7 +22,9 @@ const isMissingUnderscore = (password: string): boolean => {
     return !/_/.test(password);
 }
 
-const rules: Array<(password: string) => boolean> = [
+type VALIDATION_RULE = (password: string) => boolean;
+
+const validationOneRules: Array<VALIDATION_RULE> = [
     isNotLongEnough,
     isMissingCapitalLetter,
     isMissingLowerCaseLetter,
@@ -30,9 +32,12 @@ const rules: Array<(password: string) => boolean> = [
     isMissingUnderscore
 ]
 
+const validationTwoRules: Array<VALIDATION_RULE> = [isNotLongEnoughTwo, isMissingCapitalLetter, isMissingLowerCaseLetter ]
+
 type VALIDATION = 'VALIDATION_1' | 'VALIDATION_2';
 
-const mappedRulesets = new Map([[ 'VALIDATION_1', rules ], [ 'VALIDATION_2', [isNotLongEnoughTwo] ]]);
+
+const mappedRulesets = new Map([[ 'VALIDATION_1', validationOneRules ], [ 'VALIDATION_2', validationTwoRules ]]);
 
 export const isPasswordValid = (password: string, validationType: VALIDATION = 'VALIDATION_1'): boolean => {
     const ruleset = mappedRulesets.get(validationType);
