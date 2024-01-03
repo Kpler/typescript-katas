@@ -59,5 +59,16 @@ describe("In case of VALIDATION_2 Is Password Valid", () => {
         const password = 'KPLR4_3';
         expect(isPasswordValid(password,'VALIDATION_2')).toBe(false);
     });
+    test("Given the password doesnt contain a number should return that password is not valid", () => {
+        const password = 'KPLRFour_';
+        expect(isPasswordValid(password,'VALIDATION_2')).toBe(false);
+    });
+})
+
+describe("In case of VALIDATION_3 Is Password Valid", () => {
+    test("Given the password 'Kpler4_3erqwerty' should return that the password is valid", () => {
+        const password = 'Kpler4_3erqwerty';
+        expect(isPasswordValid(password,'VALIDATION_3')).toBe(true);
+    });
 })
 
