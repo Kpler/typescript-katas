@@ -22,26 +22,26 @@ const isMissingUnderscore = (password: string): boolean => {
 
 type VALIDATION_RULE = (password: string) => boolean;
 
-const validationOneRules: Array<{ validation_rule: VALIDATION_RULE, errorMsg: string }> = [
-    {validationRule: isNotLongEnough(8), errorMsg: ''},
+const validationOneRules: Array<{ validationRule: VALIDATION_RULE, errorMsg: string }> = [
+    {validationRule: isNotLongEnough(8), errorMsg: 'Password is not long enough'},
     {validationRule: isMissingCapitalLetter, errorMsg: ''},
     {validationRule: isMissingLowerCaseLetter, errorMsg: ''},
     {validationRule: isMissingNumber, errorMsg: ''},
     {validationRule: isMissingUnderscore, errorMsg: ''}
-]
+];
 
-const validationTwoRules: Array<VALIDATION_RULE> = [
-    isNotLongEnough(6),
-    isMissingCapitalLetter,
-    isMissingLowerCaseLetter,
-    isMissingNumber
-]
+const validationTwoRules: Array<{ validationRule: VALIDATION_RULE, errorMsg: string }> = [
+    {validationRule: isNotLongEnough(6), errorMsg: ''},
+    {validationRule: isMissingCapitalLetter, errorMsg: ''},
+    {validationRule: isMissingLowerCaseLetter, errorMsg: ''},
+    {validationRule: isMissingNumber, errorMsg: ''},
+];
 
-const validationThreeRules: Array<VALIDATION_RULE> = [
-    isNotLongEnough(16),
-    isMissingCapitalLetter,
-    isMissingLowerCaseLetter,
-    isMissingUnderscore
+const validationThreeRules: Array<{ validationRule: VALIDATION_RULE, errorMsg: string }> = [
+    {validationRule: isNotLongEnough(16), errorMsg: ''},
+    {validationRule: isMissingCapitalLetter, errorMsg: ''},
+    {validationRule: isMissingLowerCaseLetter, errorMsg: ''},
+    {validationRule: isMissingUnderscore, errorMsg: ''}
 ];
 
 type VALIDATION = 'VALIDATION_1' | 'VALIDATION_2' | 'VALIDATION_3';
@@ -76,8 +76,15 @@ export const isPasswordValid = (password: string, validationType: VALIDATION = '
         throw new Error(`Validation type ${validationType} is not supported`);
     }
     // return !ruleset.some((rule) => rule(password));
-    const reasons = ruleset.map((rule) => rule(password))
-    return reasons ? new PasswordInvalidResponse([''])
+    const reasons = ruleset.map((rule) => {
+        if(rule.validationRule(password))
+            return '';
+        else
+            return rule.errorMsg;
+    }).filter((str) => str.length > 0);
+
+
+    return reasons.length > 0 ? new PasswordInvalidResponse(reasons)
         : new PasswordValidResponse();
 }
 
