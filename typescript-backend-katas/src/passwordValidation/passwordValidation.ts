@@ -53,10 +53,24 @@ const mappedRuleSets = new Map([
     ['VALIDATION_3', validationThreeRules],
 ]);
 
-export const isPasswordValid = (password: string, validationType: VALIDATION = 'VALIDATION_1'): boolean => {
+interface Response {}
+export class PasswordValidResponse implements Response {
+    constructor() {
+
+    }
+}
+
+class PasswordInvalidResponse implements Response {
+    constructor(public readonly reasons: Array<string>) {
+
+    }
+}
+
+export const isPasswordValid = (password: string, validationType: VALIDATION = 'VALIDATION_1'): Response => {
     const ruleset = mappedRuleSets.get(validationType) ?? [];
     if (ruleset.length === 0) {
         throw new Error(`Validation type ${validationType} is not supported`);
     }
-    return !ruleset.some((rule) => rule(password));
+    // return !ruleset.some((rule) => rule(password));
+    return ruleset.some((rule) => rule(password)) ? new PasswordInvalidResponse(['']) : new PasswordValidResponse();
 }
