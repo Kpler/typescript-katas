@@ -18,8 +18,14 @@ export class Game {
             return 0;
         }
         return this.#frames.reduce(({sum, lastRollType}, currentFrame) => {
-            return sum + (currentFrame.roll1 ?? 0) + (currentFrame.roll2 ?? 0)
-        }, {sum: 0, lastRollType: RollTypes.Open});
+            let currentSum
+            if(lastRollType === RollTypes.Spare)
+                currentSum = sum + (currentFrame.roll1 ?? 0) * 2 + (currentFrame.roll2 ?? 0)
+            else
+                currentSum = sum + (currentFrame.roll1 ?? 0) + (currentFrame.roll2 ?? 0)
+            const rollType = (currentFrame.roll1 ?? 0) + (currentFrame.roll2 ?? 0) === 10 ? RollTypes.Spare : RollTypes.Open
+            return {sum: currentSum, lastRollType: rollType}
+        }, {sum: 0, lastRollType: RollTypes.Open}).sum;
     }
 
     roll(number: number) {
