@@ -3,7 +3,12 @@ export class Game {
     #frames: Array<{roll1: number, roll2?: number}> = [];
 
     score(): number {
-        return this.#currentScore;
+        if(this.#frames.length === 0) {
+            return 0;
+        }
+        return this.#frames.reduce((sum, currentFrame) => {
+            return sum + currentFrame.roll1 + (currentFrame.roll2 ?? 0)
+        }, 0);
     }
 
     roll(number: number) {
