@@ -19,7 +19,7 @@ describe("when playing bowling", () => {
         game.roll(5);
         game.roll(5);
         game.roll(3);
-        
+
         expect(game.score()).toBe(16);
     });
 });
