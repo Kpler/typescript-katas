@@ -1,13 +1,18 @@
 export class Game {
     #currentScore: number = 0;
-    #frames: Array<{roll1: number, roll2?: number}> = [];
+    #frames: Array<{roll1?: number, roll2?: number}> = [
+        {
+            roll1: undefined,
+            roll2: undefined
+        }
+    ];
 
     score(): number {
         if(this.#frames.length === 0) {
             return 0;
         }
-        return this.#frames.reduce((sum, currentFrame) => {
-            return sum + currentFrame.roll1 + (currentFrame.roll2 ?? 0)
+        return this.#frames.reduce(({sum}, currentFrame) => {
+            return sum + (currentFrame.roll1 ?? 0) + (currentFrame.roll2 ?? 0)
         }, 0);
     }
 

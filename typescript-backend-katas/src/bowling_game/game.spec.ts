@@ -12,7 +12,7 @@ describe("when playing bowling", () => {
 
     it("we should increase score when playing once", () => {
         game.roll(1)
-        expect(game.score()).toBe(1);
+    expect(game.score()).toBe(1);
     });
 
     it("when somebody knocks down 5 then 5 then 3 the score should be 16", () => {
