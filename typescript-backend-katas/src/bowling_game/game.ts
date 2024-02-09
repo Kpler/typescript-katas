@@ -1,9 +1,15 @@
+enum RollTypes {
+    Strike,
+    Spare,
+    Open
+}
+
 export class Game {
     #currentScore: number = 0;
     #frames: Array<{roll1?: number, roll2?: number}> = [
         {
             roll1: undefined,
-            roll2: undefined
+            roll2: undefined,
         }
     ];
 
@@ -11,9 +17,9 @@ export class Game {
         if(this.#frames.length === 0) {
             return 0;
         }
-        return this.#frames.reduce(({sum}, currentFrame) => {
+        return this.#frames.reduce(({sum, lastRollType}, currentFrame) => {
             return sum + (currentFrame.roll1 ?? 0) + (currentFrame.roll2 ?? 0)
-        }, 0);
+        }, {sum: 0, lastRollType: RollTypes.Open});
     }
 
     roll(number: number) {
