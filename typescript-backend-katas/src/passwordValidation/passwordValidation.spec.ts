@@ -7,6 +7,7 @@ describe("The password validator", () => {
         ['should be valid with complex password', '8Charats_', true],
         ['should contain a lower case letter', 'CHARACTER', false],
         ['should contain a number', 'CCCharats_', false],
+        ['should contain an underscore', 'CCCharats5', false],
     ])('%s', (_, password, expectedResult) =>{
         const result = isPasswordValid(password);
         expect(result).toBe(expectedResult)

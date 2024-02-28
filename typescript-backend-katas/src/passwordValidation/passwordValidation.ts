@@ -2,21 +2,16 @@ export default (password: string): boolean => {
     return isPasswordLongEnough(password)
         && containsAnUppercase(password)
         && containsALowercase(password)
-        && containsANumber(password);
+        && containsANumber(password)
+        && containsAnUnderscore(password);
 }
 
-function containsANumber(password: string) {
-    return /\d/.test(password);
-}
+const containsANumber = (password: string) => /\d/.test(password)
 
-function isPasswordLongEnough(password: string) {
-    return password.length >= 8;
-}
+const isPasswordLongEnough = (password: string) => password.length >= 8
 
-function containsAnUppercase(password: string) {
-    return /[A-Z]/.test(password);
-}
+const containsAnUppercase = (password: string) => /[A-Z]/.test(password)
 
-function containsALowercase(password: string) {
-    return /[a-z]/.test(password);
-}
+const containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
+
+const containsALowercase = (password: string) => /[a-z]/.test(password)
