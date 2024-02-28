@@ -1,10 +1,8 @@
-export default (password: string): boolean => {
-    return isPasswordLongEnough(password)
-        && containsAnUppercase(password)
-        && containsALowercase(password)
-        && containsANumber(password)
-        && containsAnUnderscore(password);
-}
+export default (password: string): boolean => isPasswordLongEnough(password)
+    && containsAnUppercase(password)
+    && containsALowercase(password)
+    && containsANumber(password)
+    && containsAnUnderscore(password)
 
 const containsANumber = (password: string) => /\d/.test(password)
 
