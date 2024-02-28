@@ -1,4 +1,4 @@
-import { PasswordValidator } from "./passwordValidation";
+import {PasswordValidator, PasswordValidatorTwo} from "./passwordValidation";
 
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
@@ -16,7 +16,7 @@ describe("The password validator for iteration one", () => {
 });
 
 describe("The password validator for iteration two", () => {
-    const passwordValidator = new PasswordValidator();
+    const passwordValidator = new PasswordValidatorTwo();
     it.each([
         ['should not have less than 6 characters', '7char', false],
         ['should have less than 7 characters', 'charach', true],
