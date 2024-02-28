@@ -1,18 +1,12 @@
-import {validatePassword} from "./passwordValidation";
+import {isPasswordValid} from "./passwordValidation";
+
 describe("The password validator", () => {
-    it("should not have less than 8 characters", () => {
-        const result = validatePassword("7charas");
-        expect(result).toBe(false);
-    });
-
-    it("should be valid with more than 8 characters", () => {
-        const result = validatePassword("8charact");
-        expect(result).toBe(true);
-    });
-
-    it("should contain capital letter", () => {
-        const result = validatePassword("characte");
-        expect(result).toBe(false);
-    });
-
+    it.each([
+        ['should not have less than 8 characters', '7charas', false],
+        ['should contain capital letter', 'characte', false],
+        ['should be valid with complex password', '8Charats_', true],
+    ])('$1', ([,password, expectedResult]) =>{
+        const result = isPasswordValid(password);
+        expect(result).toBe(expectedResult)
+    })
 });
