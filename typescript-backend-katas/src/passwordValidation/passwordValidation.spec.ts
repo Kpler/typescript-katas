@@ -10,5 +10,9 @@ describe("The password validator", () => {
         expect(result).toBe(true);
     });
 
+    it("should contain capital letter", () => {
+        const result = validatePassword("characte");
+        expect(result).toBe(false);
+    });
 
 });
