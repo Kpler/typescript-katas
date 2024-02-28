@@ -1,15 +1,14 @@
-describe("Example test", () => {
-    it("should sum numbers correctly", () => {
-        expect(1 + 1).toBe(2);
-    });
-});
-
-const validate_password = (password: string): boolean => {
-    return true;
-}
-
+import {validatePassword} from "./passwordValidation";
 describe("The password validator", () => {
-    if("should not have less than characters", () => {
-        const result = validate_password("7charas");
+    it("should not have less than 8 characters", () => {
+        const result = validatePassword("7charas");
+        expect(result).toBe(false);
     });
+
+    it("should be valid with more than 8 characters", () => {
+        const result = validatePassword("8charact");
+        expect(result).toBe(true);
+    });
+
+
 });
