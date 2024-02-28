@@ -14,7 +14,8 @@ const containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
 
 const containsALowercase = (password: string) => /[a-z]/.test(password)
 
-export class PasswordValidator {
+export interface PasswordValidatorInterface {}
+export class PasswordValidator implements PasswordValidatorInterface{
 
   public isValid(password: string): boolean {
     return isPasswordValid(password);
