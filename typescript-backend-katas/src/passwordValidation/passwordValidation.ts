@@ -1,6 +1,6 @@
 abstract class IPasswordValidator {
     abstract rules: ((password: string) => boolean)[]
-
+    
     protected containsANumber = (password: string) => /\d/.test(password)
 
     protected isPasswordLongEnough = (passwordLength: number) => (password: string) => password.length >= passwordLength;
@@ -11,9 +11,9 @@ abstract class IPasswordValidator {
 
     protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
-    isValid(password: string): {result : boolean, message : string} {
+    validatePassword(password: string): {result : boolean, message : string} {
         const isValid = this.rules.every((rule) => rule(password))
-        return  {result: isValid, message: isValid ? "Password Valid": "Wrong Password"}
+        return  {result: isValid, message: isValid ? "Password Valid": "Wrong password"}
     }
 }
 

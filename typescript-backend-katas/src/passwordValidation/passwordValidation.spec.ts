@@ -10,8 +10,8 @@ describe("The password validator for iteration one", () => {
         ['should contain a number', 'CCCharats_', {result : false, message: "Wrong password"}],
         ['should contain an underscore', 'CCCharats5', {result : false, message: "Wrong password"}],
     ])('%s', (_, password, expectedResult) =>{
-        const result = passwordValidator.isValid(password);
-        expect(result).toBe(expectedResult)
+        const result = passwordValidator.validatePassword(password);
+        expect(result).toStrictEqual(expectedResult)
     })
 });
 
@@ -24,8 +24,8 @@ describe("The password validator for iteration two", () => {
         ['should not miss a number', 'Charblah', {result : false, message: "Wrong password"}],
         ['should provide a valid password', 'Charach1', {result : true, message: "Password Valid"}],
     ])('%s', (_, password, expectedResult) =>{
-        const result = passwordValidator.isValid(password);
-        expect(result).toBe(expectedResult)
+        const result = passwordValidator.validatePassword(password);
+        expect(result).toStrictEqual(expectedResult)
     })
 });
 
@@ -39,7 +39,7 @@ describe("The complex password validator for iteration two validation 3", () => 
         ['should not miss a underscore', 'Charbla', {result : false, message: "Wrong password"}],
         ['should provide a valid password', 'Chaefaefaefaefarach_', {result : true, message: "Password Valid"}],
     ])('%s', (_, password, expectedResult) =>{
-        const result = passwordValidator.isValid(password);
-        expect(result).toBe(expectedResult)
+        const result = passwordValidator.validatePassword(password);
+        expect(result).toStrictEqual(expectedResult)
     })
 });
