@@ -1,4 +1,4 @@
-import {PasswordValidator, PasswordValidatorTwo} from "./passwordValidation";
+import {PasswordValidator, SimplePasswordValidator} from "./passwordValidation";
 
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
@@ -16,9 +16,24 @@ describe("The password validator for iteration one", () => {
 });
 
 describe("The password validator for iteration two", () => {
-    const passwordValidator = new PasswordValidatorTwo();
+    const passwordValidator = new SimplePasswordValidator();
     it.each([
         ['should not have less than 6 characters', '5Char', false],
+        ['should not miss a capital letter', '5charblah', false],
+        ['should not miss a lower case letter', '5CHARBLAH', false],
+        ['should not miss a number', 'Charblah', false],
+        ['should provide a valid password', 'Charach1', true],
+    ])('%s', (_, password, expectedResult) =>{
+        const result = passwordValidator.isValid(password);
+        expect(result).toBe(expectedResult)
+    })
+});
+
+
+describe("The complex password validator for iteration two validation 3", () => {
+    const passwordValidator = new ComplexPasswordValidator();
+    it.each([
+        ['should not have less than 16 characters', '5Char', false],
         ['should not miss a capital letter', '5charblah', false],
         ['should not miss a lower case letter', '5CHARBLAH', false],
         ['should not miss a number', 'Charblah', false],
