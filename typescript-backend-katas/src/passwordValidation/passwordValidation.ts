@@ -2,9 +2,7 @@ abstract class IPasswordValidator {
     abstract rules: ((password: string) => boolean)[]
     protected containsANumber = (password: string) => /\d/.test(password)
 
-    // protected isPasswordLongEnough = (password: string) => password.length >= 8
-
-    protected isPasswordLongerThan = (password: string, length: number) => password.length >= length
+    abstract function isPasswordLongEnough (password: string) => Boolean
 
     protected containsAnUppercase = (password: string) => /[A-Z]/.test(password)
 
