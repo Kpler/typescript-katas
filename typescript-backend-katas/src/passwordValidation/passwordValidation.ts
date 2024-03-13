@@ -1,25 +1,16 @@
-const isPasswordValid = (password: string): boolean => isPasswordLongEnough(password)
-    && containsAnUppercase(password)
-    && containsALowercase(password)
-    && containsANumber(password)
-    && containsAnUnderscore(password)
-
-const containsANumber = (password: string) => /\d/.test(password)
-
-const isPasswordLongEnough = (password: string) => password.length >= 8
-
-const containsAnUppercase = (password: string) => /[A-Z]/.test(password)
-
-const containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
-
-const containsALowercase = (password: string) => /[a-z]/.test(password)
-
 abstract class IPasswordValidator {
-    public rules: ((password: string) => boolean)[]
+    abstract rules: ((password: string) => boolean)[]
+    protected containsANumber = (password: string) => /\d/.test(password)
 
-    constructor(rules: ((password: string) => boolean)[]) {
-        this.rules = rules;
-    }
+    // protected isPasswordLongEnough = (password: string) => password.length >= 8
+
+    protected isPasswordLongerThan = (password: string, length: number) => password.length >= length
+
+    protected containsAnUppercase = (password: string) => /[A-Z]/.test(password)
+
+    protected containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
+
+    protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
     isValid(password: string): boolean {
         return this.rules.every((rule) => rule(password))
@@ -27,23 +18,17 @@ abstract class IPasswordValidator {
 }
 
 export class PasswordValidator extends IPasswordValidator {
-    constructor() {
-        const rules = [
-            isPasswordLongEnough,
-            containsALowercase,
-            containsANumber,
-            containsAnUnderscore,
-            containsAnUppercase
-        ]
-        super(rules);
-    }
+    rules = [
+        this.isPasswordLongerThan,
+        this.containsALowercase,
+        this.containsANumber,
+        this.containsAnUnderscore,
+        this.containsAnUppercase
+    ]
 }
 
 export class PasswordValidatorTwo extends IPasswordValidator {
-    constructor() {
-        const rules = [
-            (password: string) => password.length >= 6,
-        ]
-        super(rules);
-    }
+    rules = [
+        
+    ]
 }
