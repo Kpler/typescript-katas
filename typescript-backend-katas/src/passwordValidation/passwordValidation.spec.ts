@@ -29,9 +29,13 @@ describe("The password validator for iteration two", () => {
     })
 });
 
-describe("The password validator for iteration two", () => {
+describe("The password validator three for iteration 2", () => {
     const passwordValidator = new PasswordValidatorThree();
-    it.each([])('%s', (_, password, expectedResult) =>{
+    it.each([
+        ['should be valid when all the rules match', 'Charac6_Charac6_', true],
+        ['should be invalid when less than 16 chars', 'Charac6_Charac6', false],
+        ['should be invalid when it does not contain a capital letter', 'charac6_charac6_', false],
+    ])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.isValid(password);
         expect(result).toBe(expectedResult)
     })
