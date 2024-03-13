@@ -35,6 +35,8 @@ describe("The password validator three for iteration 2", () => {
         ['should be valid when all the rules match', 'Charac6_Charac6_', true],
         ['should be invalid when less than 16 chars', 'Charac6_Charac6', false],
         ['should be invalid when it does not contain a capital letter', 'charac6_charac6_', false],
+        ['should be invalid when it does not contain a lower letter', 'CHARAC6_CHARAC6_', false],
+        ['should contain an underscore', 'Charac6Charac6aa', false],
     ])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.isValid(password);
         expect(result).toBe(expectedResult)
