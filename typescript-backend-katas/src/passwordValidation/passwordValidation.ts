@@ -1,12 +1,6 @@
-const isPasswordValid = (password: string): boolean => isPasswordLongEnough(password)
-    && containsAnUppercase(password)
-    && containsALowercase(password)
-    && containsANumber(password)
-    && containsAnUnderscore(password)
-
 const containsANumber = (password: string) => /\d/.test(password)
 
-const isPasswordLongEnough = (password: string) => password.length >= 8
+const isPasswordLongEnough = (minLength: number) => (password: string) => password.length >= minLength
 
 const containsAnUppercase = (password: string) => /[A-Z]/.test(password)
 
@@ -14,7 +8,7 @@ const containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
 
 const containsALowercase = (password: string) => /[a-z]/.test(password)
 
-abstract class IPasswordValidator {
+abstract class AbstractPasswordValidator {
     public rules: ((password: string) => boolean)[]
 
     constructor(rules: ((password: string) => boolean)[]) {
@@ -26,10 +20,10 @@ abstract class IPasswordValidator {
     }
 }
 
-export class PasswordValidator extends IPasswordValidator {
+export class PasswordValidator extends AbstractPasswordValidator {
     constructor() {
         const rules = [
-            isPasswordLongEnough,
+            isPasswordLongEnough(8),
             containsALowercase,
             containsANumber,
             containsAnUnderscore,
@@ -39,10 +33,10 @@ export class PasswordValidator extends IPasswordValidator {
     }
 }
 
-export class PasswordValidatorTwo extends IPasswordValidator {
+export class PasswordValidatorTwo extends AbstractPasswordValidator {
     constructor() {
         const rules = [
-            (password: string) => password.length >= 6,
+            isPasswordLongEnough(7),
         ]
         super(rules);
     }

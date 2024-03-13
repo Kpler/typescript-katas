@@ -19,7 +19,8 @@ describe("The password validator for iteration two", () => {
     const passwordValidator = new PasswordValidatorTwo();
     it.each([
         ['should not have less than 6 characters', '7char', false],
-        ['should have less than 7 characters', 'charach', true],
+        ['should be valid with more than 6 characters', 'Charach', true],
+        ['should contain a capital letter', 'charach', false],
     ])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.isValid(password);
         expect(result).toBe(expectedResult)
