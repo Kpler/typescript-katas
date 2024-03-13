@@ -1,8 +1,11 @@
 abstract class IPasswordValidator {
     abstract rules: ((password: string) => boolean)[]
+    abstract passwordMinLength: number
     protected containsANumber = (password: string) => /\d/.test(password)
 
-    abstract isPasswordLongEnough (password: string) : boolean
+    isPasswordLongEnough (password: string) : boolean  {
+        return password.length >= this.passwordMinLength;
+    }
 
     protected containsAnUppercase = (password: string) => /[A-Z]/.test(password)
 
@@ -16,9 +19,7 @@ abstract class IPasswordValidator {
 }
 
 export class PasswordValidator extends IPasswordValidator {
-    isPasswordLongEnough(password: string): boolean {
-        return password.length >= 8;
-    }
+    passwordMinLength = 8
 
     rules = [
         this.isPasswordLongEnough,
@@ -30,11 +31,12 @@ export class PasswordValidator extends IPasswordValidator {
 }
 
 export class PasswordValidatorTwo extends IPasswordValidator {
-    isPasswordLongEnough(password: string): boolean {
-        return password.length >= 6;
-    }
+    passwordMinLength = 6
 
     rules = [
-        this.isPasswordLongEnough
+        this.isPasswordLongEnough,
+        this.containsAnUppercase,
+        this.containsALowercase,
+        this.containsANumber,
     ]
 }
