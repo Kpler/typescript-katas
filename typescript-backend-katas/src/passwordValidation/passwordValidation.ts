@@ -11,8 +11,9 @@ abstract class IPasswordValidator {
 
     protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
-    isValid(password: string): boolean {
-        return this.rules.every((rule) => rule(password))
+    isValid(password: string): {result : boolean, message : string} {
+        const isValid = this.rules.every((rule) => rule(password))
+        return  {result: isValid, message: isValid ? "Password Valid": "Wrong Password"}
     }
 }
 
