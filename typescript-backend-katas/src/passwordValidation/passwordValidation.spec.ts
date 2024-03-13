@@ -5,7 +5,7 @@ describe("The password validator for iteration one", () => {
     it.each([
         ['should not have less than 8 characters', '7charas', false],
         ['should contain capital letter', '0characte_', false],
-        ['should be valid with complex password', '8Charats_', true],
+        ['should be valid with complex password', '8npCharats_', true],
         ['should contain a lower case letter', 'CHARACTER', false],
         ['should contain a number', 'CCCharats_', false],
         ['should contain an underscore', 'CCCharats5', false],
@@ -17,10 +17,9 @@ describe("The password validator for iteration one", () => {
 
 describe("The password validator for iteration two", () => {
     const passwordValidator = new PasswordValidatorTwo();
-    const validPassword = 'Charach6';
     it.each([
-        ['should not have less than 6 characters', '7char', false],
-        ['should be valid with more than 6 characters', validPassword, true],
+        ['should be valid when all the rules match', 'Charac6', true],
+        ['should not have less than 6 characters', '7charA', false],
         ['should contain a capital letter', 'charach', false],
         ['should contain a lower case letter', 'CHARACH', false],
         ['should contain a number', 'Charach', false],
