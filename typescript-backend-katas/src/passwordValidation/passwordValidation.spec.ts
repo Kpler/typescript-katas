@@ -43,3 +43,18 @@ describe("The complex password validator for iteration two validation 3", () => 
         expect(result).toBe(expectedResult)
     })
 });
+
+
+describe("The password validator for iteration three", () => {
+    const passwordValidator = new ComplexPasswordValidator();
+    it.each([
+        ['should not have less than 16 characters', '_Char', false],
+        ['should not miss a capital letter', '_charblah', false],
+        ['should not miss a lower case letter', '_CHARBLAH', false],
+        ['should not miss a underscore', 'Charbla', false],
+        ['should provide a valid password', 'Chaefaefaefaefarach_', true],
+    ])('%s', (_, password, expectedResult) =>{
+        const result = passwordValidator.isValid(password);
+        expect(result).toBe(expectedResult)
+    })
+});
