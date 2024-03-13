@@ -33,8 +33,7 @@ export class PasswordValidator extends AbstractPasswordValidator {
     }
 }
 
-export class PasswordValidatorTwo
-    extends AbstractPasswordValidator {
+export class BasicPasswordValidator extends AbstractPasswordValidator {
     constructor() {
         const rules = [
             isLongEnough(7),
@@ -57,3 +56,5 @@ export class AdvancedPasswordValidator extends AbstractPasswordValidator {
         super(rules);
     }
 }
+
+
