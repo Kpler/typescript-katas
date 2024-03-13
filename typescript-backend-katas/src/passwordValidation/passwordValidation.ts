@@ -1,6 +1,6 @@
 const containsANumber = (password: string) => /\d/.test(password)
 
-const isPasswordLongEnough = (minLength: number) => (password: string) => password.length >= minLength
+const isLongEnough = (minLength: number) => (password: string) => password.length >= minLength
 
 const containsAnUppercase = (password: string) => /[A-Z]/.test(password)
 
@@ -23,7 +23,7 @@ abstract class AbstractPasswordValidator {
 export class PasswordValidator extends AbstractPasswordValidator {
     constructor() {
         const rules = [
-            isPasswordLongEnough(8),
+            isLongEnough(8),
             containsALowercase,
             containsANumber,
             containsAnUnderscore,
@@ -36,7 +36,10 @@ export class PasswordValidator extends AbstractPasswordValidator {
 export class PasswordValidatorTwo extends AbstractPasswordValidator {
     constructor() {
         const rules = [
-            isPasswordLongEnough(7),
+            isLongEnough(7),
+            containsAnUppercase,
+            containsALowercase,
+            containsANumber,
         ]
         super(rules);
     }
