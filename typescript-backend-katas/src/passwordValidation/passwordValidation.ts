@@ -66,11 +66,16 @@ abstract class AbstractPasswordValidator {
             }
         )
 
-        result.isPasswordValid = (result.isLongEnough &&
-            result.containsCapitalLetter &&
-            result.containsLowerCase &&
-            result.containsANumber &&
-            result.containsAnUnderScore)
+        result.isPasswordValid = Object.entries(result).reduce((acc, current) => {
+            const [key, value] = current
+            return acc && value
+        }, true)
+
+        // result.isPasswordValid = (result.isLongEnough &&
+        //     result.containsCapitalLetter &&
+        //     result.containsLowerCase &&
+        //     result.containsANumber &&
+        //     result.containsAnUnderScore) && true
         return result
     }
 }
