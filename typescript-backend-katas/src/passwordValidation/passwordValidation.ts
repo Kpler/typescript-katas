@@ -3,7 +3,7 @@ export enum ValidationError {
 }
 
 abstract class IPasswordValidator {
-    abstract rules: ((password: string) => boolean)[]
+    abstract rules: [ValidationError, ((password: string) => boolean)][]
     
     protected containsANumber = (password: string) => /\d/.test(password)
 
@@ -16,21 +16,21 @@ abstract class IPasswordValidator {
     protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
     validatePassword(password: string): {result : boolean, message : string} {
-        const isValid = this.rules.every((rule) => rule(password))
+        const invalidRules = this.rules.map((rule) => rule(password)).filter(rules => rules !== null)
         return  {result: isValid, message: isValid ? "Password Valid": "Wrong password"}
     }
 }
 
 export class PasswordValidator extends IPasswordValidator {
     rules = [
-        this.isPasswordLongEnough(8),
-        this.containsALowercase,
+        [ValidationError.NotEnoughCharacters, this.isPasswordLongEnough(8)],
+        /* this.containsALowercase,
         this.containsANumber,
         this.containsAnUnderscore,
-        this.containsAnUppercase
+        this.containsAnUppercase */
     ]
 }
-
+/* 
 export class SimplePasswordValidator extends IPasswordValidator {
     rules = [
         this.isPasswordLongEnough(6),
@@ -48,3 +48,4 @@ export class ComplexPasswordValidator extends IPasswordValidator {
         this.containsAnUnderscore,
     ]
 }
+ */
