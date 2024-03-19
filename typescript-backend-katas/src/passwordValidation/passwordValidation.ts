@@ -1,3 +1,7 @@
+export enum ValidationError {
+    NotEnoughCharacters
+}
+
 abstract class IPasswordValidator {
     abstract rules: ((password: string) => boolean)[]
     
