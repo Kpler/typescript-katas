@@ -3,11 +3,14 @@ export enum ValidationError {
 }
 
 abstract class IPasswordValidator {
-    abstract rules: [ValidationError, ((password: string) => boolean)][]
-    
+    abstract rules: Array<{predicate: (password: string) => boolean, error: ValidationError}>
+
     protected containsANumber = (password: string) => /\d/.test(password)
 
-    protected isPasswordLongEnough = (passwordLength: number) => (password: string) => password.length >= passwordLength;
+    protected isPasswordLongEnough = (passwordLength: number) => ({
+        predicate: (password: string) => password.length >= passwordLength,
+        error: ValidationError.NotEnoughCharacters
+    })
 
     protected containsAnUppercase = (password: string) => /[A-Z]/.test(password)
 
@@ -22,15 +25,15 @@ abstract class IPasswordValidator {
 }
 
 export class PasswordValidator extends IPasswordValidator {
-    rules = [
-        [ValidationError.NotEnoughCharacters, this.isPasswordLongEnough(8)],
+    rules = new Map([
+        [this.isPasswordLongEnough(8), ValidationError.NotEnoughCharacters],
         /* this.containsALowercase,
         this.containsANumber,
         this.containsAnUnderscore,
         this.containsAnUppercase */
-    ]
+    ]);
 }
-/* 
+/*
 export class SimplePasswordValidator extends IPasswordValidator {
     rules = [
         this.isPasswordLongEnough(6),
