@@ -25,8 +25,23 @@ abstract class AbstractPasswordValidator {
         this.rules = rules;
     }
 
-    isValid(password: string): boolean {
-        return this.rules.every((rule) => rule(password))
+    isValid(password: string): ValidationResult {
+        const result: ValidationResult = {
+            isPasswordValid: true
+        }
+
+        this.rules.forEach(
+            (rule) => {
+                const ruleIsValid = rule(password)
+                if (!ruleIsValid) {
+                    result.isPasswordValid = false
+                }
+            }
+        )
+
+        return {
+            isPasswordValid: this.rules.every((rule) => rule(password))
+        }
     }
 }
 
