@@ -7,15 +7,15 @@ import {
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
     it.each([
-        ['should not have less than 8 characters', '7charas', <ValidationResult>{isPasswordValid: false, isLongEnough: false}],
+        ['should not have less than 8 characters', '7_Aaras', <ValidationResult>{isPasswordValid: false, isLongEnough: false}],
         ['should contain capital letter', '0characte_', <ValidationResult>{isPasswordValid: false, containsCapitalLetter: false}],
         ['should be valid with complex password', '8npCharats_', <ValidationResult>{isPasswordValid: true}],
         ['should contain a lower case letter', 'CHARACTER', <ValidationResult>{isPasswordValid: false, containsLowerCase: false}],
         ['should contain a number', 'CCCharats_', <ValidationResult>{isPasswordValid: false, containsANumber: false}],
         ['should contain an underscore', 'CCCharats5', <ValidationResult>{isPasswordValid: false, containsAnUnderScore: false}],
-    ])('%s', (_, password, expectedResult) =>{
+])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.isValid(password);
-        expect(result).toBe(expectedResult)
+        expect(result).toStrictEqual(expectedResult)
         // const result = passwordValidator.isValid(password);
         // expect(result.every( (exception) => {
         //     expectedResult.include()

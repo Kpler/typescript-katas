@@ -18,7 +18,7 @@ const containsAnUppercase = (password: string) : ValidationResult =>  {
     const result = /[A-Z]/.test(password)
     return <ValidationResult>{
         isPasswordValid: result,
-        containsUpperCase: result,
+        containsCapitalLetter: result,
     }}
 
 const containsAnUnderscore = (password: string): ValidationResult  => {
