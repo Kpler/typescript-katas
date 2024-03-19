@@ -19,7 +19,7 @@ export class InValidPasswordResponse implements PasswordResponse {
 
 }
 abstract class IPasswordValidator {
-    abstract rules: ((password: string) => PasswordResponse)[]
+    abstract rules: ((password: string) => PasswordResponse[])
     public invalidPw = new InValidPasswordResponse([])
     
     protected containsANumber = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
@@ -58,7 +58,7 @@ abstract class IPasswordValidator {
             return this.invalidPw
         }
     protected validatePassword(password: string): ValidPasswordResponse | InValidPasswordResponse  {
-        const invalidResponses: string[] = this.rules.filter(rule => {
+        const invalidResponses: PasswordResponse[] = this.rules.(rule => {
             const appliedRule = rule(password);
             if (appliedRule instanceof InValidPasswordResponse) {
                 return appliedRule.messages
