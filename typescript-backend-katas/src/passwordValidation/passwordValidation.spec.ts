@@ -1,4 +1,5 @@
-import {ComplexPasswordValidator, PasswordValidator, SimplePasswordValidator, ValidationError} from "./passwordValidation";
+import { PasswordValidator} from "./passwordValidation";
+import { ValidationError } from "./passwordValidation";
 
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();

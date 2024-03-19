@@ -18,20 +18,20 @@ abstract class IPasswordValidator {
 
     protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
-    validatePassword(password: string): {result : boolean, message : string} {
-        const invalidRules = this.rules.map((rule) => rule(password)).filter(rules => rules !== null)
-        return  {result: isValid, message: isValid ? "Password Valid": "Wrong password"}
+    validatePassword(password: string): ValidationError[] {
+        return this.rules.filter((rule) => rule.predicate(password)).map(rule => rule.error)
+        // return  {result: isValid, message: isValid ? "Password Valid": "Wrong password"}
     }
 }
 
 export class PasswordValidator extends IPasswordValidator {
-    rules = new Map([
-        [this.isPasswordLongEnough(8), ValidationError.NotEnoughCharacters],
+    rules = [
+        this.isPasswordLongEnough(8)
         /* this.containsALowercase,
         this.containsANumber,
         this.containsAnUnderscore,
         this.containsAnUppercase */
-    ]);
+    ];
 }
 /*
 export class SimplePasswordValidator extends IPasswordValidator {
