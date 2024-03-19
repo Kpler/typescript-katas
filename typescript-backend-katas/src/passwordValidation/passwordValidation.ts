@@ -1,24 +1,35 @@
-interface PasswordResponse {}
+interface PasswordResponse {
+    result: boolean
+}
 
 export class ValidPasswordResponse implements PasswordResponse {
-    readonly result: boolean = true
+    readonly result: boolean = true;
 }
 
 export class InValidPasswordResponse implements PasswordResponse {
+    readonly result: boolean = false;
     readonly messages: Array<string>
     constructor(messages: Array<string>) {
         this.messages = messages
     }
 
-    protected addMessage(msg: string) {
+    public addMessage(msg: string) {
         this.messages.push(msg);
     }
 
 }
 abstract class IPasswordValidator {
     abstract rules: ((password: string) => PasswordResponse)[]
+    public invalidPw = new InValidPasswordResponse([])
     
-    protected containsANumber = (password: string) => /\d/.test(password)
+    protected containsANumber = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+        const containsNumber = /\d/.test(password)
+        if (containsNumber) {
+            return new ValidPasswordResponse()    
+        }
+        this.invalidPw.addMessage("Does not contain a Number")
+        return this.invalidPw
+    }
 
     protected isPasswordLongEnough = (passwordLength: number) => (password: string) => password.length >= passwordLength;
 
@@ -29,7 +40,15 @@ abstract class IPasswordValidator {
     protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
     validatePassword(password: string): ValidPasswordResponse | InValidPasswordResponse  {
-        const isValid = this.rules.every((rule) => rule(password))
+        const isValid = this.rules.map(rule => {
+            const appliedRule = rule(password);
+            if (appliedRule.result === false) {
+                appliedRule.messages
+            }
+        })
+        /*const isValid = this.rules.every((rule) => {
+            const isValid= rule(password).
+        })*/
 
         return isValid ? new ValidPasswordResponse() : new InValidPasswordResponse(["Wrong password"]);
     }
