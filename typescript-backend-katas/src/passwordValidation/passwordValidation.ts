@@ -12,7 +12,7 @@ export class InValidPasswordResponse implements PasswordResponse {
 
 }
 abstract class IPasswordValidator {
-    abstract rules: ((password: string) => boolean)[]
+    abstract rules: ((password: string) => PasswordResponse)[]
     
     protected containsANumber = (password: string) => /\d/.test(password)
 
