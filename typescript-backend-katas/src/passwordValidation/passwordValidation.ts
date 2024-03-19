@@ -1,5 +1,9 @@
 export enum ValidationError {
-    NotEnoughCharacters
+    NotEnoughCharacters,
+    NoUnderscore,
+    NoNumber,
+    NoLowerCaseLetter,
+    NoCapitalLetter
 }
 
 abstract class IPasswordValidator {
