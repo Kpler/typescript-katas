@@ -1,14 +1,18 @@
-import {PasswordValidator, AdvancedPasswordValidator, BasicPasswordValidator} from "./passwordValidation";
+import {
+    PasswordValidator,
+    AdvancedPasswordValidator,
+    ValidationResult
+} from "./passwordValidation";
 
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
     it.each([
-        ['should not have less than 8 characters', '7charas', {isPasswordValid: false, isLongEnough: false}],
-        ['should contain capital letter', '0characte_', {isPasswordValid: false, containsCapitalLetter: false}],
-        ['should be valid with complex password', '8npCharats_', {isPasswordValid: true}],
-        ['should contain a lower case letter', 'CHARACTER', {isPasswordValid: false, containsLowerCase: false}],
-        ['should contain a number', 'CCCharats_', {isPasswordValid: false, containsANumber: false}],
-        ['should contain an underscore', 'CCCharats5', {isPasswordValid: false, containsAnUnderScore: false}],
+        ['should not have less than 8 characters', '7charas', <ValidationResult>{isPasswordValid: false, isLongEnough: false}],
+        ['should contain capital letter', '0characte_', <ValidationResult>{isPasswordValid: false, containsCapitalLetter: false}],
+        ['should be valid with complex password', '8npCharats_', <ValidationResult>{isPasswordValid: true}],
+        ['should contain a lower case letter', 'CHARACTER', <ValidationResult>{isPasswordValid: false, containsLowerCase: false}],
+        ['should contain a number', 'CCCharats_', <ValidationResult>{isPasswordValid: false, containsANumber: false}],
+        ['should contain an underscore', 'CCCharats5', <ValidationResult>{isPasswordValid: false, containsAnUnderScore: false}],
     ])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.isValid(password);
         expect(result).toBe(expectedResult)
