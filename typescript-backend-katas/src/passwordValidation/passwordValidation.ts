@@ -1,3 +1,16 @@
+interface PasswordResponse {}
+
+class ValidPasswordResponse implements PasswordResponse {
+    readonly result: boolean = true
+}
+
+class InValidPasswordResponse implements PasswordResponse {
+    readonly messages: Array<string>
+    constructor(messages: Array<string>) {
+        this.messages = messages
+    }
+
+}
 abstract class IPasswordValidator {
     abstract rules: ((password: string) => boolean)[]
     
@@ -11,7 +24,7 @@ abstract class IPasswordValidator {
 
     protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
-    validatePassword(password: string): {result : boolean, message : string} {
+    validatePassword(password: string): PasswordResponse {
         const isValid = this.rules.every((rule) => rule(password))
         return  {result: isValid, message: isValid ? "Password Valid": "Wrong password"}
     }
