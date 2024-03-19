@@ -7,17 +7,19 @@ export enum ValidationError {
 }
 
 class ValidationResult{
-    constructor(private readonly errors: ValidationError[]) {}
+    constructor(private readonly errors: ValidationError[], private readonly numberOfAcceptedErrors: number) {}
     getErrors(){
         return this.errors
     }
 
     isPasswordValid(){
-        return this.errors.length === 0
+        return this.errors.length <= this.numberOfAcceptedErrors
     }
 }
 
 abstract class IPasswordValidator {
+    protected numberOfAcceptedErrors = 0;
+    
     abstract rules: Array<{predicate: (password: string) => boolean, error: ValidationError}>
 
     protected containsANumber = {predicate: (password: string) => /\d/.test(password), error: ValidationError.NoNumber}
@@ -34,7 +36,7 @@ abstract class IPasswordValidator {
     protected containsALowercase = {predicate: (password: string) => /[a-z]/.test(password), error: ValidationError.NoLowerCaseLetter}
 
     validatePassword(password: string): ValidationResult {
-        return new ValidationResult(this.rules.filter((rule) => !rule.predicate(password)).map(rule => rule.error))
+        return new ValidationResult(this.rules.filter((rule) => !rule.predicate(password)).map(rule => rule.error), this.numberOfAcceptedErrors)
     }
 }
 
@@ -64,5 +66,9 @@ export class ComplexPasswordValidator extends IPasswordValidator {
         this.containsALowercase,
         this.containsAnUnderscore,
     ]
+}
+
+export class PermisivePasswordValidator extends PasswordValidator {
+    numberOfAcceptedErrors = 1;
 }
 
