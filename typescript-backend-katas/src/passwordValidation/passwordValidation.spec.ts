@@ -21,33 +21,89 @@ describe.each(
                     title: 'should be valid with complex password',
                     passwordInput: '8Charats_',
                     errors: [],
-                },
+                },                
                 {
                     title: 'should contain a lower case letter',
-
-                }
-                [, 'CH4RACTER_', [ValidationError.NoLowerCaseLetter]],
-                ['should contain a number', 'CCCharats_', [ValidationError.NoNumber]],
-                ['should contain an underscore', 'CCCharats5', [ValidationError.NoUnderscore]],
-                [
-                    'should contain all the errors when they all fail',
-                    '?',
-                    [
+                    passwordInput: 'CH4RACTER_',
+                    errors: [ValidationError.NoLowerCaseLetter],
+                },
+                {
+                    title: 'should contain a number',
+                    passwordInput: 'CCCharats_',
+                    errors: [ValidationError.NoNumber],
+                },
+                {
+                    title: 'should contain an underscore',
+                    passwordInput: 'CCCharats5',
+                    errors: [ValidationError.NoUnderscore],
+                },
+                {
+                    title: 'should contain all the errors when they all fail',
+                    passwordInput: '?',
+                    errors: [
                         ValidationError.NotEnoughCharacters,
                         ValidationError.NoLowerCaseLetter,
                         ValidationError.NoNumber,
                         ValidationError.NoUnderscore,
                         ValidationError.NoCapitalLetter,
-                    ]
-                ],
+                    ],
+                },
+            ]
+        },        
+        {
+            title: "The password validator for iteration four",
+            validatorFactory: () => new PasswordValidator(),
+            testCases: [
+                {
+                    title: 'should not have less than 8 characters',
+                    passwordInput: '7C_aras',
+                    errors: [ValidationError.NotEnoughCharacters]
+                },
+                {
+                    title: 'should contain capital letter',
+                    passwordInput: '0characte_',
+                    errors: [ValidationError.NoCapitalLetter]
+                },
+                {
+                    title: 'should be valid with complex password',
+                    passwordInput: '8Charats_',
+                    errors: [],
+                },                
+                {
+                    title: 'should contain a lower case letter',
+                    passwordInput: 'CH4RACTER_',
+                    errors: [ValidationError.NoLowerCaseLetter],
+                },
+                {
+                    title: 'should contain a number',
+                    passwordInput: 'CCCharats_',
+                    errors: [ValidationError.NoNumber],
+                },
+                {
+                    title: 'should contain an underscore',
+                    passwordInput: 'CCCharats5',
+                    errors: [ValidationError.NoUnderscore],
+                },
+                {
+                    title: 'should contain all the errors when they all fail',
+                    passwordInput: '?',
+                    errors: [
+                        ValidationError.NotEnoughCharacters,
+                        ValidationError.NoLowerCaseLetter,
+                        ValidationError.NoNumber,
+                        ValidationError.NoUnderscore,
+                        ValidationError.NoCapitalLetter,
+                    ],
+                },
             ]
         },
+
     ]
 )("$title", ({title, validatorFactory, testCases}) => {
-    it.each(testCases)('%s', (_, password, expectedErrors) => {
-        const result = validatorFactory().validatePassword(password);
-        expect(result.getErrors()).toStrictEqual(expectedErrors);
-        expect(result.isPasswordValid()).toStrictEqual(expectedErrors.length === 0);
+    it.each(testCases)('$title', ({title, passwordInput, errors}) => {
+        const result = validatorFactory().validatePassword(passwordInput);
+        expect(result.getErrors()).toStrictEqual(errors);
+        expect(result.isPasswordValid()).toStrictEqual(errors.length === 0);
     })
 })
 describe("The password validator for iteration one", () => {
@@ -107,3 +163,5 @@ describe("The complex password validator for iteration two validation 3", () => 
         expect(result.isPasswordValid()).toStrictEqual(expectedErrors.length === 0);
      })
 });
+
+
