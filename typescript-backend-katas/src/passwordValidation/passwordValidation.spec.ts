@@ -1,5 +1,5 @@
-import { PasswordValidator} from "./passwordValidation";
-import { ValidationError } from "./passwordValidation";
+import {PasswordValidator} from "./passwordValidation";
+import {ValidationError} from "./passwordValidation";
 
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
@@ -10,7 +10,18 @@ describe("The password validator for iteration one", () => {
         ['should contain a lower case letter', 'CH4RACTER_', [ValidationError.NoLowerCaseLetter]],
         ['should contain a number', 'CCCharats_', [ValidationError.NoNumber]],
         ['should contain an underscore', 'CCCharats5', [ValidationError.NoUnderscore]],
-    ])('%s', (_, password, expectedResult) =>{
+        [
+            'should contain all the errors when they all fail',
+            '?',
+            [
+                ValidationError.NotEnoughCharacters,
+                ValidationError.NoLowerCaseLetter,
+                ValidationError.NoNumber,
+                ValidationError.NoUnderscore,
+                ValidationError.NoCapitalLetter,
+            ]
+        ],
+    ])('%s', (_, password, expectedResult) => {
         const result = passwordValidator.validatePassword(password);
         expect(result).toStrictEqual(expectedResult)
     })

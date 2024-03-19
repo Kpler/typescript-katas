@@ -9,18 +9,18 @@ export enum ValidationError {
 abstract class IPasswordValidator {
     abstract rules: Array<{predicate: (password: string) => boolean, error: ValidationError}>
 
-    protected containsANumber = (password: string) => /\d/.test(password)
+    protected containsANumber = {predicate: (password: string) => /\d/.test(password), error: ValidationError.NoNumber}
 
     protected isPasswordLongEnough = (passwordLength: number) => ({
         predicate: (password: string) => password.length >= passwordLength,
         error: ValidationError.NotEnoughCharacters
     })
 
-    protected containsAnUppercase = (password: string) => /[A-Z]/.test(password)
+    protected containsAnUppercase = {predicate: (password: string) => /[A-Z]/.test(password), error: ValidationError.NoCapitalLetter}
 
-    protected containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
+    protected containsAnUnderscore = {predicate: (password: string) => password.indexOf('_') >= 0, error: ValidationError.NoUnderscore}
 
-    protected containsALowercase = (password: string) => /[a-z]/.test(password)
+    protected containsALowercase = {predicate: (password: string) => /[a-z]/.test(password), error: ValidationError.NoLowerCaseLetter}
 
     validatePassword(password: string): ValidationError[] {
         return this.rules.filter((rule) => !rule.predicate(password)).map(rule => rule.error)
@@ -29,11 +29,11 @@ abstract class IPasswordValidator {
 
 export class PasswordValidator extends IPasswordValidator {
     rules = [
-        this.isPasswordLongEnough(8)
-        /* this.containsALowercase,
+        this.isPasswordLongEnough(8),
+        this.containsALowercase,
         this.containsANumber,
         this.containsAnUnderscore,
-        this.containsAnUppercase */
+        this.containsAnUppercase
     ];
 }
 /*
