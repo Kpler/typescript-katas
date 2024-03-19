@@ -18,22 +18,33 @@ export class InValidPasswordResponse implements PasswordResponse {
     }
 
 }
+
+export class RuleValidResponse {
+    readonly isValid = true;
+    readonly msg = "Is Valid"
+}
+
+export class RuleInValidResponse {
+    readonly isValid = false;
+    msg: string = ""
+}
+
 abstract class IPasswordValidator {
-    abstract rules: ((password: string) => PasswordResponse[])
-    public invalidPw = new InValidPasswordResponse([])
+    abstract rules: ((password: string) => ValidPasswordResponse | RuleInValidResponse)[]
+    public invalidPw = new RuleInValidResponse([])
     
-    protected containsANumber = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+    protected containsANumber = (password: string): ValidPasswordResponse | RuleInValidResponse => {
         const containsNumber = /\d/.test(password)
         if (containsNumber) {
             return new ValidPasswordResponse()    
         }
-        this.invalidPw.addMessage("Does not contain a Number")
+        this.invalidPw.msg("Does not contain a Number")
         return this.invalidPw
     }
 
     protected isPasswordLongEnough = (passwordLength: number) => (password: string) => password.length >= passwordLength;
 
-    protected containsAnUppercase = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+    protected containsAnUppercase = (password: string): ValidPasswordResponse | RuleInValidResponse => {
         const containsNumber = /[A-Z]/.test(password)
         if (containsNumber) {
             return new ValidPasswordResponse()
@@ -41,7 +52,7 @@ abstract class IPasswordValidator {
         this.invalidPw.addMessage("Does not contain an upper case")
         return this.invalidPw
     }
-    protected containsAnUnderscore = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+    protected containsAnUnderscore = (password: string): ValidPasswordResponse | RuleInValidResponse => {
         const containsNumber = password.indexOf('_') >= 0
         if (containsNumber) {
             return new ValidPasswordResponse()
@@ -49,7 +60,7 @@ abstract class IPasswordValidator {
         this.invalidPw.addMessage("Does not contain an under case")
         return this.invalidPw
     }
-    protected containsALowercase = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+    protected containsALowercase = (password: string): ValidPasswordResponse | RuleInValidResponse => {
             const containsNumber = /[a-z]/.test(password)
             if (containsNumber) {
                 return new ValidPasswordResponse()
@@ -57,11 +68,12 @@ abstract class IPasswordValidator {
             this.invalidPw.addMessage("Does not contain an under case")
             return this.invalidPw
         }
-    protected validatePassword(password: string): ValidPasswordResponse | InValidPasswordResponse  {
-        const invalidResponses: PasswordResponse[] = this.rules.(rule => {
+    protected validatePassword(password: string): ValidPasswordResponse | RuleInValidResponse  {
+        const invalidResponses: string[] = []
+        this.rules.forEach(rule => {
             const appliedRule = rule(password);
             if (appliedRule instanceof InValidPasswordResponse) {
-                return appliedRule.messages
+                invalidResponses.push(appliedRule.messages[0]) // only one message per rule
             }
         })
         return !invalidResponses.length ? new ValidPasswordResponse() : new InValidPasswordResponse(invalidResponses);
