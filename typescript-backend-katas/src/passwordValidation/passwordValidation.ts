@@ -8,6 +8,12 @@ const containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
 
 const containsALowercase = (password: string) => /[a-z]/.test(password)
 
+class ValidationResult {
+    public isPasswordValid: boolean
+    constructor() {
+    }
+}
+
 abstract class AbstractPasswordValidator {
     public rules: ((password: string) => boolean)[]
 
