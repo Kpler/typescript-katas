@@ -1,12 +1,41 @@
-const containsANumber = (password: string) => /\d/.test(password)
+const containsANumber = (password: string): ValidationResult => {
+    const result = /\d/.test(password)
+    return <ValidationResult>{
+        isPasswordValid: result,
+        containsANumber: result,
+    }
+}
 
-const isLongEnough = (minLength: number) => (password: string) => password.length >= minLength
+const isLongEnough = (minLength: number) => (password: string): ValidationResult  => {
+    const result = password.length >= minLength
+    return <ValidationResult>{
+        isPasswordValid: result,
+        isLongEnough: result,
+    }
+}
 
-const containsAnUppercase = (password: string) => /[A-Z]/.test(password)
+const containsAnUppercase = (password: string) : ValidationResult =>  {
+    const result = /[A-Z]/.test(password)
+    return <ValidationResult>{
+        isPasswordValid: result,
+        containsUpperCase: result,
+    }}
 
-const containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
+const containsAnUnderscore = (password: string): ValidationResult  => {
+    const result = password.indexOf('_') >= 0
+    return <ValidationResult>{
+        isPasswordValid: result,
+        containsAnUnderScore: result,
+    }
+}
 
-const containsALowercase = (password: string) => /[a-z]/.test(password)
+const containsALowercase = (password: string): ValidationResult  => {
+    const result = /[a-z]/.test(password)
+    return <ValidationResult>{
+        isPasswordValid: result,
+        containsLowerCase: result,
+    }
+}
 
 export interface ValidationResult {
     isPasswordValid: boolean;
