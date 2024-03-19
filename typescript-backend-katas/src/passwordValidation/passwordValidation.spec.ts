@@ -1,6 +1,55 @@
 import {PasswordValidator, SimplePasswordValidator, ComplexPasswordValidator} from "./passwordValidation";
 import {ValidationError} from "./passwordValidation";
 
+describe.each(
+    [
+        {
+            title: "The password validator for iteration one",
+            validatorFactory: () => new PasswordValidator(),
+            testCases: [
+                {
+                    title: 'should not have less than 8 characters',
+                    passwordInput: '7C_aras',
+                    errors: [ValidationError.NotEnoughCharacters]
+                },
+                {
+                    title: 'should contain capital letter',
+                    passwordInput: '0characte_',
+                    errors: [ValidationError.NoCapitalLetter]
+                },
+                {
+                    title: 'should be valid with complex password',
+                    passwordInput: '8Charats_',
+                    errors: [],
+                },
+                {
+                    title: 'should contain a lower case letter',
+
+                }
+                [, 'CH4RACTER_', [ValidationError.NoLowerCaseLetter]],
+                ['should contain a number', 'CCCharats_', [ValidationError.NoNumber]],
+                ['should contain an underscore', 'CCCharats5', [ValidationError.NoUnderscore]],
+                [
+                    'should contain all the errors when they all fail',
+                    '?',
+                    [
+                        ValidationError.NotEnoughCharacters,
+                        ValidationError.NoLowerCaseLetter,
+                        ValidationError.NoNumber,
+                        ValidationError.NoUnderscore,
+                        ValidationError.NoCapitalLetter,
+                    ]
+                ],
+            ]
+        },
+    ]
+)("$title", ({title, validatorFactory, testCases}) => {
+    it.each(testCases)('%s', (_, password, expectedErrors) => {
+        const result = validatorFactory().validatePassword(password);
+        expect(result.getErrors()).toStrictEqual(expectedErrors);
+        expect(result.isPasswordValid()).toStrictEqual(expectedErrors.length === 0);
+    })
+})
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
     it.each([
