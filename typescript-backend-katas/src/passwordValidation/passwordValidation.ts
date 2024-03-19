@@ -10,6 +10,10 @@ export class InValidPasswordResponse implements PasswordResponse {
         this.messages = messages
     }
 
+    protected addMessage(msg: string) {
+        this.messages.push(msg);
+    }
+
 }
 abstract class IPasswordValidator {
     abstract rules: ((password: string) => PasswordResponse)[]
@@ -27,7 +31,7 @@ abstract class IPasswordValidator {
     validatePassword(password: string): ValidPasswordResponse | InValidPasswordResponse  {
         const isValid = this.rules.every((rule) => rule(password))
 
-        return isValid ? new ValidPasswordResponse() : new InValidPasswordResponse(["Wrong Password"]);
+        return isValid ? new ValidPasswordResponse() : new InValidPasswordResponse(["Wrong password"]);
     }
 }
 

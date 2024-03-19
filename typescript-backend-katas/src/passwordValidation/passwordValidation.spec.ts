@@ -9,7 +9,7 @@ import {
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
     it.each([
-    ['should not have less than 8 characters', '7charas', new InValidPasswordResponse(["Wrong password"]),
+    ['should not have less than 8 characters', '7charas', new InValidPasswordResponse(["Wrong password"])],
         ['should contain capital letter', '0characte_', new InValidPasswordResponse(["Wrong password"])],
         ['should be valid with complex password', '8Charats_', new ValidPasswordResponse()],
         ['should contain a lower case letter', 'CHARACTER', new InValidPasswordResponse(["Wrong password"])],
