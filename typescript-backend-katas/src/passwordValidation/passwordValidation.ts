@@ -26,6 +26,8 @@ abstract class IPasswordValidator {
 
     validatePassword(password: string): PasswordResponse {
         const isValid = this.rules.every((rule) => rule(password))
+
+        const response = isValid ? new ValidPasswordResponse() : new InValidPasswordResponse([]);
         return  {result: isValid, message: isValid ? "Password Valid": "Wrong password"}
     }
 }
