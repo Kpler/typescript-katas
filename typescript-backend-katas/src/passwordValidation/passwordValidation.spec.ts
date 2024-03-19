@@ -3,12 +3,12 @@ import {PasswordValidator, AdvancedPasswordValidator, BasicPasswordValidator} fr
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
     it.each([
-        ['should not have less than 8 characters', '7charas', false],
-        ['should contain capital letter', '0characte_', false],
-        ['should be valid with complex password', '8npCharats_', true],
-        ['should contain a lower case letter', 'CHARACTER', false],
-        ['should contain a number', 'CCCharats_', false],
-        ['should contain an underscore', 'CCCharats5', false],
+        ['should not have less than 8 characters', '7charas', {isPasswordValid: false, isLongEnough: false}],
+        ['should contain capital letter', '0characte_', {isPasswordValid: false, containsCapitalLetter: false}],
+        ['should be valid with complex password', '8npCharats_', {isPasswordValid: true}],
+        ['should contain a lower case letter', 'CHARACTER', {isPasswordValid: false, containsLowerCase: false}],
+        ['should contain a number', 'CCCharats_', {isPasswordValid: false, containsANumber: false}],
+        ['should contain an underscore', 'CCCharats5', {isPasswordValid: false, containsAnUnderScore: false}],
     ])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.isValid(password);
         expect(result).toBe(expectedResult)
