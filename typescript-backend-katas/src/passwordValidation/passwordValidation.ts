@@ -1,7 +1,6 @@
 const containsANumber = (password: string): ValidationResult => {
     const result = /\d/.test(password)
     return <ValidationResult>{
-        isPasswordValid: result,
         containsANumber: result,
     }
 }
@@ -9,7 +8,6 @@ const containsANumber = (password: string): ValidationResult => {
 const isLongEnough = (minLength: number) => (password: string): ValidationResult  => {
     const result = password.length >= minLength
     return <ValidationResult>{
-        isPasswordValid: result,
         isLongEnough: result,
     }
 }
@@ -17,14 +15,12 @@ const isLongEnough = (minLength: number) => (password: string): ValidationResult
 const containsAnUppercase = (password: string) : ValidationResult =>  {
     const result = /[A-Z]/.test(password)
     return <ValidationResult>{
-        isPasswordValid: result,
         containsCapitalLetter: result,
     }}
 
 const containsAnUnderscore = (password: string): ValidationResult  => {
     const result = password.indexOf('_') >= 0
     return <ValidationResult>{
-        isPasswordValid: result,
         containsAnUnderScore: result,
     }
 }
@@ -32,7 +28,6 @@ const containsAnUnderscore = (password: string): ValidationResult  => {
 const containsALowercase = (password: string): ValidationResult  => {
     const result = /[a-z]/.test(password)
     return <ValidationResult>{
-        isPasswordValid: result,
         containsLowerCase: result,
     }
 }
@@ -71,6 +66,11 @@ abstract class AbstractPasswordValidator {
             }
         )
 
+        result.isPasswordValid = (result.isLongEnough &&
+            result.containsCapitalLetter &&
+            result.containsLowerCase &&
+            result.containsANumber &&
+            result.containsAnUnderScore)
         return result
     }
 }

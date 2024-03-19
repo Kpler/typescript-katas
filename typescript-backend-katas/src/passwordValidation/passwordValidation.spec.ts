@@ -10,16 +10,12 @@ describe("The password validator for iteration one", () => {
         ['should not have less than 8 characters', '7_Aaras', <ValidationResult>{isPasswordValid: false, isLongEnough: false}],
         ['should contain capital letter', '0characte_', <ValidationResult>{isPasswordValid: false, containsCapitalLetter: false}],
         ['should be valid with complex password', '8npCharats_', <ValidationResult>{isPasswordValid: true}],
-        ['should contain a lower case letter', 'CHARACTER', <ValidationResult>{isPasswordValid: false, containsLowerCase: false}],
+        ['should contain a lower case letter', 'CHARACTER2_', <ValidationResult>{isPasswordValid: false, containsLowerCase: false}],
         ['should contain a number', 'CCCharats_', <ValidationResult>{isPasswordValid: false, containsANumber: false}],
         ['should contain an underscore', 'CCCharats5', <ValidationResult>{isPasswordValid: false, containsAnUnderScore: false}],
 ])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.isValid(password);
         expect(result).toStrictEqual(expectedResult)
-        // const result = passwordValidator.isValid(password);
-        // expect(result.every( (exception) => {
-        //     expectedResult.include()
-        // }).toBe(expectedResult)
     })
 });
 
