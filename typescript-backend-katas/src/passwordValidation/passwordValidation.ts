@@ -55,21 +55,18 @@ abstract class AbstractPasswordValidator {
     }
 
     isValid(password: string): ValidationResult {
-        const result: ValidationResult = {
-            isPasswordValid: true,
-            // isLongEnough?: boolean;
-            // containsCapitalLetter?: boolean;
-            // containsLowerCase?: boolean;
-            // containsANumber?: boolean;
-            // containsAnUnderScore?: boolean;
+        let result: ValidationResult = {
+            isPasswordValid: true
         }
 
         this.rules.forEach(
             (rule) => {
                 const ruleIsValid = rule(password)
-                if (!ruleIsValid) {
-                    result.isPasswordValid = false
-
+                if (!ruleIsValid.isPasswordValid) {
+                    result = {
+                        ...result,
+                        ...ruleIsValid
+                    }
                 }
             }
         )
