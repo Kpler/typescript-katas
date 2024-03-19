@@ -48,15 +48,20 @@ export interface ValidationResult {
 
 
 abstract class AbstractPasswordValidator {
-    public rules: ((password: string) => boolean)[]
+    public rules: ((password: string) =>ValidationResult)[]
 
-    constructor(rules: ((password: string) => boolean)[]) {
+    constructor(rules: ((password: string) => ValidationResult)[]) {
         this.rules = rules;
     }
 
     isValid(password: string): ValidationResult {
         const result: ValidationResult = {
-            isPasswordValid: true
+            isPasswordValid: true,
+            // isLongEnough?: boolean;
+            // containsCapitalLetter?: boolean;
+            // containsLowerCase?: boolean;
+            // containsANumber?: boolean;
+            // containsAnUnderScore?: boolean;
         }
 
         this.rules.forEach(
@@ -64,13 +69,12 @@ abstract class AbstractPasswordValidator {
                 const ruleIsValid = rule(password)
                 if (!ruleIsValid) {
                     result.isPasswordValid = false
+
                 }
             }
         )
 
-        return {
-            isPasswordValid: this.rules.every((rule) => rule(password))
-        }
+        return result
     }
 }
 
