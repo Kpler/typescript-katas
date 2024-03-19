@@ -33,24 +33,38 @@ abstract class IPasswordValidator {
 
     protected isPasswordLongEnough = (passwordLength: number) => (password: string) => password.length >= passwordLength;
 
-    protected containsAnUppercase = (password: string) => /[A-Z]/.test(password)
-
-    protected containsAnUnderscore = (password: string) => password.indexOf('_') >= 0
-
-    protected containsALowercase = (password: string) => /[a-z]/.test(password)
-
-    validatePassword(password: string): ValidPasswordResponse | InValidPasswordResponse  {
-        const isValid = this.rules.map(rule => {
+    protected containsAnUppercase = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+        const containsNumber = /[A-Z]/.test(password)
+        if (containsNumber) {
+            return new ValidPasswordResponse()
+        }
+        this.invalidPw.addMessage("Does not contain an upper case")
+        return this.invalidPw
+    }
+    protected containsAnUnderscore = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+        const containsNumber = password.indexOf('_') >= 0
+        if (containsNumber) {
+            return new ValidPasswordResponse()
+        }
+        this.invalidPw.addMessage("Does not contain an under case")
+        return this.invalidPw
+    }
+    protected containsALowercase = (password: string): ValidPasswordResponse | InValidPasswordResponse => {
+            const containsNumber = /[a-z]/.test(password)
+            if (containsNumber) {
+                return new ValidPasswordResponse()
+            }
+            this.invalidPw.addMessage("Does not contain an under case")
+            return this.invalidPw
+        }
+    protected validatePassword(password: string): ValidPasswordResponse | InValidPasswordResponse  {
+        const invalidResponses: string[] = this.rules.filter(rule => {
             const appliedRule = rule(password);
-            if (appliedRule.result === false) {
-                appliedRule.messages
+            if (appliedRule instanceof InValidPasswordResponse) {
+                return appliedRule.messages
             }
         })
-        /*const isValid = this.rules.every((rule) => {
-            const isValid= rule(password).
-        })*/
-
-        return isValid ? new ValidPasswordResponse() : new InValidPasswordResponse(["Wrong password"]);
+        return !invalidResponses.length ? new ValidPasswordResponse() : new InValidPasswordResponse(invalidResponses);
     }
 }
 
