@@ -1,4 +1,4 @@
-import {PasswordValidator} from "./passwordValidation";
+import {PasswordValidator, SimplePasswordValidator, ComplexPasswordValidator} from "./passwordValidation";
 import {ValidationError} from "./passwordValidation";
 
 describe("The password validator for iteration one", () => {
@@ -21,37 +21,40 @@ describe("The password validator for iteration one", () => {
                 ValidationError.NoCapitalLetter,
             ]
         ],
-    ])('%s', (_, password, expectedResult) => {
+    ])('%s', (_, password, expectedErrors) => {
         const result = passwordValidator.validatePassword(password);
-        expect(result.getErrors()).toStrictEqual(expectedResult)
+        expect(result.getErrors()).toStrictEqual(expectedErrors);
+        expect(result.isPasswordValid()).toStrictEqual(expectedErrors.length === 0);
     })
 });
 
-// describe("The password validator for iteration two", () => {
-//     const passwordValidator = new SimplePasswordValidator();
-//     it.each([
-//         ['should not have less than 6 characters', '5Char', {result : false, message: "Wrong password"}],
-//         ['should not miss a capital letter', '5charblah', {result : false, message: "Wrong password"}],
-//         ['should not miss a lower case letter', '5CHARBLAH', {result : false, message: "Wrong password"}],
-//         ['should not miss a number', 'Charblah', {result : false, message: "Wrong password"}],
-//         ['should provide a valid password', 'Charach1', {result : true, message: "Password Valid"}],
-//     ])('%s', (_, password, expectedResult) =>{
-//         const result = passwordValidator.validatePassword(password);
-//         expect(result).toStrictEqual(expectedResult)
-//     })
-// });
+ describe("The password validator for iteration two", () => {
+     const passwordValidator = new SimplePasswordValidator();
+     it.each([
+         ['should not have less than 6 characters', '5Cha_', [ValidationError.NotEnoughCharacters]],
+         ['should not miss a capital letter', '5charb_ah', [ValidationError.NoCapitalLetter]],
+         ['should not miss a lower case letter', '5CHARB_AH', [ValidationError.NoLowerCaseLetter]],
+         ['should not miss a number', 'Charblah', [ValidationError.NoNumber]],
+         ['should provide a valid password', 'Charach1', []],
+     ])('%s', (_, password, expectedErrors) =>{
+        const result = passwordValidator.validatePassword(password);
+        expect(result.getErrors()).toStrictEqual(expectedErrors);
+        expect(result.isPasswordValid()).toStrictEqual(expectedErrors.length === 0);
+     })
+ });
 
 
-// describe("The complex password validator for iteration two validation 3", () => {
-//     const passwordValidator = new ComplexPasswordValidator();
-//     it.each([
-//         ['should not have less than 16 characters', '_Char', {result : false, message: "Wrong password"}],
-//         ['should not miss a capital letter', '_charblah', {result : false, message: "Wrong password"}],
-//         ['should not miss a lower case letter', '_CHARBLAH', {result : false, message: "Wrong password"}],
-//         ['should not miss a underscore', 'Charbla', {result : false, message: "Wrong password"}],
-//         ['should provide a valid password', 'Chaefaefaefaefarach_', {result : true, message: "Password Valid"}],
-//     ])('%s', (_, password, expectedResult) =>{
-//         const result = passwordValidator.validatePassword(password);
-//         expect(result).toStrictEqual(expectedResult)
-//     })
-// });
+describe("The complex password validator for iteration two validation 3", () => {
+     const passwordValidator = new ComplexPasswordValidator();
+     it.each([
+         ['should not have less than 16 characters', '_Char', [ValidationError.NotEnoughCharacters]],
+         ['should not miss a capital letter', '_charblah', [ValidationError.NotEnoughCharacters, ValidationError.NoCapitalLetter]],
+         ['should not miss a lower case letter', '_CHARBLAH', [ValidationError.NotEnoughCharacters, ValidationError.NoLowerCaseLetter]],
+         ['should not miss a underscore', 'Charbla', [ValidationError.NotEnoughCharacters, ValidationError.NoUnderscore]],
+         ['should provide a valid password', 'Chaefaefaefaefarach_', []],
+     ])('%s', (_, password, expectedErrors) =>{
+        const result = passwordValidator.validatePassword(password);
+        expect(result.getErrors()).toStrictEqual(expectedErrors);
+        expect(result.isPasswordValid()).toStrictEqual(expectedErrors.length === 0);
+     })
+});

@@ -13,7 +13,7 @@ class ValidationResult{
     }
 
     isPasswordValid(){
-        this.errors.length === 0
+        return this.errors.length === 0
     }
 }
 
@@ -47,7 +47,7 @@ export class PasswordValidator extends IPasswordValidator {
         this.containsAnUppercase
     ];
 }
-/*
+
 export class SimplePasswordValidator extends IPasswordValidator {
     rules = [
         this.isPasswordLongEnough(6),
@@ -65,4 +65,4 @@ export class ComplexPasswordValidator extends IPasswordValidator {
         this.containsAnUnderscore,
     ]
 }
- */
+
