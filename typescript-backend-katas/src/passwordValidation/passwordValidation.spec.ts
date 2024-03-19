@@ -23,7 +23,7 @@ describe("The password validator for iteration one", () => {
         ],
     ])('%s', (_, password, expectedResult) => {
         const result = passwordValidator.validatePassword(password);
-        expect(result).toStrictEqual(expectedResult)
+        expect(result.getErrors()).toStrictEqual(expectedResult)
     })
 });
 

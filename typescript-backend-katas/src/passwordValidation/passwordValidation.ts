@@ -6,6 +6,17 @@ export enum ValidationError {
     NoCapitalLetter
 }
 
+class ValidationResult{
+    constructor(private readonly errors: ValidationError[]) {}
+    getErrors(){
+        return this.errors
+    }
+
+    isPasswordValid(){
+        this.errors.length === 0
+    }
+}
+
 abstract class IPasswordValidator {
     abstract rules: Array<{predicate: (password: string) => boolean, error: ValidationError}>
 
@@ -22,8 +33,8 @@ abstract class IPasswordValidator {
 
     protected containsALowercase = {predicate: (password: string) => /[a-z]/.test(password), error: ValidationError.NoLowerCaseLetter}
 
-    validatePassword(password: string): ValidationError[] {
-        return this.rules.filter((rule) => !rule.predicate(password)).map(rule => rule.error)
+    validatePassword(password: string): ValidationResult {
+        return new ValidationResult(this.rules.filter((rule) => !rule.predicate(password)).map(rule => rule.error))
     }
 }
 
