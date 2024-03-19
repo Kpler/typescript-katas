@@ -1,9 +1,9 @@
-import {ComplexPasswordValidator, PasswordValidator, SimplePasswordValidator} from "./passwordValidation";
+import {ComplexPasswordValidator, PasswordValidator, SimplePasswordValidator, InValidPasswordResponse} from "./passwordValidation";
 
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
     it.each([
-    ['should not have less than 8 characters', '7charas', {result : false, message: "Wrong password"}],
+    ['should not have less than 8 characters', '7charas', new InValidPasswordResponse(),
         ['should contain capital letter', '0characte_', {result : false, message: "Wrong password"}],
         ['should be valid with complex password', '8Charats_', {result : true, message: "Password Valid"}],
         ['should contain a lower case letter', 'CHARACTER', {result : false, message: "Wrong password"}],
