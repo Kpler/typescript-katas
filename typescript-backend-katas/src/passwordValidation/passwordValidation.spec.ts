@@ -4,12 +4,12 @@ import { ValidationError } from "./passwordValidation";
 describe("The password validator for iteration one", () => {
     const passwordValidator = new PasswordValidator();
     it.each([
-        ['should not have less than 8 characters', '7charas', [ValidationError.NotEnoughCharacters]],
-        // ['should contain capital letter', '0characte_', {result : false, message: "Wrong password"}],
-        // ['should be valid with complex password', '8Charats_', {result : true, message: "Password Valid"}],
-        // ['should contain a lower case letter', 'CHARACTER', {result : false, message: "Wrong password"}],
-        // ['should contain a number', 'CCCharats_', {result : false, message: "Wrong password"}],
-        // ['should contain an underscore', 'CCCharats5', {result : false, message: "Wrong password"}],
+        ['should not have less than 8 characters', '7C_aras', [ValidationError.NotEnoughCharacters]],
+        ['should contain capital letter', '0characte_', [ValidationError.NoCapitalLetter]],
+        ['should be valid with complex password', '8Charats_', []],
+        ['should contain a lower case letter', 'CH4RACTER_', [ValidationError.NoLowerCaseLetter]],
+        ['should contain a number', 'CCCharats_', [ValidationError.NoNumber]],
+        ['should contain an underscore', 'CCCharats5', [ValidationError.NoUnderscore]],
     ])('%s', (_, password, expectedResult) =>{
         const result = passwordValidator.validatePassword(password);
         expect(result).toStrictEqual(expectedResult)

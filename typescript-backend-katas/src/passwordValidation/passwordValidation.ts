@@ -19,8 +19,7 @@ abstract class IPasswordValidator {
     protected containsALowercase = (password: string) => /[a-z]/.test(password)
 
     validatePassword(password: string): ValidationError[] {
-        return this.rules.filter((rule) => rule.predicate(password)).map(rule => rule.error)
-        // return  {result: isValid, message: isValid ? "Password Valid": "Wrong password"}
+        return this.rules.filter((rule) => !rule.predicate(password)).map(rule => rule.error)
     }
 }
 
