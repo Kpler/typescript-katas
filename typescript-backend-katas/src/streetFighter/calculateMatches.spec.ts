@@ -8,7 +8,7 @@ describe("calculateMatches", () => {
 
         const ranking = calculateMatches(fighters, matches)
 
-        expect(ranking).toEqual(['blanka', 'zangief']);
+        expect(ranking).toEqual({'blanka': 3, 'zangief': 0});
     })
 
 
@@ -19,7 +19,7 @@ describe("calculateMatches", () => {
 
         const ranking = calculateMatches(fighters, matches)
 
-        expect(ranking).toEqual([]);
+        expect(ranking).toEqual({'blanka': 0, 'zangief': 0});
     })
 
     it('given a list of fighters and list of matches, should return the fighters ranking', () => {
@@ -29,7 +29,7 @@ describe("calculateMatches", () => {
 
         const ranking = calculateMatches(fighters, matches)
 
-        expect(ranking).toEqual(['zangief', 'blanka']);
+        expect(ranking).toEqual({'blanka': 0, 'zangief': 3});
     })
 
     it('given a list of fighters and list of matches, should return the fighters ranking', () => {
@@ -39,7 +39,7 @@ describe("calculateMatches", () => {
 
         const ranking = calculateMatches(fighters, matches)
 
-        expect(ranking).toEqual(['blanka', 'zangief']);
+        expect(ranking).toEqual({'blanka': 3, 'zangief': 0});
     })
 
     it('given a list of fighters and list of multiple matches, should return the fighters ranking', () => {
@@ -53,6 +53,6 @@ describe("calculateMatches", () => {
 
         const ranking = calculateMatches(fighters, matches)
 
-        expect(ranking).toEqual(['blanka', 'zangief']);
+        expect(ranking).toEqual({'blanka': 6, 'zangief': 3});
     })
 });
