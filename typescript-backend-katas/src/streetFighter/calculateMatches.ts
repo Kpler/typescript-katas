@@ -1,8 +1,8 @@
 export type Match = {
     timeslot: number, 
     home: string, 
-    roundsWon1: number, 
-    roundsWon2: number,
+    roundsWonHome: number, 
+    roundsWonAway: number,
     away: string
 }
 
@@ -11,5 +11,8 @@ export const calculateMatches = (fighters: string[], matches: Match[] ) => {
         return []
     }
 
-    return ['blanka', 'zangief'];
+    if (matches[0].roundsWonHome > matches[0].roundsWonAway )
+        return [matches[0].home, matches[0].away]
+    else
+        return [matches[0].away, matches[0].home]
 }
