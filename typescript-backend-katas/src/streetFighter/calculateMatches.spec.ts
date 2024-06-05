@@ -1,4 +1,4 @@
-import { calculateMatches } from "./calculateMatches";
+import {calculateMatches, Match} from "./calculateMatches";
 
 describe("calculateMatches", () => {
     it('given a list of fighters and list of matches, should return the fighters ranking', () => {
@@ -9,6 +9,17 @@ describe("calculateMatches", () => {
         const ranking = calculateMatches(fighters, matches)
 
         expect(ranking).toEqual(['blanka', 'zangief']);
+    })
+
+
+    it('given a list of fighters and empty list of matches, should return empty list', () => {
+
+        const fighters = ['zangief', 'blanka']
+        const matches: Match[] = []
+
+        const ranking = calculateMatches(fighters, matches)
+
+        expect(ranking).toEqual([]);
     })
 
     it('given a list of fighters and list of matches, should return the fighters ranking', () => {

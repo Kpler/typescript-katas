@@ -6,6 +6,10 @@ export type Match = {
     away: string
 }
 
-export const calculateMatches = (fighters: string [], matches: Match [] ) => {
+export const calculateMatches = (fighters: string[], matches: Match[] ) => {
+    if (matches.length == 0) {
+        return []
+    }
+
     return ['blanka', 'zangief'];
 }
