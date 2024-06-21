@@ -1,7 +1,3 @@
-/*
-timeslot,home,roundsWon1,roundsWon2,away
-1,chun-li,2,1,sagat
-*/
 
 export class Match {
     constructor(
@@ -24,7 +20,11 @@ interface SimplifiedMatch {
     away: string;
     result: MatchResult;
 }
-
+interface RankRow {
+    name: string;
+    points: number;
+    rank: number;
+}
 function computeMatchResult(match: Match): SimplifiedMatch {
     if (match.homeRounds > match.awayRounds) {
         return { home: match.homeFighter, away: match.awayFighter, result: MatchResult.HOME_WIN };
@@ -49,16 +49,15 @@ function incrementFightersScore(pointsPerFighter: Map<string, number>, match: Si
     }
 }
 
-export function computeRanking(matches: Match[]): string[] {
-    const pointsPerFighter: Map<string, number> = new Map();
-
+export function computeRanking(matches: Match[]): RankRow[] {
     const simplifiedMatches: SimplifiedMatch[] = matches.map(computeMatchResult);
 
+    const pointsPerFighter: Map<string, number> = new Map();
     simplifiedMatches.forEach(match => incrementFightersScore(pointsPerFighter, match));
 
-    const ranking = Array.from(pointsPerFighter.entries())
+    const ranking: RankRow[] = Array.from(pointsPerFighter.entries())
         .sort((a, b) => b[1] - a[1])
-        .map(entry => entry[0]);
+        .map((entry, index) => ({ name: entry[0], points: entry[1], rank: index + 1}));
 
     return ranking;
 }

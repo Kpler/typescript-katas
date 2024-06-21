@@ -21,4 +21,19 @@ describe("computeRanking", () => {
       {name: "sagat", points: 0, rank: 2}
     ]);
   })
+
+  it('should return both fighters with 1 point ranking when there is a case of draw', () => {
+    // Given
+    const matches = [
+      new Match("chun-li", "sagat", 2, 2)
+    ];
+
+    // When
+    const ranking = computeRanking(matches)
+
+    // Then
+    expect(
+      ranking.map(({points}) => points).every(points => points === 1)
+    ).toBe(true);
+  })
 })
