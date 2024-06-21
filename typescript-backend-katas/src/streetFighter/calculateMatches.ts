@@ -1,4 +1,4 @@
-type match = {
+export type Match = {
     timeslot: number,
     home: string,
     roundsWon1: number,
@@ -6,6 +6,6 @@ type match = {
     away: string,
 }
 
-export function calculateMatches(matches: string[]): string[] {
+export function calculateMatches(matches: Match[]): string[] {
     return []
 }
