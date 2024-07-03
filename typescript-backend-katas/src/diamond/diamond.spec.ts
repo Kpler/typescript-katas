@@ -18,8 +18,22 @@ describe("diamond", () => {
         const expectedResult = "*A*-B*B-*A*"
 
         // WHEN
+        const result = createDiamond(level);
 
         // THEN
+        expect(result).toEqual(expectedResult);
+    });
+
+    it('should create a diamond of level 3', () => {
+        // GIVEN
+        const level = 3
+        const expectedResult = "**A**-*B*B*-C**C-*B*B*-**A**"
+
+        // WHEN
+        const result = createDiamond(level);
+
+        // THEN
+        expect(result).toEqual(expectedResult);
     });
 });
 
