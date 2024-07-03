@@ -1,7 +1,8 @@
 export function createDiamond(level: number = 1) {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  let output: string = "";
   if (level === 1) {
-    return "A";
+    output += "A";
   }
 
   // for (let levelIndex = 0; levelIndex < level; levelIndex++) {
@@ -10,11 +11,14 @@ export function createDiamond(level: number = 1) {
   //     }
 
   if (level === 2) {
-    const firstLetter = characters[level - 1];
+    // const firstLetter = characters[level - 2];
     for (let i = 0; i < level; i++) {
       if (i === 0) {
-        return `*${firstLetter}*`;
+        output.concat(`*${characters[i]}*-`);
+      } else {
+        output.concat(`${characters[i]}*${characters[i]}`);
       }
     }
   }
+  return output;
 }
