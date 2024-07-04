@@ -1,5 +1,6 @@
 import { Fighter } from "./ranking";
+import {parseJsonFile} from "./helpers/helpers";
 
 export const getFighters = (filename: string): Fighter[] => {
-  return [];
+  return parseJsonFile<Fighter>(filename)
 }

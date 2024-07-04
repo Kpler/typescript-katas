@@ -1,0 +1,19 @@
+[
+  {
+    "id": 0,
+    "firstname": "Ryu",
+    "country": "JPN"
+  },
+  {
+    "id": 1,
+    "firstname": "Edmond",
+    "lastname": "Honda",
+    "country": "JPN"
+  },
+  {
+    "id": 11,
+    "firstname": "Mister",
+    "lastname": "Bison",
+    "country": null
+  }
+]

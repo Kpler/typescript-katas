@@ -13,7 +13,6 @@ describe("get ranking", () => {
         expect(result).toStrictEqual([]);
     });
 
-
     it("should return a ranking with the winner being first and the loser being second when there is 1 match", () => {
         // GIVEN
         const matches: Match[] = [
@@ -100,8 +99,6 @@ describe("get ranking", () => {
             },
         ]);
     });
-
-
 
     it("should return a ranking when there are more than two 2 fighters and 1 match", () => {
         // GIVEN
