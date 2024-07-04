@@ -12,11 +12,28 @@ export interface RankingRow {
 }
 interface MatchResult {
     match: Match,
-    result: string
+    result: Result
 }
+
+enum Result {
+    HomeWin,
+    AwayWin,
+    Tie
+}
+
+function computeResult(match: Match): MatchResult {
+        return {
+            match,
+            result: Result.HomeWin
+        }
+}
+
 export function getRanking(matches: Match[]) {
     if (matches.length === 0) return [];
 
     const matchResult = computeResult(matches[0])
-    return
+
+    return {
+        fighter: ""
+    }
 }
