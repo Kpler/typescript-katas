@@ -21,6 +21,11 @@ enum Result {
     Tie
 }
 
+interface Fighter{
+    id: number
+
+}
+
 function computeResult(match: Match): MatchResult {
     let result = Result.Tie;
     if (match.roundsHome > match.roundsAway) {
