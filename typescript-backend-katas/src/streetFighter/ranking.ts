@@ -21,7 +21,7 @@ enum Result {
     Tie
 }
 
-interface Fighter{
+export interface Fighter{
     id: number
 
 }
