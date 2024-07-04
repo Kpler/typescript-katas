@@ -37,6 +37,7 @@ function computeResult(match: Match): MatchResult {
 export function getRanking(matches: Match[]): RankingRow[] {
     if (matches.length === 0) return [];
 
+
     const matchesResult = [computeResult(matches[0])];
 
     const pointsPerFighter: Record<string, number> = {};
@@ -53,38 +54,14 @@ export function getRanking(matches: Match[]): RankingRow[] {
             pointsPerFighter[matchResult.match.homeFighter] =  (pointsPerFighter[matchResult.match.homeFighter] ?? 0) + 1
         }
     });
-    Object.entries(pointsPerFighter)
-      .sort(([fighterA, aPoints], [fighterB, bPoints]) => aPoints - bPoints)
+    return Object.entries(pointsPerFighter)
+      .sort(([_, aPoints], [__, bPoints]) =>  bPoints - aPoints)
       .map((row, index) => {
-
-    })
-
-    if (matchResult.result === Result.HomeWin) {
-        return [
-            {
-                fighter: matchResult.match.homeFighter,
-                rank: 1,
-                points: 3,
-            },
-            {
-                fighter: matchResult.match.awayFighter,
-                rank: 2,
-                points: 0,
-            },
-        ];
-    } else {
-        return [
-            {
-                fighter: matchResult.match.awayFighter,
-                rank: 1,
-                points: 3,
-            },
-            {
-                fighter: matchResult.match.homeFighter,
-                rank: 2,
-                points: 0,
-            },
-        ];
-    }
+            return{
+                fighter: row[0],
+                rank: index + 1,
+                points: row[1],
+            }
+    });
     return [];
 }
