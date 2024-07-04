@@ -55,13 +55,17 @@ export function getRanking(matches: Match[]): RankingRow[] {
         }
     });
     return Object.entries(pointsPerFighter)
-      .sort(([_, aPoints], [__, bPoints]) =>  bPoints - aPoints)
-      .map((row, index) => {
-            return{
-                fighter: row[0],
-                rank: index + 1,
-                points: row[1],
+      .sort(([aFighter, aPoints], [bFighter, bPoints]) =>  {
+            const pointsDifference = bPoints - aPoints
+            if (pointsDifference === 0) {
+                return aFighter > bFighter ? 1 : -1;
             }
-    });
-    return [];
+            return pointsDifference
+        })
+      .map((row, index) => ({
+            fighter: row[0],
+            rank: index + 1,
+            points: row[1],
+        })
+    );
 }

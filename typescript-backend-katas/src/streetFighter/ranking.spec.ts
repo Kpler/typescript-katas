@@ -72,7 +72,7 @@ describe("get ranking", () => {
         ]);
     });
 
-    it("should return a ranking with the winner being first and the loser being second when there is tie", () => {
+    it("should return a ranking with the two fighter ranked 1 when there is a tie", () => {
         // GIVEN
         const matches: Match[] = [
             {
@@ -89,12 +89,12 @@ describe("get ranking", () => {
         //THEN
         expect(result).toStrictEqual([
             {
-                fighter: "player2",
+                fighter: "player1",
                 rank: 1,
                 points: 1,
             },
             {
-                fighter: "player1",
+                fighter: "player2",
                 rank: 2,
                 points: 1,
             },
