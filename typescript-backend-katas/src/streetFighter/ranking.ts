@@ -35,10 +35,7 @@ function computeResult(match: Match): MatchResult {
 }
 
 export function getRanking(matches: Match[]): RankingRow[] {
-    if (matches.length === 0) return [];
-
-
-    const matchesResult = [computeResult(matches[0])];
+    const matchesResult =matches.map(computeResult);
 
     const pointsPerFighter: Record<string, number> = {};
 

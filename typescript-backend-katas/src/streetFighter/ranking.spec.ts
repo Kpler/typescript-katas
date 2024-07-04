@@ -102,4 +102,44 @@ describe("get ranking", () => {
     });
 
 
+
+    it("should return a ranking when there are more than two 2 fighters and 1 match", () => {
+        // GIVEN
+        const matches: Match[] = [
+            {
+                homeFighter: "chun-li",
+                awayFighter: "sagat",
+                roundsHome: 2,
+                roundsAway:1,
+            },
+            {
+                homeFighter: "blanka",
+                awayFighter: "chun-li",
+                roundsHome: 1,
+                roundsAway:1,
+            }
+        ];
+
+        //WHEN
+        const result = getRanking(matches);
+
+        //THEN
+        expect(result).toStrictEqual([
+            {
+                fighter: "chun-li",
+                rank: 1,
+                points: 4,
+            },
+            {
+                fighter: "blanka",
+                rank: 2,
+                points: 1,
+            },
+            {
+                fighter: "sagat",
+                rank: 3,
+                points: 0,
+            }
+        ]);
+    });
 });
