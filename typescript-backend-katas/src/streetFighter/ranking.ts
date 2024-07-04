@@ -1,4 +1,16 @@
+export interface Match {
+    homeFighter: string;
+    awayFighter: string;
+    roundsHome: number,
+    roundsAway: number,
+}
 
-export function getRanking(matches: any[]) {
+export interface RankingRow {
+    fighter: string,
+    rank: number,
+    points: number,
+}
+
+export function getRanking(matches: Match[]) {
     return [];
 }
