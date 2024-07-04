@@ -10,7 +10,13 @@ export interface RankingRow {
     rank: number,
     points: number,
 }
-
+interface MatchResult {
+    match: Match,
+    result: string
+}
 export function getRanking(matches: Match[]) {
-    return [];
+    if (matches.length === 0) return [];
+
+    const matchResult = computeResult(matches[0])
+    return
 }
