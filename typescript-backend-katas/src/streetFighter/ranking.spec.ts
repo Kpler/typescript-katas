@@ -42,4 +42,33 @@ describe("get ranking", () => {
             },
         ]);
     });
+
+    it("should return a ranking with the winner being first and the loser being second when there is 1 match", () => {
+        // GIVEN
+        const matches: Match[] = [
+            {
+                homeFighter: "player1",
+                awayFighter: "player2",
+                roundsHome: 1,
+                roundsAway:2,
+            }
+        ];
+
+        //WHEN
+        const result = getRanking(matches);
+
+        //THEN
+        expect(result).toStrictEqual([
+            {
+                fighter: "player2",
+                rank: 1,
+                points: 3,
+            },
+            {
+                fighter: "player1",
+                rank: 2,
+                points: 0,
+            },
+        ]);
+    });
 });
