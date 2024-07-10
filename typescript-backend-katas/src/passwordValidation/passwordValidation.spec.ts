@@ -63,7 +63,7 @@ describe("Password validation class", () => {
         const password = '_aAfa3456789';
 
         // WHEN
-        const pwValidatore = new PasswordValidationIteration()
+        const pwValidatore = new PasswordValidationIteration(8)
         const result = pwValidatore.isPasswordValid(password)
 
         // THEN
