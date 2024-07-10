@@ -22,4 +22,6 @@ describe("Password validation", () => {
         // THEN
         expect(result).toBeFalsy();
     })
+
+
 });
