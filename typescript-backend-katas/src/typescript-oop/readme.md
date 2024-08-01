@@ -5,6 +5,14 @@ Create a simple bank account management system that allows you to manage bank ac
 You and the finest of your co-workers got asked to write a small banking app.
 Your friend gave you the following user story.
 
+Later on, we plan add complex logic to retrieve the user 
+balance. For this reason, instead of it being a public field, 
+we want it to be a private field and add a simple 
+`getBalance()` method that, in a first step, will 
+just return the value of the private field
+The initial balance of a new account should be 0
+
+
 - Create Bank account (without connection to any bank)
 - The only visible information of an bank account are:
     - id
