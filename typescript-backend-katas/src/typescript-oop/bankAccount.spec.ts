@@ -23,4 +23,16 @@ describe("Bank Account test", () => {
         // Then
         expect(bankAccount.getBalance()).toBe(0)
     })
+
+    it("should be able to make a deposit", () => {
+        // GIVEN
+        const bankAccount = new BankAccount(1, "some name");
+        const amount = 100;
+        
+        // WHEN
+        bankAccount.deposite(amount)
+
+        // THEN
+        expect(bankAccount.getBalance()).toBe(amount);
+    });
 });
