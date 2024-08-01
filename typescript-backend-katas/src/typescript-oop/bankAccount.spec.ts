@@ -19,7 +19,7 @@ describe("Bank Account test", () => {
 
         // When
         const bankAccount = new BankAccount(1, "some name");
-        
+
         // Then
         expect(bankAccount.getBalance()).toBe(0)
     })
@@ -28,11 +28,36 @@ describe("Bank Account test", () => {
         // GIVEN
         const bankAccount = new BankAccount(1, "some name");
         const amount = 100;
-        
+
         // WHEN
-        bankAccount.deposite(amount)
+        bankAccount.deposit(amount)
 
         // THEN
         expect(bankAccount.getBalance()).toBe(amount);
+    });
+
+    it("should increase the balance amount to existing balance after a deposit", () => {
+        // GIVEN
+        const bankAccount = new BankAccount(1, "some name");
+        const amount = 100;
+        bankAccount.deposit(amount)
+
+        // WHEN
+        bankAccount.deposit(amount)
+
+        // THEN
+        expect(bankAccount.getBalance()).toBe(amount * 2);
+    });
+
+    it("should not add negative values after a deposit", () => {
+        // GIVEN
+        const bankAccount = new BankAccount(1, "some name");
+        const amount = -100;
+
+        // WHEN
+        bankAccount.deposit(amount);
+
+        // THEN
+        expect(bankAccount.getBalance()).toBe(0);
     });
 });

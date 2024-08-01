@@ -19,6 +19,8 @@ The initial balance of a new account should be 0
     - name
 - The account balance is not directly accessable by outsiders.
 - basic functionality withdraws, deposits
+- For a first iteration, we want basic error handling : 
+  - Depositing a negative amount does not affect the balance
 
 
 -------------
