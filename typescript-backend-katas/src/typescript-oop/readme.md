@@ -10,7 +10,11 @@ Your friend gave you the following user story.
     - id
     - name
 - The account balance is not directly accessable by outsiders.
-- Also the id is not needed to create a new bank account and will be set automatically once a new bank account is created.
+- basic functionality withdraws, deposits
+
+
+-------------
+ (remove auto incr from I iteration)Also the id is not needed to create a new bank account and will be set automatically once a new bank account is created.
 
 ### Iteration II:
 - Create a Bank which handles multiple bank accounts.
