@@ -8,10 +8,17 @@ export class BankAccount {
     }
 
     public deposit(depositAmount: number): void {
+        if (depositAmount < 0) {
+            throw new NicoCannotCount("He really cannot count!");
+        }
         this.#balance += depositAmount;
     }
 
     public withdraw(withdrawnAmount: number): void {
         this.#balance -= withdrawnAmount;
     }
+}
+
+export class NicoCannotCount extends Error {
+
 }

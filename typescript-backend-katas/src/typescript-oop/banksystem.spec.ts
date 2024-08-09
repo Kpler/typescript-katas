@@ -1,4 +1,4 @@
-import { BankAccount } from "./banksystem";
+import {BankAccount, NicoCannotCount} from "./banksystem";
 
 describe('BankAccount Test', () => {
     let bankAccount: BankAccount;
@@ -36,4 +36,11 @@ describe('BankAccount Test', () => {
         bankAccount.withdraw(withdrawnAmount)
         expect(bankAccount.getBalance()).toEqual(500)
     });
+
+    it('should deposit not be negative', () => {
+        const depositAmount = -100000;
+
+        expect(() => bankAccount.deposit(depositAmount)).toThrow(new NicoCannotCount("He really cannot count!"))
+    });
+
 })
