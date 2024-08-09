@@ -23,6 +23,6 @@ export class BankAccount {
     }
 }
 
-export class BankClass {
-    public accounts: Array<BankAccount>;
+export class Bank {
+    public accounts: Array<BankAccount> = [];
 }
