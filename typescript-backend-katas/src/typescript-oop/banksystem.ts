@@ -23,3 +23,6 @@ export class BankAccount {
     }
 }
 
+export class BankClass {
+    public accounts: Array<BankAccount>;
+}
