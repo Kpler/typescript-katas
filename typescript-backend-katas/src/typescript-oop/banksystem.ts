@@ -1,5 +1,7 @@
 export class BankAccount {
-    public getBalance() {
+    constructor(readonly id: number, readonly name: string) {}
+
+    public getBalance(): number {
         return 0
     }
 }
