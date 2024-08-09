@@ -1,4 +1,4 @@
-import { BankAccount, Bank } from "./banksystem";
+import { BankAccount } from "./banksystem";
 import { NicoCannotCount, AlexCannotCount } from "./bankerrors";
 
 describe('BankAccount Test', () => {
@@ -52,15 +52,4 @@ describe('BankAccount Test', () => {
         expect(bankAccount.getBalance()).toEqual(0);
     });
 
-})
-
-describe('BankClass Test', () => {
-    it('should initialize with bank accounts', () => {
-        const bankAccountA = new BankAccount(0, "bankAccountA")
-        const bankAccountB = new BankAccount(1, "bankAccountB")
-
-        const bankClass = new Bank()
-
-        expect(bankClass.accounts.length).toEqual(0)
-    })
 })

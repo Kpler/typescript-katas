@@ -22,7 +22,3 @@ export class BankAccount {
         this.#balance -= withdrawnAmount;
     }
 }
-
-export class Bank {
-    public accounts: Array<BankAccount> = [];
-}
