@@ -1,8 +1,9 @@
 import { NicoCannotCount, AlexCannotCount } from "./bankerrors";
+type BankAccountParams = { name: string, id: number };
 export class BankAccount {
     #balance = 0;
 
-    constructor(readonly id: number, readonly name: string) { }
+    constructor(readonly options: BankAccountParams) { }
 
     public getBalance(): number {
         return this.#balance;

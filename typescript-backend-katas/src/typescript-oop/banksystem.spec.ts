@@ -7,13 +7,13 @@ describe('BankAccount Test', () => {
     const defaultName = 'Revolut';
 
     beforeEach(() => {
-        bankAccount = new BankAccount(defaultId, defaultName)
+        bankAccount = new BankAccount({id : defaultId, name: defaultName})
     })
 
     it('should create a new BankAccount', () => {
         expect(bankAccount.getBalance()).toEqual(0)
-        expect(bankAccount.id).toEqual(0);
-        expect(bankAccount.name).toEqual('Revolut')
+        expect(bankAccount.options.id).toEqual(0);
+        expect(bankAccount.options.name).toEqual('Revolut')
     });
 
     it('should deposit a given amount', () => {

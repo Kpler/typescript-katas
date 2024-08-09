@@ -1,4 +1,5 @@
 import {Bank} from "./bank";
+import {BankAccount} from "./banksystem";
 
 describe('Bank Test', () => {
     it('should initialize without any bank accounts', () => {
@@ -12,10 +13,8 @@ describe('Bank Test', () => {
         bank.createAccount('Manolis');
         bank.createAccount('Emna');
 
-        expect(bank.accounts.length).toEqual(1);
-        expect(bank.accounts[0].name).toBe('Manolis');
-        expect(bank.accounts[0].id).toBe(0);
-        expect(bank.accounts[1].name).toBe('Emna');
-        expect(bank.accounts[1].id).toBe(1);
+        expect(bank.accounts.length).toEqual(2);
+        expect(bank.accounts[0]).toStrictEqual(new BankAccount({id: 0, name: 'Manolis'}));
+        expect(bank.accounts[1]).toStrictEqual(new BankAccount({id: 1, name: 'Emna'}));
     });
 })
