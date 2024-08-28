@@ -8,3 +8,7 @@ export class DiscountBundle {
     ) {
     }
 }
+
+export class DiscountBundleInCatalog {
+    constructor(public readonly discountBundle: DiscountBundle, public readonly discountAmount: number) { }
+}

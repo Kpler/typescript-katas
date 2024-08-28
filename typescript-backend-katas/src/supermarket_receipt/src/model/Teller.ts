@@ -1,25 +1,35 @@
-import {SupermarketCatalog} from "./SupermarketCatalog"
-import {OffersByProduct, ShoppingCart} from "./ShoppingCart"
-import {Product} from "./Product"
-import {Receipt} from "./Receipt"
-import {Offer} from "./Offer"
-import {SpecialOfferType} from "./SpecialOfferType"
-import {DiscountBundle} from "./DiscountBundle";
+import { SupermarketCatalog } from "./SupermarketCatalog"
+import { OffersByProduct, ShoppingCart } from "./ShoppingCart"
+import { Product } from "./Product"
+import { Receipt } from "./Receipt"
+import { Offer } from "./Offer"
+import { SpecialOfferType } from "./SpecialOfferType"
+import { DiscountBundle, DiscountBundleInCatalog } from "./DiscountBundle";
+import { sum } from "lodash"
 
 export class Teller {
 
     private offers: OffersByProduct = {};
     private bundles: DiscountBundle[] = [];
 
-    public constructor(private readonly catalog: SupermarketCatalog ) {
+    public constructor(private readonly catalog: SupermarketCatalog) {
     }
 
-    public addSpecialOffer(offerType: SpecialOfferType , product: Product, argument: number): void {
+    public addSpecialOffer(offerType: SpecialOfferType, product: Product, argument: number): void {
         this.offers[product.name] = new Offer(offerType, product, argument);
     }
 
     public addBundleOffer(bundle: DiscountBundle): void {
         this.bundles.push(bundle);
+    }
+
+    calculateBundleDiscountAmount(bundle: DiscountBundle): DiscountBundleInCatalog {
+        let sumAmount = 0;
+        for (let product of bundle.products) {
+            let unitPrice = this.catalog.getUnitPrice(product);
+            sumAmount = sumAmount + (unitPrice * bundle.rate / 100);
+        }
+        return new DiscountBundleInCatalog(bundle, sumAmount);
     }
 
     public checksOutArticlesFrom(theCart: ShoppingCart): Receipt {
@@ -32,7 +42,12 @@ export class Teller {
             let price = quantity * unitPrice;
             receipt.addProduct(p, quantity, unitPrice, price);
         }
-        theCart.handleOffers(receipt, this.offers, this.catalog);
+
+        // TODO: Add a check which bundles are appliable.
+        if (this.bundles.length > 0) {
+            receipt.addDiscountBundleInCatalog(this.calculateBundleDiscountAmount(this.bundles[0]));
+            theCart.handleOffers(receipt, this.offers, this.catalog);
+        }
 
         return receipt;
     }
