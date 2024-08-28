@@ -45,7 +45,10 @@ export class Teller {
 
         // TODO: Add a check which bundles are appliable.
         if (this.bundles.length > 0) {
-            receipt.addDiscountBundleInCatalog(this.calculateBundleDiscountAmount(this.bundles[0]));
+            this.bundles.map((bundle) => {
+                receipt.addDiscountBundleInCatalog(
+                    this.calculateBundleDiscountAmount(bundle));
+            })
             theCart.handleOffers(receipt, this.offers, this.catalog);
         }
 
