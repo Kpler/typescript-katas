@@ -5,8 +5,8 @@ import {Receipt} from "./Receipt"
 import {Offer} from "./Offer"
 import {SpecialOfferType} from "./SpecialOfferType"
 
-class Bundle {
-    products: Product[] = [];
+export class Bundle {
+    public products: Product[] = [];
 
     addProduct(product: Product): void {
         this.products.push(product);
@@ -16,6 +16,7 @@ class Bundle {
 export class Teller {
 
     private offers: OffersByProduct = {};
+    public bundles: Bundle[] = [];
 
     public constructor(private readonly catalog: SupermarketCatalog ) {
     }
@@ -40,7 +41,7 @@ export class Teller {
     }
 
     public addBundle(bundle: Bundle): void {
-
+        this.bundles.push(bundle);
     }
 
 }

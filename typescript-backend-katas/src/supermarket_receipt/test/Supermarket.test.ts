@@ -3,7 +3,7 @@ import {Product} from "../src/model/Product"
 import {SupermarketCatalog} from "../src/model/SupermarketCatalog"
 import {Receipt} from "../src/model/Receipt"
 import {ShoppingCart} from "../src/model/ShoppingCart"
-import {Teller} from "../src/model/Teller"
+import {Bundle, Teller} from "../src/model/Teller"
 import {SpecialOfferType} from "../src/model/SpecialOfferType"
 import {ProductUnit} from "../src/model/ProductUnit"
 import {assert} from "chai";
@@ -35,5 +35,19 @@ describe('Supermarket', () => {
         assert.equal(receiptItem.price, 1.99);
         assert.approximately(receiptItem.totalPrice, 2.5*1.99, 0.01);
         assert.equal(receiptItem.quantity, 2.5);
+    });
+
+    it('add a bundle to the teller', () => {
+        // ARRANGE
+        const bundle: Bundle = new Bundle();
+        bundle.addProduct(new Product("toothbrush", ProductUnit.Each));
+
+        const catalog: SupermarketCatalog = new FakeCatalog();
+
+        const teller: Teller = new Teller(catalog);
+        teller.addBundle(bundle);
+
+        assert.equal(teller.bundles.length, 1);
+        assert.equal(teller.bundles[0], bundle);
     });
 });
