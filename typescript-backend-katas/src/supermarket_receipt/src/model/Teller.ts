@@ -24,11 +24,13 @@ export class Teller {
     }
 
     calculateBundleDiscountAmount(bundle: DiscountBundle): DiscountBundleInCatalog {
-        let sumAmount = 0;
-        for (let product of bundle.products) {
+        const discountAmountOfProducts = bundle.products.map((product) => {
             let unitPrice = this.catalog.getUnitPrice(product);
-            sumAmount = sumAmount + (unitPrice * bundle.rate / 100);
-        }
+            return (unitPrice * bundle.rate / 100);
+        });
+        const sumAmount = discountAmountOfProducts.reduce((previousValue, currentValue, _, __) => {
+            return previousValue + currentValue
+        },0);
         return new DiscountBundleInCatalog(bundle, sumAmount);
     }
 
