@@ -50,4 +50,26 @@ describe('Supermarket', () => {
         assert.equal(teller.bundles.length, 1);
         assert.equal(teller.bundles[0], bundle);
     });
+
+    it('Ten percent discount', () => {
+        // ARRANGE
+        const catalog: SupermarketCatalog = new FakeCatalog();
+        const toothbrush: Product = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 1);
+
+        const bundle: Bundle = new Bundle();
+        bundle.addProduct(toothbrush);
+
+        const teller: Teller = new Teller(catalog);
+        teller.addBundle(bundle);
+
+        const cart: ShoppingCart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 1);
+
+        // ACT
+        const receipt: Receipt = teller.checksOutArticlesFrom(cart);
+
+        // ASSERT
+        assert.approximately(receipt.getTotalPrice(), 0.9, 0.01);
+    });
 });
