@@ -6,6 +6,7 @@ import {Discount} from "./Discount"
 import {Receipt} from "./Receipt"
 import {Offer} from "./Offer"
 import {SpecialOfferType} from "./SpecialOfferType"
+import {Bundle} from "./Teller";
 
 type ProductQuantities = { [productName: string]: ProductQuantity }
 export type OffersByProduct = {[productName: string]: Offer};
@@ -43,6 +44,22 @@ export class ShoppingCart {
 
     private increaseQuantity(product: Product, productQuantity: ProductQuantity, quantity: number) {
         return new ProductQuantity(product, productQuantity.quantity + quantity)
+    }
+
+    private isBundleComplete(bundle: Bundle, productNames: string[]) {
+        return productNames.every(
+            pName => bundle.products.map(
+                ({name}) => name).includes(pName))
+    }
+
+    private addBundleDiscount(bundle: Bundle, receipt: Receipt, catalog: SupermarketCatalog) {
+        const dummyProduct = bundle.products[0] // TODO: Do we need a real bundle discount
+        const discountAmount = bundle.products.reduce((sum, product) => {
+            const productPrice = catalog.getUnitPrice(product);
+            return sum + productPrice;
+        }, 0) * .9;
+        const discount = new Discount(dummyProduct, "3 for 2", discountAmount);
+        receipt.addDiscount(discount);
     }
 
     handleOffers(receipt: Receipt,  offers: OffersByProduct, catalog: SupermarketCatalog ):void {
