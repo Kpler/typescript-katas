@@ -4,16 +4,22 @@ import {Product} from "./Product"
 import {Receipt} from "./Receipt"
 import {Offer} from "./Offer"
 import {SpecialOfferType} from "./SpecialOfferType"
+import {DiscountBundle} from "./DiscountBundle";
 
 export class Teller {
 
     private offers: OffersByProduct = {};
+    private bundles: DiscountBundle[] = [];
 
     public constructor(private readonly catalog: SupermarketCatalog ) {
     }
 
     public addSpecialOffer(offerType: SpecialOfferType , product: Product, argument: number): void {
         this.offers[product.name] = new Offer(offerType, product, argument);
+    }
+
+    public addBundleOffer(bundle: DiscountBundle): void {
+        this.bundles.push(bundle);
     }
 
     public checksOutArticlesFrom(theCart: ShoppingCart): Receipt {
