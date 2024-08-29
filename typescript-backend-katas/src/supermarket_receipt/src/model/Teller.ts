@@ -5,14 +5,6 @@ import {Receipt} from "./Receipt"
 import {Offer} from "./Offer"
 import {SpecialOfferType} from "./SpecialOfferType"
 
-class Bundle {
-    products: Product[] = [];
-
-    addProduct(product: Product): void {
-        this.products.push(product);
-    }   
-}
-
 export class Teller {
 
     private offers: OffersByProduct = {};
@@ -37,10 +29,6 @@ export class Teller {
         theCart.handleOffers(receipt, this.offers, this.catalog);
 
         return receipt;
-    }
-
-    public addBundle(bundle: Bundle): void {
-
     }
 
 }
