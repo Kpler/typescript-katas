@@ -3,19 +3,19 @@ import {OrderStatus} from './OrderStatus';
 
 class Order {
   private total: number;
-  private currency: string;
-  private items: OrderItem[];
+  private readonly currency: string;
+  private readonly items: OrderItem[];
   private tax: number;
   private status: OrderStatus;
-  private id: number;
+  private readonly id: number;
 
-  public constructor() {
+  public constructor(id: number) {
     this.total = 0;
-    this.currency = "euro";
+    this.currency = "EUR";
     this.items = [];
     this.tax = 0;
     this.status = OrderStatus.CREATED;
-    this.id = null;
+    this.id = id;
   }
 
   public getTotal(): number {
@@ -30,16 +30,8 @@ class Order {
     return this.currency;
   }
 
-  public setCurrency(currency: string): void {
-    this.currency = currency;
-  }
-
   public getItems(): OrderItem[] {
     return this.items;
-  }
-
-  public setItems(items: OrderItem[]): void {
-    this.items = items;
   }
 
   public getTax(): number {
@@ -60,10 +52,6 @@ class Order {
 
   public getId(): number {
     return this.id;
-  }
-
-  public setId(id: number): void {
-    this.id = id;
   }
 }
 

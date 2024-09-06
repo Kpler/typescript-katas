@@ -18,8 +18,7 @@ describe('OrderShipmentUseCase', () => {
   });
 
   it('shipApprovedOrder', () => {
-    let initialOrder: Order = new Order();
-    initialOrder.setId(1);
+    let initialOrder: Order = new Order(1);
     initialOrder.setStatus(OrderStatus.APPROVED);
     orderRepository.addOrder(initialOrder);
 
@@ -33,8 +32,7 @@ describe('OrderShipmentUseCase', () => {
   });
 
   it('createdOrdersCannotBeShipped', () => {
-    let initialOrder: Order = new Order();
-    initialOrder.setId(2);
+    let initialOrder: Order = new Order(2);
     initialOrder.setStatus(OrderStatus.CREATED);
     orderRepository.addOrder(initialOrder);
 
@@ -47,8 +45,7 @@ describe('OrderShipmentUseCase', () => {
   });
 
   it('rejectedOrdersCannotBeShipped', () => {
-    let initialOrder: Order = new Order();
-    initialOrder.setId(3);
+    let initialOrder: Order = new Order(3);
     initialOrder.setStatus(OrderStatus.REJECTED);
     orderRepository.addOrder(initialOrder);
 
@@ -61,8 +58,7 @@ describe('OrderShipmentUseCase', () => {
   });
 
   it('shippedOrdersCannotBeShippedAgain', () => {
-    let initialOrder: Order = new Order();
-    initialOrder.setId(4);
+    let initialOrder: Order = new Order(4);
     initialOrder.setStatus(OrderStatus.SHIPPED);
     orderRepository.addOrder(initialOrder);
 

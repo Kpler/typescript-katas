@@ -1,14 +1,10 @@
 class OrderApprovalRequest {
-  private orderId: number;
+  private readonly orderId: number;
   private approved: boolean;
 
-  constructor() {
-    this.orderId = null;
-    this.approved = false;
-  }
-
-  public  setOrderId(orderId: number): void {
+  constructor(orderId: number) {
     this.orderId = orderId;
+    this.approved = false;
   }
 
   public getOrderId(): number {

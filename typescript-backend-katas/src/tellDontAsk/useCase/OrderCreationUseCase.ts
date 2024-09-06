@@ -17,12 +17,7 @@ class OrderCreationUseCase {
   }
 
   public run(request: SellItemsRequest): void {
-    const order: Order = new Order();
-    order.setStatus(OrderStatus.CREATED);
-    order.setItems([]);
-    order.setCurrency('EUR');
-    order.setTotal(0);
-    order.setTax(0);
+    const order: Order = new Order(1);
 
     for (const itemRequest of request.getRequests()) {
        const product: Product = this.productCatalog.getByName(itemRequest.getProductName());
