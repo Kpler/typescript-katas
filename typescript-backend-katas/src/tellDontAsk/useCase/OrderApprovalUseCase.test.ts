@@ -28,7 +28,6 @@ describe('OrderApprovalUseCase', () => {
 
   it('rejectedExistingOrder', () => {
     let initialOrder: Order = new Order(1);
-    initialOrder.setStatus(OrderStatus.CREATED);
     orderRepository.addOrder(initialOrder);
 
     let request: OrderApprovalRequest = new OrderApprovalRequest(initialOrder.getId());

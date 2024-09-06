@@ -33,7 +33,6 @@ describe('OrderShipmentUseCase', () => {
 
   it('createdOrdersCannotBeShipped', () => {
     let initialOrder: Order = new Order(2);
-    initialOrder.setStatus(OrderStatus.CREATED);
     orderRepository.addOrder(initialOrder);
 
     let request: OrderShipmentRequest = new OrderShipmentRequest();
