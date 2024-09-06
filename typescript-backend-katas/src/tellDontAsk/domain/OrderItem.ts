@@ -13,42 +13,26 @@ class OrderItem {
     const taxedAmount: number = Math.round(unitaryTaxedAmount * itemRequest.getQuantity() * 100) / 100;
     const taxAmount: number = unitaryTax * itemRequest.getQuantity();
 
-    this.setProduct(product);
-    this.setQuantity(itemRequest.getQuantity());
-    this.setTax(taxAmount);
-    this.setTaxedAmount(taxedAmount);
+    this.product = product;
+    this.quantity = itemRequest.getQuantity();
+    this.tax = taxAmount;
+    this.taxedAmount = taxedAmount;
+
   }
 
   public getProduct(): Product {
     return this.product;
   }
 
-  public setProduct(product: Product): void {
-    this.product = product;
-  }
-
   public getQuantity(): number {
     return this.quantity;
   }
-
-  public setQuantity(quantity: number): void {
-    this.quantity = quantity;
-  }
-
   public getTaxedAmount(): number {
     return this.taxedAmount;
   }
 
-  public setTaxedAmount(taxedAmount: number): void {
-    this.taxedAmount = taxedAmount;
-  }
-
   public getTax(): number {
     return this.tax;
-  }
-
-  public setTax(tax: number): void {
-    this.tax = tax;
   }
 }
 
