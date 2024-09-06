@@ -3,9 +3,7 @@ import OrderApprovalUseCase from "./OrderApprovalUseCase";
 import OrderApprovalRequest from "./OrderApprovalRequest";
 import {OrderStatus} from "../domain/OrderStatus";
 import Order from "../domain/Order";
-import RejectedOrderCannotBeApprovedException from "../utils/RejectedOrderCannotBeApprovedException";
-import ApprovedOrderCannotBeRejectedException from "../utils/ApprovedOrderCannotBeRejectedException";
-import ShippedOrdersCannotBeChangedException from "../utils/ShippedOrdersCannotBeChangedException";
+import {RejectedOrderCannotBeApprovedException, ApprovedOrderCannotBeRejectedException, ShippedOrdersCannotBeChangedException } from "../utils/exceptions";
 
 describe('OrderApprovalUseCase', () => {
   let orderRepository: TestOrderRepository;

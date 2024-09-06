@@ -1,10 +1,8 @@
 import Order from '../domain/Order';
 import { OrderStatus } from '../domain/OrderStatus';
 import OrderRepository from '../repository/OrderRepository';
-import ApprovedOrderCannotBeRejectedException from '../utils/ApprovedOrderCannotBeRejectedException';
+import {ShippedOrdersCannotBeChangedException, ApprovedOrderCannotBeRejectedException, RejectedOrderCannotBeApprovedException} from '../utils/exceptions';
 import OrderApprovalRequest from './OrderApprovalRequest';
-import RejectedOrderCannotBeApprovedException from '../utils/RejectedOrderCannotBeApprovedException';
-import ShippedOrdersCannotBeChangedException from '../utils/ShippedOrdersCannotBeChangedException';
 
 class OrderApprovalUseCase {
   private readonly orderRepository: OrderRepository;

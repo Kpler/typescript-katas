@@ -5,7 +5,7 @@ import Product from '../domain/Product';
 import OrderRepository from '../repository/OrderRepository';
 import { ProductCatalog } from '../repository/ProductCatalog';
 import SellItemsRequest from './SellItemsRequest';
-import UnknownProductException from '../utils/UnknownProductException';
+import {UnknownProductException} from '../utils/exceptions';
 
 class OrderCreationUseCase {
   private readonly orderRepository: OrderRepository;

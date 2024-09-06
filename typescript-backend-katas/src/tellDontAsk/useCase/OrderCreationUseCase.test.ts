@@ -7,7 +7,7 @@ import SellItemRequest from "./SellItemRequest";
 import SellItemsRequest from "./SellItemsRequest";
 import Order from "../domain/Order";
 import {OrderStatus} from "../domain/OrderStatus";
-import UnknownProductException from "../utils/UnknownProductException";
+import {UnknownProductException} from "../utils/exceptions";
 import Product from "../domain/Product";
 
 describe('OrderApprovalUseCase', () => {
