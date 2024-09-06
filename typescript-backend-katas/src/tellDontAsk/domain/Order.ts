@@ -10,8 +10,10 @@ class Order {
   private id: number;
 
   constructor(currency: string, items: OrderItem[]) {
-    this.total = 0;
-    this.tax = 0;
+    const total = items.reduce((sum, item) => sum + item.getTaxedAmount(), 0)
+    const totalTax = items.reduce((sum, item) => sum + item.getTax(), 0)
+    this.total = total;
+    this.tax = totalTax;
     this.status = OrderStatus.CREATED;
     this.currency = currency;
     this.items = items;
@@ -21,32 +23,16 @@ class Order {
     return this.total;
   }
 
-  public setTotal(total: number): void {
-    this.total = total;
-  }
-
   public getCurrency(): string {
     return this.currency;
-  }
-
-  public setCurrency(currency: string): void {
-    this.currency = currency;
   }
 
   public getItems(): OrderItem[] {
     return this.items;
   }
 
-  public setItems(items: OrderItem[]): void {
-    this.items = items;
-  }
-
   public getTax(): number {
     return this.tax;
-  }
-
-  public setTax(tax: number): void {
-    this.tax = tax;
   }
 
   public getStatus(): OrderStatus {

@@ -17,7 +17,6 @@ class OrderCreationUseCase {
 
   public run(request: SellItemsRequest): void {
     const items: OrderItem[] = [];
-    const order: Order = new Order('EUR', items);
 
     for (const itemRequest of request.getRequests()) {
        const product: Product = this.productCatalog.getByName(itemRequest.getProductName());
@@ -27,17 +26,10 @@ class OrderCreationUseCase {
       }
       else {
         const orderItem: OrderItem = new OrderItem(product, itemRequest);
-        order.setTax(order.getTax() + orderItem.getTax());
         items.push(orderItem);
       }
     }
-
-    items.forEach(item => {
-      order.getItems().push(item);
-    });
-
-    const total = items.reduce((sum, item) => sum + item.getTaxedAmount(), 0)
-    order.setTotal(total);
+    const order: Order = new Order('EUR', items);
 
     this.orderRepository.save(order);
   }
