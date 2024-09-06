@@ -1,10 +1,20 @@
 import Product from './Product';
+import product from "./Product";
+import product from "./Product";
+import SellItemRequest from "../useCase/SellItemRequest";
 
 class OrderItem {
   private product: Product;
   private quantity: number;
   private taxedAmount: number;
   private tax: number;
+
+  constructor(product: Product, itemRequest: SellItemRequest) {
+    this.product = product;
+    this.quantity = itemRequest.getQuantity();
+    this.taxedAmount = Math.round(product.computeUnitaryTaxedAmount() * itemRequest.getQuantity() * 100) / 100;
+    this.tax = product.computeUnitaryTax() * itemRequest.getQuantity();
+  }
 
   public getProduct(): Product {
     return this.product;

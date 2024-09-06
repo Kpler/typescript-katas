@@ -28,7 +28,6 @@ class Product {
     return Math.round((this.price + unitaryTax) * 100) / 100;
   }
 
-
   // const taxedAmount: number = Math.round(unitaryTaxedAmount * itemRequest.getQuantity() * 100) / 100;
   // const taxAmount: number = unitaryTax * itemRequest.getQuantity();
 }
