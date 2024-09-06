@@ -42,16 +42,28 @@ class Order {
     this.tax = tax;
   }
 
-  public getStatus(): OrderStatus {
-    return this.status;
-  }
-
   public setStatus(status: OrderStatus): void {
     this.status = status;
   }
 
   public getId(): number {
     return this.id;
+  }
+
+  public isCreated() {
+      return this.status === OrderStatus.CREATED;
+  }
+
+  public isShipped() {
+      return this.status === OrderStatus.SHIPPED;
+  }
+
+  public isRejected() {
+      return this.status === OrderStatus.REJECTED;
+  }
+
+  public isApproved() {
+      return this.status === OrderStatus.APPROVED;
   }
 }
 

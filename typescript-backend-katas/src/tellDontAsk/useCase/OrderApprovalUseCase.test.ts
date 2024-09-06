@@ -23,7 +23,7 @@ describe('OrderApprovalUseCase', () => {
     useCase.run(request);
 
     const savedOrder: Order = orderRepository.getSavedOrder();
-    expect(savedOrder.getStatus()).toBe(OrderStatus.APPROVED);
+    expect(savedOrder.isApproved()).toBe(true);
   });
 
   it('rejectedExistingOrder', () => {
@@ -35,7 +35,7 @@ describe('OrderApprovalUseCase', () => {
     useCase.run(request);
 
     const savedOrder: Order = orderRepository.getSavedOrder();
-    expect(savedOrder.getStatus()).toBe(OrderStatus.REJECTED);
+    expect(savedOrder.isRejected()).toBe(true);
   });
 
   it('cannotApproveRejectedOrder', () => {

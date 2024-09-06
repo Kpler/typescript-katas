@@ -44,7 +44,7 @@ describe('OrderApprovalUseCase', () => {
       useCase.run(request);
 
       const insertedOrder: Order = orderRepository.getSavedOrder();
-      expect(insertedOrder.getStatus()).toBe(OrderStatus.CREATED);
+      expect(insertedOrder.isCreated()).toBe(true);
       expect(insertedOrder.getTotal()).toBe(23.20);
       expect(insertedOrder.getTax()).toBe((2.13));
       expect(insertedOrder.getCurrency()).toBe(('EUR'));

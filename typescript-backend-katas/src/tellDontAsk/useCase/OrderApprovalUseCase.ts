@@ -14,15 +14,15 @@ class OrderApprovalUseCase {
   public run(request: OrderApprovalRequest): void {
       const order: Order = this.orderRepository.getById(request.getOrderId());
 
-      if (order.getStatus() === OrderStatus.SHIPPED) {
+      if (order.isShipped()) {
           throw new ShippedOrdersCannotBeChangedException();
       }
 
-      if (request.isApproved() && order.getStatus() === OrderStatus.REJECTED) {
+      if (request.isApproved() && order.isRejected()) {
           throw new RejectedOrderCannotBeApprovedException();
       }
 
-      if (!request.isApproved() && order.getStatus() === OrderStatus.APPROVED) {
+      if (!request.isApproved() && order.isApproved()) {
           throw new ApprovedOrderCannotBeRejectedException();
       }
 
