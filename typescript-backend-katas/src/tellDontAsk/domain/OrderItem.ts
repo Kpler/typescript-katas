@@ -1,4 +1,4 @@
-import SellItemRequest from '../useCase/SellItemRequest';
+import SellItemRequest from './SellItemRequest';
 import Product from './Product';
 
 class OrderItem {

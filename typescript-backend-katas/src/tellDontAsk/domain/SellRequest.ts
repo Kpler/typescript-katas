@@ -1,10 +1,10 @@
-import SellItemRequest from "./SellItemRequest";
+import SellItemRequest from "../domain/SellItemRequest";
 
 class SellRequest {
   private requests: SellItemRequest[];
 
   public setRequests(requests: SellItemRequest[]): void {
-      this.requests = requests;
+    this.requests = requests;
   }
 
   public getRequests(): SellItemRequest[] {
