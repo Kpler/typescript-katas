@@ -9,6 +9,14 @@ class Order {
   private status: OrderStatus;
   private id: number;
 
+  constructor(currency: string, items: OrderItem[]) {
+    this.total = 0;
+    this.tax = 0;
+    this.status = OrderStatus.CREATED;
+    this.currency = currency;
+    this.items = items;
+  }
+
   public getTotal(): number {
     return this.total;
   }

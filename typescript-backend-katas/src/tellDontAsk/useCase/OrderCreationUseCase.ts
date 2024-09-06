@@ -1,6 +1,5 @@
 import Order from '../domain/Order';
 import OrderItem from '../domain/OrderItem';
-import { OrderStatus } from '../domain/OrderStatus';
 import Product from '../domain/Product';
 import OrderRepository from '../repository/OrderRepository';
 import { ProductCatalog } from '../repository/ProductCatalog';
@@ -17,12 +16,8 @@ class OrderCreationUseCase {
   }
 
   public run(request: SellItemsRequest): void {
-    const order: Order = new Order();
-    order.setStatus(OrderStatus.CREATED);
-    order.setItems([]);
-    order.setCurrency('EUR');
-    order.setTotal(0);
-    order.setTax(0);
+    const items: OrderItem[] = [];
+    const order: Order = new Order('EUR', items);
 
     for (const itemRequest of request.getRequests()) {
        const product: Product = this.productCatalog.getByName(itemRequest.getProductName());
@@ -32,12 +27,17 @@ class OrderCreationUseCase {
       }
       else {
         const orderItem: OrderItem = new OrderItem(product, itemRequest);
-        order.getItems().push(orderItem);
-
-        order.setTotal(order.getTotal() + orderItem.getTaxedAmount());
         order.setTax(order.getTax() + orderItem.getTax());
+        items.push(orderItem);
       }
     }
+
+    items.forEach(item => {
+      order.getItems().push(item);
+    });
+
+    const total = items.reduce((sum, item) => sum + item.getTaxedAmount(), 0)
+    order.setTotal(total);
 
     this.orderRepository.save(order);
   }

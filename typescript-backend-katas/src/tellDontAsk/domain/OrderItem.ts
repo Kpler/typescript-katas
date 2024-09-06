@@ -1,6 +1,4 @@
 import Product from './Product';
-import product from "./Product";
-import product from "./Product";
 import SellItemRequest from "../useCase/SellItemRequest";
 
 class OrderItem {
