@@ -15,7 +15,6 @@ describe('OrderApprovalUseCase', () => {
   });
   it('approvedExistingOrder', () => {
     let initialOrder: Order = new Order();
-    initialOrder.setStatus(OrderStatus.CREATED);
     initialOrder.setId(1);
     orderRepository.addOrder(initialOrder);
 
