@@ -1,5 +1,6 @@
-import Order from '../../src/domain/Order';
-import { ShipmentService } from '../../src/service/ShipmentService';
+import {ShipmentService} from "../service/ShipmentService";
+import Order from "../domain/Order";
+
 
 class TestShipmentService implements ShipmentService {
   private shippedOrder: Order = null;

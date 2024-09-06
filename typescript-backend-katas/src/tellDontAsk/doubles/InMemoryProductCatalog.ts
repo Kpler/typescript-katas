@@ -1,5 +1,6 @@
-import Product from '../../src/domain/Product';
-import { ProductCatalog } from '../../src/repository/ProductCatalog';
+import {ProductCatalog} from "../repository/ProductCatalog";
+import Product from "../domain/Product";
+
 
 class InMemoryProductCatalog implements ProductCatalog {
   private products: Product[];
@@ -14,4 +15,3 @@ class InMemoryProductCatalog implements ProductCatalog {
 }
 
 export default InMemoryProductCatalog;
-

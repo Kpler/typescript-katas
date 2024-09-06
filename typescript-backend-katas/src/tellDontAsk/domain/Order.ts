@@ -1,5 +1,8 @@
 import OrderItem from './OrderItem';
 import {OrderStatus} from './OrderStatus';
+import ShippedOrdersCannotBeChangedException from "../useCase/ShippedOrdersCannotBeChangedException";
+import RejectedOrderCannotBeApprovedException from "../useCase/RejectedOrderCannotBeApprovedException";
+import ApprovedOrderCannotBeRejectedException from "../useCase/ApprovedOrderCannotBeRejectedException";
 
 class Order {
   private total: number;
@@ -43,6 +46,22 @@ class Order {
 
   public getStatus(): OrderStatus {
     return this.status;
+  }
+
+  public goToNextStatus(isApproved: boolean): void {
+    if (this.getStatus() === OrderStatus.SHIPPED) {
+      throw new ShippedOrdersCannotBeChangedException();
+    }
+
+    if (isApproved && this.getStatus() === OrderStatus.REJECTED) {
+      throw new RejectedOrderCannotBeApprovedException();
+    }
+
+    if (!isApproved && this.getStatus() === OrderStatus.APPROVED) {
+      throw new ApprovedOrderCannotBeRejectedException();
+    }
+
+    this.status = isApproved ? OrderStatus.APPROVED : OrderStatus.REJECTED
   }
 
   public setStatus(status: OrderStatus): void {
