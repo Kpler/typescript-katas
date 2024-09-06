@@ -4,7 +4,7 @@ import { OrderStatus } from '../domain/OrderStatus';
 import Product from '../domain/Product';
 import OrderRepository from '../repository/OrderRepository';
 import { ProductCatalog } from '../repository/ProductCatalog';
-import SellItemsRequest from './SellItemsRequest';
+import SellRequest from './SellRequest';
 import UnknownProductException from './UnknownProductException';
 
 class OrderCreationUseCase {
@@ -16,7 +16,7 @@ class OrderCreationUseCase {
     this.productCatalog = productCatalog;
   }
 
-  public run(request: SellItemsRequest): void {
+  public run(request: SellRequest): void {
     const order: Order = new Order();
     order.setStatus(OrderStatus.CREATED);
     order.setItems([]);
@@ -25,7 +25,7 @@ class OrderCreationUseCase {
     order.setTax(0);
 
     for (const itemRequest of request.getRequests()) {
-       const product: Product = this.productCatalog.getByName(itemRequest.getProductName());
+        const product: Product = this.productCatalog.getByName(itemRequest.getProductName());
 
       if (product === undefined) {
         throw new UnknownProductException();

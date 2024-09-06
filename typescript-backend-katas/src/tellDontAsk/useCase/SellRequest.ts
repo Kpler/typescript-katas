@@ -1,6 +1,6 @@
 import SellItemRequest from "./SellItemRequest";
 
-class SellItemsRequest {
+class SellRequest {
   private requests: SellItemRequest[];
 
   public setRequests(requests: SellItemRequest[]): void {
@@ -12,4 +12,4 @@ class SellItemsRequest {
   }
 }
 
-export default SellItemsRequest;
+export default SellRequest;

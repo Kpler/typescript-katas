@@ -4,7 +4,7 @@ import Category from "../domain/Category";
 import {ProductCatalog} from "../repository/ProductCatalog";
 import OrderCreationUseCase from "./OrderCreationUseCase";
 import SellItemRequest from "./SellItemRequest";
-import SellItemsRequest from "./SellItemsRequest";
+import SellRequest from "./SellRequest";
 import Order from "../domain/Order";
 import {OrderStatus} from "../domain/OrderStatus";
 import UnknownProductException from "./UnknownProductException";
@@ -36,7 +36,7 @@ describe('OrderApprovalUseCase', () => {
       tomatoRequest.setProductName('tomato');
       tomatoRequest.setQuantity(3);
 
-      let request: SellItemsRequest = new SellItemsRequest();
+      let request: SellRequest = new SellRequest();
       request.setRequests([]);
       request.getRequests().push(saladRequest);
       request.getRequests().push(tomatoRequest);
@@ -62,7 +62,7 @@ describe('OrderApprovalUseCase', () => {
   });
 
   it('unknownProduct', () => {
-      let request: SellItemsRequest = new SellItemsRequest();
+      let request: SellRequest = new SellRequest();
       request.setRequests([]);
       let unknownProductRequest: SellItemRequest = new SellItemRequest();
       unknownProductRequest.setProductName('unknown product');
