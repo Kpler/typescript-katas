@@ -20,10 +20,6 @@ class OrderShipmentUseCase {
 
     order.validateCanBeShipped();
 
-    if (order.getStatus() === OrderStatus.SHIPPED) {
-      throw new OrderCannotBeShippedTwiceException();
-    }
-
     this.shipmentService.ship(order);
 
     order.setStatus(OrderStatus.SHIPPED);

@@ -1,4 +1,5 @@
 import OrderCannotBeShippedException from '../useCase/OrderCannotBeShippedException';
+import OrderCannotBeShippedTwiceException from '../useCase/OrderCannotBeShippedTwiceException';
 import OrderItem from './OrderItem';
 import { OrderStatus } from './OrderStatus';
 
@@ -61,6 +62,9 @@ class Order {
   public validateCanBeShipped(): void {
     if (this.status === OrderStatus.CREATED || this.status === OrderStatus.REJECTED) {
       throw new OrderCannotBeShippedException();
+    }
+    if (this.status === OrderStatus.SHIPPED) {
+      throw new OrderCannotBeShippedTwiceException();
     }
   }
 }

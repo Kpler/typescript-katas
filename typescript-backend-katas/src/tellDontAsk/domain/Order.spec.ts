@@ -1,4 +1,5 @@
 import OrderCannotBeShippedException from "../useCase/OrderCannotBeShippedException";
+import OrderCannotBeShippedTwiceException from "../useCase/OrderCannotBeShippedTwiceException";
 import Order from "./Order";
 import { OrderStatus } from "./OrderStatus";
 
@@ -14,6 +15,12 @@ describe('Order.validateCanBeShipped', () => {
         mockOrder.setStatus(OrderStatus.CREATED);
 
         expect(() => mockOrder.validateCanBeShipped()).toThrow(OrderCannotBeShippedException);
+    });
+    it('it should throw OrderCannotBeShippedException when OrderStatus is shipped', () => {
+        let mockOrder = new Order();
+        mockOrder.setStatus(OrderStatus.SHIPPED);
+
+        expect(() => mockOrder.validateCanBeShipped()).toThrow(OrderCannotBeShippedTwiceException);
     });
 }
 )
