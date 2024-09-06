@@ -58,7 +58,7 @@ class Order {
   }
 
   public canBeShipped(): boolean {
-    return false;
+    return this.status === OrderStatus.APPROVED;
   }
 }
 
