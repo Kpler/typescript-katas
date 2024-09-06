@@ -1,18 +1,19 @@
+import OrderCannotBeShippedException from "../useCase/OrderCannotBeShippedException";
 import Order from "./Order";
 import { OrderStatus } from "./OrderStatus";
 
-describe('Order', () => {
-    it('it should return true when OrderStatus is APPROVED', () => {
+describe('Order.validateCanBeShipped', () => {
+    it('it should not raise an exception OrderStatus is APPROVED', () => {
         let mockOrder = new Order();
         mockOrder.setStatus(OrderStatus.APPROVED);
 
-        expect(mockOrder.canBeShipped()).toBe(true);
+        expect(mockOrder.validateCanBeShipped());
     });
-    it('it should return false when OrderStatus is CREATED', () => {
+    it('it should throw OrderCannotBeShippedException when OrderStatus is CREATED', () => {
         let mockOrder = new Order();
         mockOrder.setStatus(OrderStatus.CREATED);
 
-        expect(mockOrder.canBeShipped()).toBe(false);
+        expect(() => mockOrder.validateCanBeShipped()).toThrow(OrderCannotBeShippedException);
     });
 }
 )

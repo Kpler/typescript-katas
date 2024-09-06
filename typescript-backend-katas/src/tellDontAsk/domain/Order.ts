@@ -1,3 +1,4 @@
+import OrderCannotBeShippedException from '../useCase/OrderCannotBeShippedException';
 import OrderItem from './OrderItem';
 import { OrderStatus } from './OrderStatus';
 
@@ -57,8 +58,10 @@ class Order {
     this.id = id;
   }
 
-  public canBeShipped(): boolean {
-    return this.status === OrderStatus.APPROVED;
+  public validateCanBeShipped(): void {
+    if (this.status === OrderStatus.CREATED || this.status === OrderStatus.REJECTED) {
+      throw new OrderCannotBeShippedException();
+    }
   }
 }
 
