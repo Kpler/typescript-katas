@@ -4,8 +4,8 @@ import OrderShipmentUseCase from "./OrderShipmentUseCase";
 import Order from "../domain/Order";
 import {OrderStatus} from "../domain/OrderStatus";
 import OrderShipmentRequest from "./OrderShipmentRequest";
-import OrderCannotBeShippedException from "./OrderCannotBeShippedException";
-import OrderCannotBeShippedTwiceException from "./OrderCannotBeShippedTwiceException";
+import OrderCannotBeShippedException from "../utils/OrderCannotBeShippedException";
+import OrderCannotBeShippedTwiceException from "../utils/OrderCannotBeShippedTwiceException";
 
 describe('OrderShipmentUseCase', () => {
   let orderRepository: TestOrderRepository;
