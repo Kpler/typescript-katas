@@ -7,7 +7,7 @@ describe('Order.validateCanBeShipped', () => {
         let mockOrder = new Order();
         mockOrder.setStatus(OrderStatus.APPROVED);
 
-        expect(mockOrder.validateCanBeShipped());
+        expect(() => mockOrder.validateCanBeShipped()).not.toThrow(Error);
     });
     it('it should throw OrderCannotBeShippedException when OrderStatus is CREATED', () => {
         let mockOrder = new Order();
