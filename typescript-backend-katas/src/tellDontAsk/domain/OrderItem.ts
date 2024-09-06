@@ -8,15 +8,14 @@ class OrderItem {
   private tax: number;
 
   public constructor(itemRequest: SellItemRequest, product: Product) {
-    const unitaryTax: number = Math.round(product.getPrice() / 100 * product.getCategory().getTaxPercentage() * 100) / 100;
-    const unitaryTaxedAmount: number = Math.round((product.getPrice() + unitaryTax) * 100) / 100;
-    const taxedAmount: number = Math.round(unitaryTaxedAmount * itemRequest.getQuantity() * 100) / 100;
-    const taxAmount: number = unitaryTax * itemRequest.getQuantity();
-
     this.product = product;
     this.quantity = itemRequest.getQuantity();
-    this.tax = taxAmount;
-    this.taxedAmount = taxedAmount;
+
+    const unitaryTax: number = Math.round(product.getPrice() / 100 * product.getCategory().getTaxPercentage() * 100) / 100;
+    const unitaryTaxedAmount: number = Math.round((product.getPrice() + unitaryTax) * 100) / 100;
+
+    this.tax = unitaryTax * itemRequest.getQuantity();
+    this.taxedAmount = Math.round(unitaryTaxedAmount * itemRequest.getQuantity() * 100) / 100;
 
   }
 
