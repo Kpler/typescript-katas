@@ -1,9 +1,10 @@
 import Category from './Category';
 
 class Product {
-  private name: string;
-  private price: number;
-  private category: Category;
+  constructor(  private name: string,
+  private price: number,
+  private category: Category) {
+  }
 
   public getName(): string {
     return this.name;

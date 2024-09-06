@@ -12,34 +12,22 @@ import Product from "../domain/Product";
 
 describe('OrderApprovalUseCase', () => {
   const orderRepository: TestOrderRepository = new TestOrderRepository();
-  let food: Category = new Category();
-  food.setName('food');
-  food.setTaxPercentage(10);
+  let food: Category = new Category('food', 10);
 
-  const saladProduct = new Product();
-  saladProduct.setName('salad');
-  saladProduct.setPrice(3.56);
-  saladProduct.setCategory(food);
-  const tomatoProduct = new Product();
-  tomatoProduct.setName('tomato');
-  tomatoProduct.setPrice(4.65);
-  tomatoProduct.setCategory(food);
+  const saladProduct = new Product('salad', 3.56, food);
+  const tomatoProduct = new Product('tomato', 4.65, food);
+
   const productCatalog: ProductCatalog = new InMemoryProductCatalog([ saladProduct, tomatoProduct]);
   const useCase: OrderCreationUseCase = new OrderCreationUseCase(orderRepository, productCatalog);
 
   it('sellMultipleItems', () => {
-      let saladRequest: SellItemRequest = new SellItemRequest();
-      saladRequest.setProductName('salad');
-      saladRequest.setQuantity(2);
+      let saladRequest: SellItemRequest = new SellItemRequest('salad', 2);
 
-      let tomatoRequest: SellItemRequest = new SellItemRequest();
-      tomatoRequest.setProductName('tomato');
-      tomatoRequest.setQuantity(3);
+      let tomatoRequest: SellItemRequest = new SellItemRequest('tomato', 3);
 
-      let request: SellItemsRequest = new SellItemsRequest();
-      request.setRequests([]);
-      request.getRequests().push(saladRequest);
-      request.getRequests().push(tomatoRequest);
+      let request: SellItemsRequest = new SellItemsRequest(
+          [saladRequest, tomatoRequest]
+      );
 
       useCase.run(request);
 
@@ -62,10 +50,8 @@ describe('OrderApprovalUseCase', () => {
   });
 
   it('unknownProduct', () => {
-      let request: SellItemsRequest = new SellItemsRequest();
-      request.setRequests([]);
-      let unknownProductRequest: SellItemRequest = new SellItemRequest();
-      unknownProductRequest.setProductName('unknown product');
+      let request: SellItemsRequest = new SellItemsRequest([]);
+      let unknownProductRequest: SellItemRequest = new SellItemRequest('unknown product', 0);
       request.getRequests().push(unknownProductRequest);
 
       expect(() => useCase.run(request)).toThrow(UnknownProductException);

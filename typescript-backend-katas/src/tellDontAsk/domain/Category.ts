@@ -1,6 +1,6 @@
 class Category {
-  private name: string;
-  private taxPercentage: number;
+  constructor(private name: string, private taxPercentage: number) {
+  }
 
   public getName(): string {
       return this.name;
