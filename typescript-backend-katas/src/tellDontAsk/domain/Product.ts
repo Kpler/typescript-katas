@@ -28,6 +28,10 @@ class Product {
   public setCategory(category: Category): void {
     this.category = category;
   }
+
+  public calculateUnitaryTax(): number {
+    return Math.round(this.price / 100 * this.category.getTaxPercentage() * 100) / 100;
+  }
 }
 
 export default Product;

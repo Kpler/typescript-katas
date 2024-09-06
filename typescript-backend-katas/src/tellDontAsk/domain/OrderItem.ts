@@ -11,7 +11,7 @@ class OrderItem {
     this.product = product;
     this.quantity = itemRequest.getQuantity();
 
-    const unitaryTax: number = Math.round(product.getPrice() / 100 * product.getCategory().getTaxPercentage() * 100) / 100;
+    const unitaryTax: number = product.calculateUnitaryTax();
     const unitaryTaxedAmount: number = Math.round((product.getPrice() + unitaryTax) * 100) / 100;
 
     this.tax = unitaryTax * this.quantity;
