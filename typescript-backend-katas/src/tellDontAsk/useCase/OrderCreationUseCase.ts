@@ -21,7 +21,7 @@ class OrderCreationUseCase {
 
     for (const itemRequest of request.getRequests()) {
        const product: Product = this.productCatalog.getByName(itemRequest.getProductName());
-       order.addItem(product, itemRequest);
+       order.addItem(product, itemRequest.toDomain());
     }
 
     this.orderRepository.save(order);

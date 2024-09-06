@@ -4,6 +4,7 @@ import ShippedOrdersCannotBeChangedException from "./ShippedOrdersCannotBeChange
 import RejectedOrderCannotBeApprovedException from "./RejectedOrderCannotBeApprovedException";
 import ApprovedOrderCannotBeRejectedException from "./ApprovedOrderCannotBeRejectedException";
 import UnknownProductException from "./UnknownProductException";
+import DomainSellItemRequst from "./DomainSellItemRequst";
 
 class Order {
   private total: number;
@@ -27,32 +28,16 @@ class Order {
     return this.total;
   }
 
-  public setTotal(total: number): void {
-    this.total = total;
-  }
-
   public getCurrency(): string {
     return this.currency;
-  }
-
-  public setCurrency(currency: string): void {
-    this.currency = currency;
   }
 
   public getItems(): OrderItem[] {
     return this.items;
   }
 
-  public setItems(items: OrderItem[]): void {
-    this.items = items;
-  }
-
   public getTax(): number {
     return this.tax;
-  }
-
-  public setTax(tax: number): void {
-    this.tax = tax;
   }
 
   public getStatus(): OrderStatus {
@@ -87,25 +72,19 @@ class Order {
     this.id = id;
   }
 
-  public addItem(product: any, itemRequest: any): void {
+  public addItem(product: any, itemRequest: DomainSellItemRequst): void {
     if (product === undefined) {
       throw new UnknownProductException();
-    }
-    else {
-      const unitaryTax: number = Math.round(product.getPrice() / 100 * product.getCategory().getTaxPercentage() * 100) / 100;
-      const unitaryTaxedAmount: number = Math.round((product.getPrice() + unitaryTax) * 100) / 100;
-      const taxedAmount: number = Math.round(unitaryTaxedAmount * itemRequest.getQuantity() * 100) / 100;
-      const taxAmount: number = unitaryTax * itemRequest.getQuantity();
-
+    } else {
       const orderItem: OrderItem = new OrderItem(
-        product,
-        itemRequest
+          product,
+          itemRequest
       );
 
       this.items.push(orderItem);
 
-      this.total = (this.getTotal() + taxedAmount);
-      this.tax = this.getTax() + taxAmount;
+      this.total = (this.getTotal() + orderItem.getTaxedAmount());
+      this.tax = this.getTax() + orderItem.getTax();
     }
   }
 }

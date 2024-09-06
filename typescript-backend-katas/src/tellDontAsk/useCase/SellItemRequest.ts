@@ -1,3 +1,5 @@
+import DomainSellItemRequst from '../domain/DomainSellItemRequst';
+
 class SellItemRequest {
   private quantity: number;
   private productName: string;
@@ -16,6 +18,13 @@ class SellItemRequest {
 
   public getProductName(): string {
       return this.productName;
+  }
+
+  public toDomain(): DomainSellItemRequst {
+    const domainSellItemRequest = new DomainSellItemRequst();
+    domainSellItemRequest.setQuantity(this.quantity);
+    domainSellItemRequest.setProductName(this.productName);
+    return domainSellItemRequest;
   }
 }
 

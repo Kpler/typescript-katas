@@ -1,4 +1,5 @@
 import Product from './Product';
+import DomainSellItemRequst from "./DomainSellItemRequst";
 
 class OrderItem {
   private product: Product;
@@ -8,7 +9,7 @@ class OrderItem {
 
   public constructor(
       product: Product,
-      itemRequest: any,
+      itemRequest: DomainSellItemRequst,
   ) {
 
     const unitaryTax = Math.round(product.getPrice() / 100 * product.getCategory().getTaxPercentage() * 100) / 100
@@ -26,32 +27,16 @@ class OrderItem {
     return this.product;
   }
 
-  public setProduct(product: Product): void {
-    this.product = product;
-  }
-
   public getQuantity(): number {
       return this.quantity;
-  }
-
-  public setQuantity(quantity: number): void {
-    this.quantity = quantity;
   }
 
   public getTaxedAmount(): number {
     return this.taxedAmount;
   }
 
-  public setTaxedAmount(taxedAmount: number): void {
-    this.taxedAmount = taxedAmount;
-  }
-
   public getTax(): number {
     return this.tax;
-  }
-
-  public setTax(tax: number): void {
-    this.tax = tax;
   }
 }
 
