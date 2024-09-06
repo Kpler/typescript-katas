@@ -4,7 +4,7 @@ import OrderShipmentUseCase from "./OrderShipmentUseCase";
 import Order from "../domain/Order";
 import {OrderStatus} from "../domain/OrderStatus";
 import OrderShipmentRequest from "./OrderShipmentRequest";
-import OrderCannotBeShippedException from "./OrderCannotBeShippedException";
+import OrderCannotBeShippedException from "./../domain/OrderCannotBeShippedException";
 import OrderCannotBeShippedTwiceException from "./../domain/OrderCannotBeShippedTwiceException";
 
 describe('OrderShipmentUseCase', () => {
