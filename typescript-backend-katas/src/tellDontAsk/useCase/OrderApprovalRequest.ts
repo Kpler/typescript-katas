@@ -2,6 +2,11 @@ class OrderApprovalRequest {
   private orderId: number;
   private approved: boolean;
 
+  constructor() {
+    this.orderId = null;
+    this.approved = false;
+  }
+
   public  setOrderId(orderId: number): void {
     this.orderId = orderId;
   }
@@ -10,8 +15,8 @@ class OrderApprovalRequest {
     return this.orderId;
   }
 
-  public setApproved(approved: boolean): void {
-    this.approved = approved;
+  public approveRequest(): void {
+      this.approved = true;
   }
 
   public isApproved(): boolean{

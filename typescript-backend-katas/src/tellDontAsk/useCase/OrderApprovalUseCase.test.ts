@@ -20,7 +20,7 @@ describe('OrderApprovalUseCase', () => {
 
     let request: OrderApprovalRequest = new OrderApprovalRequest();
     request.setOrderId(1);
-    request.setApproved(true);
+    request.approveRequest();
 
     useCase.run(request);
 
@@ -36,7 +36,6 @@ describe('OrderApprovalUseCase', () => {
 
     let request: OrderApprovalRequest = new OrderApprovalRequest();
     request.setOrderId(1);
-    request.setApproved(false);
 
     useCase.run(request);
 
@@ -52,7 +51,7 @@ describe('OrderApprovalUseCase', () => {
 
     const request: OrderApprovalRequest = new OrderApprovalRequest();
     request.setOrderId(1);
-    request.setApproved(true);
+    request.approveRequest();
 
     expect(() => useCase.run(request)).toThrow(RejectedOrderCannotBeApprovedException);
     expect(orderRepository.getSavedOrder()).toBe(null);
@@ -66,7 +65,6 @@ describe('OrderApprovalUseCase', () => {
 
     const request: OrderApprovalRequest = new OrderApprovalRequest();
     request.setOrderId(1);
-    request.setApproved(false);
 
     expect(() =>  useCase.run(request)).toThrow(ApprovedOrderCannotBeRejectedException);
     expect(orderRepository.getSavedOrder()).toBe(null);
@@ -80,7 +78,7 @@ describe('OrderApprovalUseCase', () => {
 
     const request: OrderApprovalRequest = new OrderApprovalRequest();
     request.setOrderId(1);
-    request.setApproved(true);
+    request.approveRequest();
 
     expect(() => useCase.run(request)).toThrow(ShippedOrdersCannotBeChangedException);
     expect(orderRepository.getSavedOrder()).toBe(null);
@@ -94,7 +92,6 @@ describe('OrderApprovalUseCase', () => {
 
     let request: OrderApprovalRequest = new OrderApprovalRequest();
     request.setOrderId(1);
-    request.setApproved(false);
 
     expect(() => useCase.run(request)).toThrow(ShippedOrdersCannotBeChangedException);
     expect(orderRepository.getSavedOrder()).toBe(null);
