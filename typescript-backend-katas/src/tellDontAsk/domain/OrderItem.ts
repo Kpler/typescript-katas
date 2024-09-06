@@ -2,10 +2,10 @@ import Product from './Product';
 import DomainSellItemRequst from "./DomainSellItemRequst";
 
 class OrderItem {
-  private product: Product;
-  private quantity: number;
-  private taxedAmount: number;
-  private tax: number;
+  private readonly product: Product;
+  private readonly quantity: number;
+  private readonly taxedAmount: number;
+  private readonly tax: number;
 
   public constructor(
       product: Product,
