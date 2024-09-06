@@ -1,5 +1,5 @@
 import OrderItem from './OrderItem';
-import {OrderStatus} from './OrderStatus';
+import { OrderStatus } from './OrderStatus';
 
 class Order {
   private total: number;
@@ -55,6 +55,10 @@ class Order {
 
   public setId(id: number): void {
     this.id = id;
+  }
+
+  public canBeShipped(): boolean {
+    return false;
   }
 }
 
