@@ -1,8 +1,8 @@
 import OrderItem from './OrderItem';
 import {OrderStatus} from './OrderStatus';
-import ShippedOrdersCannotBeChangedException from "../useCase/ShippedOrdersCannotBeChangedException";
-import RejectedOrderCannotBeApprovedException from "../useCase/RejectedOrderCannotBeApprovedException";
-import ApprovedOrderCannotBeRejectedException from "../useCase/ApprovedOrderCannotBeRejectedException";
+import ShippedOrdersCannotBeChangedException from "./ShippedOrdersCannotBeChangedException";
+import RejectedOrderCannotBeApprovedException from "./RejectedOrderCannotBeApprovedException";
+import ApprovedOrderCannotBeRejectedException from "./ApprovedOrderCannotBeRejectedException";
 
 class Order {
   private total: number;

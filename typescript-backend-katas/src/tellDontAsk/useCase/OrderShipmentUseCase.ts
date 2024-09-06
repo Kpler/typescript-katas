@@ -3,7 +3,7 @@ import { OrderStatus } from '../domain/OrderStatus';
 import OrderRepository from '../repository/OrderRepository';
 import { ShipmentService } from '../service/ShipmentService';
 import OrderCannotBeShippedException from './OrderCannotBeShippedException';
-import OrderCannotBeShippedTwiceException from './OrderCannotBeShippedTwiceException';
+import OrderCannotBeShippedTwiceException from './../domain/OrderCannotBeShippedTwiceException';
 import OrderShipmentRequest from './OrderShipmentRequest';
 
 class OrderShipmentUseCase {
