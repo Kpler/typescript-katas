@@ -1,6 +1,7 @@
 import {ProductUnit} from "./model/ProductUnit"
 import {ReceiptItem} from "./model/ReceiptItem"
 import {Receipt} from "./model/Receipt"
+import {Discount} from "./model/Discount";
 
 export class ReceiptPrinter {
 
@@ -24,17 +25,7 @@ export class ReceiptPrinter {
             result += line;
         }
         for (const discount of receipt.getDiscounts()) {
-            let productPresentation = discount.product.name;
-            let pricePresentation = this.format2Decimals(discount.discountAmount);
-            let description = discount.description;
-            result += description;
-            result += "(";
-            result += productPresentation;
-            result += ")";
-            result += ReceiptPrinter.getWhitespace(this.columns - 3 - productPresentation.length - description.length - pricePresentation.length);
-            result += "-";
-            result += pricePresentation;
-            result += "\n";
+            result += this.printDiscount(discount)
         }
         result += "\n";
         let pricePresentation = this.format2Decimals(receipt.getTotalPrice());
@@ -64,4 +55,12 @@ export class ReceiptPrinter {
     private static getWhitespace(whitespaceSize: number): string {
         return " ".repeat(whitespaceSize);
     }
+
+    private printDiscount(discount : Discount) : string {
+        const productPresentation = discount.product.name;
+        const pricePresentation = this.format2Decimals(discount.discountAmount);
+        const description = discount.description;
+        const receiptPrinter = ReceiptPrinter.getWhitespace(this.columns - 3 - productPresentation.length - description.length - pricePresentation.length)
+        return `${description}(${productPresentation})${receiptPrinter}-${pricePresentation}\n`
+}
 }
