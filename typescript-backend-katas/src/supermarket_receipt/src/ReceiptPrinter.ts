@@ -13,13 +13,9 @@ export class ReceiptPrinter {
         for (const discount of receipt.getDiscounts()) {
             result += discount.print(this.columns)
         }
-        result += "\n";
-        let pricePresentation = ReceiptPrinter.format2Decimals(receipt.getTotalPrice());
-        let total = "Total: ";
-        let whitespace = ReceiptPrinter.getWhitespace(this.columns - total.length - pricePresentation.length);
-        result += total;
-        result += whitespace;
-        result += pricePresentation;
+        const pricePresentation = ReceiptPrinter.format2Decimals(receipt.getTotalPrice());
+        const total = "Total: ";
+        result +=`\n${total}${ReceiptPrinter.getWhitespace(this.columns - total.length - pricePresentation.length)}${pricePresentation}`
 
         return result;
     }
