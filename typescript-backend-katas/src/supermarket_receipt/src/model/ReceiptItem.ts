@@ -21,10 +21,11 @@ export class ReceiptItem {
         return `${name}${ReceiptPrinter.getWhitespace(whitespaceSize)}${price}\n${this.quantity != 1 ? moreThan1ItemText : ""}`
     }
 
-    private presentQuantity(): string  {
-        return ProductUnit.Each == this.product.unit
-            // TODO make sure this is the simplest way to make something similar to the java version
-            ? new Intl.NumberFormat('en-UK', {maximumFractionDigits: 0}).format(this.quantity)
-            : new Intl.NumberFormat('en-UK', {minimumFractionDigits: 3}).format(this.quantity);
+    private presentQuantity(): string {
+        const options = ProductUnit.Each === this.product.unit
+            ? { maximumFractionDigits: 0 }
+            : { minimumFractionDigits: 3 };
+
+        return new Intl.NumberFormat('en-UK', options).format(this.quantity);
     }
 }
