@@ -60,12 +60,7 @@ export class ShoppingCart {
                     x = 3;
 
                 } else if (offer.offerType == SpecialOfferType.TwoForAmount) {
-                    x = 2;
-                    if (quantityAsInt >= 2) {
-                        const total = offer.argument * Math.floor(quantityAsInt / x) + quantityAsInt % 2 * unitPrice;
-                        const discountN = unitPrice * quantity - total;
-                        discount = new Discount(product, "2 for " + offer.argument, discountN);
-                    }
+                    discount = this.applyDiscountTwoForAmount(quantityAsInt, offer, unitPrice, productQuantity)
 
                 } if (offer.offerType == SpecialOfferType.FiveForAmount) {
                     x = 5;
@@ -88,4 +83,12 @@ export class ShoppingCart {
 
         }
     }
+    private applyDiscountTwoForAmount(quantityAsInt: number, offer: Offer, unitPrice: number, productQuantity: ProductQuantity)  {
+    if (quantityAsInt >= 2) {
+        const total = offer.argument * Math.floor(quantityAsInt / 2) + quantityAsInt % 2 * unitPrice;
+        const discountN = unitPrice * productQuantity.quantity - total;
+        return new Discount(productQuantity.product, "2 for " + offer.argument, discountN);
+    }
+    else { return null}
+}
 }
