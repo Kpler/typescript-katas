@@ -18,14 +18,8 @@ export class Teller {
 
     public checksOutArticlesFrom(theCart: ShoppingCart): Receipt {
         const receipt = new Receipt();
-        const productQuantities = theCart.getItems();
-        for (let pq of productQuantities) {
-            let p = pq.product;
-            let quantity = pq.quantity;
-            let unitPrice = this.catalog.getUnitPrice(p);
-            let price = quantity * unitPrice;
-            receipt.addProduct(p, quantity, unitPrice, price);
-        }
+
+        receipt.addProductQuantities(theCart.getItems(), this.catalog);
         theCart.handleOffers(receipt, this.offers, this.catalog);
 
         return receipt;

@@ -2,6 +2,8 @@ import {Discount} from "./Discount"
 import {Product} from "./Product"
 import {ReceiptItem} from "./ReceiptItem"
 import * as _ from "lodash"
+import {ProductQuantity} from "./ProductQuantity";
+import {SupermarketCatalog} from "./SupermarketCatalog";
 
 export class Receipt {
     private items: ReceiptItem[] = [];
@@ -20,6 +22,16 @@ export class Receipt {
 
     public addProduct( p: Product, quantity: number, price: number, totalPrice: number): void {
         this.items.push(new ReceiptItem(p, quantity, price, totalPrice));
+    }
+
+    public addProductQuantities(productQuantities: ProductQuantity[], catalog: SupermarketCatalog): void {
+        for (let pq of productQuantities) {
+            const p = pq.product;
+            const quantity = pq.quantity;
+            const unitPrice = catalog.getUnitPrice(p);
+            const price = quantity * unitPrice;
+            this.addProduct(p, quantity, unitPrice, price);
+        }
     }
 
     public getItems(): ReceiptItem[] {
