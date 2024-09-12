@@ -11,18 +11,7 @@ export class ReceiptPrinter {
     public printReceipt( receipt: Receipt): string {
         let result = "";
         for (const item of receipt.getItems()) {
-            let price = this.format2Decimals(item.totalPrice);
-            let quantity = ReceiptPrinter.presentQuantity(item);
-            let name = item.product.name;
-            let unitPrice = this.format2Decimals(item.price);
-
-            let whitespaceSize = this.columns - name.length - price.length;
-            let line = name + ReceiptPrinter.getWhitespace(whitespaceSize) + price + "\n";
-
-            if (item.quantity != 1) {
-                line += "  " + unitPrice + " * " + quantity + "\n";
-            }
-            result += line;
+            result += this.printReceiptItem(item);
         }
         for (const discount of receipt.getDiscounts()) {
             result += this.printDiscount(discount)
@@ -62,5 +51,16 @@ export class ReceiptPrinter {
         const description = discount.description;
         const receiptPrinter = ReceiptPrinter.getWhitespace(this.columns - 3 - productPresentation.length - description.length - pricePresentation.length)
         return `${description}(${productPresentation})${receiptPrinter}-${pricePresentation}\n`
-}
+    }
+
+    private printReceiptItem(receiptItem: ReceiptItem): string {
+        const price = this.format2Decimals(receiptItem.totalPrice);
+        const quantity = ReceiptPrinter.presentQuantity(receiptItem);
+        const name = receiptItem.product.name;
+        const unitPrice = this.format2Decimals(receiptItem.price);
+        const whitespaceSize = this.columns - name.length - price.length;
+
+        const moreThan1ItemText = `  ${unitPrice} * ${quantity}\n`;
+        return `${name}${ReceiptPrinter.getWhitespace(whitespaceSize)}${price}\n${receiptItem.quantity != 1 ? moreThan1ItemText : ""}`
+    }
 }
