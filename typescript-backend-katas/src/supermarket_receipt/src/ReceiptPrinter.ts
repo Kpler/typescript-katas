@@ -8,7 +8,37 @@ export class ReceiptPrinter {
     }
 
     public printReceipt( receipt: Receipt): string {
-        let result = "";
+        let result = `${this.prepareItems(receipt)}${this.prepareDiscount(receipt)} \n`;
+        let pricePresentation = this.format2Decimals(receipt.getTotalPrice());
+        let total = "Total: ";
+        let whitespace = ReceiptPrinter.getWhitespace(this.columns - total.length - pricePresentation.length);
+        result += total;
+        result += whitespace;
+        result += pricePresentation;
+
+        return result;
+    }
+
+    private prepareDiscount(receipt: Receipt): string {
+        let result: string = '';
+        for (const discount of receipt.getDiscounts()) {
+            let productPresentation = discount.product.name;
+            let pricePresentation = this.format2Decimals(discount.discountAmount);
+            let description = discount.description;
+            result += description;
+            result += "(";
+            result += productPresentation;
+            result += ")";
+            result += ReceiptPrinter.getWhitespace(this.columns - 3 - productPresentation.length - description.length - pricePresentation.length);
+            result += "-";
+            result += pricePresentation;
+            result += "\n";
+        }
+        return result;
+    }
+
+    private prepareItems(receipt: Receipt): string {
+        let result: string = '';
         for (const item of receipt.getItems()) {
             let price = this.format2Decimals(item.totalPrice);
             let quantity = ReceiptPrinter.presentQuantity(item);
@@ -23,27 +53,6 @@ export class ReceiptPrinter {
             }
             result += line;
         }
-        for (const discount of receipt.getDiscounts()) {
-            let productPresentation = discount.product.name;
-            let pricePresentation = this.format2Decimals(discount.discountAmount);
-            let description = discount.description;
-            result += description;
-            result += "(";
-            result += productPresentation;
-            result += ")";
-            result += ReceiptPrinter.getWhitespace(this.columns - 3 - productPresentation.length - description.length - pricePresentation.length);
-            result += "-";
-            result += pricePresentation;
-            result += "\n";
-        }
-        result += "\n";
-        let pricePresentation = this.format2Decimals(receipt.getTotalPrice());
-        let total = "Total: ";
-        let whitespace = ReceiptPrinter.getWhitespace(this.columns - total.length - pricePresentation.length);
-        result += total;
-        result += whitespace;
-        result += pricePresentation;
-
         return result;
     }
 
