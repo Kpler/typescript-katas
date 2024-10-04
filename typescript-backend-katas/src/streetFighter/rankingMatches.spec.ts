@@ -53,3 +53,19 @@ describe("When a list with one match with a tie", () => {
         );
     });
 });
+
+describe("When a list with two match with 3 participants", () => {
+    it("should return the ranking with the correct number of points for every fighters", () => {
+        const matches = [new Match("David", 2, "Nico", 1 ), new Match("Simon", 2, "Nico", 1 ) ]
+
+        const result = computeRanking(matches);
+
+        expect(result).toEqual(
+            [
+                new RankedFighter("David", 3),
+                new RankedFighter("Simon", 3),
+                new RankedFighter("Nico", 0)
+            ]
+        );
+    });
+});
