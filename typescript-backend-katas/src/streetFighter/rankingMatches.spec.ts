@@ -38,3 +38,18 @@ describe("When a list with one match with the away fighter who wins", () => {
         );
     });
 });
+
+describe("When a list with one match with a tie", () => {
+    it("should return the ranking with the correct number of points for both fighters", () => {
+        const matches = [new Match("David", 2, "Nico", 2 )]
+
+        const result = computeRanking(matches);
+
+        expect(result).toEqual(
+            [
+                new RankedFighter("Nico", 1),
+                new RankedFighter("David", 1)
+            ]
+        );
+    });
+});
