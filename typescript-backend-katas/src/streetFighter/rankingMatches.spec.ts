@@ -47,8 +47,8 @@ describe("When a list with one match with a tie", () => {
 
         expect(result).toEqual(
             [
-                new RankedFighter("Nico", 1),
-                new RankedFighter("David", 1)
+                new RankedFighter("David", 1),
+                new RankedFighter("Nico", 1)
             ]
         );
     });
