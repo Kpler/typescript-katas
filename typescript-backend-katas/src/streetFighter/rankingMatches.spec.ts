@@ -5,7 +5,7 @@ import {computeRanking} from "./rankingMatches";
 
 const david = new Fighter(0, "David", undefined, undefined)
 const nico = new Fighter(0, "Nico", undefined, undefined)
-const simon = new Fighter(0, "David", undefined, undefined)
+const simon = new Fighter(0, "Simon", undefined, undefined)
 
 describe("computeRanking", () => {
     it.each([
