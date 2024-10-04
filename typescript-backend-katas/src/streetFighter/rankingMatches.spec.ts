@@ -1,3 +1,5 @@
+import { Match } from "./match";
+import { RankedFighter } from "./rankedFighter";
 import {computeRanking} from "./rankingMatches";
 
 describe("When we receive an empty list of matches", () => {
