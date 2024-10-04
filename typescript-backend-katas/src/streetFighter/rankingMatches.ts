@@ -37,7 +37,7 @@ export const computeRanking = (match: Match[], fighters: Fighter[]): RankedFight
 }
 
 const getFighterFromName = (name:string, fighters: Fighter[]) => {
-  const fighter = fighters.find(f => f.firstName === name);
+  const fighter = fighters.find(f => f.firstname === name);
   if(!fighter) {
     throw new Error("Fighter not found: " + name);
   }

@@ -5,7 +5,7 @@ import {computeRanking, computeRankingFromDatasource} from "./rankingMatches";
 
 const david = new Fighter(0, "David", undefined, "USA")
 const nico = new Fighter(1, "Nico", "Honda", "JPN")
-const simon = new Fighter(2, "Simon", undefined, undefined)
+const simon = new Fighter(2, "Simon", undefined, null)
 
 describe("computeRanking", () => {
     it.each([
@@ -56,7 +56,7 @@ describe("computeRanking", () => {
             ]
         },
     ])("$testTitle", ({matches, expectedRanking}) => {
-        const result = computeRankingFromDatasource("src\\streetFighter\\sources\\getFcaApiTestData.json", matches);
+        const result = computeRankingFromDatasource("src/streetFighter/sources/getFcaApiTestData.json", matches);
 
         expect(result).toEqual(expectedRanking);
     })
