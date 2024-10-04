@@ -1,6 +1,11 @@
+import { Fighter } from "./fighter";
 import { Match } from "./match";
 import { RankedFighter } from "./rankedFighter";
 import {computeRanking} from "./rankingMatches";
+
+const david = new Fighter(0, "David", undefined, undefined)
+const nico = new Fighter(0, "Nico", undefined, undefined)
+const simon = new Fighter(0, "David", undefined, undefined)
 
 describe("computeRanking", () => {
     it.each([
@@ -13,41 +18,41 @@ describe("computeRanking", () => {
             testTitle:"With a list with one match with the home fighter who wins",
             matches: [new Match("David", 2, "Nico", 1)],
             expectedRanking: [
-                new RankedFighter("David", 3),
-                new RankedFighter("Nico", 0)
+                new RankedFighter(david, 3),
+                new RankedFighter(nico, 0)
             ]
         },
         {
             testTitle:"With a list with one match with the away fighter who wins",
             matches: [new Match("David", 1, "Nico", 2 )],
             expectedRanking: [
-                new RankedFighter("Nico", 3),
-                new RankedFighter("David", 0)
+                new RankedFighter(nico, 3),
+                new RankedFighter(david, 0)
             ]
         },
         {
             testTitle:"With a list with one match with a tie",
             matches: [new Match("David", 2, "Nico", 2 )],
             expectedRanking: [
-                new RankedFighter("David", 1),
-                new RankedFighter("Nico", 1)
+                new RankedFighter(david, 1),
+                new RankedFighter(nico, 1)
             ]
         },
         {
             testTitle:"With a list with one match with a tie",
             matches: [new Match("David", 2, "Nico", 2 )],
             expectedRanking: [
-                new RankedFighter("David", 1),
-                new RankedFighter("Nico", 1)
+                new RankedFighter(david, 1),
+                new RankedFighter(nico, 1)
             ]
         },
         {
             testTitle:"With a list with two match with 3 participants",
             matches: [new Match("David", 2, "Nico", 1 ), new Match("Simon", 2, "Nico", 1 ) ],
             expectedRanking: [
-                new RankedFighter("David", 3),
-                new RankedFighter("Simon", 3),
-                new RankedFighter("Nico", 0)
+                new RankedFighter(david, 3),
+                new RankedFighter(simon, 3),
+                new RankedFighter(nico, 0)
             ]
         },
     ])("$testTitle", ({matches, expectedRanking}) => {

@@ -1,7 +1,9 @@
+import { Fighter } from "./fighter";
+
 export class RankedFighter {
     
     constructor(
-        public readonly fighter: string, 
+        public readonly fighter: Fighter, 
         public readonly score: number) {}
 
 }
