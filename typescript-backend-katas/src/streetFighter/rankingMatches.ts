@@ -7,7 +7,7 @@ const WINNER_SCORE = 3
 const LOSER_SCORE = 0
 const TIE_SCORE = 1
 
-export const computeRankingFromDatasource = (fightersJSONDataSource: string, matches: []) => {
+export const computeRankingFromDatasource = (fightersJSONDataSource: string, matches: Match[]) => {
   const fighters = parseJsonFile<Fighter>(fightersJSONDataSource);
   return computeRanking(matches, fighters);
 }
