@@ -4,20 +4,30 @@ const enum Actions {
     Move = 'M'
 }
 
+enum Direction {
+    North = "North",
+    East = 'East',
+    West = "West",
+}
+
+
 export function navigateRobot(actions?: string) {
-    let direction = 'North'
+    let direction = Direction.North
     let position = [0, 0];
 
     for (const action of actions || []) {
-        if (actions === Actions.Left) {
-            direction = 'West';
-        } else if (actions === Actions.Right) {
-            direction = 'East';
-        } else if (actions === Actions.Move) {
-            position = [0, 1];
-            return {position, direction};
+        if (action === Actions.Left) {
+            direction = Direction.West;
+        } else if (action === Actions.Right) {
+            direction = Direction.East;
+        } else if (action === Actions.Move) {
+            if (direction === Direction.North) {
+                position = [0, 1]
+            } else if (direction === Direction.West) {
+                position = [-1, 0]
+            }
         }
     }
 
-    return {position: [0, 0], direction};
+    return {position, direction};
 }
