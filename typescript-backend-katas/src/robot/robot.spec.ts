@@ -1,12 +1,6 @@
-function navigateRobot() {
-    return {}
-}
+import { navigateRobot } from "./robot";
 
-describe("Example test", () => {
-    it("should sum numbers correctly", () => {
-        expect(1 + 1).toBe(2);
-    });
-
+describe("Robot", () => {
     it("should have init position", () => {
         // GIVEN
 
@@ -15,6 +9,18 @@ describe("Example test", () => {
 
         // THEN
         const expectedResult = { position: [0, 0], direction: "North" };
+        expect(position).toEqual(expectedResult);
+    });
+
+    it("should be able to turn left", () => {
+        // GIVEN
+        const args = 'L';
+
+        // WHEN
+        const position = navigateRobot(args);
+
+        // THEN
+        const expectedResult = {position: [0, 0], direction: "West"}
         expect(position).toEqual(expectedResult);
     })
 });
