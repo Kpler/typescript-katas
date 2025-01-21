@@ -1,3 +1,4 @@
-export function navigateRobot(positionArgs?: string) {
-    return positionArgs ? { position: [0, 0], direction: "West" } : { position: [0, 0], direction: "North" };
+export function navigateRobot(actions?: string) {
+    let direction = 'North'
+    return {position: [0, 0], direction: actions ? "West" : "North"}
 }

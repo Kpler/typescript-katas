@@ -23,4 +23,12 @@ describe("Robot", () => {
         const expectedResult = {position: [0, 0], direction: "West"}
         expect(position).toEqual(expectedResult);
     })
+
+    it("should be able to turn right", () => {
+        const args = "R";
+        const position = navigateRobot(args)
+        // THEN
+        const expectedResult = {position: [0, 0], direction: "East"}
+        expect(position).toEqual(expectedResult);
+    })
 });
