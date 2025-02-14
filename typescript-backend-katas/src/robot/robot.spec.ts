@@ -31,4 +31,11 @@ describe("Robot", () => {
         const result = navigateRobot(command);
         expect(result).toEqual(expectResult);
     });
+
+    it.each([
+        { command: "M", obstacles: [0, 1], expectResult: { position: [0, 0], direction: "North", status: "Obstacle encountered"} },
+    ])("should move and rotate %s", ({ command, expectResult }) => {
+        const result = navigateRobot(command);
+        expect(result).toEqual(expectResult);
+    });
 });
