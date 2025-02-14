@@ -16,35 +16,32 @@ export function navigateRobot(commands: string): RobotState {
     let result: RobotState = {position: [0, 0], direction: "North"}
 
     for (const command of commands) {
-        if (command === Command.Move) {
-            result = move(result)
+        const commandToAction = {
+            [Command.Move]: move,
+            [Command.Left]: rotateLeft,
+            [Command.Right]: rotateRight
         }
 
-        if (command === Command.Left) {
-            result = rotateLeft(result)
-        }
-
-        if (command === Command.Right) {
-            result = rotateRight(result)
-        }
+        result = commandToAction[command as Command](result)
     }
 
     return result
 }
 
 const move = (result: RobotState): RobotState => {
+    const [x, y] = result.position
     switch (result.direction) {
         case "North":
-            result.position = [result.position[0], result.position[1]+1] 
+            result.position = [x, y + 1]
             break;
         case "East":
-            result.position = [1, 0]
+            result.position = [x + 1, y]
             break;
         case "South":
-            result.position = [0, -1]
+            result.position = [x, y - 1]
             break;
         case "West":
-            result.position = [-1, 0]
+            result.position = [x - 1, y]
             break;
     }
 

@@ -20,11 +20,15 @@ describe("navigateRobot", () => {
             {commands: "LLM", expectedPosition: [0, -1], expectedDirection: "South"},
             {commands: "LLLM", expectedPosition: [1, 0], expectedDirection: "East"},
             {commands: "MM", expectedPosition: [0, 2], expectedDirection: "North"},
+            {commands: "LMLMLMLM", expectedPosition: [0, 0], expectedDirection: "North"},
         ]
-    )("Given command is $commands, the resulting position should be $expectedPosition and the resulting direction should be $expectedDirection", ({
-       commands,
-       expectedPosition, expectedDirection
-   }) => {
+    )("Given command is $commands, the resulting position should be $expectedPosition and the resulting direction should be $expectedDirection", (
+        {
+            commands,
+            expectedPosition,
+            expectedDirection
+        }
+    ) => {
         // Given
         // When
         const result = navigateRobot(commands)
