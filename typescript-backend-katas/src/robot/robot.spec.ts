@@ -34,6 +34,7 @@ describe("Robot", () => {
 
     it.each([
         { command: "M", obstacles: [[0, 1]], expectResult: { position: [0, 0], direction: "North", status: "Obstacle encountered" } },
+        { command: "MM", obstacles: [[0, 2],[0, 1]], expectResult: { position: [0, 0], direction: "North", status: "Obstacle encountered" } },
     ])("should move and rotate %s", ({ command, expectResult, obstacles }) => {
         const result = navigateRobot(command, obstacles as Position[]);
         expect(result).toEqual(expectResult);

@@ -42,7 +42,7 @@ export function navigateRobot(
 }
 
 function move(state: RobotState, obstacles: Position[]) {
-    let newPos = state.position;
+    let newPos = [state.position[0], state.position[1]] as Position;
     switch (state.direction) {
         case CARDINAL_DIRECTIONS.NORTH:
             newPos[1]++;
@@ -57,7 +57,8 @@ function move(state: RobotState, obstacles: Position[]) {
             newPos[0]--;
             break;
     }
-    if (obstacles.includes(newPos)) {
+
+    if (obstacles.some(([x, y]) => newPos[0] === x && newPos[1] === y)) {
         throw Error(OBSTACLE_ENCOUNTERED)
     } else {
         state.position = newPos;
