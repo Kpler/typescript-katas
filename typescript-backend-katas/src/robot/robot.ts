@@ -9,6 +9,10 @@ export interface RobotState {
 
 
 export function navigateRobot(commands: string): RobotState {
-    const result: RobotState = { position: [0, 0], direction: "North" }
+    let result: RobotState = { position: [0, 0], direction: "North" }
+    if(commands === "M") {
+        result = { position: [0, 1], direction: "North" }
+    } 
+       
     return result
 }

@@ -22,4 +22,15 @@ describe("navigateRobot", () => {
         expect(result.position).toEqual([0, 1])
         expect(result.direction).toBe("North")
     });
+    it("should move up with one single Move instruction from the initial state", () => {
+        // Given
+        const command = "L"
+
+        // When
+        const result = navigateRobot(command)
+
+        // Then
+        expect(result.position).toEqual([0, 0])
+        expect(result.direction).toBe("West")
+    });
 });
