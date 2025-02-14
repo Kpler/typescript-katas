@@ -36,5 +36,19 @@ describe("Robot", () => {
             direction: 'North'
         });
       });
+
+      it('should change position one step forward', () => {
+        expect(navigateRobot('M')).toEqual({
+            position: [0, 1],
+            direction: 'North'
+        });
+      });
+
+      it('should change heading and position', () => {
+        expect(navigateRobot('LM')).toEqual({
+            position: [-1, 0],
+            direction: 'West'
+        });
+      });
   });
 });
