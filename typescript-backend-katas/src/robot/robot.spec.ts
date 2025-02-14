@@ -11,51 +11,24 @@ describe("navigateRobot", () => {
         expect(result.direction).toBe("North")
     });
 
-    it("should move up with one single Move instruction from the initial state", () => {
+    it.each(
+        [
+            {commands: "M", expectedPosition: [0, 1], expectedDirection: "North"},
+            {commands: "R", expectedPosition: [0, 0], expectedDirection: "East"},
+            {commands: "L", expectedPosition: [0, 0], expectedDirection: "West"},
+            {commands: "LM", expectedPosition: [-1, 0], expectedDirection: "West"},
+            {commands: "LLM", expectedPosition: [0, -1], expectedDirection: "South"},
+        ]
+    )("Given command is $commands, the resulting position should be $expectedPosition and the resulting direction should be $expectedDirection", ({
+       commands,
+       expectedPosition, expectedDirection
+   }) => {
         // Given
-        const command = "M"
-
         // When
-        const result = navigateRobot(command)
+        const result = navigateRobot(commands)
 
         // Then
-        expect(result.position).toEqual([0, 1])
-        expect(result.direction).toBe("North")
-    });
-
-    it("should change direction to West instruction from the initial state", () => {
-        // Given
-        const command = "L"
-
-        // When
-        const result = navigateRobot(command)
-
-        // Then
-        expect(result.position).toEqual([0, 0])
-        expect(result.direction).toBe("West")
-    });
-
-    it("should change direction to East instruction from the initial state", () => {
-        // Given
-        const command = "R"
-
-        // When
-        const result = navigateRobot(command)
-
-        // Then
-        expect(result.position).toEqual([0, 0])
-        expect(result.direction).toBe("East")
-    });
-
-    it("should change direction to West and move one step from the initial state", () => {
-        // Given
-        const command = "LM"
-
-        // When
-        const result = navigateRobot(command)
-
-        // Then
-        expect(result.position).toEqual([-1, 0])
-        expect(result.direction).toBe("West")
-    });
+        expect(result.position).toEqual(expectedPosition)
+        expect(result.direction).toBe(expectedDirection)
+    })
 });
