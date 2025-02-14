@@ -8,5 +8,19 @@ describe("Robot", () => {
             direction: 'North'
         });
     });
+
+    it('should heading turn to the West', () => {
+      expect(navigateRobot('L')).toEqual({
+          position: [0, 0],
+          direction: 'West'
+      });
+    });
+
+    it('should heading turn to the East', () => {
+      expect(navigateRobot('R')).toEqual({
+          position: [0, 0],
+          direction: 'East'
+      });
+    });
   });
 });
