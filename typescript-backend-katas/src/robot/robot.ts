@@ -1,5 +1,9 @@
+enum Directions {
+    North = "North"
+}
+
 export function navigateRobot(cmd?: string) {
-  const directions = ['North', 'East', 'South', 'West'];
+  const directions = [Directions.North, 'East', 'South', 'West'];
   let directionIndex = 0;
   let position = [0, 0];
 
@@ -9,19 +13,16 @@ export function navigateRobot(cmd?: string) {
       } else if (command === 'R') {
         directionIndex = (directionIndex + 1) % 4;
       } else if (command === 'M') {
-        
+          let [x,y] = position
+          if (directions[directionIndex] === Directions.North) y += 1;
+          if (directions[directionIndex] === "West") x -= 1;
+
+        position = [x, y]
       }
   }
 
-  if (!cmd || cmd?.indexOf('M') === -1) {
-      return {
-          position: [0, 0],
-          direction: directions[directionIndex]
-      }
-  } else {
     return {
-        position: [0, 1],
+        position,
         direction: directions[directionIndex]
     }
-  }
 }
