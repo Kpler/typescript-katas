@@ -29,5 +29,12 @@ describe("Robot", () => {
               direction: 'South'
           });
       });
+
+      it('should heading turn to the North using many commands', () => {
+        expect(navigateRobot('LLRLLL')).toEqual({
+            position: [0, 0],
+            direction: 'North'
+        });
+      });
   });
 });
