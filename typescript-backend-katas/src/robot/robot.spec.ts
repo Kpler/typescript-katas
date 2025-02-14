@@ -1,4 +1,4 @@
-import { navigateRobot } from "./robot";
+import { navigateRobot, Position } from "./robot";
 
 describe("Robot", () => {
     it("should start in position [0,0] facing north", () => {
@@ -33,9 +33,11 @@ describe("Robot", () => {
     });
 
     it.each([
-        { command: "M", obstacles: [0, 1], expectResult: { position: [0, 0], direction: "North", status: "Obstacle encountered"} },
-    ])("should move and rotate %s", ({ command, expectResult }) => {
-        const result = navigateRobot(command);
+        { command: "M", obstacles: [[0, 1]], expectResult: { position: [0, 0], direction: "North", status: "Obstacle encountered" } },
+    ])("should move and rotate %s", ({ command, expectResult, obstacles }) => {
+        const result = navigateRobot(command, obstacles as Position[]);
         expect(result).toEqual(expectResult);
     });
+
+
 });

@@ -1,4 +1,4 @@
-type Position = [number, number];
+export type Position = [number, number];
 type Direction = "North" | "East" | "South" | "West";
 
 enum CARDINAL_DIRECTIONS {
@@ -8,7 +8,7 @@ enum CARDINAL_DIRECTIONS {
     EAST = "East"
 }
 
-
+export const OBSTACLE_ENCOUNTERED = "Obstacle encountered";
 interface RobotState {
     position: Position;
     direction: Direction;
@@ -18,23 +18,25 @@ interface RobotState {
 export function navigateRobot(
     commands: string,
     obstacles: Position[] = []
-  ): RobotState {
+): RobotState {
     const state: RobotState = {
         position: [0, 0],
         direction: CARDINAL_DIRECTIONS.NORTH,
         status: undefined
     };
-
-    commands.split("").forEach(command => {
-        if (command === 'L') {
-            rotateLeft(state);
-        } else if (command === 'R') {
-            rotateRight(state);
-        } else if (command === 'M') {
-            move(state, obstacles);
-        }
-
-    });
+    try {
+        commands.split("").forEach(command => {
+            if (command === 'L') {
+                rotateLeft(state);
+            } else if (command === 'R') {
+                rotateRight(state);
+            } else if (command === 'M') {
+                move(state, obstacles);
+            }
+        });
+    } catch (error: any) {
+        state.status = error.message
+    }
 
     return state;
 }
@@ -55,9 +57,10 @@ function move(state: RobotState, obstacles: Position[]) {
             newPos[0]--;
             break;
     }
-    if(obstacles.includes(newPos))
-    {
-        
+    if (obstacles.includes(newPos)) {
+        throw Error(OBSTACLE_ENCOUNTERED)
+    } else {
+        state.position = newPos;
     }
 }
 
