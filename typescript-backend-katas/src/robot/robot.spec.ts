@@ -65,5 +65,13 @@ describe("Robot", () => {
             status: 'Obstacle encountered'
         });
       })
+
+      it('should return status "obstacle encountered" with last position after complex movement', () => {
+        expect(navigateRobot('LLMRM', [[-1, -2]])).toEqual({
+            position: [-1, -1],
+            direction: 'West',
+            status: 'Obstacle encountered'
+        });
+      })
   });
 });
