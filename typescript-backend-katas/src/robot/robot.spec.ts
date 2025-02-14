@@ -46,4 +46,16 @@ describe("navigateRobot", () => {
         expect(result.position).toEqual([0, 0])
         expect(result.direction).toBe("East")
     });
+
+    it("should change direction to West and move one step from the initial state", () => {
+        // Given
+        const command = "LM"
+
+        // When
+        const result = navigateRobot(command)
+
+        // Then
+        expect(result.position).toEqual([-1, 0])
+        expect(result.direction).toBe("West")
+    });
 });
