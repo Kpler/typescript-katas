@@ -22,5 +22,12 @@ describe("Robot", () => {
           direction: 'East'
       });
     });
+
+      it('should heading turn to the South', () => {
+          expect(navigateRobot('LL')).toEqual({
+              position: [0, 0],
+              direction: 'South'
+          });
+      });
   });
 });

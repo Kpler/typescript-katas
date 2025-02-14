@@ -1,12 +1,17 @@
 export function navigateRobot(cmd?: string) {
   let direction = 'North';
-  if (cmd === 'L') {
-    direction = 'West';
-  } else if (cmd === 'R') {
-    direction = 'East';
+
+
+  for (const command of cmd || []) {
+      if (command === 'L') {
+          direction = 'West';
+      } else if (command === 'R') {
+          direction = 'East';
+      }
   }
+
   return {
       position: [0, 0],
-      direction: cmd ? 'West' : 'North'
+      direction
   }
 }
