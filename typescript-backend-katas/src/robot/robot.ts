@@ -1,6 +1,14 @@
 type Position = [number, number];
 type Direction = "North" | "East" | "South" | "West";
 
+enum CARDINAL_DIRECTIONS {
+    NORTH = "North",
+    WEST = "West",
+    SOUTH = "South",
+    EAST = "East"
+}
+
+
 interface RobotState {
     position: Position;
     direction: Direction;
@@ -9,7 +17,7 @@ interface RobotState {
 export function navigateRobot(commands: string) {
     const state: RobotState = {
         position: [0, 0],
-        direction: "North"
+        direction: CARDINAL_DIRECTIONS.NORTH
     };
 
     commands.split("").forEach(command => {
@@ -28,16 +36,16 @@ export function navigateRobot(commands: string) {
 
 function move(state: RobotState) {
     switch (state.direction) {
-        case "North":
+        case CARDINAL_DIRECTIONS.NORTH:
             state.position[1]++;
             break;
-        case "East":
+        case CARDINAL_DIRECTIONS.EAST:
             state.position[0]++;
             break;
-        case "South":
+        case CARDINAL_DIRECTIONS.SOUTH:
             state.position[1]--;
             break;
-        case "West":
+        case CARDINAL_DIRECTIONS.WEST:
             state.position[0]--;
             break;
     }
@@ -45,17 +53,17 @@ function move(state: RobotState) {
 
 function rotateLeft(state: RobotState) {
     switch (state.direction) {
-        case "North":
-            state.direction = "West";
+        case CARDINAL_DIRECTIONS.NORTH:
+            state.direction = CARDINAL_DIRECTIONS.WEST;
             break;
-        case "East":
-            state.direction = "North";
+        case CARDINAL_DIRECTIONS.EAST:
+            state.direction = CARDINAL_DIRECTIONS.NORTH;
             break;
-        case "South":
-            state.direction = "East";
+        case CARDINAL_DIRECTIONS.SOUTH:
+            state.direction = CARDINAL_DIRECTIONS.EAST;
             break;
-        case "West":
-            state.direction = "South"
+        case CARDINAL_DIRECTIONS.WEST:
+            state.direction = CARDINAL_DIRECTIONS.SOUTH
             break;
     }
 }

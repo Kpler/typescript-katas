@@ -23,7 +23,10 @@ describe("Robot", () => {
 
     it.each([
         { command: "M", expectResult: { position: [0, 1], direction: "North" } },
-        { command: "M", expectResult: { position: [0, 1], direction: "North" } },
+        { command: "RM", expectResult: { position: [1, 0], direction: "East" } },
+        { command: "RRM", expectResult: { position: [0, -1], direction: "South" } },
+        { command: "LM", expectResult: { position: [-1, 0], direction: "West" } },
+        { command: "LMLMLMLM", expectResult: { position: [0, 0], direction: "North" } },
     ])("should move and rotate %s", ({ command, expectResult }) => {
         const result = navigateRobot(command);
         expect(result).toEqual(expectResult);
