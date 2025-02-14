@@ -9,8 +9,8 @@ describe("Robot", () => {
     it.each([
         {command: "R", expectedDirection: "East" },
         {command: "L", expectedDirection: "West" }
-    ])("should rotate", ({command}) => {
+    ])("should rotate", ({command, expectedDirection}) => {
         const result = navigateRobot(command);
-
+        expect(result.direction).toEqual(expectedDirection);
     });
 });
