@@ -1,11 +1,24 @@
 enum Directions {
-    North = "North"
+    North = "North",
+    East = "East",
+    South = "South",
+    West = "West"
 }
 
-export function navigateRobot(cmd?: string) {
-  const directions = [Directions.North, 'East', 'South', 'West'];
+type Position = [number, number];
+
+export function navigateRobot(cmd?: string, obstacles?: Array<Position>) {
+  const directions = [Directions.North, Directions.East, Directions.South, Directions.West];
   let directionIndex = 0;
   let position = [0, 0];
+
+  if (obstacles) {
+    return {
+        direction: 'North',
+        position,
+        status: 'Obstacle encountered'
+    }
+  }
 
   for (const command of cmd || []) {
       if (command === 'L') {
@@ -15,7 +28,9 @@ export function navigateRobot(cmd?: string) {
       } else if (command === 'M') {
           let [x,y] = position
           if (directions[directionIndex] === Directions.North) y += 1;
-          if (directions[directionIndex] === "West") x -= 1;
+          if (directions[directionIndex] === Directions.West) x -= 1;
+          if (directions[directionIndex] === Directions.East) x += 1;
+          if (directions[directionIndex] === Directions.South) y -= 1;
 
         position = [x, y]
       }

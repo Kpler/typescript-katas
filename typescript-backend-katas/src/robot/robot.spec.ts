@@ -50,5 +50,20 @@ describe("Robot", () => {
             direction: 'West'
         });
       });
+
+      it('should change heading and position for a complex movement', () => {
+        expect(navigateRobot('LMMMRRM')).toEqual({
+            position: [-2, 0],
+            direction: 'East'
+        });
+      });
+
+      it('should return status "obstacle encountered" with last position', () => {
+        expect(navigateRobot('M', [[0, 1]])).toEqual({
+            position: [0, 0],
+            direction: 'North',
+            status: 'Obstacle encountered'
+        });
+      })
   });
 });
