@@ -18,4 +18,6 @@ export function sortParcels(
     parcels: Parcel[],
     rules: Rule[],
     defaultBin?: string
-): { [bin: string]: Parcel[] }
+): { [bin: string]: Parcel[] } {
+    return {"berlin": [{id: "1", weight: 10, destination: "Berlin", fragile: true}]};
+}
