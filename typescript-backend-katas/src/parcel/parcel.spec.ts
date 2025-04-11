@@ -2,11 +2,11 @@ import {sortParcels} from "./parcel";
 
 describe("Basic rule matching", () => {
     it.each([
-        {
-            parcels: [{id: "1", weight: 10, destination: "Berlin", fragile: true}],
-            rules: [{ match: { destination: "Berlin" }, bin: "berlin" }],
-            expected: {berlin: [{id: "1", weight: 10, destination: "Berlin", fragile: true}]}
-        },
+    {
+        parcels: [{id: "1", weight: 10, destination: "Berlin", fragile: true}],
+        rules: [{ match: { destination: "Berlin" }, bin: "berlin" }],
+        expected: {berlin: [{id: "1", weight: 10, destination: "Berlin", fragile: true}]}
+    },
     {
         parcels: [{id: "1", weight: 15, destination: "Paris", fragile: true}],
         rules: [{ match: { destination: "Paris" }, bin: "paris" }],
@@ -21,10 +21,22 @@ describe("Basic rule matching", () => {
         parcels: [{id: "1", weight: 20, destination: "Cary", fragile: false}],
         rules: [{ match: { destination: "Berlin" }, bin: "berlin" }],
         expected: {berlin: []}
+    },
+    {
+        parcels: [
+            {id: "1", weight: 20, destination: "Cary", fragile: false},
+            {id: "2", weight: 10, destination: "Berlin", fragile: true}
+        ],
+        rules: [
+            { match: { destination: "Berlin" }, bin: "berlin" },
+            { match: { destination: "Cary" }, bin: "cary" }
+        ],
+        expected: {
+            cary: [{id: "1", weight: 20, destination: "Cary", fragile: false}],
+            berlin: [{id: "2", weight: 10, destination: "Berlin", fragile: true}]
+        }
     }
-    ])("should match a parcel to its target Bin", ({parcels, rules, expected}) => {
+    ])("should match a parcel to there target bins", ({parcels, rules, expected}) => {
         expect(sortParcels(parcels, rules)).toEqual(expected);
     });
-
-
 });

@@ -19,5 +19,11 @@ export function sortParcels(
     rules: Rule[],
     // defaultBin?: string
 ): { [bin: string]: Parcel[] } {
-    return {[parcels[0].destination.toLowerCase()]: parcels};
+    if (rules[0].bin === parcels[0].destination.toLowerCase()) {
+        return {[parcels[0].destination.toLowerCase()]: parcels};
+    }
+    return {
+        [rules[0].bin]: []
+    }
+
 }
