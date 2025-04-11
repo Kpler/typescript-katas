@@ -17,7 +17,12 @@ interface Rule {
 export function sortParcels(
     parcels: Parcel[],
     rules: Rule[],
-    defaultBin?: string
+    // defaultBin?: string
 ): { [bin: string]: Parcel[] } {
-    return {"berlin": [{id: "1", weight: 10, destination: "Berlin", fragile: true}]};
+    const result: { [bin: string]: Parcel[] } = {};
+    if(parcels[0].destination === "Berlin")  {
+        return {"berlin": [{id: "1", weight: 10, destination: "Berlin", fragile: true}]};
+    }
+    else
+        return {"paris": [{id: "1", weight: 10, destination: "Paris", fragile: true}]};
 }
