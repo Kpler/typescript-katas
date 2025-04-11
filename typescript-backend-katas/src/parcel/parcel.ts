@@ -37,10 +37,11 @@ function isNumber(value: unknown): value is number {
 
 function findMatchingRule(rules: Rule[], parcel: Parcel) {
     return rules.find((rule) => {
-        const destinationCheck = rule.match.destination === parcel.destination
-        const maxWeightCheck = isNumber(rule.match.maxWeight) ? rule.match.maxWeight >= parcel.weight : true
-
-        return destinationCheck && maxWeightCheck
+        const isDestinationMatched = rule.match.destination === parcel.destination
+        const isMaxWeightMatched = isNumber(rule.match.maxWeight) ? rule.match.maxWeight >= parcel.weight : true
+        const isMinWeightMatched = isNumber(rule.match.minWeight) ? rule.match.minWeight <= parcel.weight : true
+        const isFragileMatched = typeof rule.match.fragile === 'boolean' ? rule.match.fragile === parcel.fragile : true;
+        return isDestinationMatched && isMaxWeightMatched && isMinWeightMatched && isFragileMatched
     });
 }
 

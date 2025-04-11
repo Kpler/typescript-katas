@@ -73,10 +73,30 @@ describe("Basic rule matching", () => {
             parcels: [{id: "1", weight: 15, destination: "Berlin", fragile: true}],
             rules: [{ match: { destination: "Berlin", maxWeight: 10 }, bin: "berlin-lightweight" }],
             expected: {'berlin-lightweight': []}
-        }
+        },
+        {
+            parcels: [{id: "1", weight: 2, destination: "Berlin", fragile: true}],
+            rules: [{ match: { destination: "Berlin", minWeight: 10 }, bin: "berlin-lightweight" }],
+            expected: {'berlin-lightweight': []}
+        },
+        {
+            parcels: [{id: "1", weight: 12, destination: "Berlin", fragile: true}],
+            rules: [{ match: { destination: "Berlin", minWeight: 10 }, bin: "berlin-lightweight" }],
+            expected: {'berlin-lightweight': [{id: "1", weight: 12, destination: "Berlin", fragile: true}]}
+        },
     
-    ])("should match percels according to their weight", ({parcels, rules, expected}) => {
+    ])("should match parcels according to their weight", ({parcels, rules, expected}) => {
         expect(sortParcels(parcels, rules)).toEqual(expected);
+    });
 
+    it.each([
+        {
+            parcels: [{id: "1", weight: 10, destination: "Berlin", fragile: true}],
+            rules: [{ match: { destination: "Berlin", fragile: false }, bin: "berlin" }],
+            expected: {berlin: []}
+        },
+
+    ])("should match parcels according to their fragility ", ({parcels, rules, expected}) => {
+        expect(sortParcels(parcels, rules)).toEqual(expected);
     })
 });
