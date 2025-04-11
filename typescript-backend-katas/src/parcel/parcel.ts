@@ -19,11 +19,19 @@ export function sortParcels(
     rules: Rule[],
     // defaultBin?: string
 ): { [bin: string]: Parcel[] } {
-    if (rules[0].bin === parcels[0].destination.toLowerCase()) {
-        return {[parcels[0].destination.toLowerCase()]: parcels};
+    const result: {[bin: string]: Parcel[]} = {};
+    for (const parcel of parcels) {
+        const rule = rules.find((rule) => rule.bin === parcel.destination.toLowerCase())
+        if (rule) {
+            const bin = rule ? rule.bin : undefined;
+            if (bin) {
+                if (!result[bin]) {
+                    result[bin] = [];
+                }
+                result[bin].push(parcel);
+            }
+        }
     }
-    return {
-        [rules[0].bin]: []
-    }
+    return result
 
 }
