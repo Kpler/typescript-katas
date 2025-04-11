@@ -19,10 +19,5 @@ export function sortParcels(
     rules: Rule[],
     // defaultBin?: string
 ): { [bin: string]: Parcel[] } {
-    const result: { [bin: string]: Parcel[] } = {};
-    if(parcels[0].destination === "Berlin")  {
-        return {"berlin": [{id: "1", weight: 10, destination: "Berlin", fragile: true}]};
-    }
-    else
-        return {"paris": [{id: "1", weight: 10, destination: "Paris", fragile: true}]};
+    return {[parcels[0].destination.toLowerCase()]: parcels};
 }
