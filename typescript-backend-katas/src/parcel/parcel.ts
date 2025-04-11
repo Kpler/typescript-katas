@@ -22,7 +22,7 @@ export function sortParcels(
     const result: {[bin: string]: Parcel[]} = Object.fromEntries(rules.map((rule) => [rule.bin, []])) 
 
     for (const parcel of parcels) {
-        const rule = findRule(rules, parcel)
+        const rule = findMatchingRule(rules, parcel)
         if (rule) {
             result[rule.bin].push(parcel);
         }
@@ -30,7 +30,17 @@ export function sortParcels(
     return result
 
 }
-function findRule(rules: Rule[], parcel: Parcel) {
-    return rules.find((rule) => rule.match.destination === parcel.destination);
+
+function isNumber(value: unknown): value is number {
+    return typeof value === 'number' && !isNaN(value);
+}
+
+function findMatchingRule(rules: Rule[], parcel: Parcel) {
+    return rules.find((rule) => {
+        const destinationCheck = rule.match.destination === parcel.destination
+        const maxWeightCheck = isNumber(rule.match.maxWeight) ? rule.match.maxWeight >= parcel.weight : true
+
+        return destinationCheck && maxWeightCheck
+    });
 }
 
