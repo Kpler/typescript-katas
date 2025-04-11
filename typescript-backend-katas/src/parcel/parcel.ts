@@ -31,6 +31,6 @@ export function sortParcels(
 
 }
 function findRule(rules: Rule[], parcel: Parcel) {
-    return rules.find((rule) => rule.bin === parcel.destination.toLowerCase());
+    return rules.find((rule) => rule.match.destination === parcel.destination);
 }
 
