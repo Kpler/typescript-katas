@@ -15,30 +15,37 @@ export class PockerGame {
     return a.split(" ");
   }
 
-  evaluateHand(cards: string[]): handRanking {
+  evaluateHand(cards: string[]): string {
     cards.forEach((card) => {
       const cardValue = card.slice(0, -1);
       const currentCount = this.faceValueCounts.get(cardValue) || 0;
       this.faceValueCounts.set(cardValue, currentCount + 1);
     });
     cards.forEach((card) => {
-        const suitValue = card.slice(1, -1);
+        const suitValue = card.slice(1, 2);
         const currentCount = this.suitValueCounts.get(suitValue) || 0;
         this.suitValueCounts.set(suitValue, currentCount + 1);
       });
 
+      for (const count of this.suitValueCounts.values()) {
+          if (count >= 5){
+              this.handRank.isFlush = true;
+              return "Flush";
+          }
+      }
+
+    let numberOfPairs = 0;
     for (const count of this.faceValueCounts.values()) {
       if (this.isPair(count)) {
-        if (this.handRank.hasOnePair) {
-          this.handRank.hasTwoPair = true;
-          this.handRank.hasOnePair = false;
-        } else if (!this.handRank.hasTwoPair) {
-          this.handRank.hasOnePair = true;
-        }
+          numberOfPairs ++;
       }
     }
+    if (numberOfPairs >= 2) {
+        return "Two Pairs"
+    } else if (numberOfPairs >= 1) {return "One Pair"}
 
-    return this.handRank;
+
+    return "";
   }
 
   private isPair(count: number): boolean {

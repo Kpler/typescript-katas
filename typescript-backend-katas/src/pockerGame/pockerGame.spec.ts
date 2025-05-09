@@ -18,23 +18,23 @@ describe("Texas Holdem", () => {
   it.each([
     {
       input: ["5c", "9s", "Ks", "Qd", "4d", "3c", "6d"],
-      result: { hasOnePair: false, hasTwoPair: false, isFlush: false },
+      result: "",
     },
     {
       input: ["Kc", "9s", "Ks", "Qd", "4d", "3c", "6d"],
-      result: { hasOnePair: true, hasTwoPair: false, isFlush: false },
+      result: "One Pair",
     },
     {
       input: ["Kc", "Qs", "Ks", "Qd", "4d", "3c", "6d"],
-      result: { hasOnePair: false, hasTwoPair: true, isFlush: false },
+      result: "Two Pairs",
     },
     {
       input: ["Kc", "Qs", "Ks", "Qd", "7d", "3c", "3d"],
-      result: { hasOnePair: false, hasTwoPair: true, isFlush: false },
+      result: "Two Pairs",
     },
     {
       input: ["Ks", "Qs", "7d", "2s", "3s", "3c", "6s"],
-      result: { hasOnePair: false, hasTwoPair: false, isFlush: true },
+      result: "Flush",
     },
   ])("shouldEvaluateHand", ({ input, result }) => {
     const game = new PockerGame();
