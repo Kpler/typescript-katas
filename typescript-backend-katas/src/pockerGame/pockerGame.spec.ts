@@ -8,7 +8,7 @@ describe("Texas Holdem", () => {
   });
 
   it("has one pair", () => {
-    const playerCards: string[] = ['Kc','9s','Ks','Qd','9d','3c','6d']
+    const playerCards: string[] = ['Kc','9s','Ks','Qd','4d','3c','6d']
     const game = new PockerGame();
     expect(game.hasOnePair(playerCards)).toEqual(true);
   });
