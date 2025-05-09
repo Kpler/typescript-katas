@@ -8,28 +8,23 @@ describe("Texas Holdem", () => {
   });
 
   it.each([
-    { input: ['Kc','9s','Ks','Qd','4d','3c','6d'], result: {hasOnePair: true, hasTwoPair: false }  }
+    { input: ['5c','9s','Ks','Qd','4d','3c','6d'],
+      result: {hasOnePair: false, hasTwoPair: false },
+    },
+      { input: ['Kc','9s','Ks','Qd','4d','3c','6d'],
+        result: {hasOnePair: true, hasTwoPair: false },
+      },{ input: ['Kc','Qs','Ks','Qd','4d','3c','6d'],
+        result: {hasOnePair: false, hasTwoPair: true },
+      },
+      { input: ['Kc','Qs','Ks','2d','Kd','3c','6d'],
+        result: {hasOnePair: false, hasTwoPair: false },
+      },
+      { input: ['Kc','Qs','Ks','Qd','7d','3c','3d'],
+        result: {hasOnePair: false, hasTwoPair: true },
+      }
   ]
-  )("has one pair", ({input, result}) => {
+  )("shouldEvaluateHand", ({input, result}) => {
     const game = new PockerGame();
     expect(game.evaluateHand(input)).toEqual(result);
-  });
-
-  it("has one pair", () => {
-    const playerCards: string[] = ['Kc','9s','Ks','Qd','4d','3c','6d']
-    const game = new PockerGame();
-    expect(game.evaluateHand(playerCards).hasOnePair).toEqual(true);
-  });
-
-  it("identify when it has two pairs", () => {
-    const playerCards: string[] = ['Kc','9s','Ks','9d','4d','3c','6d']
-    const game = new PockerGame();
-    expect(game.evaluateHand(playerCards).hasTwoPair).toEqual(true);
-  });
-
-  it("identify no pairs", () => {
-    const playerCards: string[] = ['Kc','9s','Qs','8d','4d','3c','6d']
-    const game = new PockerGame();
-    expect(game.evaluateHand(playerCards).hasTwoPair).toEqual(false);
   });
 });
