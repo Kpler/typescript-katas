@@ -13,7 +13,7 @@ export class PockerGame {
         return a.split(' ');
     }
 
-    hasOnePair(cards: string[]): boolean {
+    evaluateHand(cards: string[]): handRanking {
         cards.forEach(card => {
             const cardValue = card.slice(0, -1);
             const currentCount = this.counts.get(cardValue) || 0;
@@ -21,11 +21,16 @@ export class PockerGame {
         })
         
         for (const count of this.counts.values()) {
-            if (count === 2) {
+            if (this.isPair(count)) {
                 this.handRank.hasOnePair = true;
+            }
+            if (this.handRank.hasOnePair && this.isPair(count)) {
+                this.handRank.hasTwoPair = true;
             }
         }
         
-        return this.handRank.hasOnePair
+        return this.handRank
     }
+
+    private isPair(count: number): boolean  { return count === 2 }
 }
