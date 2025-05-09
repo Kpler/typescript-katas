@@ -5,15 +5,15 @@ type handRanking = {
 }
 export class PockerGame {
 
-    
+    readCards(a: string): string[] {
+        return a.split(' ');
+    }
 
-    readCards(a: string): handRanking {
-        const cards = a.split(' ');
-
+    hasOnePair(cards: string[]): boolean {
         cards.forEach(card => {
             const cardValue = card.slice(0, -1);
         };
 
-        return ;
+
     }
 }
