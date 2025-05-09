@@ -7,6 +7,14 @@ describe("Texas Holdem", () => {
     expect(game.readCards(playerCards)).toEqual(['Kc','9s','Ks','Kd','9d','3c','6d']);
   });
 
+  it.each([
+    { input: ['Kc','9s','Ks','Qd','4d','3c','6d'], result: {hasOnePair: true, hasTwoPair: false }  }
+  ]
+  )("has one pair", ({input, result}) => {
+    const game = new PockerGame();
+    expect(game.evaluateHand(input)).toEqual(result);
+  });
+
   it("has one pair", () => {
     const playerCards: string[] = ['Kc','9s','Ks','Qd','4d','3c','6d']
     const game = new PockerGame();
@@ -20,8 +28,8 @@ describe("Texas Holdem", () => {
   });
 
   it("identify no pairs", () => {
-    const playerCards: string[] = ['Kc','9s','Ks','9d','4d','3c','6d']
+    const playerCards: string[] = ['Kc','9s','Qs','8d','4d','3c','6d']
     const game = new PockerGame();
-    expect(game.evaluateHand(playerCards).hasTwoPair).toEqual(true);
+    expect(game.evaluateHand(playerCards).hasTwoPair).toEqual(false);
   });
 });

@@ -22,11 +22,14 @@ export class PockerGame {
         
         for (const count of this.counts.values()) {
             if (this.isPair(count)) {
-                this.handRank.hasOnePair = true;
+                if (this.handRank.hasOnePair && this.isPair(count)) {
+                    this.handRank.hasTwoPair = true;
+                }
+                else {
+                    this.handRank.hasOnePair = true;
+                }
             }
-            if (this.handRank.hasOnePair && this.isPair(count)) {
-                this.handRank.hasTwoPair = true;
-            }
+            
         }
         
         return this.handRank
