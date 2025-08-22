@@ -13,4 +13,24 @@ describe("navigate2DSpacecraft", () => {
 
         expect(result).toEqual(initial);
     })
+
+    it('should move to the east', () => {
+        const initial: Spacecraft2D = {
+            position: [0, 0],
+            direction: "N",
+            fuel: 100,
+            status: "OK",
+        }
+
+        const expected: Spacecraft2D = {
+            position: [1, 0],
+            direction: "E",
+            fuel: 100,
+            status: "OK",
+        }
+
+        const result = navigate2DSpacecraft(initial, ['R'], []);
+
+        expect(result).toEqual(expected);
+    });
 })
