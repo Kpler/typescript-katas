@@ -45,7 +45,7 @@ export function navigate2DSpacecraft(
   quest?: Quest
 ): Spacecraft2D {
 
-  const initialDirection = initial.direction;
+  let initialDirection = initial.direction;
   let initialPosition = initial.position;
 
   if (commands.length === 0) {
@@ -53,28 +53,29 @@ export function navigate2DSpacecraft(
       ...initial
     };
   }
-  for (const command in commands){
+  for (const command of commands){
     if (command === CommandEnum.R) {
-        return {
-        position: initialPosition,
-        direction: DirectionEnum.E,
-        fuel: 100,
-        status: StatusEnum.OK
+        if (initialDirection === DirectionEnum.N) {
+          initialDirection = DirectionEnum.E;
         }
     } else if (command === CommandEnum.L) {
         return {
-        position: initialPosition,
-        direction: DirectionEnum.W,
-        fuel: 100,
-        status: StatusEnum.OK
+          position: initialPosition,
+          direction: DirectionEnum.W,
+          fuel: 100,
+          status: StatusEnum.OK
         }
     }
     else if(command === CommandEnum.F){
+        if (initialDirection === DirectionEnum.N) {
+          initialPosition[1] = initialPosition[1]++;
+        }
+    }
   }
 
 
   return {
-    position: [0,1],
+    position: initialPosition,
     direction: DirectionEnum.N,
     fuel: 100,
     status: StatusEnum.OK
