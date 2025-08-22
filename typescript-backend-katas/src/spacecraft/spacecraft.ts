@@ -24,13 +24,32 @@ export function navigate2DSpacecraft(
     obstacles: Position[],
     quest?: Quest
 ): Spacecraft2D {
-    if (commands.length && commands[0] === 'R' ) {
-
-    }
-    return {
+    let result = {
         position: initial.position,
         direction: initial.direction,
         fuel: initial.fuel,
         status: initial.status,
     }
+    if (commands.length && commands[0] === 'R') {
+        return {
+            position: move(initial.position, 'R'),
+            direction: "E",
+            fuel: initial.fuel,
+            status: initial.status,
+        }
+    }
+    return result;
+}
+
+function move(initialPosition: Position, command: Command): Position {
+    if (command === 'R') {
+        return [initialPosition[0] + 1, initialPosition[1]];
+    }
+    if (command === 'L') {
+        return [initialPosition[0] - 1, initialPosition[1]];
+    }
+    if (command === 'F') {
+        return [initialPosition[0], initialPosition[1] + 1];
+    }
+    return initialPosition;
 }
