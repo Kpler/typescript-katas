@@ -24,17 +24,20 @@ export function navigate2DSpacecraft(
   obstacles: Position[],
   quest?: Quest
 ): Spacecraft2D {
+  let current = {...initial};
+  let [x, y] = current.position;
+
   commands.forEach(command => {
     if (command == 'F') {
-
-      initial.position = [0, 1];
+      y = y + 1;
     }
 
     if (command == 'R') {
-      initial.direction = 'E';
+      current.direction = 'E';
     }
   })
 
+  current.position = [x,y]
 
-  return initial;
+  return current;
 }
