@@ -45,9 +45,9 @@ function move(initialPosition: Position, command: Command): Position {
     if (command === 'R') {
         return [initialPosition[0] + 1, initialPosition[1]];
     }
-    if (command === 'L') {
-        return [initialPosition[0] - 1, initialPosition[1]];
-    }
+   // if (command === 'L') {
+   //     return [initialPosition[0] - 1, initialPosition[1]];
+   // }
     if (command === 'F') {
         return [initialPosition[0], initialPosition[1] + 1];
     }
