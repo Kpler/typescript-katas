@@ -24,13 +24,17 @@ export function navigate2DSpacecraft(
   obstacles: Position[],
   quest?: Quest
 ): Spacecraft2D {
-  if (commands[0] == 'F') {
-    initial.position = [0, 1];
-  }
+  commands.forEach(command => {
+    if (command == 'F') {
 
-  if (commands[0] == 'R') {
-    initial.direction = 'E';
-  }
+      initial.position = [0, 1];
+    }
+
+    if (command == 'R') {
+      initial.direction = 'E';
+    }
+  })
+
 
   return initial;
 }
