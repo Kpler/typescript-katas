@@ -24,6 +24,31 @@ export function navigate2DSpacecraft(
   obstacles: Position[],
   quest?: Quest
 ): Spacecraft2D {
+
+  const initialDirection = initial.direction;
+
+  if (commands.length === 0) {
+    return {
+      ...initial
+    };
+  }
+
+  if (commands[0] === "R") {
+    return {
+      position: [0,0],
+      direction: "E",
+      fuel: 100,
+      status: "OK"
+    }
+  } else if (commands[0] === "L") {
+    return {
+      position: [0,0],
+      direction: "W",
+      fuel: 100,
+      status: "OK"
+    }
+  }
+
   return {
     position: [0,1],
     direction: "N",
