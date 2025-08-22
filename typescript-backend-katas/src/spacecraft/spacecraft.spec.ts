@@ -1,3 +1,5 @@
+import { Command, navigate2DSpacecraft, Position, Spacecraft2D } from "./spacecraft";
+
 describe('navigate2DSpacecraft',()=>{
     it('should navigate the spacecraft according to the commands',()=>{
         const initial: Spacecraft2D = {
@@ -12,6 +14,8 @@ describe('navigate2DSpacecraft',()=>{
         expect(result).toEqual({
             position: [0, 1],
             direction: "N",
+            fuel: 100,
+            status: "OK"
         });
     });
 })
