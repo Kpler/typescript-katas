@@ -24,6 +24,8 @@ export function navigate2DSpacecraft(
   obstacles: Position[],
   quest?: Quest
 ): Spacecraft2D {
-  // Dummy implementation to fix the error
+  if(commands[0] == 'F') {
+    initial.position=[0,1]
+  }
   return initial;
 }

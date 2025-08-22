@@ -39,4 +39,44 @@ describe('Spacecraft', () => {
       status: 'OK'
     });
   });
+
+  it('should move forward in the current direction', () => {
+    expect(
+      navigate2DSpacecraft(
+        {
+          position: [0, 0],
+          direction: 'N',
+          fuel: 100,
+          status: 'OK'
+        },
+        ['F'],
+        [],
+      )
+    ).toStrictEqual({
+      position: [0, 1],
+      direction: 'N',
+      fuel: 100,
+      status: 'OK'
+    });
+  });
+
+  it('should move forward in the current direction', () => {
+    expect(
+      navigate2DSpacecraft(
+        {
+          position: [0, 0],
+          direction: 'N',
+          fuel: 100,
+          status: 'OK'
+        },
+        ['R'],
+        [],
+      )
+    ).toStrictEqual({
+      position: [0, 0],
+      direction: 'E',
+      fuel: 100,
+      status: 'OK'
+    });
+  });
 });
