@@ -54,4 +54,21 @@ describe('navigate2DSpacecraft',()=>{
             status: "OK"
         });
     });
+    it('should move forward and turn right', () => {
+        const initial: Spacecraft2D = {
+            position: [0, 0],
+            direction: "N",
+            fuel: 100,
+            status: "OK"
+        };
+        const commands: Command[] = ["F", "R"];
+        const obstacles: Position[] = [];
+        const result = navigate2DSpacecraft(initial, commands, obstacles);
+        expect(result).toEqual({
+            position: [0, 1],
+            direction: "E",
+            fuel: 100,
+            status: "OK"
+        });
+    });
 })

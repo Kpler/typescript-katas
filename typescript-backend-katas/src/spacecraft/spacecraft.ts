@@ -11,6 +11,26 @@ export type Spacecraft2D = {
 
 export type Command = "F" | "L" | "R";
 
+enum CommandEnum {
+  F = "F",
+  L = "L",
+  R = "R"
+}
+
+enum DirectionEnum {
+  N = "N",
+  E = "E",
+  S = "S",
+  W = "W"
+}
+
+enum StatusEnum {
+  OK = "OK",
+  OUT_OF_FUEL = "OUT_OF_FUEL",
+  CRASHED = "CRASHED",
+  MISSION_COMPLETE = "MISSION_COMPLETE"
+}
+
 export type Quest = {
   astronaut: Position;
   base: Position;
@@ -26,34 +46,38 @@ export function navigate2DSpacecraft(
 ): Spacecraft2D {
 
   const initialDirection = initial.direction;
+  let initialPosition = initial.position;
 
   if (commands.length === 0) {
     return {
       ...initial
     };
   }
-
-  if (commands[0] === "R") {
-    return {
-      position: [0,0],
-      direction: "E",
-      fuel: 100,
-      status: "OK"
+  for (const command in commands){
+    if (command === CommandEnum.R) {
+        return {
+        position: initialPosition,
+        direction: DirectionEnum.E,
+        fuel: 100,
+        status: StatusEnum.OK
+        }
+    } else if (command === CommandEnum.L) {
+        return {
+        position: initialPosition,
+        direction: DirectionEnum.W,
+        fuel: 100,
+        status: StatusEnum.OK
+        }
     }
-  } else if (commands[0] === "L") {
-    return {
-      position: [0,0],
-      direction: "W",
-      fuel: 100,
-      status: "OK"
-    }
+    else if(command === CommandEnum.F){
   }
+
 
   return {
     position: [0,1],
-    direction: "N",
+    direction: DirectionEnum.N,
     fuel: 100,
-    status: "OK"
+    status: StatusEnum.OK
   }
 }
 
