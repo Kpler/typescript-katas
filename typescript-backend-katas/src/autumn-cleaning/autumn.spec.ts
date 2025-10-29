@@ -63,7 +63,9 @@ describe('Autumn Cleaning - Level 0: Basic Matching', () => {
                   { name: "Lara", stamina: 80, available: true, skillLevel: 1, id: "1" },
                   { name: "Bob", stamina: 80, available: true, skillLevel: 5, id: "2" },
               ],
-              [{ id: "t1", type: "branches", difficulty: 2 }],
+              [
+                { id: "t1", type: "branches", difficulty: 2 },
+              ],
               [{ match: { type: "branches" }, team: "Leaf Team" }]
             );
 
@@ -71,6 +73,24 @@ describe('Autumn Cleaning - Level 0: Basic Matching', () => {
             expect(assignment["Leaf Team"]).toEqual(
               [ { volunteer: { name: "Bob", stamina: 80, available: true, skillLevel: 5, id: "2" },
                   task: { id: "t1", type: "branches", difficulty: 2 } } ]
+            );
+        });
+
+        it('should not return any volunteer if skill level not matching', () => {
+            const assignment = assignTasks(
+              [
+                  { name: "Lara", stamina: 80, available: true, skillLevel: 1, id: "1" },
+                  { name: "Bob", stamina: 80, available: true, skillLevel: 1, id: "2" },
+              ],
+              [
+                { id: "t1", type: "branches", difficulty: 2 },
+              ],
+              [{ match: { type: "branches" }, team: "Leaf Team" }]
+            );
+
+            expect(Object.keys(assignment)).toContain('Leaf Team');
+            expect(assignment["Leaf Team"]).toEqual(
+              []
             );
         });
     });

@@ -31,16 +31,20 @@ export function assignTasks(
 ): { [team: string]: { volunteer: Volunteer; task: Task }[] } {
     const teamName = 'Leaf Team'
     const assignments :Record<string, { volunteer: Volunteer; task: Task }[]> = {[teamName]: []}
-
     for (const task of tasks) {
         const doesTaskMatchRule = rules.some(rule => rule.match.type === task.type)
 
         if (doesTaskMatchRule) {
+          const volunteersMatching = volunteers.filter(vol => vol.skillLevel >= task.difficulty);
+
+          if (volunteersMatching.length) {
             // TODO: check volunteers
             assignments[teamName].push({
-                volunteer: volunteers[0],
+                volunteer: volunteersMatching[0],
                 task: task,
             })
+          }
+
         }
     }
     return assignments;
