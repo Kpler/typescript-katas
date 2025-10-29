@@ -66,6 +66,60 @@ describe('Autumn Cleaning - Level 0: Basic Matching', () => {
                 ],
             });
         });
+
+        it('should assign multiple tasks to a different matching on simple type matching', () => {
+            const volunteers = [
+                { name: "Peter", stamina: 100, available: true, skillLevel: 5, id: "2" }
+            ];
+            const tasks = [
+                { id: "t1", type: "leaves" as const, difficulty: 2 },
+                { id: "t2", type: "branches" as const, difficulty: 4 }
+            ];
+            const assignmentRules = [
+                { match: { type: "leaves" as const }, team: "Leaf Team" },
+                { match: { type: "branches" as const }, team: "Branches Team", priority: 2 },
+            ];
+
+            const result = assignTasks(volunteers, tasks, assignmentRules);
+
+            expect(
+                result
+            ).toEqual({
+                "Branches Team": [
+                    {
+                        volunteer: { name: "Peter", stamina: 100, available: true, skillLevel: 5, id: "2" },
+                        task: { id: "t2", type: "branches" as const, difficulty: 4 }
+                    }
+                ],
+            });
+        });
+
+        it('should assign multiple tasks to a different matching on simple type matching', () => {
+            const volunteers = [
+                { name: "Peter", stamina: 100, available: true, skillLevel: 5, id: "2" }
+            ];
+            const tasks = [
+                { id: "t1", type: "leaves" as const, difficulty: 2 },
+                { id: "t2", type: "branches" as const, difficulty: 4 }
+            ];
+            const assignmentRules = [
+                { match: { type: "leaves" as const }, team: "Leaf Team", priority: 2 },
+                { match: { type: "branches" as const }, team: "Branches Team" },
+            ];
+
+            const result = assignTasks(volunteers, tasks, assignmentRules);
+
+            expect(
+                result
+            ).toEqual({
+                "Leaf Team": [
+                    {
+                        volunteer: { name: "Peter", stamina: 100, available: true, skillLevel: 5, id: "2" },
+                        task: { id: "t1", type: "leaves" as const, difficulty: 2 }
+                    }
+                ],
+            });
+        });
     });
 });
 

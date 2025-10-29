@@ -23,58 +23,48 @@ interface AssignmentRule {
     team: string;
 }
 
+type AssigmentResult = {
+    [team: string]: { volunteer: Volunteer; task: Task }[]
+}
+
 export function assignTasks(
     volunteers: Volunteer[],
     tasks: Task[],
     rules: AssignmentRule[],
     defaultTeam?: string
-): { [team: string]: { volunteer: Volunteer; task: Task }[] } {
+): AssigmentResult {
 
-    const result: { [team: string]: { volunteer: Volunteer; task: Task }[] } = {}
+    const result: AssigmentResult = {}
 
     const assignedVolunteers = new Set<string>();
 
-    for (const task of tasks) {
-        const matchedRule = rules.find(rule => rule.match.type === task.type)
-        const team = matchedRule?.team
+    const sortedRules = rules
+        .sort((rule1, rule2) => (rule2.priority || 0) - (rule1.priority || 0))
 
-        if (!team) continue;
+    for (const rule of sortedRules) {
+        const matchingTask = tasks.find(task => rule.match.type === task.type)
+        const team = rule?.team
+
+        if (!matchingTask) continue;
 
         const assignedVolunteer = volunteers.find(
-                v => !assignedVolunteers.has(v.id)
-            )
+            v => !assignedVolunteers.has(v.id)
+        )
 
         if (assignedVolunteer) {
             assignedVolunteers.add(assignedVolunteer.id)
 
-            if(!result[team]) {
+            if (!result[team]) {
                 result[team] = [];
             }
 
             result[team].push({
                 volunteer: assignedVolunteer,
-                task: task
+                task: matchingTask
             })
         }
     }
-    
-    return result
 
-    // const volunteer: Volunteer = volunteers[0];
-    // const task: Task = tasks[0];
-    // const rule: AssignmentRule = rules[0];
-
-    // if (task.type == rule.match.type) {
-    //     return {
-    //         "Leaf Team": [
-    //             {
-    //                 volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
-    //                 task: { id: "t1", type: "leaves" as const, difficulty: 2 }
-    //             }
-    //         ]
-    //     }
-    // }
-    // return {"Leaf Team": []}
+    return result;
 }
 
-// → { "Leaf Team": [ { volunteer: ..., task: ... } ] }
