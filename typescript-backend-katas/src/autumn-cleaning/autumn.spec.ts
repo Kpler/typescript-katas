@@ -8,6 +8,15 @@ describe('Autumn Cleaning - Level 0: Basic Matching', () => {
             const assignmentRules = [{ match: { type: "leaves" as const}, team: "Leaf Team" }];
 
             const result = assignTasks(volunteers, tasks, assignmentRules);
+
+            expect(
+                result
+            ).toEqual({"Leaf Team": [
+                {
+                    volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
+                    task: { id: "t1", type: "leaves" as const, difficulty: 2 }
+                }
+            ]});
         });
     });
 });
