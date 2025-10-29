@@ -29,11 +29,12 @@ export function assignTasks(
     rules: AssignmentRule[],
     defaultTeam?: string
 ): { [team: string]: { volunteer: Volunteer; task: Task }[] } {
-    return tasks.some(task => task.type === 'leaves') ? {
+    return tasks.some(task => rules.some(rule => rule.match.type === task.type)) ? {
         'Leaf Team':
             [
-                { volunteer: {name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
-                  task: { id: "t1", type: "leaves", difficulty: 2 }
+                {
+                  volunteer: volunteers[0],
+                  task: tasks[0],
                 }
             ]
     } : {'Leaf Team': []}
