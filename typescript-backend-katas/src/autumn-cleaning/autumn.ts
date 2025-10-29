@@ -29,13 +29,19 @@ export function assignTasks(
     rules: AssignmentRule[],
     defaultTeam?: string
 ): { [team: string]: { volunteer: Volunteer; task: Task }[] } {
-    return tasks.some(task => rules.some(rule => rule.match.type === task.type)) ? {
-        'Leaf Team':
-            [
-                {
-                  volunteer: volunteers[0],
-                  task: tasks[0],
-                }
-            ]
-    } : {'Leaf Team': []}
+    const teamName = 'Leaf Team'
+    const assignments :Record<string, { volunteer: Volunteer; task: Task }[]> = {[teamName]: []}
+
+    for (const task of tasks) {
+        const doesTaskMatchRule = rules.some(rule => rule.match.type === task.type)
+
+        if (doesTaskMatchRule) {
+            // TODO: check volunteers
+            assignments[teamName].push({
+                volunteer: volunteers[0],
+                task: task,
+            })
+        }
+    }
+    return assignments;
 }
