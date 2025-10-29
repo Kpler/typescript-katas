@@ -28,13 +28,27 @@ export function assignTasks(
     tasks: Task[],
     rules: AssignmentRule[],
     defaultTeam?: string
-) {
-  return {"Leaf Team": [
-                {
-                    volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
-                    task: { id: "t1", type: "leaves" as const, difficulty: 2 }
-                }
-            ]}
+): { [team: string]: { volunteer: Volunteer; task: Task }[] } {
+
+
+    return rules.map(rule => {
+        return {
+            "Leaf Team": {
+                volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
+                task: { id: "t1", type: "leaves" as const, difficulty: 2 }
+            }
+        }
+    })
+    /*
+    return {
+        "Leaf Team": [
+            {
+                volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
+                task: { id: "t1", type: "leaves" as const, difficulty: 2 }
+            }
+        ]
+    }
+        */
 }
 
 // → { "Leaf Team": [ { volunteer: ..., task: ... } ] }
