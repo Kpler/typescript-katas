@@ -31,24 +31,21 @@ export function assignTasks(
 ): { [team: string]: { volunteer: Volunteer; task: Task }[] } {
 
 
-    return rules.map(rule => {
+    const volunteer = volunteers[0];
+    const task = tasks[0];
+    const rule = rules[0];
+
+    if (task.type == rule.match.type) {
         return {
-            "Leaf Team": {
-                volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
-                task: { id: "t1", type: "leaves" as const, difficulty: 2 }
-            }
+            "Leaf Team": [
+                {
+                    volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
+                    task: { id: "t1", type: "leaves" as const, difficulty: 2 }
+                }
+            ]
         }
-    })
-    /*
-    return {
-        "Leaf Team": [
-            {
-                volunteer: { name: "Lara", stamina: 80, available: true, skillLevel: 3, id: "1" },
-                task: { id: "t1", type: "leaves" as const, difficulty: 2 }
-            }
-        ]
     }
-        */
+    return {"Leaf Team": []}
 }
 
 // → { "Leaf Team": [ { volunteer: ..., task: ... } ] }
