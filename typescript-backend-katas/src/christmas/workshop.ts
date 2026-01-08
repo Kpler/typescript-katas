@@ -6,9 +6,12 @@ export class Gift {
   private weight: number;
 
   constructor(weight: number, recipient: string, name: string, ) {
-    this.id = 'asd';
+    this.id = Math.random().toString(10);
     this.name = name;
     this.recipient = recipient;
+    if(weight < 0) {
+        throw new Error('Weight cannot be negative!');
+    }
     this.weight = weight;
   }
 

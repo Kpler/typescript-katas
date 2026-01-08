@@ -14,6 +14,22 @@ describe('Level 1: Gift Registry', () => {
     })
 
     test('weight should be a positive value', () => {
-       expect(new Gift(-1, "Jan", "New Laptop")).toThrow();
-    })
+       expect(() => new Gift(-1, "Jan", "New Laptop")).toThrow();
+    });
+
+    test('weight should be a positive value', () => {
+       expect(() => new Gift(-1, "Jan", "New Laptop")).toThrow('Weight cannot be negative!');
+    });
+
+    test('gift should have different auto-generated ids', () => {
+      const gift1 = new Gift(1, "Jan", "New Laptop")
+      const gift2 = new Gift(1, "Jan", "New Screen")
+
+      expect(gift1.getId()).not.toEqual(gift2.getId());
+    });
+
+    test('all parameters are required to create a gift', () => {
+        expect(() => new Gift(1, "", "New Laptop")).toThrow();
+        expect(() => new Gift(1, "Jan", "")).toThrow();
+    });
 });
