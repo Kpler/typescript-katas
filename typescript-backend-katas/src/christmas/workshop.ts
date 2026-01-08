@@ -31,3 +31,22 @@ export class Gift {
     return this.recipient;
   }
 }
+
+export class Workshop {
+    private gifts: Gift[];
+    constructor(){
+        this.gifts = [];
+    }
+
+    public getGiftCount(): Number {
+        return this.gifts.length
+    }
+
+    public addGift(gift: Gift) {
+        this.gifts.push(gift)
+    }
+
+    public getGiftByRecipient(_rec: String) {
+        return this.gifts[0]
+    }
+}
