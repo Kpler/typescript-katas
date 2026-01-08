@@ -35,30 +35,51 @@ describe('Level 1: Gift Registry', () => {
 });
 
 describe('Level 2: Workshop', () => {
-    test('workshop should start with empty inventory', () => {
-        const workshop = new Workshop();
-        expect(workshop.getGiftCount()).toBe(0);
-    });
+  let workshop: Workshop;
 
-    test('add a gift to inventory', () => {
-        const workshop = new Workshop();
-        const gift = new Gift(
-            8,
-            "Jan",
-            "New Laptop"
-        )
-        workshop.addGift(gift);
-        expect(workshop.getGiftCount()).toBe(1);
-    });
+  beforeEach(() => {
+    workshop = new Workshop();
+  });
 
-    test('find a gift based on the recipient', () => {
-        const workshop = new Workshop();
-        const gift = new Gift(
-            8,
-            "Jan",
-            "New Laptop"
-        )
-        workshop.addGift(gift);
-        expect(workshop.getGiftByRecipient("Jan")).toBe(gift);
-    })
+  test('workshop should start with empty inventory', () => {
+      expect(workshop.getGiftCount()).toBe(0);
+  });
+
+  test('add a gift to inventory', () => {
+      const gift = new Gift(
+          8,
+          "Jan",
+          "New Laptop"
+      )
+      workshop.addGift(gift);
+      expect(workshop.getGiftCount()).toBe(1);
+  });
+
+  test('find a gift based on the recipient', () => {
+      const gift = new Gift(
+          8,
+          "Jan",
+          "New Laptop"
+      )
+      workshop.addGift(gift);
+      expect(workshop.getGiftByRecipient("Jan")).toBe(gift);
+  })
+
+   test('find a gift based on the recipient when there are multiple recipients', () => {
+      const giftOne = new Gift(
+          8,
+          "Jan",
+          "New Laptop"
+      )
+      const giftTwo = new Gift(
+          8,
+          "Pedro",
+          "New Laptop"
+      )
+
+      workshop.addGift(giftOne);
+      workshop.addGift(giftTwo);
+
+      expect(workshop.getGiftByRecipient("Pedro")).toBe(giftTwo);
+  })
 });

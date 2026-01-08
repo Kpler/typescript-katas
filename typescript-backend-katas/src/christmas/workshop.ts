@@ -7,6 +7,9 @@ export class Gift {
 
   constructor(weight: number, recipient: string, name: string, ) {
     this.id = Math.random().toString(10);
+    if (!name || !recipient) {
+      throw new Error();
+    }
     this.name = name;
     this.recipient = recipient;
     if(weight < 0) {
@@ -47,6 +50,6 @@ export class Workshop {
     }
 
     public getGiftByRecipient(_rec: String) {
-        return this.gifts[0]
+        return this.gifts.find((gift) => gift.getRecipient() === _rec);
     }
 }
